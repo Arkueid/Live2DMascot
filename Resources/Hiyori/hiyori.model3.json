@@ -1,0 +1,176 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Hiyori.moc3",
+		"Textures": [
+			"Hiyori.2048/texture_00.png",
+			"Hiyori.2048/texture_01.png"
+		],
+		"Physics": "Hiyori.physics3.json",
+		"UserData": "Hiyori.userdata3.json",
+		"Pose": "Hiyori.pose3.json",
+		"DisplayInfo": "Hiyori.cdi3.json",
+		"Motions": {
+			"NewYearComing": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.0.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "新年快到了，有什么新的计划吗？"
+				}
+			],
+			"NewYear": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.4.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "新年好呀！有去哪些好玩的地方呢？Hiyori也想和你一起去旅行呢。"
+				},
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.5.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "新的一年，请多多关照呢！"
+				}
+			],
+			"LongSittingTip": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.6.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "已经观看屏幕很久了哦，该休息一下了吧。"
+				}
+			],
+			"Idle": [
+				{
+					"File": "motions/Hiyori_m01.motion3.json",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5
+				},
+				{
+					"File": "motions/Hiyori_m02.motion3.json",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Sound": "sounds/Hiyori.jp.11.wav",
+					"Text": "大家好，我是练习时常两年半的个人练习生Hiyori，我擅长唱、跳、rap、篮球"
+				},
+				{
+					"File": "motions/Hiyori_m04.motion3.json",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Sound": "sounds/Hiyori.jp.9.wav",
+					"Text": "好吃的？Hiyori也想尝尝看呢！"
+				},
+				{
+					"File": "motions/Hiyori_m05.motion3.json",
+					"Sound": "sounds/Hiyori.jp.1.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "是在学习吗，要加油啊！"
+
+				},
+				{
+					"File": "motions/Hiyori_m07.motion3.json",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5
+				}
+			],
+			"Morning": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.10.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "早上好！！！Damage，新的一天从Hiyori元气满满的笑容中诞生啦！"
+				}
+			],
+			"Evening": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.14.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "晚上好，有点累了吧。哼哼，Hiyori可是一点都不困哦！"
+				}
+			],
+			"Afternoon": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.13.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "下午好！怎么样，怎么样，有好好午睡吗？"
+				}
+			],
+			"Midnight": [
+				{
+					"File": "motions/Hiyori_m03.motion3.json",
+					"Sound": "sounds/Hiyori.jp.2.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "有点晚了，要早点休息呀。"
+				}
+			],
+			"TapBody": [
+				{
+					"File": "motions/Hiyori_m09.motion3.json",
+					"Sound": "sounds/Hiyori.jp.7.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "呜啊！连电脑程序也不放过吗！！！"
+				},
+				{
+					"File": "motions/Hiyori_m10.motion3.json",
+					"Sound": "sounds/Hiyori.jp.8.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "你干嘛！！！哈哈哎哟"
+				}
+			],
+			"TapHead": [
+				{
+					"File": "motions/Hiyori_m09.motion3.json",
+					"Sound": "sounds/Hiyori.jp.3.wav",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "Hiyori会一直陪伴在你身边的！"
+				}
+			]
+		}
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": [
+				"ParamMouthOpenY"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	],
+	"HitAreas": [
+		{
+			"Id": "HitArea",
+			"Name": "Body"
+		},
+		{
+			"Id": "ArtMesh56",
+			"Name": "Head"
+		},
+		{
+			"Id": "ArtMesh51",
+			"Name": "Head"
+		}
+	]
+}

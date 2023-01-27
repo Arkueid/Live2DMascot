@@ -1,0 +1,32 @@
+{
+	"UserSettings" : 
+	{
+		"Dialog" : 
+		{
+			"Height" : 150,
+			"StyleSheet" : "font-size: 20px;border: 5px solid rgb(100, 100, 100);background-color: rgba(100, 100, 100, 200);padding: 10px;margin : 0;color: white;font-family: Comic Sans MS;",
+			"Width" : 400
+		},
+		"KeepQuiet" : false,
+		"ModelDir" : "../Resources",
+		"ModelName" : "Hiyori",
+		"MouseTrack" : true,
+		"NoSound" : true,
+		"ShowText" : false,
+		"StayOnTop" : true,
+		"TextFadeOutTime" : 4
+	},
+	"WindowSettings" : 
+	{
+		"AppName" : "桃濑日和",
+		"FPS" : 45,
+		"Height" : 700,
+		"IconPath" : "../Resources/sample-hiyori_movie.png",
+		"LastPos" : 
+		{
+			"X" : 1476,
+			"Y" : 232
+		},
+		"Width" : 500
+	}
+}
