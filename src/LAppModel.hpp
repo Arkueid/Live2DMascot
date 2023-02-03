@@ -23,6 +23,7 @@ using namespace LAppDefine;
 class LAppModel : public Csm::CubismUserModel
 {
 public:
+    int _frameCount = 0;
     bool isFinished();
     /**
      * @brief コンストラクタ

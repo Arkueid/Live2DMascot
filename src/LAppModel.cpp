@@ -19,6 +19,7 @@
 #include <Motion/CubismMotionQueueEntry.hpp>
 #include "LAppDefine.hpp"
 #include "LAppPal.hpp"
+#include "NetworkUtils.h"
 #include "LAppTextureManager.hpp"
 #include "LAppDelegate.hpp"
 #include "LApp.h"
@@ -252,10 +253,12 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
 
     _motionManager->StopAllMotions();
     
+    //启动时问候语
     const char* greeting = NULL;
     const char* group = NULL;
     time_t tick = time(0);
     struct tm* now = localtime(&tick);
+    
     if (now->tm_hour < 12)
     {
         group = "Morning";
@@ -270,16 +273,6 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     else {
         group = "Midnight";
     }
-    if (now->tm_mon == 1 && abs(now->tm_mday - 21) < 5)
-    {
-        if (rand() % 2 == 0)
-        {
-            if (now->tm_mday - 21 > 0)
-                group = "NewYearComing";
-            else group = "NewYear";
-        }
-    }
-
     StartRandomMotion(group, PriorityForce, NULL);
 
     _updating = false;
@@ -388,14 +381,16 @@ void LAppModel::Update()
 
     //-----------------------------------------------------------------
     _model->LoadParameters(); // 前回セーブされた状態をロード
-    if (_motionManager->IsFinished())
+    if (_motionManager->IsFinished() && _frameCount / LAppConfig::_FPS >= LAppConfig::_MotionInterval)
     {
         // モーションの再生がない場合、待機モーションの中からランダムで再生する
         StartRandomMotion(MotionGroupIdle, PriorityIdle);
+        _frameCount = 0;
     }
     else
     {
         motionUpdated = _motionManager->UpdateMotion(_model, deltaTimeSeconds); // モーションを更新
+        _frameCount++;
     }
     _model->SaveParameters(); // 状態を保存
     //-----------------------------------------------------------------
@@ -448,7 +443,7 @@ void LAppModel::Update()
 
         // 状態更新/RMS値取得
         _wavFileHandler.Update(deltaTimeSeconds);
-        value = _wavFileHandler.GetRms();
+        value = _wavFileHandler.GetRms() * 1.1; //单声道，口型按电平值放大0.1倍
         for (csmUint32 i = 0; i < _lipSyncIds.GetSize(); ++i)
         {
             _model->AddParameterValue(_lipSyncIds[i], value, 0.8f);
@@ -507,7 +502,6 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         {
             motion->SetFadeOutTime(fadeTime);
         }
-        motion->SetEffectIds(_eyeBlinkIds, _lipSyncIds);
         autoDelete = true; // 終了時にメモリから削除
 
         DeleteBuffer(buffer, path.GetRawString());
@@ -536,15 +530,27 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
             {
                 LAppPal::PrintLog("[APP] sound play: %s", path.GetRawString());
             }
+            motion->SetEffectIds(_eyeBlinkIds, _lipSyncIds);
+
         }
     }
 
     //text
-    if (LApp::GetInstance()->GetWindow()->ShowText() && preSoundFinished)
+    bool forceShow =  (group == "Morning" || group == "Evening" || group == "Afternoon");
+    if ((LApp::GetInstance()->GetWindow()->ShowText() && preSoundFinished ) || forceShow )
     {
         csmString text = _modelSetting->GetTextForMotion(group, no);
         if (strcmp(text.GetRawString(), "") != 0)
         {
+            if (forceShow)
+            {
+                const char* holiday = HolidayUtils::WhatsToday();
+                if (holiday)
+                {
+                    string x = QString::fromLocal8Bit("\nPS: 今天是").append(holiday).append(QString::fromLocal8Bit("哦！")).toStdString();
+                    text.Append(x.c_str(), x.size());
+                }
+            };
             LApp::GetInstance()->GetWindow()->showDialog(text.GetRawString());
         }
     }

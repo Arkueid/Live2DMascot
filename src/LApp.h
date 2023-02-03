@@ -21,11 +21,20 @@ namespace LAppConfig {
 	extern bool _StayOnTop;
 	extern bool _NoSound;
 	extern bool _ShowText;
+	extern bool _ShowBgmList;
 	extern const char* _ConfigPath;
 	extern string _DialogStyleSheet;
 	extern int _TextFadeOutTime;
 	extern int _DialogWidth;
 	extern int _DialogHeight;
+	extern int _DialogWordInterval;
+	extern int _BgmListLastPosX;
+	extern int _BgmListLastPosY;
+	extern string _NoteOutPath;
+	extern string _APIKey;
+	extern string _APISecret;
+	extern int _MotionInterval;
+	extern string _UserName;
 };
 
 class LApp

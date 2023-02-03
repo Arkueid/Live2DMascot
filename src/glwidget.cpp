@@ -1,6 +1,7 @@
 #include "LAppDelegate.hpp"
 #include "LAppLive2DManager.hpp"
 #include "LAppPal.hpp"
+#include "conversationwidget.h"
 #include "glwidget.h"
 #include "LAppDefine.hpp"
 #include "LAppView.hpp"
@@ -13,12 +14,14 @@
 #include <QtWidgets/qmenu.h>
 #include <QtCore/qtextcodec.h>
 #include <QtGui/qtextoption.h>
+#include <QtGui/qpainter.h>
 #include <QtWidgets/qmessagebox.h>
 #include <QtWidgets/qtextbrowser.h>
 #include <QtCore/qpropertyanimation.h>
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <QtWidgets/qdesktopwidget.h>
 #include <QtWidgets/qstyle.h>
 #include <unordered_map>
 #include <time.h>
@@ -48,6 +51,8 @@ GLWidget::GLWidget()
 	//子窗口，不在任务栏显示图标
 	setWindowFlag(Qt::SubWindow);
 
+	//鼠标显示可交互
+	setCursor(QCursor(Qt::PointingHandCursor));
 	//记录鼠标位置属性
 	mouseX = 0;
 	mouseY = 0;
@@ -76,23 +81,19 @@ void GLWidget::paintGL()
 
 void GLWidget::timerEvent(QTimerEvent* e)
 {
-	update();
 	float x, y;
-	x = QCursor::pos().x() - this->x();
-	y = QCursor::pos().y() - this->y();
+	QCursor cursor;
+	x = cursor.pos().x() - this->x();
+	y = cursor.pos().y() - this->y();
 	LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&x, &y);
-	bool res1 = LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y);
-	bool res2 = LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y);
-	bool res3 = LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Special", x, y);
 	HWND hWnd = (HWND)(this->winId());
-	if ((res1 || res2 || res3) && !_keepQuiet)
+	if (!_keepQuiet && (LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y)))
 	{
 		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) & (~WS_EX_TRANSPARENT));
 	}
 	else
 	{
 		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) | WS_EX_TRANSPARENT);
-		setCursor(QCursor(Qt::PointingHandCursor));
 	}
 	if (_mouseTrack)
 	{
@@ -104,6 +105,7 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		runFor = 0;
 	}
 	runFor++;
+	update();
 }
 
 void GLWidget::mousePressEvent(QMouseEvent* e)
@@ -112,7 +114,7 @@ void GLWidget::mousePressEvent(QMouseEvent* e)
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
 	mouseX = e->pos().x();
 	mouseY = e->pos().y();
-
+	_dialog->raise();
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent* e)
@@ -122,16 +124,29 @@ void GLWidget::mouseMoveEvent(QMouseEvent* e)
 	if (e->buttons() == Qt::RightButton)
 	{
 		move(x() + e->pos().x() - mouseX, y() + e->pos().y() - mouseY);
+		_dialog->AttachToCharacter();
+		_cvWidget->AttachToCharacter();
 	}
 }
 
 void GLWidget::mouseDoubleClickEvent(QMouseEvent* e)
 {
-	LAppModel* model = LAppLive2DManager::GetInstance()->GetModel(0);
-	if (model->isFinished())
-	{
-		model->StartRandomMotion(MotionGroupIdle, PriorityIdle, FinishedMotion);
+	if (e->button() == Qt::RightButton) {
+		_cvWidget->getInput();
+		HoldText();
 	}
+}
+
+void GLWidget::HoldText()
+{
+	_LastState = _showText;
+	setShowText(false);
+	_dialog->hide();
+}
+
+void GLWidget::ReleaseText()
+{
+	setShowText(_LastState);
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent* e)
@@ -178,11 +193,11 @@ void GLWidget::trayIconOnActivated(QSystemTrayIcon::ActivationReason reason)
 
 void GLWidget::showRightMenu()
 {
-	int mX = QCursor::pos().x() + 20;
-	int mY = QCursor::pos().y() - rightMenu->height() - 10;
-	rightMenu->move(mX, mY);
+	QCursor cursor;
 	rightMenu->show();
-
+	int mX = cursor.pos().x() + 20;
+	int mY = cursor.pos().y() - rightMenu->height() - 10;
+	rightMenu->move(mX, mY);
 }
 
 void GLWidget::quitOnTriggered()
@@ -202,6 +217,7 @@ void GLWidget::Release()
 	}
 	rightMenu->deleteLater();
 	_dialog->deleteLater();
+	_bgmlist->deleteLater();
 	close();
 }
 
@@ -221,75 +237,84 @@ void GLWidget::hideOnTriggered()
 }
 void GLWidget::keepMouseTrackOnTriggered()
 {
-	QTextCodec* codec = QTextCodec::codecForName("gb2312");
-	if (act_keepMouseTrack->text() == codec->toUnicode("关闭鼠标追踪"))
+	if (!act_keepMouseTrack->isChecked())
 	{
 		keepMouseTrack(false);
-		act_keepMouseTrack->setText(codec->toUnicode("开启鼠标追踪"));
+		act_keepMouseTrack->setChecked(false);
 	}
 	else
 	{
 		keepMouseTrack(true);
-		act_keepMouseTrack->setText(codec->toUnicode("关闭鼠标追踪"));
+		act_keepMouseTrack->setChecked(true);
 	}
 }
 void GLWidget::keepQuietOnTriggered()
 {
-	QTextCodec* codec = QTextCodec::codecForName("gb2312");
-	if (act_keepQuiet->text() == codec->toUnicode("开启免打扰"))
+	if (!act_keepQuiet->isChecked())
 	{
-		keepQuiet(true);
-		act_keepQuiet->setText(codec->toUnicode("关闭免打扰"));
+		keepQuiet(false);
+		act_keepQuiet->setChecked(false);
 	}
 	else
 	{
-		keepQuiet(false);
-		act_keepQuiet->setText(codec->toUnicode("开启免打扰"));
+		keepQuiet(true);
+		act_keepQuiet->setChecked(true);
 	}
 }
 
 void GLWidget::stayOnTopOnTriggered()
 {
-	QTextCodec* codec = QTextCodec::codecForName("gb2312");
-	if (act_stayOnTop->text() == codec->toUnicode("开启置顶显示"))
+	if (!act_stayOnTop->isChecked())
 	{
-		stayOnTop(true);
-		act_stayOnTop->setText(codec->toUnicode("关闭置顶显示"));
+		stayOnTop(false);
+		act_stayOnTop->setChecked(false);
 	}
 	else
 	{
-		stayOnTop(false);
-		act_stayOnTop->setText(codec->toUnicode("开启置顶显示"));
+		stayOnTop(true);
+		act_stayOnTop->setChecked(true);
 	}
 }
 
 void GLWidget::setNoSoundOnTriggered()
 {
-	QTextCodec* codec = QTextCodec::codecForName("gb2312");
-	if (act_setNoSound->text() == codec->toUnicode("开启静音"))
+	if (!act_setNoSound->isChecked())
 	{
-		setNoSound(true);
-		act_setNoSound->setText(codec->toUnicode("关闭静音"));
+		setNoSound(false);
+		act_setNoSound->setChecked(false);
 	}
 	else
 	{
-		setNoSound(false);
-		act_setNoSound->setText(codec->toUnicode("开启静音"));
+		setNoSound(true);
+		act_setNoSound->setChecked(true);
 	}
 }
 
 void GLWidget::setShowTextOnTriggered()
 {
-	QTextCodec* codec = QTextCodec::codecForName("gb2312");
-	if (act_setShowText->text() == codec->toUnicode("开启文本显示"))
+	if (!act_setShowText->isChecked())
 	{
-		setShowText(true);
-		act_setShowText->setText(codec->toUnicode("关闭文本显示"));
+		setShowText(false);
+		act_setShowText->setChecked(false);
 	}
 	else
 	{
-		setShowText(false);
-		act_setShowText->setText(codec->toUnicode("开启文本显示"));
+		setShowText(true);
+		act_setShowText->setChecked(true);
+	}
+}
+
+void GLWidget::setShowBgmListOnTriggered()
+{
+	if (!act_setShowBgmList->isChecked())
+	{
+		setShowBgmList(false);
+		act_setShowBgmList->setChecked(false);
+	}
+	else
+	{
+		setShowBgmList(true);
+		act_setShowBgmList->setChecked(true);
 	}
 }
 
@@ -299,7 +324,7 @@ void GLWidget::Run()
 	trayIcon->show();
 	show();
 	_dialog->raise();
-
+	setShowBgmList(LAppConfig::_ShowBgmList);
 }
 
 #pragma region 加载配置文件
@@ -313,6 +338,7 @@ void GLWidget::loadConfig()
 	_onTop = LAppConfig::_StayOnTop;
 	_showText = LAppConfig::_ShowText;
 	_noSound = LAppConfig::_NoSound;
+	_showBgmList = LAppConfig::_ShowBgmList;
 	setWindowFlag(Qt::WindowStaysOnTopHint, _onTop);
 	//加载系统托盘
 	QTextCodec* codec = QTextCodec::codecForName("gb2312");
@@ -320,7 +346,7 @@ void GLWidget::loadConfig()
 	ifstream f(LAppConfig::_IconPath, ios::binary);
 	if (!f.good())
 	{
-		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_VistaShield));
+		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon));
 	}
 	else
 	{
@@ -335,11 +361,30 @@ void GLWidget::loadConfig()
 	rightMenu = new QMenu(this);
 	act_quit = new QAction(codec->toUnicode("退出"));
 	act_hide = new QAction(codec->toUnicode("隐藏"));
-	act_keepMouseTrack = new QAction(codec->toUnicode(_mouseTrack ? "关闭鼠标追踪" : "开启鼠标追踪"));
-	act_keepQuiet = new QAction(codec->toUnicode(_keepQuiet ? "关闭免打扰" : "开启免打扰"));
-	act_stayOnTop = new QAction(codec->toUnicode(_onTop ? "关闭置顶显示" : "开启置顶显示"));
-	act_setNoSound = new QAction(codec->toUnicode(_noSound ? "关闭静音" : "开启静音"));
-	act_setShowText = new QAction(codec->toUnicode(_showText ? "关闭文本显示" : "开启文本显示"));
+
+	act_keepMouseTrack = new QAction(codec->toUnicode("鼠标追踪"));
+	act_keepMouseTrack->setCheckable(true);
+	act_keepMouseTrack->setChecked(_mouseTrack);
+
+	act_keepQuiet = new QAction(codec->toUnicode("免打扰"));
+	act_keepQuiet->setCheckable(true);
+	act_keepQuiet->setChecked(_keepQuiet);
+
+	act_stayOnTop = new QAction(codec->toUnicode("置顶显示"));
+	act_stayOnTop->setCheckable(true);
+	act_stayOnTop->setChecked(_onTop);
+
+	act_setNoSound = new QAction(codec->toUnicode("静音"));
+	act_setNoSound->setCheckable(true);
+	act_setNoSound->setChecked(_noSound);
+
+	act_setShowText = new QAction(codec->toUnicode("文本显示"));
+	act_setShowText->setCheckable(true);
+	act_setShowText->setChecked(_showText);
+
+	act_setShowBgmList = new QAction(codec->toUnicode("追番列表"));
+	act_setShowBgmList->setCheckable(true);
+	act_setShowBgmList->setChecked(_showBgmList);
 
 	//右键菜单信号
 	connect(act_quit, SIGNAL(triggered()), SLOT(quitOnTriggered()));
@@ -349,11 +394,18 @@ void GLWidget::loadConfig()
 	connect(act_stayOnTop, SIGNAL(triggered()), SLOT(stayOnTopOnTriggered()));
 	connect(act_setNoSound, SIGNAL(triggered()), SLOT(setNoSoundOnTriggered()));
 	connect(act_setShowText, SIGNAL(triggered()), SLOT(setShowTextOnTriggered()));
+	connect(act_setShowBgmList, SIGNAL(triggered()), SLOT(setShowBgmListOnTriggered()));
 
-	rightMenu->addActions({ act_quit, act_hide, act_keepMouseTrack, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText });
+	rightMenu->addActions({ act_setShowBgmList, act_keepMouseTrack, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_quit, });
 	startTimer(1000 / FPS);
 	_dialog = new Dialog();
-
+	_bgmlist = new BgmListView();
+	_cvWidget = new ConversationWidget();
+	_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
+	QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
+	if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
+	else if (LAppConfig::_BgmListLastPosX <= 0) _bgmlist->move(0, LAppConfig::_BgmListLastPosY);
+	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 30) _bgmlist->move(screen->width() - 30, LAppConfig::_BgmListLastPosY);
 }
 #pragma endregion
 
@@ -364,47 +416,7 @@ void GLWidget::saveConfig()
 }
 #pragma endregion
 
-Dialog::Dialog()
-{
-	_textBrowser = new QTextBrowser(this);
-	const char* styleSheet = LAppConfig::_DialogStyleSheet.c_str();
-	setStyleSheet(styleSheet);
-	int w = LAppConfig::_DialogWidth;
-	int h = LAppConfig::_DialogHeight;
-	resize(w, h);
-	_textBrowser->resize(w, h);
-	setWindowFlags(Qt::SubWindow | Qt::FramelessWindowHint);
-	setAttribute(Qt::WA_TranslucentBackground);
-	_textBrowser->setAttribute(Qt::WA_TransparentForMouseEvents);
-	animation = new QPropertyAnimation(this, NULL);
-	animation->setStartValue(0);
-	animation->setEndValue(0);
-	animation->setDuration(LAppConfig::_TextFadeOutTime * 1000);
-	connect(animation, SIGNAL(finished()), this, SLOT(close()));
-}
 
-void Dialog::pop(const char* text)
-{
-	animation->stop();
-	_textBrowser->clear();
-	QTextCodec* codec = QTextCodec::codecForName("utf-8");
-	GLWidget* win = LApp::GetInstance()->GetWindow();
-	move(win->x() + (win->width() - width()) / 2 , win->y() + (win->height() - height()) * 2 / 3);
-	_textBrowser->setText(codec->toUnicode(text));
-	setWindowFlag(Qt::WindowStaysOnTopHint, LApp::GetInstance()->GetWindow()->OnTop());
-	show();
-	raise();
-	animation->start();
-}
-void Dialog::Release()
-{
-	_textBrowser->deleteLater();
-}
-
-void Dialog::mouseReleaseEvent(QMouseEvent* e)
-{
-	close();
-}
 
 void GLWidget::showDialog(const char* text)
 {
@@ -426,4 +438,10 @@ void GLWidget::setNoSound(bool on)
 void GLWidget::setShowText(bool on)
 {
 	_showText = on;
+}
+
+void GLWidget::setShowBgmList(bool on)
+{
+	_showBgmList = on;
+	_bgmlist->setVisible(on);
 }

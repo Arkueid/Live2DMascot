@@ -58,7 +58,6 @@ Csm::csmBool LAppWavFileHandler::Update(Csm::csmFloat32 deltaTimeSeconds)
         }
     }
     rms = sqrt(rms / (_wavFileInfo._numberOfChannels * (goalOffset - _sampleOffset)));
-
     _lastRms = rms;
     _sampleOffset = goalOffset;
     return true;
@@ -98,7 +97,6 @@ Csm::csmBool LAppWavFileHandler::LoadWavFile(const Csm::csmString& filePath)
     // ファイルロード
     _byteReader._fileByte = LAppPal::LoadFileAsBytes(filePath.GetRawString(), &(_byteReader._fileSize));
     _byteReader._readOffset = 0;
-
     // ファイルロードに失敗しているか、先頭のシグネチャ"RIFF"を入れるサイズもない場合は失敗
     if ((_byteReader._fileByte == NULL) || (_byteReader._fileSize < 4))
     {
@@ -192,7 +190,6 @@ Csm::csmBool LAppWavFileHandler::LoadWavFile(const Csm::csmString& filePath)
     LAppPal::ReleaseBytes(_byteReader._fileByte);
     _byteReader._fileByte = NULL;
     _byteReader._fileSize = 0;
-
     return ret;
 }
 

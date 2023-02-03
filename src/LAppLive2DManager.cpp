@@ -26,6 +26,7 @@ namespace {
 
     void FinishedMotion(ACubismMotion* self)
     {
+        if (DebugLogEnable)
         LAppPal::PrintLog("Motion Finished: %x", self);
     }
 }
@@ -109,7 +110,7 @@ void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
                 LAppPal::PrintLog("[APP]hit area: [%s]", HitAreaNameHead);
             }
             _models[i]->SetRandomExpression();
-            _models[i]->StartRandomMotion(MotionGroupTapHead, PriorityNormal, FinishedMotion);
+            _models[i]->StartRandomMotion(MotionGroupTapHead, PriorityForce, FinishedMotion);
         }
         else if (_models[i]->HitTest(HitAreaNameSpecial, x, y))
         {
@@ -117,7 +118,7 @@ void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
             {
                 LAppPal::PrintLog("[APP]hit area: [%s]", HitAreaNameSpecial);
             }
-            _models[i]->StartRandomMotion(MotionGroupTapSpecial, PriorityNormal, FinishedMotion);
+            _models[i]->StartRandomMotion(MotionGroupTapSpecial, PriorityForce, FinishedMotion);
         }
         else if (_models[i]->HitTest(HitAreaNameBody, x, y))
         {
@@ -125,7 +126,7 @@ void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
             {
                 LAppPal::PrintLog("[APP]hit area: [%s]", HitAreaNameBody);
             }
-            _models[i]->StartRandomMotion(MotionGroupTapBody, PriorityNormal, FinishedMotion);
+            _models[i]->StartRandomMotion(MotionGroupTapBody, PriorityForce, FinishedMotion);
         }
         else 
         {
