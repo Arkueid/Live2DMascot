@@ -1,32 +1,50 @@
 {
 	"UserSettings" : 
 	{
+		"BgmList" : 
+		{
+			"LastPos" : 
+			{
+				"X" : 1508,
+				"Y" : -595
+			}
+		},
 		"Dialog" : 
 		{
-			"Height" : 150,
-			"StyleSheet" : "font-size: 20px;border: 5px solid rgb(100, 100, 100);background-color: rgba(100, 100, 100, 200);padding: 10px;margin : 0;color: white;font-family: Comic Sans MS;",
-			"Width" : 400
+			"Height" : 120,
+			"StyleSheet" : "font-size: 20px;border: 1px solid rgb(0, 0, 0);background-color: rgba(0, 0, 0, 200);padding: 10px;margin : 0;color: white;font-family: Comic Sans MS;",
+			"Width" : 300,
+			"WordInterval" : 10
 		},
 		"KeepQuiet" : true,
+		"Mlyai" : 
+		{
+			"APIKey" : "82wmm51s1bskwft3",
+			"APISecret" : "o0vp8k7e"
+		},
 		"ModelDir" : "../Resources",
 		"ModelName" : "Hiyori",
+		"MotionInterval" : 5,
 		"MouseTrack" : true,
-		"NoSound" : false,
-		"ShowText" : true,
+		"NoSound" : true,
+		"NoteOutPath" : ".",
+		"ShowBgmList" : true,
+		"ShowText" : false,
 		"StayOnTop" : false,
-		"TextFadeOutTime" : 4
+		"TextFadeOutTime" : 4,
+		"UserName" : "ArcueidBrunestud"
 	},
 	"WindowSettings" : 
 	{
 		"AppName" : "桃濑日和",
 		"FPS" : 45,
-		"Height" : 700,
+		"Height" : 500,
 		"IconPath" : "../Resources/sample-hiyori_movie.png",
 		"LastPos" : 
 		{
-			"X" : 922,
-			"Y" : 343
+			"X" : 1556,
+			"Y" : 536
 		},
-		"Width" : 500
+		"Width" : 300
 	}
 }
