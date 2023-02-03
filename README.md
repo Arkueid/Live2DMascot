@@ -24,23 +24,50 @@ https://zhuanlan.zhihu.com/p/511077879
    * 双击打开番剧介绍页面
    * 每周一更新一次
    * 番剧列表储存在 bangumi.2023XXX.json 中，番剧源是[bangumi]  
+   * 展示  
+  
+番剧列表，全部展开  
 
-2. 节日提醒
+![番剧列表](sample_images/bgmlist.png)  
+
+顶部隐藏  
+
+![番剧列表，顶部隐藏](sample_images/bgmlist_hide.png#pic_center)  
+
+
+侧边隐藏
+
+<div align="center">
+	<img src="sample_images/bgmlist_side_hid.png" width="150px">
+</div>  
+
+
+1. 节日提醒
    * 一年更新一次，节日当天运行会有提示
    * 节日列表源是[免费节日api]
   
-3. 基于茉莉云的ai聊天  
+2. 基于茉莉云的ai聊天  
+   * 右键双击打开聊天输入板，回车提交输入，左键双击聊天板取消并关闭
    * api来自[茉莉云]
    * 可行注册茉莉云账号，创建机器人，并在config.json中修改api-key和api-secret
-4. 语音播放
+   * 展示  
+
+<div align="center">
+	<img src="sample_images/chat.png" width="500">
+	<img src="sample_images/chat_rsp.png", width="400">
+</div>  
+
+
+3. 语音播放
    * 语音播放需要在model3.json文件中添加motion的Sound属性
    * 仅支持.wav格式，详细参数参考[Cubism Live2D SDK for Native]的口型同步
-   * 语音和口型同步只支持**单声道**的.wav格式
-5. 文本显示  
-   * 文本显示需要在model3.json文件中添加motion的Text属性
-   * 需要自己修改模型的model3.json文件，详细参考Hiyori的模型
+   * 语音和口型同步只支持**单声道**的.wav格式  
   
-6. 自定义  
+4. 文本显示  
+   * 文本显示需要在model3.json文件中添加motion的Text属性
+   * 需要自己修改模型的model3.json文件，详细参考Hiyori的模型  
+  
+5. 自定义  
    **可定义的交互动作组在.model3.json文件中**  
 
 	| 动作组可用字段 | 字段含义 |  
@@ -53,8 +80,32 @@ https://zhuanlan.zhihu.com/p/511077879
 	| Idle | 闲置时自动播放 |
 	| TapHead | 点击头部触发语音 |
 	| TapBody | 点击身体触发语音 |
-	| TapSpecial | 特触（参考碧蓝航线） |
-7. **更换模型，可以修改config.json的ModelName字段，引入其他模型请确保moc3模型格式**  
+	| TapSpecial | 特触（参考碧蓝航线） |  
+
+	示例：
+	```json
+	{
+		"Idle": [  //动作组Idle，播放时会从动作组中随机出一个动作
+
+				{
+					"File": "motions/Hiyori_m04.motion3.json",
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Sound": "sounds/Hiyori.jp.9.wav",
+					"Text": "好吃的？Hiyori也想尝尝看呢！"
+				},
+				{
+					"File": "motions/Hiyori_m05.motion3.json",  //动作路径
+					"Sound": "sounds/Hiyori.jp.1.wav",  //音频文件路径
+					"FadeInTime": 0.5,
+					"FadeOutTime": 0.5,
+					"Text": "是在学习吗，要加油啊！"  //语音文本
+				}
+		]
+	}
+	```
+  
+6. **更换模型，可以修改config.json的ModelName字段，引入其他模型请确保moc3模型格式**  
    
 
 [贴吧]:https://tieba.baidu.com/p/5377537423
@@ -116,7 +167,7 @@ https://zhuanlan.zhihu.com/p/511077879
 				"APISecret" : "o0vp8k7e"
 			},
 			"ModelDir" : "../Resources",  //模型文件所在文件夹
-			"ModelName" : "Hiyori",  //模型文件夹名称
+			"ModelName" : "Hiyori",  //模型文件夹名称，更换模型时修改该字段
 			"MotionInterval" : 5,  //自动播放动作的间隔
 			"MouseTrack" : true,  //鼠标追踪，角色看向鼠标位置
 			"NoSound" : true,  //静音
