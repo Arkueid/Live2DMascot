@@ -42,7 +42,9 @@ https://zhuanlan.zhihu.com/p/511077879
   
 番剧列表，全部展开  
 
-![番剧列表](sample_images/bgmlist.png)  
+<div align="center">
+	<img src="sample_images/bgmlist.png">
+</div>   
 
 顶部隐藏  
 
@@ -127,7 +129,15 @@ AI可以在茉莉云上进行调教，普通用户每日500次访问，一般来
 [贴吧]:https://tieba.baidu.com/p/5377537423
 [bangumi]:https://bgm.tv
 [免费节日api]:https://timor.tech/api/holiday
-[茉莉云]:https://mlyai.com
+[茉莉云]:https://mlyai.com  
+
+
+7. **系统托盘**  
+
+<div align="center">
+	<img src="./sample_images/preview3.png"/>  
+</div>
+
 ***  
 
 ## 使用说明  
