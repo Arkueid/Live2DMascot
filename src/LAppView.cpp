@@ -114,6 +114,8 @@ void LAppView::Render()
     // Cubism更新・描画
     Live2DManager->OnUpdate();
 
+#if 0
+
     // 各モデルが持つ描画ターゲットをテクスチャとする場合
     if (_renderTarget == SelectTarget_ModelFrameBuffer && _renderSprite)
     {
@@ -124,7 +126,6 @@ void LAppView::Render()
             0.0f, 0.0f,
             1.0f, 0.0f,
         };
-
         for (csmUint32 i = 0; i < Live2DManager->GetModelNum(); i++)
         {
             float alpha = GetSpriteAlpha(i); // サンプルとしてαに適当な差をつける
@@ -137,7 +138,11 @@ void LAppView::Render()
             }
         }
     }
+#endif
+
 }
+
+#if 0
 
 void LAppView::InitializeSprite()
 {
@@ -145,7 +150,6 @@ void LAppView::InitializeSprite()
     int height = LAppDelegate::GetInstance()->GetWindow()->height();
     float x, y;
 
-#if 0
     _programId = LAppDelegate::GetInstance()->CreateShader();
     
     LAppTextureManager* textureManager = LAppDelegate::GetInstance()->GetTextureManager();
@@ -178,12 +182,12 @@ void LAppView::InitializeSprite()
     fHeight = static_cast<float>(powerTexture->height);
     _power = new LAppSprite(x, y, fWidth, fHeight, powerTexture->id, _programId);
 
-#endif
     // 画面全体を覆うサイズ
-    x = width * 0.5f;
-    y = height * 0.5f;
-    _renderSprite = new LAppSprite(x, y, static_cast<float>(width), static_cast<float>(height), 0, _programId);
+    //x = width * 0.5f;
+    //y = height * 0.5f;
+    //_renderSprite = new LAppSprite(x, y, static_cast<float>(width), static_cast<float>(height), 0, _programId);
 }
+#endif
 
 void LAppView::OnTouchesBegan(float px, float py) const
 {
@@ -311,9 +315,10 @@ void LAppView::PostModelDraw(LAppModel& refModel)
                 0.0f, 0.0f,
                 1.0f, 0.0f,
             };
-
+#if 0
             _renderSprite->SetColor(1.0f, 1.0f, 1.0f, GetSpriteAlpha(0));
             _renderSprite->RenderImmidiate(useTarget->GetColorBuffer(), uvVertex);
+#endif
         }
     }
 }
@@ -349,6 +354,8 @@ float LAppView::GetSpriteAlpha(int assign) const
 
 void LAppView::ResizeSprite()
 {
+#if 0
+
     LAppTextureManager* textureManager = LAppDelegate::GetInstance()->GetTextureManager();
     if (!textureManager)
     {
@@ -363,7 +370,6 @@ void LAppView::ResizeSprite()
     float y = 0.0f;
     float fWidth = 0.0f;
     float fHeight = 0.0f;
-
     if (_back)
     {
         GLuint id = _back->GetTextureId();
@@ -405,4 +411,5 @@ void LAppView::ResizeSprite()
             _gear->ResetRect(x, y, fWidth, fHeight);
         }
     }
+#endif
 }

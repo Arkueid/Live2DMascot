@@ -54,8 +54,14 @@ namespace LAppDefine {
     const csmInt32 PriorityForce = 3;
 
     // デバッグ用ログの表示オプション
+#ifdef CONSOLE_FLAG
+    const csmBool DebugLogEnable = true;
+    const csmBool DebugTouchLogEnable = true;
+#else
     const csmBool DebugLogEnable = false;
     const csmBool DebugTouchLogEnable = false;
+#endif
+    
 
     // Frameworkから出力するログのレベル設定
     const CubismFramework::Option::LogLevel CubismLoggingLevel = CubismFramework::Option::LogLevel_Verbose;

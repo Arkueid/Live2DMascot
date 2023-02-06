@@ -1,6 +1,7 @@
 #pragma once
 #include "BgmListView.h"
 #include "conversationwidget.h"
+#include "controlwidget.h"
 #include "dialog.h" 
 #include <QtWidgets/qopenglwidget.h>
 #include <QtGui/qevent.h>
@@ -8,7 +9,6 @@
 #include <QtWidgets/qaction.h>
 #include <QtWidgets/qmenu.h>
 using namespace std;
-
 
 class GLWidget : public QOpenGLWidget
 {
@@ -24,9 +24,11 @@ private:
 	QAction* act_setNoSound = NULL;  //静音
 	QAction* act_setShowText = NULL;  //显示文本
 	QAction* act_setShowBgmList = NULL;  //显示追番列表
+	QAction* act_showSettings = NULL; //显示设置窗口
 	Dialog* _dialog = NULL;  //文本框
 	BgmListView* _bgmlist = NULL;  //追番列表
 	ConversationWidget* _cvWidget = NULL;  //聊天输入框
+	ControlWidget* _control = NULL;  //设置
 	bool _LastState;
 public:
 	GLWidget();
@@ -35,20 +37,15 @@ public:
 	void mouseReleaseEvent(QMouseEvent* e);
 	void mouseMoveEvent(QMouseEvent* e);
 	void showRightMenu();
-	void loadConfig();
+	void setupUI();
 	void saveConfig();
 	void Release();
 	void Run();
 	void showDialog(const char* text);
-	bool MouseTrack() { return _mouseTrack; }
-	bool Quiet() { return _keepQuiet; }
-	bool OnTop() { return _onTop; }
-	bool NoSound() { return _noSound; }
-	bool ShowText() { return _showText; }
-	bool ShowBgmList() { return _showBgmList; }
 	BgmListView* GetBgmListView() { return _bgmlist; }
 	void HoldText();
 	void ReleaseText();
+	void LoadConfig();
 protected:
 	void initializeGL();
 	void resizeGL(int w, int h);
@@ -63,14 +60,8 @@ protected:
 	void setShowText(bool on);
 	int mouseX;
 	int mouseY;
-	bool _mouseTrack;
-	bool _keepQuiet;
-	bool _onTop;
-	bool _noSound;
-	bool _showText;
-	bool _showBgmList;
-	int FPS;
-	long runFor = 0;
+	int currentTimerIndex;
+	int runFor = 0;
 private slots:
 	void trayIconOnActivated(QSystemTrayIcon::ActivationReason reason);
 	void quitOnTriggered();
@@ -81,6 +72,7 @@ private slots:
 	void setNoSoundOnTriggered();
 	void setShowTextOnTriggered();
 	void setShowBgmListOnTriggered();
+	void showSettingsOnTriggered();
 };
 
 

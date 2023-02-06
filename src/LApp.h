@@ -1,9 +1,9 @@
 #pragma once
 #include "glwidget.h"
+#include <QtCore/qtextcodec.h>
 #include <QtWidgets/qapplication.h>
-#include <vector>
-#include <unordered_map>
 
+void Log(const char* handler, const char* msg);
 
 namespace LAppConfig {
 
@@ -12,9 +12,9 @@ namespace LAppConfig {
 	extern int _LastPosX;
 	extern int _LastPosY;
 	extern int _FPS;
-	extern string _WindowTitle;
+	extern string _AppName;
 	extern string _IconPath;
-	extern string _DefaultModelName;
+	extern string _ModelName;
 	extern string _ModelDir;
 	extern bool _KeepQuiet;
 	extern bool _MouseTrack;
@@ -31,8 +31,8 @@ namespace LAppConfig {
 	extern int _BgmListLastPosX;
 	extern int _BgmListLastPosY;
 	extern string _NoteOutPath;
-	extern string _APIKey;
-	extern string _APISecret;
+	extern string _ApiKey;
+	extern string _ApiSecret;
 	extern int _MotionInterval;
 	extern string _UserName;
 };
@@ -51,6 +51,7 @@ public:
 	void Initialize(int argc, char* argv[]);
 	void Run();
 	void Release();
+	void LoadConfig();
 	QApplication* GetApp();
 	GLWidget* GetWindow();
 };

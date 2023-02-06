@@ -276,7 +276,6 @@ void LAppDelegate::InitializeCubism()
 
     LAppPal::UpdateTime();
 
-    _view->InitializeSprite();
 }
 
 void LAppDelegate::OnMouseCallBack(Qt::MouseButton button, int action)
@@ -310,10 +309,6 @@ void LAppDelegate::OnMouseCallBack(double x, double y)
     _mouseX = static_cast<float>(x);
     _mouseY = static_cast<float>(y);
 
-    /*if (!_captured)
-    {
-        return;
-    }*/
     if (_view == NULL)
     {
         return;

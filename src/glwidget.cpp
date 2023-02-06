@@ -8,8 +8,8 @@
 #include "LAppModel.hpp"
 #include "LApp.h"
 #include <QtGui/qevent.h>
+#include <io.h>
 #include <QtWidgets/qopenglwidget.h>
-#include <QtWidgets/qsystemtrayicon.h>
 #include <QtWidgets/qaction.h>
 #include <QtWidgets/qmenu.h>
 #include <QtCore/qtextcodec.h>
@@ -44,18 +44,18 @@ void FinishedMotion(ACubismMotion* self)
 
 GLWidget::GLWidget() 
 {
-	//窗体透明设置
-	setWindowFlag(Qt::FramelessWindowHint);
+	//窗体透明设置，子窗口
+	setWindowFlags(Qt::FramelessWindowHint|Qt::Tool);
 	setAttribute(Qt::WA_TranslucentBackground, true);
-	
-	//子窗口，不在任务栏显示图标
-	setWindowFlag(Qt::SubWindow);
 
 	//鼠标显示可交互
 	setCursor(QCursor(Qt::PointingHandCursor));
 	//记录鼠标位置属性
 	mouseX = 0;
 	mouseY = 0;
+
+	currentTimerIndex = -1;
+	_LastState = true;
 }
 
 GLWidget::~GLWidget()
@@ -81,13 +81,13 @@ void GLWidget::paintGL()
 
 void GLWidget::timerEvent(QTimerEvent* e)
 {
-	float x, y;
+
 	QCursor cursor;
-	x = cursor.pos().x() - this->x();
-	y = cursor.pos().y() - this->y();
+	float x = cursor.pos().x() - this->x();
+	float y = cursor.pos().y() - this->y();
 	LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&x, &y);
 	HWND hWnd = (HWND)(this->winId());
-	if (!_keepQuiet && (LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y)))
+	if (!LAppConfig::_KeepQuiet && (LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y)))
 	{
 		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) & (~WS_EX_TRANSPARENT));
 	}
@@ -95,11 +95,11 @@ void GLWidget::timerEvent(QTimerEvent* e)
 	{
 		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) | WS_EX_TRANSPARENT);
 	}
-	if (_mouseTrack)
+	if (LAppConfig::_MouseTrack)
 	{
 		LAppLive2DManager::GetInstance()->OnDrag(x, y);
 	}
-	if (runFor / FPS > 3600)
+	if (runFor / LAppConfig::_FPS > 3600)
 	{
 		LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce, FinishedMotion);
 		runFor = 0;
@@ -110,8 +110,10 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 void GLWidget::mousePressEvent(QMouseEvent* e)
 {
+	//配合
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->button(), 1);
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
+
 	mouseX = e->pos().x();
 	mouseY = e->pos().y();
 	_dialog->raise();
@@ -119,8 +121,7 @@ void GLWidget::mousePressEvent(QMouseEvent* e)
 
 void GLWidget::mouseMoveEvent(QMouseEvent* e)
 {
-	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
-	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
+	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y()); //解除鼠标追踪后仍可以拖动视线
 	if (e->buttons() == Qt::RightButton)
 	{
 		move(x() + e->pos().x() - mouseX, y() + e->pos().y() - mouseY);
@@ -139,7 +140,7 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent* e)
 
 void GLWidget::HoldText()
 {
-	_LastState = _showText;
+	_LastState = LAppConfig::_ShowText;
 	setShowText(false);
 	_dialog->hide();
 }
@@ -157,12 +158,12 @@ void GLWidget::mouseReleaseEvent(QMouseEvent* e)
 
 void GLWidget::keepQuiet(bool on)
 {
-	_keepQuiet = on;
+	LAppConfig::_KeepQuiet = on;
 }
 
 void GLWidget::keepMouseTrack(bool on)
 {
-	_mouseTrack = on;
+	LAppConfig::_MouseTrack = on;
 	if (!on)
 	{
 		LAppLive2DManager::GetInstance()->OnDrag(0.0f, 0.0f);
@@ -328,63 +329,49 @@ void GLWidget::Run()
 }
 
 #pragma region 加载配置文件
-void GLWidget::loadConfig()
+void GLWidget::setupUI()
 {
-	resize(LAppConfig::_WindowWidth, LAppConfig::_WindowHeight);
 	move(LAppConfig::_LastPosX, LAppConfig::_LastPosY);
-	this->FPS = (int)LAppConfig::_FPS;
-	_mouseTrack = LAppConfig::_MouseTrack;
-	_keepQuiet = LAppConfig::_KeepQuiet;
-	_onTop = LAppConfig::_StayOnTop;
-	_showText = LAppConfig::_ShowText;
-	_noSound = LAppConfig::_NoSound;
-	_showBgmList = LAppConfig::_ShowBgmList;
-	setWindowFlag(Qt::WindowStaysOnTopHint, _onTop);
+	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
 	//加载系统托盘
 	QTextCodec* codec = QTextCodec::codecForName("gb2312");
 	this->trayIcon = new QSystemTrayIcon(this);
-	ifstream f(LAppConfig::_IconPath, ios::binary);
-	if (!f.good())
-	{
-		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon));
-	}
-	else
-	{
-		trayIcon->setIcon(QIcon(LAppConfig::_IconPath.c_str()));
-	}
-	f.close();
-	QTextCodec* codec0 = QTextCodec::codecForName("utf-8");
-	trayIcon->setToolTip(codec0->toUnicode(LAppConfig::_WindowTitle.c_str()));
+	
+	LoadConfig();
+
 	connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconOnActivated(QSystemTrayIcon::ActivationReason)));
 
 	//右键菜单
 	rightMenu = new QMenu(this);
 	act_quit = new QAction(codec->toUnicode("退出"));
+
 	act_hide = new QAction(codec->toUnicode("隐藏"));
 
 	act_keepMouseTrack = new QAction(codec->toUnicode("鼠标追踪"));
 	act_keepMouseTrack->setCheckable(true);
-	act_keepMouseTrack->setChecked(_mouseTrack);
+	act_keepMouseTrack->setChecked(LAppConfig::_MouseTrack);
 
 	act_keepQuiet = new QAction(codec->toUnicode("免打扰"));
 	act_keepQuiet->setCheckable(true);
-	act_keepQuiet->setChecked(_keepQuiet);
+	act_keepQuiet->setChecked(LAppConfig::_KeepQuiet);
 
 	act_stayOnTop = new QAction(codec->toUnicode("置顶显示"));
 	act_stayOnTop->setCheckable(true);
-	act_stayOnTop->setChecked(_onTop);
+	act_stayOnTop->setChecked(LAppConfig::_StayOnTop);
 
 	act_setNoSound = new QAction(codec->toUnicode("静音"));
 	act_setNoSound->setCheckable(true);
-	act_setNoSound->setChecked(_noSound);
+	act_setNoSound->setChecked(LAppConfig::_NoSound);
 
 	act_setShowText = new QAction(codec->toUnicode("文本显示"));
 	act_setShowText->setCheckable(true);
-	act_setShowText->setChecked(_showText);
+	act_setShowText->setChecked(LAppConfig::_ShowText);
 
 	act_setShowBgmList = new QAction(codec->toUnicode("追番列表"));
 	act_setShowBgmList->setCheckable(true);
-	act_setShowBgmList->setChecked(_showBgmList);
+	act_setShowBgmList->setChecked(LAppConfig::_ShowBgmList);
+
+	act_showSettings = new QAction(codec->toUnicode("设置"));
 
 	//右键菜单信号
 	connect(act_quit, SIGNAL(triggered()), SLOT(quitOnTriggered()));
@@ -395,12 +382,17 @@ void GLWidget::loadConfig()
 	connect(act_setNoSound, SIGNAL(triggered()), SLOT(setNoSoundOnTriggered()));
 	connect(act_setShowText, SIGNAL(triggered()), SLOT(setShowTextOnTriggered()));
 	connect(act_setShowBgmList, SIGNAL(triggered()), SLOT(setShowBgmListOnTriggered()));
+	connect(act_showSettings, SIGNAL(triggered()), SLOT(showSettingsOnTriggered()));
 
-	rightMenu->addActions({ act_setShowBgmList, act_keepMouseTrack, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_quit, });
-	startTimer(1000 / FPS);
+	rightMenu->addActions({ act_setShowBgmList, act_keepMouseTrack, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_showSettings});
+	rightMenu->addSeparator();
+	rightMenu->addAction(act_quit);
+	rightMenu->setFixedWidth(120);
+	rightMenu->setStyleSheet("QMenu { background-color: white; padding-top: 8px; padding-bottom: 8px; border: 1px solid rgb(214, 214, 214); padding: 4px; color: black;} QMenu::item::selected{background-color: rgb(50, 150, 240); color: white;} QMenu::item {padding: 0 0 0 20px; margin-left: 4px; margin-right: 4px;color: rgb(90, 90, 90);} QMenu::indicator{width: 13px;} QMenu::item:checked, QMenu::item:unchecked{padding-left: 7;}");
 	_dialog = new Dialog();
 	_bgmlist = new BgmListView();
 	_cvWidget = new ConversationWidget();
+	_control = new ControlWidget();
 	_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
 	QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
 	if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
@@ -408,6 +400,31 @@ void GLWidget::loadConfig()
 	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 30) _bgmlist->move(screen->width() - 30, LAppConfig::_BgmListLastPosY);
 }
 #pragma endregion
+
+void GLWidget::LoadConfig()
+{
+	resize(LAppConfig::_WindowWidth, LAppConfig::_WindowHeight);
+	//加载图标
+	if (_access(LAppConfig::_IconPath.c_str(), 0)==-1)
+	{
+		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon));
+	}
+	else
+	{
+		trayIcon->setIcon(QIcon(LAppConfig::_IconPath.c_str()));
+	}
+
+	//设置应用名称
+	QTextCodec* codec0 = QTextCodec::codecForName("utf-8");
+	trayIcon->setToolTip(codec0->toUnicode(LAppConfig::_AppName.c_str()));
+
+	//设置fps
+	if (currentTimerIndex != -1)
+	{
+		killTimer(currentTimerIndex);
+	}
+	currentTimerIndex = startTimer(1000 / LAppConfig::_FPS);
+}
 
 #pragma region 保存配置文件
 void GLWidget::saveConfig()
@@ -417,7 +434,6 @@ void GLWidget::saveConfig()
 #pragma endregion
 
 
-
 void GLWidget::showDialog(const char* text)
 {
 	_dialog->pop(text);
@@ -425,23 +441,27 @@ void GLWidget::showDialog(const char* text)
 
 void GLWidget::stayOnTop(bool on)
 {
-	_onTop = on;
+	LAppConfig::_StayOnTop = on;
 	setWindowFlag(Qt::WindowStaysOnTopHint, on);
 	show();
 }
 
 void GLWidget::setNoSound(bool on)
 {
-	_noSound = on;
+	LAppConfig::_NoSound = on;
 }
 
 void GLWidget::setShowText(bool on)
 {
-	_showText = on;
+	LAppConfig::_ShowText = on;
 }
 
 void GLWidget::setShowBgmList(bool on)
 {
-	_showBgmList = on;
+	LAppConfig::_ShowBgmList = on;
 	_bgmlist->setVisible(on);
+}
+void GLWidget::showSettingsOnTriggered()
+{
+	_control->Pop();
 }

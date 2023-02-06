@@ -11,7 +11,7 @@ Dialog::Dialog()
 	int h = LAppConfig::_DialogHeight;
 	setFixedSize(w + 10, h + 10);
 	_textBrowser->setFixedSize(w, h);
-	setWindowFlags(Qt::SubWindow | Qt::FramelessWindowHint);
+	setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	_textBrowser->setAttribute(Qt::WA_TransparentForMouseEvents);
 	animation = new QPropertyAnimation(this, NULL);
@@ -22,6 +22,7 @@ Dialog::Dialog()
 	_textBrowser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	_wordInterval = LAppConfig::_DialogWordInterval;
 	_currentIndex = -1;
+	_currentTimer = -1;
 }
 
 void Dialog::pop(const char* text)
@@ -34,7 +35,7 @@ void Dialog::pop(const char* text)
 	_currentIndex = 0;
 	animation->stop();
 	_textBrowser->clear();
-	setWindowFlag(Qt::WindowStaysOnTopHint, LApp::GetInstance()->GetWindow()->OnTop());
+	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
 	AttachToCharacter();
 	_currentTimer = startTimer(_wordInterval);
 	show();

@@ -2,6 +2,7 @@
 #include <httplib.h>
 #include "NetworkUtils.h"
 #include <QtCore/qtextcodec.h>
+#include <QtCore/qdatetime.h>
 
 
 using namespace std;
@@ -24,8 +25,7 @@ namespace BgmListUtils {
 		struct tm* now = localtime(&t);
 		int weeks[7] = { 6, 0, 1, 2, 3, 4, 5};
 		_BgmListJsonPath = string("bangumi.").append(to_string(now->tm_year + 1900)).append(to_string(now->tm_yday - weeks[now->tm_wday])).append(".json");
-		ifstream ifs(_BgmListJsonPath);
-		if (!ifs.good()) return true;
+		if (_access(_BgmListJsonPath.c_str(), 0)==-1) return true;
 		return false;
 	}
 
@@ -87,8 +87,7 @@ namespace HolidayUtils
 		time(&t);
 		struct tm* now = localtime(&t);
 		_HolidayJsonPath = string("holiday.") + to_string(now->tm_year + 1900).append(".json");
-		ifstream ifs(_HolidayJsonPath);
-		if (!ifs.good()) return true;
+		if (_access(_HolidayJsonPath.c_str(), 0)==-1) return true;
 		return false;
 	}
 
@@ -115,13 +114,10 @@ namespace HolidayUtils
 		Json::Value json;
 		ifs >> json;
 		ifs.close();
-		time_t t;
-		time(&t);
-		struct tm* now = localtime(&t);
-		string today = to_string(now->tm_mon).append("-").append(to_string(now->tm_mday));
-		if (!json["holiday"][today].isNull() && json["holiday"][today]["holiday"].asBool())
+		string td = QDateTime::currentDateTime().toString("MM-dd").toStdString();
+		if (!json["holiday"][td].isNull() && json["holiday"][td]["holiday"].asBool())
 		{
-			return json["holiday"][today]["name"].asCString();
+			return json["holiday"][td]["name"].asCString();
 		}
 		return NULL;
 	}
@@ -136,7 +132,7 @@ namespace ChatAPI {
 		data["type"] = 1;
 		data["from"] = LAppConfig::_UserName;
 		try {
-			Result res = cli.Post("/reply", { {"Api-Key", LAppConfig::_APIKey}, {"Api-Secret", LAppConfig::_APISecret} }, data.toStyledString().c_str(), "application/json; charset=UTF-8");
+			Result res = cli.Post("/reply", { {"Api-Key", LAppConfig::_ApiKey}, {"Api-Secret", LAppConfig::_ApiSecret} }, data.toStyledString().c_str(), "application/json; charset=UTF-8");
 			Json::Reader reader;
 			Json::Value json;
 			reader.parse(res.value().body, json);

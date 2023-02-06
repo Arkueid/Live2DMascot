@@ -1,5 +1,19 @@
 # Live2D Desktop Mascot
 
+# 新增设置窗口
+
+效果图如下  
+
+<img src="./sample_images/settings.png"/>  
+
+可以通过模型设置修改模型的文本，动作，和语音
+
+<img src="./sample_images/settings2.png"/>
+
+<img src="./sample_images/settings3.png"/>
+
+***
+
 ## 开发环境
 * Visual Studio 2022
 * [Cubism Live2D SDK for Native]
@@ -56,6 +70,8 @@ https://zhuanlan.zhihu.com/p/511077879
 	<img src="sample_images/chat.png" width="500">
 	<img src="sample_images/chat_rsp.png", width="400">
 </div>  
+
+AI可以在茉莉云上进行调教，普通用户每日500次访问，一般来说是够了
 
 
 3. 语音播放

@@ -51,7 +51,7 @@ LAppTextureManager::TextureInfo* LAppTextureManager::CreateTextureFromPngFile(st
         STBI_rgb_alpha);
     {
 
-#ifdef PREMULTIPLIED_ALPHA_ENABLE
+#ifdef PREMULTIPLIED_ALPHA_ENABLE  //千万别使用这个
         unsigned int* fourBytes = reinterpret_cast<unsigned int*>(png);
         for (int i = 0; i < width * height; i++)
         {

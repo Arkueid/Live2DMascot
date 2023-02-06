@@ -519,7 +519,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         csmString path = voice;
         path = _modelHomeDir + path;
         _wavFileHandler.Start(path);
-        if (!LApp::GetInstance()->GetWindow()->NoSound())
+        if (!LAppConfig::_NoSound)
         {
             if (priority == PriorityForce)
             {
@@ -536,8 +536,8 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     }
 
     //text
-    bool forceShow =  (group == "Morning" || group == "Evening" || group == "Afternoon");
-    if ((LApp::GetInstance()->GetWindow()->ShowText() && preSoundFinished ) || forceShow )
+    bool forceShow =  (group == "Morning" || group == "Evening" || group == "Afternoon" || group == "LongSittingTip");
+    if ((LAppConfig::_ShowText && preSoundFinished ) || forceShow )
     {
         csmString text = _modelSetting->GetTextForMotion(group, no);
         if (strcmp(text.GetRawString(), "") != 0)

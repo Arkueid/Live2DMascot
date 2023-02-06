@@ -1,4 +1,4 @@
-#include "BgmListView.h"
+ï»¿#include "BgmListView.h"
 #include "json/json.h"
 #include <Windows.h>
 #include "NetworkUtils.h"
@@ -36,7 +36,7 @@ BgmListView::BgmListView()
 		_ylen = 30 * _bgmitems.size() + 30;
 	}
 	else {
-		_ylen = 200;
+		_ylen = 70;
 	}
 	ifs.close();
 }
@@ -49,43 +49,45 @@ BgmListView::~BgmListView()
 void BgmListView::paintEvent(QPaintEvent* e)
 {
 	QDateTime now = QDateTime::currentDateTime();
-
+	QColor normal = Qt::white;
+	QColor hover(240, 120, 180);
 	QPainter painter(this);
 	resize(_w, _ylen);
-	painter.fillRect(this->rect(), QColor(0, 0, 0, 200));
+	painter.fillRect(this->rect(), QColor(0, 0, 0, 180));
 	painter.fillRect(QRectF(0, 0, _w, 30), QColor(0, 0, 0, 180));
 
-	//»æÖÆÊ±¼ä
+	//ç»˜åˆ¶æ—¶é—´
 	QFont font;
-	font.setFamily(QString::fromLocal8Bit("Î¢ÈíÑÅºÚ"));
+	font.setFamily(QString::fromLocal8Bit("å¾®è½¯é›…é»‘"));
 	font.setPixelSize(15);
 	painter.setFont(font);
 	painter.setPen(Qt::white);
 	painter.drawText(QRect(0, 0, this->width(), 30).adjusted(5, 3, -5, -3), Qt::AlignVCenter | Qt::AlignLeft, now.toString("yyyy-MM-dd hh:mm dddd"));
 
-	//»æÖÆ´¹Ö±Öá
-	QLine line(20, 30, 20, _ylen - 6);
-	painter.setPen(QColor(52, 152, 219));
-	painter.drawLine(line);
-	QPixmap pixmap;
-
-	//¿¹¾â³Ý
+	//æŠ—é”¯é½¿
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	//»æÖÆ·¬¾çÁÐ±í
+	//ç»˜åˆ¶ç•ªå‰§åˆ—è¡¨
 	if (!_bgmlist.isNull())
 	{
+		//ç»˜åˆ¶åž‚ç›´è½´
+		/*QLine line(20, 30, 20, _ylen - 6);
+		painter.setPen(pink);
+		painter.drawLine(line);
+		QPixmap pixmap;*/
 		for (int i=0; i < _bgmitems.size(); i ++)
 		{
-			QColor color = i == _currentIndex ? QColor(46, 204, 113) : Qt::white;
-			painter.setPen(color);
+			painter.setPen(i == _currentIndex ? hover : normal);
 			const char* name = strcmp(_bgmitems[i]["name_cn"].asCString(), "") == 0 ? _bgmitems[i]["name"].asCString() : _bgmitems[i]["name_cn"].asCString();
 			painter.drawText(QPoint(40, i * 30 + 50), name);
 			QPainterPath circle;
 			circle.addEllipse(17, i * 30 + 40, 7, 7);
-			color = i == _currentIndex ? QColor(46, 204, 113) : QColor(52, 152, 219);
-			painter.fillPath(circle, color);
+			painter.fillPath(circle, i == _currentIndex ? hover : normal);
 		}
+	}
+	else {
+		painter.setPen(QColor(241, 158, 194));
+		painter.drawText(QPoint(40, 50),QString::fromLocal8Bit("ä»Šå¤©æ²¡æœ‰ç•ªå‰§æ›´æ–°~"));
 	}
 }
 

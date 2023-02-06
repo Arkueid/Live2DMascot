@@ -1,18 +1,16 @@
+#include <iostream>
+#include <fstream>
 #include <Windows.h>
 #include <lmcons.h>
+#include <io.h>
+#include <QtWidgets/qmessagebox.h>
+
 #include "LAppDelegate.hpp"
 #include "LApp.h"
 #include "LAppDefine.hpp"
 #include "LAppPal.hpp"
-#include <iostream>
-#include <fstream>
 #include "json/json.h"
 #include "NetworkUtils.h"
-#include <unordered_map>
-#include <vector>
-#include <QtCore/qtextcodec.h>
-#include <QtWidgets/qmessagebox.h>
-#include <QtWidgets/qapplication.h>
 using namespace std;
 using namespace LAppDefine;
 
@@ -23,9 +21,9 @@ namespace LAppConfig {
     int _LastPosY;
     int _FPS;
     int _MotionInterval;
-    string _WindowTitle;
+    string _AppName;
     string _IconPath;
-    string _DefaultModelName;
+    string _ModelName;
     string _ModelDir;
     bool _KeepQuiet;
     bool _MouseTrack;
@@ -42,8 +40,8 @@ namespace LAppConfig {
     int _BgmListLastPosY;
     int _DialogWordInterval;
     string _NoteOutPath;
-    string _APIKey;
-    string _APISecret;
+    string _ApiKey;
+    string _ApiSecret;
     string _UserName;
 };
 
@@ -59,6 +57,12 @@ void LApp::warning(const char* x)
 
 
 LApp::LApp()
+{
+    _app = NULL;
+    _win = NULL;
+}
+
+LApp::~LApp()
 {
 
 }
@@ -91,11 +95,19 @@ void LApp::Initialize(int argc, char* argv[])
         // 所以在得知系统即将关机的时候，便应立即保存数据，以免被kill而错失时机
         LApp::SaveConfig();
         });
+    _win = new GLWidget();
+    BgmListUtils::CheckUpdate();
+    HolidayUtils::CheckUpdate();
+    LoadConfig();
+    _win->setupUI();
+}
+
+void LApp::LoadConfig() {
     char* testConfigPath = "config.json";
     LAppConfig::_ConfigPath = testConfigPath;
     if (DebugLogEnable)
     {
-        LAppPal::PrintLog("[APP]config path: [%s]", testConfigPath);
+        Log("Config", testConfigPath);
     }
     ifstream file;
     file.open(testConfigPath);
@@ -114,10 +126,20 @@ void LApp::Initialize(int argc, char* argv[])
         }
     }
     file.close();
-    BgmListUtils::CheckUpdate();
-    HolidayUtils::CheckUpdate();
+
+    LAppConfig::_ModelDir = !config["UserSettings"]["ModelDir"].isNull() ? config["UserSettings"]["ModelDir"].asCString() : "Resources";
+    if (_access(LAppConfig::_ModelDir.c_str(), 0) == -1) {
+        LApp::warning("资源文件夹路径不正确！\n请修改config.json文件");
+        exit(0);
+    }
+    LAppConfig::_ModelName = !config["UserSettings"]["ModelName"].isNull() ? config["UserSettings"]["ModelName"].asCString() : "Hiyori";
+    if (_access(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str(), 0) == -1)
+    {
+        LApp::warning("模型文件不存在！\n请修改config.json文件");
+        exit(0);
+    }
     LAppConfig::_IconPath = !config["WindowSettings"]["IconPath"].isNull() ? config["WindowSettings"]["IconPath"].asCString() : "";
-    LAppConfig::_WindowTitle = !config["WindowSettings"]["AppName"].isNull() ? config["WindowSettings"]["AppName"].asCString() : "Live2D Displayer";
+    LAppConfig::_AppName = !config["WindowSettings"]["AppName"].isNull() ? config["WindowSettings"]["AppName"].asCString() : "Live2D Displayer";
     LAppConfig::_FPS = !config["WindowSettings"]["FPS"].isNull() ? config["WindowSettings"]["FPS"].asInt() : 48;
     LAppConfig::_WindowWidth = !config["WindowSettings"]["Width"].isNull() ? config["WindowSettings"]["Width"].asInt() : 500;
     LAppConfig::_WindowHeight = !config["WindowSettings"]["Height"].isNull() ? config["WindowSettings"]["Height"].asInt() : 700;
@@ -125,8 +147,6 @@ void LApp::Initialize(int argc, char* argv[])
     LAppConfig::_LastPosY = !config["WindowSettings"]["LastPos"]["Y"].isNull() ? config["WindowSettings"]["LastPos"]["Y"].asInt() : 0;
     LAppConfig::_BgmListLastPosX = !config["UserSettings"]["BgmList"]["LastPos"]["X"].isNull() ? config["UserSettings"]["BgmList"]["LastPos"]["X"].asInt() : 500;
     LAppConfig::_BgmListLastPosY = !config["UserSettings"]["BgmList"]["LastPos"]["Y"].isNull() ? config["UserSettings"]["BgmList"]["LastPos"]["Y"].asInt() : 0;
-    LAppConfig::_DefaultModelName = !config["UserSettings"]["ModelName"].isNull() ? config["UserSettings"]["ModelName"].asCString() : "Hiyori";
-    LAppConfig::_ModelDir = !config["UserSettings"]["ModelDir"].isNull() ? config["UserSettings"]["ModelDir"].asCString() : "Resources";
     LAppConfig::_MouseTrack = !config["UserSettings"]["MouseTrack"].isNull() ? config["UserSettings"]["MouseTrack"].asBool() : true;
     LAppConfig::_KeepQuiet = !config["UserSettings"]["KeepQuiet"].isNull() ? config["UserSettings"]["KeepQuiet"].asBool() : false;
     LAppConfig::_StayOnTop = !config["UserSettings"]["StayOnTop"].isNull() ? config["UserSettings"]["StayOnTop"].asBool() : false;
@@ -136,8 +156,8 @@ void LApp::Initialize(int argc, char* argv[])
     LAppConfig::_TextFadeOutTime = !config["UserSettings"]["TextFadeOutTime"].isNull() ? config["UserSettings"]["TextFadeOutTime"].asInt() : 6;
     LAppConfig::_DialogWidth = !config["UserSettings"]["Dialog"]["Width"].isNull() ? config["UserSettings"]["Dialog"]["Width"].asInt() : 400;
     LAppConfig::_DialogHeight = !config["UserSettings"]["Dialog"]["Height"].isNull() ? config["UserSettings"]["Dialog"]["Height"].asInt() : 150;
-    LAppConfig::_APIKey = !config["UserSettings"]["Mlyai"]["APIKey"].isNull() ? config["UserSettings"]["Mlyai"]["APIKey"].asCString() : "82wmm51s1bskwft3";
-    LAppConfig::_APISecret = !config["UserSettings"]["Mlyai"]["APISecret"].isNull() ? config["UserSettings"]["Mlyai"]["APISecret"].asCString() : "o0vp8k7e";
+    LAppConfig::_ApiKey = !config["UserSettings"]["Mlyai"]["APIKey"].isNull() ? config["UserSettings"]["Mlyai"]["APIKey"].asCString() : "82wmm51s1bskwft3";
+    LAppConfig::_ApiSecret = !config["UserSettings"]["Mlyai"]["APISecret"].isNull() ? config["UserSettings"]["Mlyai"]["APISecret"].asCString() : "o0vp8k7e";
     TCHAR username[UNLEN + 1];
     DWORD size = UNLEN + 1;
     GetUserName((TCHAR*)username, &size);
@@ -153,8 +173,6 @@ void LApp::Initialize(int argc, char* argv[])
         "margin : 0;"
         "color: white;"
         "font-family: Comic Sans MS;";
-    _win = new GLWidget();
-    _win->loadConfig();
 }
 
 void LApp::Run()
@@ -185,27 +203,27 @@ void LApp::SaveConfig()
     config["WindowSettings"]["Height"] = _win->height();
     config["WindowSettings"]["LastPos"]["X"] = _win->x();
     config["WindowSettings"]["LastPos"]["Y"] = _win->y();
-    config["UserSettings"]["MouseTrack"] = _win->MouseTrack();
-    config["UserSettings"]["KeepQuiet"] = _win->Quiet();
-    config["UserSettings"]["StayOnTop"] = _win->OnTop();
-    config["UserSettings"]["NoSound"] = _win->NoSound();
-    config["UserSettings"]["ShowText"] = _win->ShowText();
-    config["UserSettings"]["ShowBgmList"] = _win->ShowBgmList();
+    config["UserSettings"]["MouseTrack"] = LAppConfig::_MouseTrack;
+    config["UserSettings"]["KeepQuiet"] = LAppConfig::_KeepQuiet;
+    config["UserSettings"]["StayOnTop"] = LAppConfig::_StayOnTop;
+    config["UserSettings"]["NoSound"] = LAppConfig::_NoSound;
+    config["UserSettings"]["ShowText"] = LAppConfig::_ShowText;
+    config["UserSettings"]["ShowBgmList"] = LAppConfig::_ShowBgmList;
     config["UserSettings"]["ModelDir"] = LAppConfig::_ModelDir;
-    config["UserSettings"]["ModelName"] = LAppConfig::_DefaultModelName;
+    config["UserSettings"]["ModelName"] = LAppConfig::_ModelName;
     config["UserSettings"]["TextFadeOutTime"] = LAppConfig::_TextFadeOutTime;
     config["UserSettings"]["Dialog"]["Width"] = LAppConfig::_DialogWidth;
     config["UserSettings"]["Dialog"]["Height"] = LAppConfig::_DialogHeight;
     config["UserSettings"]["Dialog"]["StyleSheet"] = LAppConfig::_DialogStyleSheet;
     config["UserSettings"]["Dialog"]["WordInterval"] = LAppConfig::_DialogWordInterval;
     config["WindowSettings"]["IconPath"] = LAppConfig::_IconPath;
-    config["WindowSettings"]["AppName"] = LAppConfig::_WindowTitle;
+    config["WindowSettings"]["AppName"] = LAppConfig::_AppName;
     config["WindowSettings"]["FPS"] = LAppConfig::_FPS;
     config["UserSettings"]["NoteOutPath"] = LAppConfig::_NoteOutPath;
     config["UserSettings"]["BgmList"]["LastPos"]["X"] = LApp::GetInstance()->GetWindow()->GetBgmListView()->x();
     config["UserSettings"]["BgmList"]["LastPos"]["Y"] = LApp::GetInstance()->GetWindow()->GetBgmListView()->y();
-    config["UserSettings"]["Mlyai"]["APIKey"] = LAppConfig::_APIKey;
-    config["UserSettings"]["Mlyai"]["APISecret"] = LAppConfig::_APISecret;
+    config["UserSettings"]["Mlyai"]["APIKey"] = LAppConfig::_ApiKey;
+    config["UserSettings"]["Mlyai"]["APISecret"] = LAppConfig::_ApiSecret;
     config["UserSettings"]["MotionInterval"] = LAppConfig::_MotionInterval;
     config["UserSettings"]["UserName"] = LAppConfig::_UserName;
     ofstream ofs(LAppConfig::_ConfigPath);

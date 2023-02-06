@@ -14,9 +14,9 @@ protected:
 	void paintEvent(QPaintEvent* e);
 	void mouseMoveEvent(QMouseEvent* e);
 	void mousePressEvent(QMouseEvent* e);
-	void leaveEvent(QEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
 	void enterEvent(QEvent* e);
+	void leaveEvent(QEvent* e);
 private:
 	Json::Value _bgmlist;
 	int _mouseX;

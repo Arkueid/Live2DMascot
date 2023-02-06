@@ -56,7 +56,7 @@ LAppLive2DManager::LAppLive2DManager()
     , _sceneIndex(0)
 {
     _viewMatrix = new CubismMatrix44();
-    ChangeModel(LAppConfig::_ModelDir.c_str(), LAppConfig::_DefaultModelName.c_str());
+    ChangeModel(LAppConfig::_ModelDir.c_str(), LAppConfig::_ModelName.c_str());
 }
 
 LAppLive2DManager::~LAppLive2DManager()

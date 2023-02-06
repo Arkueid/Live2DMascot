@@ -5,8 +5,8 @@
 		{
 			"LastPos" : 
 			{
-				"X" : 1508,
-				"Y" : -595
+				"X" : 1568,
+				"Y" : -385
 			}
 		},
 		"Dialog" : 
@@ -16,7 +16,7 @@
 			"Width" : 300,
 			"WordInterval" : 10
 		},
-		"KeepQuiet" : true,
+		"KeepQuiet" : false,
 		"Mlyai" : 
 		{
 			"APIKey" : "82wmm51s1bskwft3",
@@ -25,7 +25,7 @@
 		"ModelDir" : "../Resources",
 		"ModelName" : "Hiyori",
 		"MotionInterval" : 5,
-		"MouseTrack" : true,
+		"MouseTrack" : false,
 		"NoSound" : true,
 		"NoteOutPath" : ".",
 		"ShowBgmList" : true,
@@ -42,8 +42,8 @@
 		"IconPath" : "../Resources/sample-hiyori_movie.png",
 		"LastPos" : 
 		{
-			"X" : 1556,
-			"Y" : 536
+			"X" : 1566,
+			"Y" : 531
 		},
 		"Width" : 300
 	}

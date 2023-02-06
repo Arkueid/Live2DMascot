@@ -60,8 +60,9 @@ public:
     /**
     * @brief 画像の初期化を行う。
     */
+#if 0
     void InitializeSprite();
-
+#endif
     /**
     * @brief スプライト系のサイズ再設定
     */
