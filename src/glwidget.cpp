@@ -81,24 +81,48 @@ void GLWidget::paintGL()
 
 void GLWidget::timerEvent(QTimerEvent* e)
 {
+	if (isVisible())
+	{
+		int mX = QCursor::pos().x();
+		int mY = QCursor::pos().y();
+		float x = mX - this->x();
+		float y = mY - this->y();
+		LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&x, &y);
 
-	QCursor cursor;
-	float x = cursor.pos().x() - this->x();
-	float y = cursor.pos().y() - this->y();
-	LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&x, &y);
-	HWND hWnd = (HWND)(this->winId());
-	if (!LAppConfig::_KeepQuiet && (LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y)))
-	{
-		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) & (~WS_EX_TRANSPARENT));
+		LAppConfig::_MouseOn = mX > this->x() && mX < this->x() + width() && mY > this->y() && mY < this->y() + height();
+
+		if (LAppConfig::_MouseOn)
+		{
+			if (!LAppConfig::_KeepQuiet && (!LAppConfig::_TransparentBackground ||  (LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y))))
+			{
+				if (_transparent)
+				{
+					HWND hWnd = (HWND)(this->winId());
+					SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) & (~WS_EX_TRANSPARENT));
+					_transparent = false;
+				}
+			}
+			else
+			{
+				if (!_transparent)
+				{
+					HWND hWnd = (HWND)(this->winId());
+					SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) | WS_EX_TRANSPARENT);
+					_transparent = true;
+				}
+			}
+		}
+		else {
+			LAppConfig::_MouseOn = false;
+		}
+
+		if (LAppConfig::_MouseTrack)
+		{
+			LAppLive2DManager::GetInstance()->OnDrag(x, y);
+		}
+
 	}
-	else
-	{
-		SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLongW(hWnd, GWL_EXSTYLE) | WS_EX_TRANSPARENT);
-	}
-	if (LAppConfig::_MouseTrack)
-	{
-		LAppLive2DManager::GetInstance()->OnDrag(x, y);
-	}
+
 	if (runFor / LAppConfig::_FPS > 3600)
 	{
 		LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce, FinishedMotion);
@@ -110,7 +134,6 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 void GLWidget::mousePressEvent(QMouseEvent* e)
 {
-	//ÅäºÏ
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->button(), 1);
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
 
@@ -141,13 +164,13 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent* e)
 void GLWidget::HoldText()
 {
 	_LastState = LAppConfig::_ShowText;
-	setShowText(false);
+	LAppConfig::_ShowText = false;
 	_dialog->hide();
 }
 
 void GLWidget::ReleaseText()
 {
-	setShowText(_LastState);
+	LAppConfig::_ShowText = _LastState;
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent* e)
@@ -174,14 +197,14 @@ void GLWidget::trayIconOnActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	if (reason == QSystemTrayIcon::DoubleClick)
 	{
-		// ´°¿ÚÒÆ¶¯×î¶¥¶Ë
-		this->setWindowFlag(Qt::WindowStaysOnTopHint, true);
-		show();
-		this->setWindowFlag(Qt::WindowStaysOnTopHint, false);
-		show();
 		QTextCodec* codec = QTextCodec::codecForName("gb2312");
 		act_hide->setText(codec->toUnicode("Òþ²Ø"));
-		
+		// ´°¿ÚÒÆ¶¯×î¶¥¶Ë
+		this->setWindowFlag(Qt::WindowStaysOnTopHint, true);
+		setVisible(true);
+		this->setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
+		setVisible(true);
+		_transparent = false;
 	}
 	else  if (reason == QSystemTrayIcon::Trigger)
 	{
@@ -196,7 +219,7 @@ void GLWidget::showRightMenu()
 {
 	QCursor cursor;
 	rightMenu->show();
-	int mX = cursor.pos().x() + 20;
+	int mX = cursor.pos().x() + 10;
 	int mY = cursor.pos().y() - rightMenu->height() - 10;
 	rightMenu->move(mX, mY);
 }
@@ -240,12 +263,12 @@ void GLWidget::keepMouseTrackOnTriggered()
 {
 	if (!act_keepMouseTrack->isChecked())
 	{
-		keepMouseTrack(false);
+		LAppConfig::_MouseTrack = false;
 		act_keepMouseTrack->setChecked(false);
 	}
 	else
 	{
-		keepMouseTrack(true);
+		LAppConfig::_MouseTrack = true;
 		act_keepMouseTrack->setChecked(true);
 	}
 }
@@ -253,12 +276,12 @@ void GLWidget::keepQuietOnTriggered()
 {
 	if (!act_keepQuiet->isChecked())
 	{
-		keepQuiet(false);
+		LAppConfig::_KeepQuiet = false;
 		act_keepQuiet->setChecked(false);
 	}
 	else
 	{
-		keepQuiet(true);
+		LAppConfig::_KeepQuiet = true;
 		act_keepQuiet->setChecked(true);
 	}
 }
@@ -267,12 +290,18 @@ void GLWidget::stayOnTopOnTriggered()
 {
 	if (!act_stayOnTop->isChecked())
 	{
-		stayOnTop(false);
+		LAppConfig::_StayOnTop = false;
+		setWindowFlag(Qt::WindowStaysOnTopHint, false);
+		show();
+		_transparent = false;
 		act_stayOnTop->setChecked(false);
 	}
 	else
 	{
-		stayOnTop(true);
+		LAppConfig::_StayOnTop = true;
+		setWindowFlag(Qt::WindowStaysOnTopHint, true);
+		show();
+		_transparent = false;
 		act_stayOnTop->setChecked(true);
 	}
 }
@@ -281,12 +310,12 @@ void GLWidget::setNoSoundOnTriggered()
 {
 	if (!act_setNoSound->isChecked())
 	{
-		setNoSound(false);
+		LAppConfig::_NoSound = false;
 		act_setNoSound->setChecked(false);
 	}
 	else
 	{
-		setNoSound(true);
+		LAppConfig::_NoSound = true;
 		act_setNoSound->setChecked(true);
 	}
 }
@@ -295,12 +324,12 @@ void GLWidget::setShowTextOnTriggered()
 {
 	if (!act_setShowText->isChecked())
 	{
-		setShowText(false);
+		LAppConfig::_ShowText = false;
 		act_setShowText->setChecked(false);
 	}
 	else
 	{
-		setShowText(true);
+		LAppConfig::_ShowText = true;
 		act_setShowText->setChecked(true);
 	}
 }
@@ -373,6 +402,19 @@ void GLWidget::setupUI()
 
 	act_showSettings = new QAction(codec->toUnicode("ÉèÖÃ"));
 
+	act_setShowBackground = new QAction(codec->toUnicode("ÏÔÊ¾±³¾°"));
+	act_setShowBackground->setCheckable(true);
+	act_setShowBackground->setChecked(LAppConfig::_ShowBackground);
+
+	act_setTransparentBackground = new QAction(codec->toUnicode("±³¾°´©Í¸"));
+	act_setTransparentBackground->setCheckable(true);
+	act_setTransparentBackground->setChecked(LAppConfig::_TransparentBackground);
+
+	act_setTransparentCharacter = new QAction(codec->toUnicode("·ÀÕÚµ²"));
+	act_setTransparentCharacter->setCheckable(true);
+	act_setTransparentCharacter->setChecked(LAppConfig::_TransparentCharacter);
+
+
 	//ÓÒ¼ü²Ëµ¥ÐÅºÅ
 	connect(act_quit, SIGNAL(triggered()), SLOT(quitOnTriggered()));
 	connect(act_hide, SIGNAL(triggered()), SLOT(hideOnTriggered()));
@@ -383,12 +425,16 @@ void GLWidget::setupUI()
 	connect(act_setShowText, SIGNAL(triggered()), SLOT(setShowTextOnTriggered()));
 	connect(act_setShowBgmList, SIGNAL(triggered()), SLOT(setShowBgmListOnTriggered()));
 	connect(act_showSettings, SIGNAL(triggered()), SLOT(showSettingsOnTriggered()));
+	connect(act_setShowBackground, SIGNAL(triggered()), SLOT(setShowBackgroundOnTriggered()));
+	connect(act_setTransparentBackground, SIGNAL(triggered()), SLOT(setTransparentBackgroundOnTriggered()));
+	connect(act_setTransparentCharacter, SIGNAL(triggered()), SLOT(setTransparentCharacterOnTriggered()));
 
-	rightMenu->addActions({ act_setShowBgmList, act_keepMouseTrack, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_showSettings});
+
+	rightMenu->addActions({ act_setShowBgmList, act_keepMouseTrack, act_setTransparentBackground, act_setTransparentCharacter, act_setShowBackground, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_showSettings});
 	rightMenu->addSeparator();
 	rightMenu->addAction(act_quit);
 	rightMenu->setFixedWidth(120);
-	rightMenu->setStyleSheet("QMenu { background-color: white; padding-top: 8px; padding-bottom: 8px; border: 1px solid rgb(214, 214, 214); padding: 4px; color: black;} QMenu::item::selected{background-color: rgb(50, 150, 240); color: white;} QMenu::item {padding: 0 0 0 20px; margin-left: 4px; margin-right: 4px;color: rgb(90, 90, 90);} QMenu::indicator{width: 13px;} QMenu::item:checked, QMenu::item:unchecked{padding-left: 7;}");
+	rightMenu->setStyleSheet("QMenu { background-color: white; padding-top: 8px; padding-bottom: 8px; border: 1px solid rgb(214, 214, 214); padding: 4px; color: black;} QMenu::item::selected{background-color: rgba(50, 150, 240, 200); color: white;} QMenu::item {padding: 0 0 0 20px; margin-left: 4px; margin-right: 4px;color: rgb(90, 90, 90);} QMenu::indicator{width: 13px;} QMenu::item:checked, QMenu::item:unchecked{padding-left: 7;}");
 	_dialog = new Dialog();
 	_bgmlist = new BgmListView();
 	_cvWidget = new ConversationWidget();
@@ -411,12 +457,11 @@ void GLWidget::LoadConfig()
 	}
 	else
 	{
-		trayIcon->setIcon(QIcon(LAppConfig::_IconPath.c_str()));
+		trayIcon->setIcon(QIcon(QString::fromLocal8Bit(LAppConfig::_IconPath.c_str())));
 	}
 
 	//ÉèÖÃÓ¦ÓÃÃû³Æ
-	QTextCodec* codec0 = QTextCodec::codecForName("utf-8");
-	trayIcon->setToolTip(codec0->toUnicode(LAppConfig::_AppName.c_str()));
+	trayIcon->setToolTip(QString::fromLocal8Bit(LAppConfig::_AppName.c_str()));
 
 	//ÉèÖÃfps
 	if (currentTimerIndex != -1)
@@ -439,29 +484,52 @@ void GLWidget::showDialog(const char* text)
 	_dialog->pop(text);
 }
 
-void GLWidget::stayOnTop(bool on)
-{
-	LAppConfig::_StayOnTop = on;
-	setWindowFlag(Qt::WindowStaysOnTopHint, on);
-	show();
-}
-
-void GLWidget::setNoSound(bool on)
-{
-	LAppConfig::_NoSound = on;
-}
-
-void GLWidget::setShowText(bool on)
-{
-	LAppConfig::_ShowText = on;
-}
-
 void GLWidget::setShowBgmList(bool on)
 {
 	LAppConfig::_ShowBgmList = on;
 	_bgmlist->setVisible(on);
 }
+
 void GLWidget::showSettingsOnTriggered()
 {
 	_control->Pop();
+}
+
+void GLWidget::setShowBackgroundOnTriggered()
+{
+	if (!act_setShowBackground->isChecked())
+	{
+		LAppConfig::_ShowBackground = false;
+		act_setShowBackground->setChecked(false);
+	}
+	else {
+		LAppConfig::_ShowBackground = true;
+		act_setShowBackground->setChecked(true);
+	}
+}
+
+void GLWidget::setTransparentBackgroundOnTriggered()
+{
+	if (!act_setTransparentBackground->isChecked())
+	{
+		LAppConfig::_TransparentBackground = false;
+		act_setTransparentBackground->setChecked(false);
+	}
+	else {
+		LAppConfig::_TransparentBackground = true;
+		act_setTransparentBackground->setChecked(true);
+	}
+}
+
+void GLWidget::setTransparentCharacterOnTriggered()
+{
+	if (!act_setTransparentCharacter->isChecked())
+	{
+		LAppConfig::_TransparentCharacter = false;
+		act_setTransparentCharacter->setChecked(false);
+	}
+	else {
+		LAppConfig::_TransparentCharacter = true;
+		act_setTransparentCharacter->setChecked(true);
+	}
 }

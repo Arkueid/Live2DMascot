@@ -125,6 +125,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     if (strcmp(_modelSetting->GetModelFileName(), "") != 0)
     {
         csmString path = _modelSetting->GetModelFileName();
+
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();  
+
         path = _modelHomeDir + path;
 
         if (_debugMode)
@@ -145,6 +149,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         {
             csmString name = _modelSetting->GetExpressionName(i);
             csmString path = _modelSetting->GetExpressionFileName(i);
+
+            //中文路径支持
+            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
             path = _modelHomeDir + path;
 
             buffer = CreateBuffer(path.GetRawString(), &size);
@@ -165,6 +173,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     if (strcmp(_modelSetting->GetPhysicsFileName(), "") != 0)
     {
         csmString path = _modelSetting->GetPhysicsFileName();
+
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
         path = _modelHomeDir + path;
 
         buffer = CreateBuffer(path.GetRawString(), &size);
@@ -176,6 +188,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     if (strcmp(_modelSetting->GetPoseFileName(), "") != 0)
     {
         csmString path = _modelSetting->GetPoseFileName();
+
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
         path = _modelHomeDir + path;
 
         buffer = CreateBuffer(path.GetRawString(), &size);
@@ -208,6 +224,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     if (strcmp(_modelSetting->GetUserDataFile(), "") != 0)
     {
         csmString path = _modelSetting->GetUserDataFile();
+
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
         path = _modelHomeDir + path;
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadUserData(buffer, size);
@@ -288,6 +308,10 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         //ex) idle_0
         csmString name = Utils::CubismString::GetFormatedString("%s_%d", group, i);
         csmString path = _modelSetting->GetMotionFileName(group, i);
+
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
         path = _modelHomeDir + path;
 
         if (_debugMode)
@@ -485,8 +509,11 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     if (motion == NULL)
     {
         csmString path = fileName;
-        path = _modelHomeDir + path;
 
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
+        path = _modelHomeDir + path;
         csmByte* buffer;
         csmSizeInt size;
         buffer = CreateBuffer(path.GetRawString(), &size);
@@ -517,6 +544,10 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     if (strcmp(voice.GetRawString(), "") != 0)
     {
         csmString path = voice;
+
+        //中文路径支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
         path = _modelHomeDir + path;
         _wavFileHandler.Start(path);
         if (!LAppConfig::_NoSound)

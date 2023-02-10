@@ -12,6 +12,7 @@
 #include "LAppView.hpp"
 #include "LAppPal.hpp"
 #include "LAppDefine.hpp"
+#include "LApp.h"
 #include "LAppLive2DManager.hpp"
 #include "LAppTextureManager.hpp"
 
@@ -415,9 +416,12 @@ void LAppDelegate::update()
     LAppPal::UpdateTime();
 
     // 画面の初期化
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, (LAppConfig::_ShowBackground && LAppConfig::_MouseOn) ? 0.2f : 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearDepth(1.0);
+
+
+    if (LAppConfig::_TransparentCharacter && LAppConfig::_MouseOn) return;
 
     //描画更新
     _view->Render();

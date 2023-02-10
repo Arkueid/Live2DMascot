@@ -1,0 +1,136 @@
+{
+	"FileReferences" : 
+	{
+		"DisplayInfo" : "nn.cdi3.json",
+		"Expressions" : 
+		[
+			{
+				"File" : "expressions/normal.exp3.json",
+				"Name" : "normal"
+			},
+			{
+				"File" : "expressions/afraid.exp3.json",
+				"Name" : "afraid"
+			},
+			{
+				"File" : "expressions/star.exp3.json",
+				"Name" : "star"
+			},
+			{
+				"File" : "expressions/smile.exp3.json",
+				"Name" : "smile"
+			},
+			{
+				"File" : "expressions/flush.exp3.json",
+				"Name" : "flush"
+			}
+		],
+		"Moc" : "nn.moc3",
+		"Motions" : 
+		{
+			"Afternoon" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.afternoon_0.wav",
+					"Text" : "下午好！"
+				}
+			],
+			"Evening" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.evening_0.wav",
+					"Text" : "晚上好！"
+				}
+			],
+			"LongSittingTip" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.longsittingtip_0.wav",
+					"Text" : "坐在电脑前很久了哦，快去休息一下吧！"
+				}
+			],
+			"Midnight" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.midnight_0.wav",
+					"Text" : "很晚了，请早点休息！"
+				}
+			],
+			"Morning" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.morning_0.wav",
+					"Text" : "早上好！"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.morning_1.wav",
+					"Text" : "早上好，今天也请多多关照呢！"
+				}
+			],
+			"TapBody" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.tap_body_0.wav",
+					"Text" : "请...请不要这样！"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.tap_body_1.wav",
+					"Text" : "一定是梦...这不是真的...这不是真的...不是不是不是..."
+				}
+			],
+			"TapHead" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.tap_head_0.wav",
+					"Text" : "诶？！头发上有东西吗？"
+				}
+			]
+		},
+		"Physics" : "nn.physics3.json",
+		"Textures" : 
+		[
+			"nn.2048/texture_00.png"
+		]
+	},
+	"Groups" : 
+	[
+		{
+			"Ids" : 
+			[
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			],
+			"Name" : "EyeBlink",
+			"Target" : "Parameter"
+		},
+		{
+			"Ids" : [
+				"ParamMouthOpenY",
+				"ParamMouthForm"
+			],
+			"Name" : "LipSync",
+			"Target" : "Parameter"
+		}
+	],
+	"HitAreas" : 
+	[
+		{
+			"Id" : "face2",
+			"Name" : "Head"
+		},
+		{
+			"Id" : "yifu",
+			"Name" : "Body"
+		}
+	],
+	"Version" : 3
+}

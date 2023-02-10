@@ -31,14 +31,14 @@ void Dialog::pop(const char* text)
 	{
 		killTimer(_currentTimer);
 	}
-	_text = QString::fromStdString(text);
+	_text = QString::fromStdString(text).toUtf8();
 	_currentIndex = 0;
 	animation->stop();
 	_textBrowser->clear();
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
 	AttachToCharacter();
 	_currentTimer = startTimer(_wordInterval);
-	show();
+	setVisible(true);
 }
 void Dialog::Release()
 {

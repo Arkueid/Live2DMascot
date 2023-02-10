@@ -5,7 +5,11 @@
  * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
  */
 #include "LApp.h"
-
+#include <io.h>
+#include <fstream>
+#include <ctime>
+#include <windows.h>
+#include <QtCore/qtextcodec.h>
 
 int main(int argc, char* argv[])
 {

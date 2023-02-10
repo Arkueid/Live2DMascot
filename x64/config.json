@@ -6,7 +6,7 @@
 			"LastPos" : 
 			{
 				"X" : 1345,
-				"Y" : 0
+				"Y" : -385
 			}
 		},
 		"Dialog" : 
@@ -23,15 +23,17 @@
 			"APISecret" : "o0vp8k7e"
 		},
 		"ModelDir" : "../Resources",
-		"ModelName" : "Hiyori",
+		"ModelName" : "shagali",
 		"MotionInterval" : 5,
 		"MouseTrack" : true,
 		"NoSound" : true,
 		"NoteOutPath" : ".",
+		"ShowBackground" : false,
 		"ShowBgmList" : true,
 		"ShowText" : false,
 		"StayOnTop" : false,
 		"TextFadeOutTime" : 4,
+		"TransparentForMouse" : true,
 		"UserName" : "ArcueidBrunestud"
 	},
 	"WindowSettings" : 

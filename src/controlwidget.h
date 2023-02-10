@@ -13,6 +13,18 @@
 #include <QtWidgets/qtreewidget.h>
 #include "json/json.h"
 
+class MyText : public QTextEdit {
+	Q_OBJECT
+signals:
+	void loseFocus();
+protected:
+	void focusOutEvent(QFocusEvent* e)
+	{
+		QTextEdit::focusOutEvent(e);
+		emit loseFocus();
+	}
+};
+
 
 class AppSettings : public QWidget
 {
@@ -67,7 +79,7 @@ class ModelSettings : public QWidget
 	QLabel* lbl_motionText;
 	QComboBox* motionJsonPath;
 	QComboBox* motionSoundPath;
-	QTextEdit* motionText;
+	MyText* motionText;
 	QPushButton* addMotion;
 	QPushButton* deleteMotion;
 	QPushButton* changeModel;
@@ -80,6 +92,7 @@ private slots:
 	void AddMotion();
 	void DeleteMotion();
 	void ShowMotionInfo(QTreeWidgetItem* w, int);
+	void StartMotion(QTreeWidgetItem* w, int);
 	void BindSound(const QString& x);
 	void BindMotion(const QString& x);
 	void BindText();

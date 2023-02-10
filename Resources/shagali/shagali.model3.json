@@ -1,0 +1,112 @@
+{
+	"FileReferences" : 
+	{
+		"DisplayInfo" : "shagali.cdi3.json",
+		"Expressions" : 
+		[
+			{
+				"File" : "？.exp3.json",
+				"Name" : "？"
+			},
+			{
+				"File" : "o o.exp3.json",
+				"Name" : "o o"
+			},
+			{
+				"File" : "HeartEye.exp3.json",
+				"Name" : "HeartEye"
+			},
+			{
+				"File" : "翅膀.exp3.json",
+				"Name" : "翅膀"
+			},
+			{
+				"File" : "哭泣.exp3.json",
+				"Name" : "哭泣"
+			},
+			{
+				"File" : "脸黑.exp3.json",
+				"Name" : "脸黑"
+			},
+			{
+				"File" : "脸红.exp3.json",
+				"Name" : "脸红"
+			},
+			{
+				"File" : "帽子.exp3.json",
+				"Name" : "帽子"
+			},
+			{
+				"File" : "生气.exp3.json",
+				"Name" : "生气"
+			},
+			{
+				"File" : "云.exp3.json",
+				"Name" : "云"
+			},
+			{
+				"File" : "星星眼.exp3.json",
+				"Name" : "星星眼"
+			},
+			{
+				"File" : "星星.exp3.json",
+				"Name" : "星星"
+			},
+			{
+				"File" : "月亮.exp3.json",
+				"Name" : "月亮"
+			},
+			{
+				"File" : "眯眯眼.exp3.json",
+				"Name" : "眯眯眼"
+			}
+		],
+		"Moc" : "shagali.moc3",
+		"Motions" : 
+		{
+			"Afternoon" : 
+			[
+				{
+					"File" : "motions/眼泪.motion3.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
+			"Morning" : 
+			[
+				{
+					"File" : "motions/眼泪.motion3.json",
+					"Sound" : "",
+					"Text" : "早上好"
+				}
+			],
+			"TapHead" : []
+		},
+		"Physics" : "shagali.physics3.json",
+		"Textures" : 
+		[
+			"shagali.4096/texture_00.png",
+			"shagali.4096/texture_01.png",
+			"shagali.4096/texture_02.png",
+			"shagali.4096/texture_03.png"
+		]
+	},
+	"Groups" : 
+	[
+		{
+			"Ids" : [],
+			"Name" : "LipSync",
+			"Target" : "Parameter"
+		},
+		{
+			"Ids" : 
+			[
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			],
+			"Name" : "EyeBlink",
+			"Target" : "Parameter"
+		}
+	],
+	"Version" : 3
+}

@@ -5,7 +5,6 @@
 
 class BgmListView : public QWidget
 {
-	Q_PROPERTY(int height READ height WRITE setHeight)
 public:
 	BgmListView();
 	~BgmListView();

@@ -5,8 +5,8 @@
 		{
 			"LastPos" : 
 			{
-				"X" : 1568,
-				"Y" : -385
+				"X" : 1406,
+				"Y" : -595
 			}
 		},
 		"Dialog" : 
@@ -16,7 +16,8 @@
 			"Width" : 300,
 			"WordInterval" : 10
 		},
-		"KeepQuiet" : false,
+		"KeepQuiet" : true,
+		"LipSyncMagnification" : 9.0,
 		"Mlyai" : 
 		{
 			"APIKey" : "82wmm51s1bskwft3",
@@ -24,27 +25,31 @@
 		},
 		"ModelDir" : "../Resources",
 		"ModelName" : "Hiyori",
-		"MotionInterval" : 5,
+		"MotionInterval" : 5.0,
 		"MouseTrack" : false,
-		"NoSound" : true,
+		"NoSound" : false,
 		"NoteOutPath" : ".",
+		"ShowBackground" : false,
 		"ShowBgmList" : true,
 		"ShowText" : false,
-		"StayOnTop" : false,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 4,
+		"TransparentBackground" : true,
+		"TransparentCharacter" : true,
+		"TransparentForMouse" : true,
 		"UserName" : "ArcueidBrunestud"
 	},
 	"WindowSettings" : 
 	{
-		"AppName" : "桃濑日和",
-		"FPS" : 45,
+		"AppName" : "0d00",
+		"FPS" : 48,
 		"Height" : 500,
-		"IconPath" : "../Resources/sample-hiyori_movie.png",
+		"IconPath" : "D:/forDesktop/Live2D Desktop Mascot/Resources/nn/ico_nn.png",
 		"LastPos" : 
 		{
-			"X" : 1566,
-			"Y" : 531
+			"X" : 1488,
+			"Y" : 491
 		},
-		"Width" : 300
+		"Width" : 400
 	}
 }

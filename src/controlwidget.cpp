@@ -1,3 +1,4 @@
+#include "LAppModel.hpp"
 #include "controlwidget.h"
 #include "LApp.h"
 #include <fstream>
@@ -12,6 +13,7 @@
 #include <QtWidgets/qtreewidget.h>
 #include <QtWidgets/qheaderview.h>
 #include <QtWidgets/qmessagebox.h>
+#include <QtWidgets/qlistview.h>
 #include "LAppLive2DManager.hpp"
 
 using namespace LAppConfig;
@@ -113,6 +115,9 @@ void getDirNames(string path, vector<string>& files)
 	}
 }
 
+
+
+
 void getFileNames(string path, vector<string>& files)
 {
 	//文件句柄
@@ -196,6 +201,7 @@ AppSettings::AppSettings(QWidget* p)
 	cancel = new QPushButton(QString::fromLocal8Bit("重置"));
 
 	grid = new QGridLayout();
+
 	grid->addWidget(lbl_appName, 0, 0, 0);
 	grid->addWidget(appName, 0, 1, 1, 4, 0);
 	grid->addWidget(lbl_username, 0, 5, 0);
@@ -243,25 +249,25 @@ void AppSettings::OpenSourceDir()
 
 void AppSettings::Apply()
 {
-	_AppName = appName->text().toStdString();
-	_UserName = username->text().toStdString();
-	_IconPath = iconPath->text().toStdString();
-	_ApiKey = appKey->text().toStdString();
-	_ApiSecret = appSecret->text().toStdString();
+	_AppName = appName->text().toLocal8Bit().constData();
+	_UserName = username->text().toLocal8Bit().constData();
+	_IconPath = iconPath->text().toLocal8Bit().constData();
+	_ApiKey = appKey->text().toLocal8Bit().constData();
+	_ApiSecret = appSecret->text().toLocal8Bit().constData();
 	_FPS = fps->text().toInt() == 0? _FPS : fps->text().toInt();
 	_WindowWidth = windowWidth->text().toInt() == 0 ? _WindowWidth : windowWidth->text().toInt();
 	_WindowHeight = windowHeight->text().toInt() == 0 ? _WindowHeight : windowHeight->text().toInt();
-	_ModelDir = modelDir->text().isEmpty() ? _ModelDir : modelDir->text().toStdString();
+	_ModelDir = modelDir->text().isEmpty() ? _ModelDir : modelDir->text().toLocal8Bit().constData();
 	LApp::GetInstance()->GetWindow()->LoadConfig();
-	_parent->setWindowTitle(QString::fromStdString(_AppName));
+	_parent->setWindowTitle(QString::fromLocal8Bit(_AppName.c_str()));
 	LoadConfig();
 	ControlWidget* p = static_cast<ControlWidget*>(_parent);
 	try {
-		if (p) {
+		if (p) {			
 			p->_modelSettings->LoadConfig();
-			Log("[AppSettings]_ModelDir changed: %s", _ModelDir.c_str());
+			Log("_ModelDir changed", _ModelDir.c_str());
 		}
-		else Log("[AppSettings]: cast failed", NULL);
+		else Log("AppSettings", "cast failed");
 		LApp::GetInstance()->SaveConfig();
 		Tip::GetInstance()->Pop(_parent, "保存成功!");
 	}
@@ -279,15 +285,15 @@ void AppSettings::Cancel()
 }
 void AppSettings::LoadConfig()
 {
-	appName->setText(_AppName.c_str());
-	username->setText(_UserName.c_str());
-	iconPath->setText(_IconPath.c_str());
+	appName->setText(QString::fromLocal8Bit(_AppName.c_str()));
+	username->setText(QString::fromLocal8Bit(_UserName.c_str()));
+	iconPath->setText(QString::fromLocal8Bit(_IconPath.c_str()));
 	fps->setText(to_string(_FPS).c_str());
-	appKey->setText(_ApiKey.c_str());
-	appSecret->setText(_ApiSecret.c_str());
+	appKey->setText(QString::fromLocal8Bit(_ApiKey.c_str()));
+	appSecret->setText(QString::fromLocal8Bit(_ApiSecret.c_str()));
 	windowWidth->setText(to_string(_WindowWidth).c_str());
 	windowHeight->setText(to_string(_WindowHeight).c_str());
-	modelDir->setText(_ModelDir.c_str());
+	modelDir->setText(QString::fromLocal8Bit(_ModelDir.c_str()));
 }
 
 ModelSettings::ModelSettings(QWidget* p)
@@ -303,12 +309,12 @@ ModelSettings::ModelSettings(QWidget* p)
 
 	motionJsonPath = new QComboBox();
 	motionSoundPath = new QComboBox();
-	motionText = new QTextEdit();
+	motionText = new MyText();
 
 	lbl_motionJsonPath = new QLabel(QString::fromLocal8Bit("动作路径"));
-	lbl_motionJsonPath->setAlignment(Qt::AlignRight);
+	lbl_motionJsonPath->setAlignment(Qt::AlignRight|Qt::AlignCenter);
 	lbl_motionSoundPath = new QLabel(QString::fromLocal8Bit("语音"));
-	lbl_motionSoundPath->setAlignment(Qt::AlignRight);
+	lbl_motionSoundPath->setAlignment(Qt::AlignRight|Qt::AlignCenter);
 	lbl_motionText = new QLabel(QString::fromLocal8Bit("文本"));
 	lbl_motionText->setAlignment(Qt::AlignTop|Qt::AlignRight);
 
@@ -336,14 +342,34 @@ ModelSettings::ModelSettings(QWidget* p)
 	setLayout(grid);
 
 	connect(_motionGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(ShowMotionInfo(QTreeWidgetItem*, int)));
+	connect(_motionGroups, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), SLOT(StartMotion(QTreeWidgetItem*, int)));
 	connect(addMotion, SIGNAL(clicked()), SLOT(AddMotion()));
 	connect(deleteMotion, SIGNAL(clicked()), SLOT(DeleteMotion()));
-
 	connect(motionJsonPath, SIGNAL(currentTextChanged(const QString&)), SLOT(BindMotion(const QString&)));
 	connect(motionSoundPath, SIGNAL(currentTextChanged(const QString&)), SLOT(BindSound(const QString&)));
-	connect(motionText, SIGNAL(textChanged()), SLOT(BindText()));
-
+	connect(motionText, SIGNAL(loseFocus()), SLOT(BindText()));
+	
 	connect(changeModel, SIGNAL(clicked()), SLOT(UpdateModel()));
+
+	_motionGroups->setStyleSheet(
+		QString("QScrollBar:vertical{width: 8px;background: #DDD;border: none}"
+			"QTreeWidget::branch::open:has-children{border-image: url(").append(_ModelDir.c_str()).append("/open.png); }"
+			"QScrollBar::handle:vertical{background: #AAA;}"
+			"QScrollBar::handle:vertical:hover{background: #888;}"
+			"QHeaderView::section{background-color: rgb(50, 50, 50); color: rgba(255, 255, 255, 210); height: 30px; font-family: 微软雅黑; border: none; padding-left: 10px}")
+		);
+	const char* styleSheet = ("QComboBox QAbstractItemView {color: rgba(255, 255, 255, 210); outline: none; background: rgb(100, 100, 100)}"
+		"QComboBox{selection-background-color: rgb(50, 50, 50); padding-left: 5px}"
+		"QScrollBar::vertical{width: 10px; background: #d0d2d4}"
+		"QScrollBar::handle:vertical{background: rgb(160, 160, 160)}"
+		);
+	model->setStyleSheet(styleSheet);
+	motionJsonPath->setStyleSheet(styleSheet);
+	motionSoundPath->setStyleSheet(styleSheet);
+	model->setView(new QListView());
+	motionJsonPath->setView(new QListView());
+	motionSoundPath->setView(new QListView());
+
 }
 
 void ModelSettings::Apply()
@@ -354,6 +380,7 @@ void ModelSettings::Apply()
 		ofs << _modelJson;
 		ofs.close();
 		LoadConfig();
+		LAppLive2DManager::GetInstance()->ChangeModel(_ModelDir.c_str(), _ModelName.c_str());
 		Tip::GetInstance()->Pop(_parent, "操作成功!");
 	}
 	
@@ -373,36 +400,40 @@ void ModelSettings::LoadConfig()
 	int i;
 	int size;
 	vector<std::string> _files;
-
-	getDirNames(_ModelDir, _files);
+	bool flag = false;
+	getDirNames(_ModelDir.c_str(), _files);
 	size = _files.size();
 	model->clear();
 	for (i = 0; i < size; i++)
 	{
-		model->addItem(_files[i].c_str());
+		if (_ModelName == _files[i]) flag = true;
+		model->addItem(QString::fromLocal8Bit(_files[i].c_str()));
 	}
+	_ModelName = flag ? _ModelName : model->itemText(0).toStdString();
 	model->setCurrentText(_ModelName.c_str());
 	motionJsonPath->clear();
 	_files.clear();
-	getFileNames(string(_ModelDir).append("/").append(_ModelName).append("/").append("motions"), _files);
+
+	getFileNames(string(_ModelDir).append("/").append(_ModelName).append("/").append("motions").c_str(), _files);
 	size = _files.size();
 	for (i = 0; i < size; i++)
 	{
-		motionJsonPath->addItem(string("motions/").append(_files[i]).c_str());
+		motionJsonPath->addItem(QString::fromLocal8Bit(string("motions/").append(_files[i]).c_str()));
 	}
 	motionSoundPath->clear();
 	motionJsonPath->addItem("");
 	motionJsonPath->setCurrentText("");
 	_files.clear();
-	getFileNames(string(_ModelDir).append("/").append(_ModelName).append("/").append("sounds"), _files);
+
+	getFileNames(string(_ModelDir).append("/").append(_ModelName).append("/").append("sounds").c_str(), _files);
 	size = _files.size();
 	for (i = 0; i < size; i++)
 	{
-		motionSoundPath->addItem(string("sounds/").append(_files[i]).c_str());
+		motionSoundPath->addItem(QString::fromLocal8Bit(string("sounds/").append(_files[i]).c_str()));
 	}
 	motionSoundPath->addItem("");
 	motionSoundPath->setCurrentText("");
-	ifstream ifs(string(_ModelDir).append("/").append(_ModelName).append("/").append(_ModelName).append(".model3.json"));
+	ifstream ifs(string(_ModelDir).append("/").append(_ModelName).append("/").append(_ModelName).append(".model3.json").c_str());
 	ifs >> _modelJson;
 	ifs.close();
 	Json::Value motions = _modelJson["FileReferences"]["Motions"];
@@ -436,11 +467,11 @@ void ModelSettings::BindMotion(const QString& x)
 	QTreeWidgetItem* cur = _motionGroups->currentItem();
 	if (cur != NULL && cur->parent() != NULL)
 	{
-		if (_access(QString::fromStdString(_ModelDir).append("/").append(QString::fromStdString(_ModelName)).append("/").append(motionJsonPath->currentText()).toStdString().c_str(), 0)!= -1)
+		if (_access(string(_ModelDir).append("/").append(_ModelName).append("/").append(motionJsonPath->currentText().toLocal8Bit().constData()).c_str(), 0) != -1)
 		{
 			if (!motionJsonPath->currentText().isEmpty())
 			{
-				_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["File"] = motionJsonPath->currentText().toStdString();
+				_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["File"] = motionJsonPath->currentText().toLocal8Bit().constData();
 				Tip::GetInstance()->Pop(_parent, "动作更换成功!");
 			}
 			else {
@@ -456,7 +487,7 @@ void ModelSettings::BindSound(const QString& x)
 	QTreeWidgetItem* cur = _motionGroups->currentItem();
 	if (cur != NULL && cur->parent() != NULL)
 	{
-		_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["Sound"] = motionSoundPath->currentText().toStdString();
+		_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["Sound"] = motionSoundPath->currentText().toLocal8Bit().constData();
 		Tip::GetInstance()->Pop(_parent, "音频更换成功!");
 	}
 		
@@ -483,14 +514,14 @@ void ModelSettings::AddMotion()
 	else if (_motionGroups->currentItem()->parent() == NULL)  //选中整个动作组
 	{
 		Json::Value motion;
-		motion["File"] = motionJsonPath->itemText(0).toStdString();
+		motion["File"] = motionJsonPath->itemText(0).toLocal8Bit().constData();
 		motion["Sound"] = "";
 		motion["Text"] = "";
 		_modelJson["FileReferences"]["Motions"][_motionGroups->currentItem()->text(0).toStdString()].append(motion);
 
 		int idx = _motionGroups->currentItem()->childCount();
 		QTreeWidgetItem* subItem = new QTreeWidgetItem();
-		subItem->setText(0, QString::fromStdString(_motionGroups->currentItem()->text(0).toStdString()).append("_").append(to_string(idx).c_str()));
+		subItem->setText(0, QString(_motionGroups->currentItem()->text(0)).append("_").append(to_string(idx).c_str()));
 		subItem->setData(1, 0, idx);
 		_motionGroups->currentItem()->addChild(subItem);
 		Tip::GetInstance()->Pop(_parent, "动作已添加!");
@@ -500,14 +531,14 @@ void ModelSettings::AddMotion()
 		QTreeWidgetItem* p = _motionGroups->currentItem()->parent();
 
 		Json::Value motion;
-		motion["File"] = motionJsonPath->itemText(0).toStdString();
+		motion["File"] = motionJsonPath->itemText(0).toLocal8Bit().constData();
 		motion["Sound"] = "";
 		motion["Text"] = "";
 		_modelJson["FileReferences"]["Motions"][p->text(0).toStdString()].append(motion);
 
 		int idx = p->childCount();
 		QTreeWidgetItem* subItem = new QTreeWidgetItem();
-		subItem->setText(0, QString::fromStdString(p->text(0).toStdString()).append("_").append(to_string(idx).c_str()));
+		subItem->setText(0, QString(p->text(0)).append("_").append(to_string(idx).c_str()));
 		subItem->setData(1, 0, idx);
 		p->addChild(subItem);
 		Tip::GetInstance()->Pop(_parent, "动作已添加!");
@@ -551,12 +582,26 @@ void ModelSettings::ShowMotionInfo(QTreeWidgetItem* w, int idx)
 		int idx = w->data(1, 0).toInt();
 		Json::Value motion = _modelJson["FileReferences"]["Motions"][groupname][idx];
 
-
-		motionJsonPath->setCurrentText(motion["File"].asCString());
-		motionSoundPath->setCurrentText(motion["Sound"].isNull() ? "" : motion["Sound"].asCString());
-		motionText->setText(motion["Text"].isNull() ? "" : motion["Text"].asCString());
+		motionJsonPath->setCurrentText(QString::fromLocal8Bit(motion["File"].asCString()));
+		motionSoundPath->setCurrentText(QString::fromLocal8Bit(motion["Sound"].isNull() ? "" : motion["Sound"].asCString()));
+		motionText->setText(QString::fromStdString(motion["Text"].isNull() ? "" : motion["Text"].asCString()));
 	}
 	else{
+		motionJsonPath->setCurrentText("");
+		motionSoundPath->setCurrentText("");
+		motionText->clear();
+	}
+}
+
+void ModelSettings::StartMotion(QTreeWidgetItem* w, int idx)
+{
+	if (w->parent() != NULL)
+	{
+		string groupname = w->parent()->text(0).toStdString();
+		int idx = w->data(1, 0).toInt();
+		LAppLive2DManager::GetInstance()->GetModel(0)->StartMotion(groupname.c_str(), idx, PriorityForce);
+	}
+	else {
 		motionJsonPath->setCurrentText("");
 		motionSoundPath->setCurrentText("");
 		motionText->clear();
@@ -574,13 +619,40 @@ void ModelSettings::UpdateModel()
 
 ControlWidget::ControlWidget()
 {
-	resize(600, 400);
+	setFixedSize(620, 400);
 	setWindowFlags(Qt::Tool);
-	setWindowTitle(QString::fromStdString(_AppName));
+	setWindowTitle(QString::fromLocal8Bit(_AppName.c_str()));
 	_appSettings = new AppSettings(this);
 	_modelSettings = new ModelSettings(this);
 	addTab(_appSettings, QString::fromLocal8Bit("应用设置"));
 	addTab(_modelSettings, QString::fromLocal8Bit("模型设置"));
+	setStyleSheet("QTabBar::tab{font-family: 微软雅黑; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
+		"QTabBar::tab:selected{background-color: rgb(30, 30, 30); color: rgba(255, 255, 255, 180); }"
+		"QTabBar{background-color: rgb(37, 37, 38);}"
+		"QTabWidget::pane{border: none; background-color: rgb(30, 30, 30); color: white}"
+		"QTabWidget{background-color: rgb(37, 37, 38)}"
+	);
+	_appSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: 微软雅黑;}"
+		"QLabel{background: transparent; color: rgba(255, 255, 255, 200); font: 15px}"
+		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
+		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
+		"QPushButton{width: 100px; font: 13.5px; border-radius: 10px; font-family: 微软雅黑; color: rgba(255, 255, 255, 200); background-color: rgba(50, 150, 235, 190); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+	);
+	_modelSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: 微软雅黑}"
+		"QLabel{background: transparent; color: rgba(255 ,255, 255, 200); font: 15px}"
+		"QTreeWidget::item{height: 30px; color: rgba(255, 255, 255, 200)}"
+		"QTreeWidget{outline: none; border: none; color: rgba(255, 255, 255, 245); background-color: rgb(50, 50, 50); font-family: 微软雅黑}"
+		"QTreeWidget::item:selected:active{background-color: rgba(50, 120, 170, 180); color: rgba(255, 255, 255, 245); border: 1px solid rgb(50, 120, 240)}"
+		"QTreeWidget::item:selected:!active{background-color: rgba(50, 120, 170, 90); color: rgba(255, 255, 255, 245); border: 1px solid rgb(50, 120, 240)}"
+		"QTreeWidget::item:hover{background-color: rgb(50, 50, 50); border: none}"
+		"QTextEdit{padding: 5px; border: 1px solid rgb(80, 80, 80); color: rgba(255, 255, 255, 245); font: 17px}"
+		"QTextEdit::focus{border: 1px solid rgb(50, 120, 200)}"
+		"QPushButton{width: 100px;font: 13.5px; border-radius: 10px; font-family: 微软雅黑; color: rgba(255, 255, 255, 200); background-color: rgba(50, 150, 235, 190); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+		"QComboBox{height: 30px; padding: 1px 18px 1px 3px;}"
+		
+	);
 }
 
 

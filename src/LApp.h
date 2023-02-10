@@ -35,6 +35,10 @@ namespace LAppConfig {
 	extern string _ApiSecret;
 	extern int _MotionInterval;
 	extern string _UserName;
+	extern bool _ShowBackground;
+	extern bool _TransparentBackground;
+	extern bool _MouseOn;
+	extern bool _TransparentCharacter;
 };
 
 class LApp
@@ -47,7 +51,7 @@ public:
 	~LApp();
 	static LApp* GetInstance();
 	void SaveConfig();
-	static void warning(const char* x);
+	static void Warning(const char* x);
 	void Initialize(int argc, char* argv[]);
 	void Run();
 	void Release();

@@ -112,7 +112,6 @@ void BgmListView::mouseMoveEvent(QMouseEvent* e)
 
 void BgmListView::leaveEvent(QEvent* e)
 {
-
 	_currentIndex = -1;
 	this->update();
 	QDesktopWidget* screen = QApplication::desktop();
@@ -131,7 +130,7 @@ void BgmListView::leaveEvent(QEvent* e)
 		_currentAnimation = new QPropertyAnimation(this, "geometry");
 		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(screen->width() - 30, y(), width(), height()));
+		_currentAnimation->setEndValue(QRect(screen->width() - 5, y(), width(), height()));
 		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 		setWindowFlag(Qt::WindowStaysOnTopHint, true);
 		show();
@@ -141,7 +140,7 @@ void BgmListView::leaveEvent(QEvent* e)
 		_currentAnimation = new QPropertyAnimation(this, "geometry");
 		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(-width() + 30, y(), width(), height()));
+		_currentAnimation->setEndValue(QRect(-width() + 5, y(), width(), height()));
 		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 		setWindowFlag(Qt::WindowStaysOnTopHint, true);
 		show();
@@ -179,7 +178,7 @@ void BgmListView::enterEvent(QEvent* e)
 	{
 		_currentAnimation = new QPropertyAnimation(this, "geometry");
 		_currentAnimation->setDuration(200);
-		_currentAnimation->setStartValue(QRect(screen->width() - 30, y(), width(), height()));
+		_currentAnimation->setStartValue(QRect(screen->width() - 5, y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(screen->width() - width(), y(), width(), height()));
 		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 	}
@@ -187,7 +186,7 @@ void BgmListView::enterEvent(QEvent* e)
 	{
 		_currentAnimation = new QPropertyAnimation(this, "geometry");
 		_currentAnimation->setDuration(200);
-		_currentAnimation->setStartValue(QRect(-width() + 30, y(), width(), height()));
+		_currentAnimation->setStartValue(QRect(-width() + 5, y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(0, y(), width(), height()));
 		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
 	}

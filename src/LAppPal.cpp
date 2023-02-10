@@ -15,6 +15,7 @@
 #include <GLFW/glfw3.h>
 #include <Model/CubismMoc.hpp>
 #include "LAppDefine.hpp"
+#include <QtCore/qstring.h>
 
 using std::endl;
 using namespace Csm;

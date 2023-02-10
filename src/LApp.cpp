@@ -43,6 +43,10 @@ namespace LAppConfig {
     string _ApiKey;
     string _ApiSecret;
     string _UserName;
+    bool _ShowBackground;
+    bool _TransparentBackground;
+    bool _MouseOn;
+    bool _TransparentCharacter;
 };
 
 namespace {
@@ -50,7 +54,7 @@ namespace {
 }
 
 
-void LApp::warning(const char* x)
+void LApp::Warning(const char* x)
 {
     QMessageBox::warning(NULL, QString::fromLocal8Bit("警告"), QString::fromLocal8Bit(x));
 }
@@ -119,7 +123,7 @@ void LApp::LoadConfig() {
         }
         catch (exception e)
         {
-            LApp::warning("Json配置文件格式有误！");
+            LApp::Warning("Json配置文件格式有误！");
             file.close();
             LApp::GetInstance()->GetApp()->quit();
             exit(0);
@@ -127,19 +131,21 @@ void LApp::LoadConfig() {
     }
     file.close();
 
-    LAppConfig::_ModelDir = !config["UserSettings"]["ModelDir"].isNull() ? config["UserSettings"]["ModelDir"].asCString() : "Resources";
+    LAppConfig::_ModelDir = !config["UserSettings"]["ModelDir"].isNull() ? QString::fromLocal8Bit(config["UserSettings"]["ModelDir"].asCString()).toLocal8Bit().constData() : "Resources";
+    if (DebugLogEnable) Log("Resource Dir", LAppConfig::_ModelDir.c_str());
     if (_access(LAppConfig::_ModelDir.c_str(), 0) == -1) {
-        LApp::warning("资源文件夹路径不正确！\n请修改config.json文件");
+        LApp::Warning("资源文件夹路径不正确！\n请修改config.json文件");
         exit(0);
     }
-    LAppConfig::_ModelName = !config["UserSettings"]["ModelName"].isNull() ? config["UserSettings"]["ModelName"].asCString() : "Hiyori";
+    LAppConfig::_ModelName = !config["UserSettings"]["ModelName"].isNull() ? QString::fromLocal8Bit(config["UserSettings"]["ModelName"].asCString()).toLocal8Bit().constData() : "Hiyori";
+    
     if (_access(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str(), 0) == -1)
     {
-        LApp::warning("模型文件不存在！\n请修改config.json文件");
+        LApp::Warning("模型文件不存在！\n请修改config.json文件");
         exit(0);
     }
-    LAppConfig::_IconPath = !config["WindowSettings"]["IconPath"].isNull() ? config["WindowSettings"]["IconPath"].asCString() : "";
-    LAppConfig::_AppName = !config["WindowSettings"]["AppName"].isNull() ? config["WindowSettings"]["AppName"].asCString() : "Live2D Displayer";
+    LAppConfig::_IconPath = !config["WindowSettings"]["IconPath"].isNull() ? QString::fromLocal8Bit(config["WindowSettings"]["IconPath"].asCString()).toLocal8Bit().constData() : "";
+    LAppConfig::_AppName = !config["WindowSettings"]["AppName"].isNull() ? QString::fromLocal8Bit(config["WindowSettings"]["AppName"].asCString()).toLocal8Bit().constData() : "Live2D Displayer";
     LAppConfig::_FPS = !config["WindowSettings"]["FPS"].isNull() ? config["WindowSettings"]["FPS"].asInt() : 48;
     LAppConfig::_WindowWidth = !config["WindowSettings"]["Width"].isNull() ? config["WindowSettings"]["Width"].asInt() : 500;
     LAppConfig::_WindowHeight = !config["WindowSettings"]["Height"].isNull() ? config["WindowSettings"]["Height"].asInt() : 700;
@@ -150,19 +156,24 @@ void LApp::LoadConfig() {
     LAppConfig::_MouseTrack = !config["UserSettings"]["MouseTrack"].isNull() ? config["UserSettings"]["MouseTrack"].asBool() : true;
     LAppConfig::_KeepQuiet = !config["UserSettings"]["KeepQuiet"].isNull() ? config["UserSettings"]["KeepQuiet"].asBool() : false;
     LAppConfig::_StayOnTop = !config["UserSettings"]["StayOnTop"].isNull() ? config["UserSettings"]["StayOnTop"].asBool() : false;
+    LAppConfig::_TransparentCharacter = !config["UserSettings"]["TransparentCharacter"].isNull() ? config["UserSettings"]["TransparentCharacter"].asBool() : false;
+
+    LAppConfig::_ShowBackground = !config["UserSettings"]["ShowBackground"].isNull() ? config["UserSettings"]["ShowBackground"].asBool() : false;
+    LAppConfig::_TransparentBackground = !config["UserSettings"]["TransparentBackground"].isNull() ? config["UserSettings"]["TransparentBackground"].asBool() : true;
+
     LAppConfig::_NoSound = !config["UserSettings"]["NoSound"].isNull() ? config["UserSettings"]["NoSound"].asBool() : false;
     LAppConfig::_ShowText = !config["UserSettings"]["ShowText"].isNull() ? config["UserSettings"]["ShowText"].asBool() : true;
     LAppConfig::_ShowBgmList = !config["UserSettings"]["ShowBgmList"].isNull() ? config["UserSettings"]["ShowBgmList"].asBool() : true;
     LAppConfig::_TextFadeOutTime = !config["UserSettings"]["TextFadeOutTime"].isNull() ? config["UserSettings"]["TextFadeOutTime"].asInt() : 6;
     LAppConfig::_DialogWidth = !config["UserSettings"]["Dialog"]["Width"].isNull() ? config["UserSettings"]["Dialog"]["Width"].asInt() : 400;
     LAppConfig::_DialogHeight = !config["UserSettings"]["Dialog"]["Height"].isNull() ? config["UserSettings"]["Dialog"]["Height"].asInt() : 150;
-    LAppConfig::_ApiKey = !config["UserSettings"]["Mlyai"]["APIKey"].isNull() ? config["UserSettings"]["Mlyai"]["APIKey"].asCString() : "82wmm51s1bskwft3";
-    LAppConfig::_ApiSecret = !config["UserSettings"]["Mlyai"]["APISecret"].isNull() ? config["UserSettings"]["Mlyai"]["APISecret"].asCString() : "o0vp8k7e";
+    LAppConfig::_ApiKey = !config["UserSettings"]["Mlyai"]["APIKey"].isNull() ? QString::fromLocal8Bit(config["UserSettings"]["Mlyai"]["APIKey"].asCString()).toLocal8Bit().constData() : "82wmm51s1bskwft3";
+    LAppConfig::_ApiSecret = !config["UserSettings"]["Mlyai"]["APISecret"].isNull() ? QString::fromLocal8Bit(config["UserSettings"]["Mlyai"]["APISecret"].asCString()).toLocal8Bit().constData() : "o0vp8k7e";
     TCHAR username[UNLEN + 1];
     DWORD size = UNLEN + 1;
     GetUserName((TCHAR*)username, &size);
-    LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? config["UserSettings"]["UserName"].asCString() : username;
-    LAppConfig::_NoteOutPath = !config["UserSettings"]["NoteOutPath"].isNull() ? config["UserSettings"]["NoteOutPath"].asCString() : ".";
+    LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? QString::fromLocal8Bit(config["UserSettings"]["UserName"].asCString()).toLocal8Bit().constData() : username;
+    LAppConfig::_NoteOutPath = !config["UserSettings"]["NoteOutPath"].isNull() ? QString::fromLocal8Bit(config["UserSettings"]["NoteOutPath"].asCString()).toLocal8Bit().constData() : ".";
     LAppConfig::_DialogWordInterval = !config["UserSettings"]["Dialog"]["WordInterval"].isNull() ? config["UserSettings"]["Dialog"]["WordInterval"].asInt() : 10;
     LAppConfig::_MotionInterval = !config["UserSettings"]["MotionInterval"].isNull() ? config["UserSettings"]["MotionInterval"].asInt() : 5;
     LAppConfig::_DialogStyleSheet = !config["UserSettings"]["Dialog"]["StyleSheet"].isNull() ? config["UserSettings"]["Dialog"]["StyleSheet"].asCString() :
@@ -226,10 +237,14 @@ void LApp::SaveConfig()
     config["UserSettings"]["Mlyai"]["APISecret"] = LAppConfig::_ApiSecret;
     config["UserSettings"]["MotionInterval"] = LAppConfig::_MotionInterval;
     config["UserSettings"]["UserName"] = LAppConfig::_UserName;
+    config["UserSettings"]["ShowBackground"] = LAppConfig::_ShowBackground;
+    config["UserSettings"]["TransparentBackground"] = LAppConfig::_TransparentBackground;
+    config["UserSettings"]["TransparentCharacter"] = LAppConfig::_TransparentCharacter;
+
     ofstream ofs(LAppConfig::_ConfigPath);
     if (ofs.fail())
     {
-        LApp::warning("配置文件保存失败!");
+        LApp::Warning("配置文件保存失败!");
         return;
     }
     ofs << config.toStyledString().c_str();

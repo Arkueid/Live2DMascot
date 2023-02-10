@@ -25,11 +25,16 @@ private:
 	QAction* act_setShowText = NULL;  //显示文本
 	QAction* act_setShowBgmList = NULL;  //显示追番列表
 	QAction* act_showSettings = NULL; //显示设置窗口
+	QAction* act_setShowBackground = NULL;  //显示背景
+	QAction* act_setTransparentBackground = NULL; //背景穿透
+	QAction* act_setTransparentCharacter = NULL;  //人物穿透
 	Dialog* _dialog = NULL;  //文本框
 	BgmListView* _bgmlist = NULL;  //追番列表
 	ConversationWidget* _cvWidget = NULL;  //聊天输入框
 	ControlWidget* _control = NULL;  //设置
 	bool _LastState;
+	bool _transparent = false;  //窗体透过
+	bool _drawBackground = false;
 public:
 	GLWidget();
 	~GLWidget();
@@ -54,10 +59,7 @@ protected:
 	void mouseDoubleClickEvent(QMouseEvent* e);
 	void keepQuiet(bool on);
 	void keepMouseTrack(bool on);
-	void stayOnTop(bool on);
-	void setNoSound(bool on);
 	void setShowBgmList(bool on);
-	void setShowText(bool on);
 	int mouseX;
 	int mouseY;
 	int currentTimerIndex;
@@ -73,6 +75,10 @@ private slots:
 	void setShowTextOnTriggered();
 	void setShowBgmListOnTriggered();
 	void showSettingsOnTriggered();
+	void setShowBackgroundOnTriggered();
+	void setTransparentBackgroundOnTriggered();
+	void setTransparentCharacterOnTriggered();
+
 };
 
 
