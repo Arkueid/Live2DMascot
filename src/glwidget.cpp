@@ -451,17 +451,17 @@ void GLWidget::LoadConfig()
 {
 	resize(LAppConfig::_WindowWidth, LAppConfig::_WindowHeight);
 	//加载图标
-	if (_access(LAppConfig::_IconPath.c_str(), 0)==-1)
+	if (_access(QString::fromUtf8(LAppConfig::_IconPath.c_str()).toLocal8Bit().constData(), 0) == -1)
 	{
 		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon));
 	}
 	else
 	{
-		trayIcon->setIcon(QIcon(QString::fromLocal8Bit(LAppConfig::_IconPath.c_str())));
+		trayIcon->setIcon(QIcon(QString::fromUtf8(LAppConfig::_IconPath.c_str())));
 	}
 
 	//设置应用名称
-	trayIcon->setToolTip(QString::fromLocal8Bit(LAppConfig::_AppName.c_str()));
+	trayIcon->setToolTip(QString::fromUtf8(LAppConfig::_AppName.c_str()));
 
 	//设置fps
 	if (currentTimerIndex != -1)

@@ -38,6 +38,10 @@ class AppSettings : public QWidget
 	QLineEdit* windowHeight;
 	QLineEdit* windowWidth;
 	QLineEdit* modelDir;
+	QLineEdit* motionInterval;
+	QLineEdit* lipSync;
+	QLabel* lbl_motioninterval;
+	QLabel* lbl_lipsync;
 	QLabel* lbl_appName;
 	QLabel* lbl_username;
 	QLabel* lbl_iconPath;

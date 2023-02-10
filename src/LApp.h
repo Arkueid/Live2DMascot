@@ -30,10 +30,11 @@ namespace LAppConfig {
 	extern int _DialogWordInterval;
 	extern int _BgmListLastPosX;
 	extern int _BgmListLastPosY;
+	extern float _LipSyncMagnification;
 	extern string _NoteOutPath;
 	extern string _ApiKey;
 	extern string _ApiSecret;
-	extern int _MotionInterval;
+	extern float _MotionInterval;
 	extern string _UserName;
 	extern bool _ShowBackground;
 	extern bool _TransparentBackground;

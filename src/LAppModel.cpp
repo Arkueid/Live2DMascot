@@ -9,6 +9,7 @@
 #include <fstream>
 #include <Windows.h>
 #include <vector>
+#include <io.h>
 #include <CubismModelSettingJson.hpp>
 #include <Motion/CubismMotion.hpp>
 #include <Physics/CubismPhysics.hpp>
@@ -91,7 +92,9 @@ void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
     }
 
     csmSizeInt size;
-    const csmString path = csmString(dir) + fileName;
+
+    //中文路径支持
+    const csmString path = QString::fromUtf8(dir).append(fileName).toLocal8Bit();
 
     csmByte* buffer = CreateBuffer(path.GetRawString(), &size);
     ICubismModelSetting* setting = new CubismModelSettingJson(buffer, size);
@@ -126,10 +129,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     {
         csmString path = _modelSetting->GetModelFileName();
 
-        //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();  
-
         path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
 
         if (_debugMode)
         {
@@ -150,10 +153,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
             csmString name = _modelSetting->GetExpressionName(i);
             csmString path = _modelSetting->GetExpressionFileName(i);
 
-            //中文路径支持
-            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
-
             path = _modelHomeDir + path;
+
+            //中文支持
+            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
 
             buffer = CreateBuffer(path.GetRawString(), &size);
             ACubismMotion* motion = LoadExpression(buffer, size, name.GetRawString());
@@ -174,10 +177,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     {
         csmString path = _modelSetting->GetPhysicsFileName();
 
-        //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
-
         path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadPhysics(buffer, size);
@@ -189,10 +192,10 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     {
         csmString path = _modelSetting->GetPoseFileName();
 
-        //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
-
         path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadPose(buffer, size);
@@ -225,10 +228,11 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     {
         csmString path = _modelSetting->GetUserDataFile();
 
-        //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
-
         path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadUserData(buffer, size);
         DeleteBuffer(buffer, path.GetRawString());
@@ -309,10 +313,19 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         csmString name = Utils::CubismString::GetFormatedString("%s_%d", group, i);
         csmString path = _modelSetting->GetMotionFileName(group, i);
 
-        //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+        if (strlen(path.GetRawString()) == 0)
+        {
+            if (_debugMode)
+            {
+                LAppPal::PrintLog("[APP]load motion without file: %s => [%s_%d] ", path.GetRawString(), group, i);
+            }
+            continue;
+        }
 
         path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
 
         if (_debugMode)
         {
@@ -467,7 +480,7 @@ void LAppModel::Update()
 
         // 状態更新/RMS値取得
         _wavFileHandler.Update(deltaTimeSeconds);
-        value = _wavFileHandler.GetRms() * 1.1; //单声道，口型按电平值放大0.1倍
+        value = _wavFileHandler.GetRms() * LAppConfig::_LipSyncMagnification; //单声道，口型按电平值放大0.5倍
         for (csmUint32 i = 0; i < _lipSyncIds.GetSize(); ++i)
         {
             _model->AddParameterValue(_lipSyncIds[i], value, 0.8f);
@@ -498,7 +511,6 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         }
         return InvalidMotionQueueEntryHandleValue;
     }
-
     const csmString fileName = _modelSetting->GetMotionFileName(group, no);
 
     //ex) idle_0
@@ -510,28 +522,33 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     {
         csmString path = fileName;
 
-        //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
-        path = _modelHomeDir + path;
-        csmByte* buffer;
-        csmSizeInt size;
-        buffer = CreateBuffer(path.GetRawString(), &size);
-        motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, onFinishedMotionHandler));
-        csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, no);
-        if (fadeTime >= 0.0f)
+        if (strlen(path.GetRawString()) != 0)  //模型没有动作文件但是model3.json中定义了动作，如果动作路径为空则不读取，以此解除对动作文件的依赖
         {
-            motion->SetFadeInTime(fadeTime);
-        }
+            path = _modelHomeDir + path;
 
-        fadeTime = _modelSetting->GetMotionFadeOutTimeValue(group, no);
-        if (fadeTime >= 0.0f)
-        {
-            motion->SetFadeOutTime(fadeTime);
-        }
-        autoDelete = true; // 終了時にメモリから削除
+            //中文支持
+            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
 
-        DeleteBuffer(buffer, path.GetRawString());
+            csmByte* buffer;
+            csmSizeInt size;
+            buffer = CreateBuffer(path.GetRawString(), &size);
+            motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, onFinishedMotionHandler));
+            csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, no);
+            if (fadeTime >= 0.0f)
+            {
+                motion->SetFadeInTime(fadeTime);
+            }
+
+            fadeTime = _modelSetting->GetMotionFadeOutTimeValue(group, no);
+            if (fadeTime >= 0.0f)
+            {
+                motion->SetFadeOutTime(fadeTime);
+            }
+            autoDelete = true; // 終了時にメモリから削除
+
+            DeleteBuffer(buffer, path.GetRawString());
+        }
     }
     else
     {
@@ -545,10 +562,11 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     {
         csmString path = voice;
 
+        path = _modelHomeDir + path;
+
         //中文路径支持
         path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
-        path = _modelHomeDir + path;
         _wavFileHandler.Start(path);
         if (!LAppConfig::_NoSound)
         {
@@ -559,8 +577,9 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
             else preSoundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME|SND_ASYNC | SND_NOSTOP);
             if (DebugLogEnable)
             {
-                LAppPal::PrintLog("[APP] sound play: %s", path.GetRawString());
+                LAppPal::PrintLog("[APP]sound play: %s", path.GetRawString());
             }
+            if (motion)
             motion->SetEffectIds(_eyeBlinkIds, _lipSyncIds);
 
         }
@@ -710,6 +729,9 @@ void LAppModel::SetupTextures()
         //OpenGLのテクスチャユニットにテクスチャをロードする
         csmString texturePath = _modelSetting->GetTextureFileName(modelTextureNumber);
         texturePath = _modelHomeDir + texturePath;
+
+        //中文支持
+        texturePath = QString::fromUtf8(texturePath.GetRawString()).toLocal8Bit();
 
         LAppTextureManager::TextureInfo* texture = LAppDelegate::GetInstance()->GetTextureManager()->CreateTextureFromPngFile(texturePath.GetRawString());
         const csmInt32 glTextueNumber = texture->id;
