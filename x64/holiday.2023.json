@@ -23,7 +23,7 @@
 			"date" : "2023-01-21",
 			"holiday" : true,
 			"name" : "除夕",
-			"rest" : 19,
+			"rest" : 17,
 			"wage" : 3
 		},
 		"01-22" : 
@@ -99,7 +99,7 @@
 			"date" : "2023-04-05",
 			"holiday" : true,
 			"name" : "清明节",
-			"rest" : 65,
+			"rest" : 50,
 			"wage" : 3
 		},
 		"04-23" : 
@@ -141,6 +141,7 @@
 			"date" : "2023-05-02",
 			"holiday" : true,
 			"name" : "劳动节",
+			"rest" : 1,
 			"wage" : 3
 		},
 		"05-03" : 

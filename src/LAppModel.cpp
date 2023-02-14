@@ -88,7 +88,7 @@ void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
 
     if (_debugMode)
     {
-        LAppPal::PrintLog("[APP]load model setting: %s", fileName);
+        LAppPal::PrintLog("[APP]load model setting: %s", QString::fromUtf8(fileName).toLocal8Bit().constData());
     }
 
     csmSizeInt size;
@@ -317,7 +317,7 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         {
             if (_debugMode)
             {
-                LAppPal::PrintLog("[APP]load motion without file: %s => [%s_%d] ", path.GetRawString(), group, i);
+                LAppPal::PrintLog("[APP]load motion without file: %s => [%s_%d] ", path.GetRawString(), QString::fromUtf8(group).toLocal8Bit().constData(), i);
             }
             continue;
         }
@@ -329,14 +329,13 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
 
         if (_debugMode)
         {
-            LAppPal::PrintLog("[APP]load motion: %s => [%s_%d] ", path.GetRawString(), group, i);
+            LAppPal::PrintLog("[APP]load motion: %s => [%s_%d] ", path.GetRawString(), QString::fromUtf8(group).toLocal8Bit().constData(), i);
         }
 
         csmByte* buffer;
         csmSizeInt size;
         buffer = CreateBuffer(path.GetRawString(), &size);
         CubismMotion* tmpMotion = static_cast<CubismMotion*>(LoadMotion(buffer, size, name.GetRawString()));
-
         csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, i);
         if (fadeTime >= 0.0f)
         {
@@ -415,9 +414,9 @@ void LAppModel::Update()
 
     // モーションによるパラメータ更新の有無
     csmBool motionUpdated = false;
-
     //-----------------------------------------------------------------
     _model->LoadParameters(); // 前回セーブされた状態をロード
+
     if (_motionManager->IsFinished() && _frameCount / LAppConfig::_FPS >= LAppConfig::_MotionInterval)
     {
         // モーションの再生がない場合、待機モーションの中からランダムで再生する
@@ -665,6 +664,25 @@ csmBool LAppModel::HitTest(const csmChar* hitAreaName, csmFloat32 x, csmFloat32 
         }
     }
     return false; // 存在しない場合はfalse
+}
+
+csmString LAppModel::HitTest(csmFloat32 x, csmFloat32 y)
+{
+    // 透明時は当たり判定なし。
+    if (_opacity < 1)
+    {
+        return false;
+    }
+    const csmInt32 count = _modelSetting->GetHitAreasCount();
+    for (csmInt32 i = 0; i < count; i++)
+    {
+        const CubismIdHandle drawID = _modelSetting->GetHitAreaId(i);
+        if (IsHit(drawID, x, y))
+        {
+            return _modelSetting->GetHitAreaName(i);
+        }
+    }
+    return ""; // 存在しない場合はfalse
 }
 
 void LAppModel::SetExpression(const csmChar* expressionID)

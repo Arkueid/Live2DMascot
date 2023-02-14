@@ -12,12 +12,12 @@ public:
 	void pop(const char* text);
 	void Release();
 	void AttachToCharacter();
-	void timerEvent(QTimerEvent* e);
+	void paintEvent(QPaintEvent* e);
 private:
-	QTextBrowser* _textBrowser;
 	QPropertyAnimation* animation;
-	int _wordInterval;
-	int _currentTimer;
+	int _xBorder;
+	int _yBorder;
 	QString _text;
-	int _currentIndex;
+	QFont _font;
+	QFontMetrics* _fontMetrics;
 };

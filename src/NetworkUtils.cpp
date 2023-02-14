@@ -32,10 +32,10 @@ namespace BgmListUtils {
 	void UpdateBgmList()
 	{
 		Client cli("https://api.bgm.tv");
-		cli.set_proxy("", -1);
-		Result rsp = cli.Get("/calendar");
 		Json::Reader reader;
 		Json::Value json;
+		cli.set_proxy("", -1);
+		Result rsp = cli.Get("/calendar");
 		reader.parse(rsp.value().body, json);
 		cli.stop();
 		ofstream ofs(_BgmListJsonPath);
@@ -48,12 +48,13 @@ namespace BgmListUtils {
 		if (ShouldUpdate())
 		{
 			try {
+				Log("BgmListUtils", "正在拉取番剧列表...");
 				UpdateBgmList();
 				Log("BgmListUtils", string("番剧列表更新完毕: ").append(_BgmListJsonPath).c_str());
 			}
-			catch (exception e)
+			catch (...)
 			{
-				Log("BgmListUtils", e.what());
+				Log("UpdateBgmList", "无网络连接，更新已取消!");
 			}
 		}
 		else {
@@ -68,12 +69,12 @@ namespace HolidayUtils
 	const bool _DebugLogEnable = true;
 	void GetHolidayJson()
 	{
-
+		Log("BgmListUtils", "正在拉取节日列表...");
 		Client cli("https://timor.tech");
-		cli.set_proxy("", -1);
-		Result res = cli.Get("/api/holiday/year");
 		Json::Value json;
 		Json::Reader reader;
+		cli.set_proxy("", -1);
+		Result res = cli.Get("/api/holiday/year");
 		reader.parse(res.value().body, json);
 		cli.stop();
 		ofstream ofs(_HolidayJsonPath, ios::binary);
@@ -99,8 +100,9 @@ namespace HolidayUtils
 				GetHolidayJson();
 				Log("HolidayUtils", string("节日列表更新完毕: ").append(_HolidayJsonPath).c_str());
 			}
-			catch (exception e) {
-				Log("HolidayUtils", e.what());
+			catch (...)
+			{
+				Log("HolidayUtils", "无网络连接，更新已取消!");
 			}
 		}
 		else {
@@ -144,9 +146,8 @@ namespace ChatAPI {
 				return codec->fromUnicode(json["message"].asCString());
 			}
 		}
-		catch (exception e)
+		catch (...)
 		{
-			Log("ChatAI", e.what());
 			return "网络连接有错误哦~";
 		}
 	}

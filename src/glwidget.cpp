@@ -93,7 +93,13 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 		if (LAppConfig::_MouseOn)
 		{
-			if (!LAppConfig::_KeepQuiet && (!LAppConfig::_TransparentBackground ||  (LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y))))
+			if (!LAppConfig::_KeepQuiet && (!LAppConfig::_TransparentBackground ||  
+				strlen(LAppLive2DManager::GetInstance()->GetModel(0)->HitTest(x, y).GetRawString()) != 0
+#if 0
+				(LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y))
+#endif
+					)
+				)
 			{
 				if (_transparent)
 				{
@@ -265,6 +271,7 @@ void GLWidget::keepMouseTrackOnTriggered()
 	{
 		LAppConfig::_MouseTrack = false;
 		act_keepMouseTrack->setChecked(false);
+		LAppLive2DManager::GetInstance()->OnDrag(0.0f, 0.0f);
 	}
 	else
 	{

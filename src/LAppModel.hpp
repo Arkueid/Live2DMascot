@@ -110,6 +110,7 @@ public:
      * @param[in]   y               判定を行うY座標
      */
     virtual Csm::csmBool HitTest(const Csm::csmChar* hitAreaName, Csm::csmFloat32 x, Csm::csmFloat32 y);
+    virtual Csm::csmString HitTest(Csm::csmFloat32 x, Csm::csmFloat32 y);
 
     /**
      * @brief   別ターゲットに描画する際に使用するバッファの取得

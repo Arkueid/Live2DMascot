@@ -344,28 +344,37 @@ ModelSettings::ModelSettings(QWidget* p)
 	lbl_motionSoundPath->setAlignment(Qt::AlignRight|Qt::AlignCenter);
 	lbl_motionText = new QLabel(QString::fromLocal8Bit("文本"));
 	lbl_motionText->setAlignment(Qt::AlignTop|Qt::AlignRight);
-
+	motionGroup = new QLineEdit();
+	addGroup = new QPushButton(QString::fromLocal8Bit("新建动作组"));
+	deleteGroup = new QPushButton(QString::fromLocal8Bit("删除动作组"));
+	lbl_motionGroup = new QLabel(QString::fromLocal8Bit("当前动作组"));
 	addMotion = new QPushButton(QString::fromLocal8Bit("添加动作"));
 	deleteMotion = new QPushButton(QString::fromLocal8Bit("删除动作"));
 	changeModel = new QPushButton(QString::fromLocal8Bit("更新模型"));
-
+	updateGroupName = new QPushButton(QString::fromLocal8Bit("修改动作组名称"));
+	
 	connect(apply, SIGNAL(clicked()), SLOT(Apply()));
 	connect(cancel, SIGNAL(clicked()), SLOT(Cancel()));
 	grid = new QGridLayout();
 	grid->addWidget(lbl_model, 0, 0, 0);
 	grid->addWidget(model, 0, 1, 0);
 	grid->addWidget(changeModel, 0, 2, 0);
-	grid->addWidget(_motionGroups, 1, 0, 3, 2, 0);
-	grid->addWidget(motionJsonPath, 1, 3, 1, 2, 0);
-	grid->addWidget(motionSoundPath, 2, 3, 1, 2, 0);
-	grid->addWidget(motionText, 3, 3, 1, 2, 0);
-	grid->addWidget(lbl_motionJsonPath, 1, 2, 0);
-	grid->addWidget(lbl_motionSoundPath, 2, 2, 0);
-	grid->addWidget(lbl_motionText, 3, 2, 0);
-	grid->addWidget(addMotion, 4, 0, 0);
-	grid->addWidget(deleteMotion, 4, 1, 0);
-	grid->addWidget(apply, 4, 3, 0);
-	grid->addWidget(cancel, 4, 4, 0);
+	grid->addWidget(lbl_motionGroup, 1, 0, 0);
+	grid->addWidget(motionGroup, 1, 1, 0);
+	grid->addWidget(addGroup, 1, 2, 0);
+	grid->addWidget(deleteGroup, 1, 3, 0);
+	grid->addWidget(updateGroupName, 1, 4, 0);
+	grid->addWidget(_motionGroups, 2, 0, 3, 2, 0);
+	grid->addWidget(motionJsonPath, 2, 3, 1, 2, 0);
+	grid->addWidget(motionSoundPath, 3, 3, 1, 2, 0);
+	grid->addWidget(motionText, 4, 3, 1, 2, 0);
+	grid->addWidget(lbl_motionJsonPath, 2, 2, 0);
+	grid->addWidget(lbl_motionSoundPath, 3, 2, 0);
+	grid->addWidget(lbl_motionText, 4, 2, 0);
+	grid->addWidget(addMotion, 5, 0, 0);
+	grid->addWidget(deleteMotion, 5, 1, 0);
+	grid->addWidget(apply, 5, 3, 0);
+	grid->addWidget(cancel, 5, 4, 0);
 	setLayout(grid);
 
 	connect(_motionGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(ShowMotionInfo(QTreeWidgetItem*, int)));
@@ -376,6 +385,10 @@ ModelSettings::ModelSettings(QWidget* p)
 	connect(motionSoundPath, SIGNAL(currentTextChanged(const QString&)), SLOT(BindSound(const QString&)));
 	connect(motionText, SIGNAL(loseFocus()), SLOT(BindText()));
 	
+	connect(addGroup, SIGNAL(clicked()), SLOT(AddGroup()));
+	connect(deleteGroup, SIGNAL(clicked()), SLOT(DeleteGroup()));
+	connect(updateGroupName, SIGNAL(clicked()), SLOT(UpdateGroupName()));
+
 	connect(changeModel, SIGNAL(clicked()), SLOT(UpdateModel()));
 
 	_motionGroups->setStyleSheet(
@@ -428,6 +441,7 @@ void ModelSettings::LoadConfig()
 	motionJsonPath->clear();
 	motionSoundPath->clear();
 	motionText->clear();
+	motionGroup->clear();
 	int i;
 	int size;
 	const char* path;
@@ -440,7 +454,7 @@ void ModelSettings::LoadConfig()
 	model->clear();
 	for (i = 0; i < size; i++)
 	{
-		if (_ModelName == _files[i]) flag = true;
+		if (strcmp(_ModelName.c_str(), QString::fromLocal8Bit(_files[i].c_str()).toStdString().c_str()) == 0) flag = true;
 		model->addItem(QString::fromLocal8Bit(_files[i].c_str()));
 	}
 	_ModelName = flag ? _ModelName : model->itemText(0).toUtf8().constData();
@@ -481,7 +495,7 @@ void ModelSettings::LoadConfig()
 	ifs >> _modelJson;
 	ifs.close();
 	Json::Value motions = _modelJson["FileReferences"]["Motions"];
-	vector<const char*> groupnames = { "Morning", "Afternoon", "Evening", "Midnight", "TapHead", "TapBody", "TapSpecial", "LongSittingTip" };
+	Json::Value::Members groupnames = motions.getMemberNames();
 	size = groupnames.size();
 	QTreeWidgetItem* item;
 	QTreeWidgetItem* subItem;
@@ -492,13 +506,13 @@ void ModelSettings::LoadConfig()
 		item = new QTreeWidgetItem();
 		_motionGroups->addTopLevelItem(item);
 		Json::Value motionGroups = motions[groupnames[i]];
-		item->setText(0, groupnames[i]);
+		item->setText(0, QString::fromUtf8(groupnames[i].c_str()));
 		size2 = motionGroups.size();
 
 		for (j = 0; j < size2; j++)
 		{
 			subItem = new QTreeWidgetItem();
-			subItem->setText(0, string(groupnames[i]).append("_").append(to_string(j)).c_str());
+			subItem->setText(0, QString::fromUtf8(groupnames[i].c_str()).append("_").append(to_string(j).c_str()));
 			subItem->setData(1, 0, j);
 			item->addChild(subItem);
 		}
@@ -571,7 +585,7 @@ void ModelSettings::AddMotion()
 {
 	if (_motionGroups->currentItem() == NULL)  //无选中
 	{
-		return;
+		Tip::GetInstance()->Pop(_parent, "未选择动作组!");
 	}
 	else if (_motionGroups->currentItem()->parent() == NULL)  //选中整个动作组
 	{
@@ -611,11 +625,11 @@ void ModelSettings::DeleteMotion()
 {
 	if (_motionGroups->currentItem() == NULL)  //无选中
 	{
-		return;
+		Tip::GetInstance()->Pop(_parent, "未选择动作!");
 	}
 	else if (_motionGroups->currentItem()->parent() == NULL)  //选中整个动作组
 	{
-		return;
+		Tip::GetInstance()->Pop(_parent, "未选择动作!");
 	}
 	else  //选中子动作 
 	{
@@ -640,18 +654,102 @@ void ModelSettings::ShowMotionInfo(QTreeWidgetItem* w, int idx)
 {
 	if (w->parent() != NULL)
 	{
+		motionGroup->setText(w->parent()->text(0));
 		string groupname = w->parent()->text(0).toUtf8();
 		int idx = w->data(1, 0).toInt();
 		Json::Value motion = _modelJson["FileReferences"]["Motions"][groupname][idx];
 
-		motionJsonPath->setCurrentText(QString::fromUtf8(motion["File"].asCString()));
+		motionJsonPath->setCurrentText(QString::fromUtf8(motion["File"].isNull() ? "" : motion["File"].asCString()));
 		motionSoundPath->setCurrentText(QString::fromUtf8(motion["Sound"].isNull() ? "" : motion["Sound"].asCString()));
 		motionText->setText(QString::fromStdString(motion["Text"].isNull() ? "" : motion["Text"].asCString()));
 	}
 	else{
+		if (w->parent() == NULL) motionGroup->setText(w->text(0));
 		motionJsonPath->setCurrentText("");
 		motionSoundPath->setCurrentText("");
 		motionText->clear();
+	}
+}
+
+void ModelSettings::AddGroup()
+{
+	if (motionGroup->text().isEmpty()) {
+		Tip::GetInstance()->Pop(_parent, "动作组名称不能为空!");
+		return;
+	}
+	QList<QTreeWidgetItem*> x = _motionGroups->findItems(motionGroup->text(), Qt::MatchExactly, 0);
+	if (x.count() == 0)
+	{
+		QTreeWidgetItem* topItem = new QTreeWidgetItem();
+		topItem->setText(0, motionGroup->text());
+		_motionGroups->addTopLevelItem(topItem);
+		_modelJson["FileReferences"]["Motions"][motionGroup->text().toUtf8().toStdString()] = Json::Value(Json::arrayValue);
+		Tip::GetInstance()->Pop(_parent, "动作组添加成功!");
+	}
+	else {
+		Tip::GetInstance()->Pop(_parent, "动作组已存在!");
+	}
+}
+
+void ModelSettings::DeleteGroup()
+{
+	if (motionGroup->text().isEmpty()) {
+		Tip::GetInstance()->Pop(_parent, "未选中动作组!");
+		return;
+	}
+	QList<QTreeWidgetItem*> x = _motionGroups->findItems(motionGroup->text(), Qt::MatchExactly, 0);
+	if (x.count() == 1)
+	{
+		if (QMessageBox::question(_parent, QString::fromLocal8Bit("模型设置"), QString::fromLocal8Bit("是否删除动作组<br>").append("<b>").append(motionGroup->text()).append("</b>"),
+			QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+		{
+			_modelJson["FileReferences"]["Motions"].removeMember(motionGroup->text().toUtf8().toStdString());
+			x.at(0)->takeChildren();
+			_motionGroups->takeTopLevelItem(_motionGroups->indexOfTopLevelItem(x.at(0)));
+			Tip::GetInstance()->Pop(_parent, "动作组已删除!");
+			_motionGroups->clearFocus();
+			motionGroup->clear();
+		}
+	}
+	else if (x.count() == 0)
+	{
+		Tip::GetInstance()->Pop(_parent, "动作组不存在!");
+	}
+	else {
+		Tip::GetInstance()->Pop(_parent, "出现未知错误!");
+	}
+}
+
+void ModelSettings::UpdateGroupName()
+{
+	if (motionGroup->text().isEmpty()) 
+	{
+		Tip::GetInstance()->Pop(_parent, "动作组名称不能为空!");
+	}
+	else if (_motionGroups->currentItem() == NULL)  //无选中
+	{
+		Tip::GetInstance()->Pop(_parent, "未选中动作组!");
+	}
+	else if (_motionGroups->findItems(motionGroup->text(), Qt::MatchExactly, 0).count() > 0)
+	{
+		Tip::GetInstance()->Pop(_parent, "动作组名称已存在!");
+	}
+	else if (_motionGroups->currentItem()->parent() == NULL)  //选中整个动作组
+	{
+		Json::Value group = _modelJson["FileReferences"]["Motions"][_motionGroups->currentItem()->text(0).toStdString()];
+		_modelJson["FileReferences"]["Motions"].removeMember(_motionGroups->currentItem()->text(0).toStdString());
+		_modelJson["FileReferences"]["Motions"][motionGroup->text().toStdString()] = group;
+		_motionGroups->currentItem()->setText(0, motionGroup->text());
+		Tip::GetInstance()->Pop(_parent, "动作组名称已修改!");
+	}
+	else  //选中子动作 
+	{
+		QTreeWidgetItem* p = _motionGroups->currentItem()->parent();
+		Json::Value group = _modelJson["FileReferences"]["Motions"][p->text(0).toStdString()];
+		_modelJson["FileReferences"]["Motions"].removeMember(p->text(0).toStdString());
+		_modelJson["FileReferences"]["Motions"][motionGroup->text().toStdString()] = group;
+		p->setText(0, motionGroup->text());
+		Tip::GetInstance()->Pop(_parent, "动作组名称已修改!");
 	}
 }
 
@@ -681,7 +779,7 @@ void ModelSettings::UpdateModel()
 
 ControlWidget::ControlWidget()
 {
-	setFixedSize(620, 400);
+	setFixedSize(620, 450);
 	setWindowFlags(Qt::Tool);
 	setWindowTitle(QString::fromUtf8(_AppName.c_str()));
 	_appSettings = new AppSettings(this);
@@ -710,6 +808,8 @@ ControlWidget::ControlWidget()
 		"QTreeWidget::item:hover{background-color: rgb(50, 50, 50); border: none}"
 		"QTextEdit{padding: 5px; border: 1px solid rgb(80, 80, 80); color: rgba(255, 255, 255, 245); font: 17px}"
 		"QTextEdit::focus{border: 1px solid rgb(50, 120, 200)}"
+		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
+		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QPushButton{width: 100px;font: 13.5px; border-radius: 10px; font-family: 微软雅黑; color: rgba(255, 255, 255, 200); background-color: rgba(50, 150, 235, 190); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 		"QComboBox{height: 30px; padding: 1px 18px 1px 3px;}"

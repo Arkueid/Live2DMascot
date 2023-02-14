@@ -44,6 +44,14 @@
 					"Text" : "晚上好！"
 				}
 			],
+			"Idle" : 
+			[
+				{
+					"File" : "",
+					"Sound" : "sounds/nn.idle_encourage.wav",
+					"Text" : "现在感到痛苦的话，行动起来就好了。"
+				}
+			],
 			"LongSittingTip" : 
 			[
 				{
@@ -113,7 +121,8 @@
 			"Target" : "Parameter"
 		},
 		{
-			"Ids" : [
+			"Ids" : 
+			[
 				"ParamMouthOpenY",
 				"ParamMouthForm"
 			],
@@ -125,11 +134,11 @@
 	[
 		{
 			"Id" : "face2",
-			"Name" : "Head"
+			"Name" : "TapHead"
 		},
 		{
 			"Id" : "yifu",
-			"Name" : "Body"
+			"Name" : "TapBody"
 		}
 	],
 	"Version" : 3

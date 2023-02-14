@@ -45,7 +45,7 @@
 				{
 					"File" : "motions/mail.motion3.json",
 					"Sound" : "sounds/mail.wav",
-					"Text" : "你的信……可恶，居然比我还要受欢迎"
+					"Text" : "你的信......可恶,居然比我还要受欢迎。"
 				},
 				{
 					"File" : "motions/main_1.motion3.json",
@@ -129,15 +129,15 @@
 	[
 		{
 			"Id" : "TouchBody",
-			"Name" : "Body"
+			"Name" : "TapBody"
 		},
 		{
 			"Id" : "TouchHead",
-			"Name" : "Head"
+			"Name" : "TapHead"
 		},
 		{
 			"Id" : "TouchSpecial",
-			"Name" : "Special"
+			"Name" : "TapSpecial"
 		}
 	],
 	"Version" : 3

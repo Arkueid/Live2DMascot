@@ -12,7 +12,7 @@
 					"FadeOutTime" : 0.5,
 					"File" : "motions/Hiyori_m03.motion3.json",
 					"Sound" : "sounds/Hiyori.jp.13.wav",
-					"Text" : "下午好！怎么样，怎么样，有好好午睡吗？"
+					"Text" : "下午好！怎么样，怎么样，有好好午睡吗？1"
 				},
 				{
 					"FadeInTime" : 0.5,
@@ -63,14 +63,9 @@
 				{
 					"FadeInTime" : 0.5,
 					"FadeOutTime" : 0.5,
-					"File" : "motions/Hiyori_m04.motion3.json",
+					"File" : "",
 					"Sound" : "sounds/idle01.wav",
 					"Text" : "站着好累啊！！！陪我聊会天吧。"
-				},
-				{
-					"FadeInTime" : 0.5,
-					"FadeOutTime" : 0.5,
-					"File" : "motions/Hiyori_m07.motion3.json"
 				}
 			],
 			"LongSittingTip" : 
@@ -112,7 +107,7 @@
 				{
 					"FadeInTime" : 0.5,
 					"FadeOutTime" : 0.5,
-					"File" : "motions/Hiyori_m03.motion3.json",
+					"File" : "",
 					"Sound" : "sounds/Hiyori.jp.10.wav",
 					"Text" : "早上好！！！Arkueid。新的一天又开始啦！"
 				}
@@ -138,7 +133,7 @@
 					"FadeOutTime" : 0.5,
 					"File" : "motions/Hiyori_m10.motion3.json",
 					"Sound" : "sounds/tapbody2.wav",
-					"Text" : "啊哈哈哈哈哈哈，好痒啊！！！快住手！！！"
+					"Text" : "啊哈哈哈哈哈哈，好痒啊！！！"
 				}
 			],
 			"TapHead" : 
@@ -163,6 +158,11 @@
 					"File" : "motions/Hiyori_m03.motion3.json",
 					"Sound" : "sounds/taphead3.wav",
 					"Text" : "Hiyori很可爱呢，是吧是吧！！！"
+				},
+				{
+					"File" : "motions/Hiyori_m06.motion3.json",
+					"Sound" : "",
+					"Text" : "嗯！？？"
 				}
 			]
 		},
@@ -199,15 +199,15 @@
 	[
 		{
 			"Id" : "HitArea",
-			"Name" : "Body"
+			"Name" : "TapBody"
 		},
 		{
 			"Id" : "ArtMesh56",
-			"Name" : "Head"
+			"Name" : "TapHead"
 		},
 		{
 			"Id" : "ArtMesh51",
-			"Name" : "Head"
+			"Name" : "TapHead"
 		}
 	],
 	"Version" : 3

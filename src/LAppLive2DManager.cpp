@@ -100,9 +100,18 @@ void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
     {
         LAppPal::PrintLog("[APP]tap point: {x:%.2f y:%.2f}", x, y);
     }
-
+    csmString hitArea;
     for (csmUint32 i = 0; i < _models.GetSize(); i++)
     {
+        hitArea = _models[i]->HitTest(x, y);
+        if (strlen(hitArea.GetRawString()) != 0)
+        {
+            if (DebugLogEnable) LAppPal::PrintLog("[APP]hit area: [%s]", hitArea.GetRawString());
+            if (strcmp(hitArea.GetRawString(), "TapHead") == 0) _models[i]->SetRandomExpression();
+            _models[i]->StartRandomMotion(hitArea.GetRawString(), PriorityForce, NULL);
+            return;
+        }
+#if 0
         if (_models[i]->HitTest(HitAreaNameHead, x, y))
         {
             if (DebugLogEnable)
@@ -132,6 +141,7 @@ void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
         {
             LAppPal::PrintLog("[APP]hit area: [%s]", "Unknown");
         }
+#endif
     }
 }
 
@@ -242,7 +252,7 @@ void LAppLive2DManager::ChangeModel(const char* modelPath, const char* modelName
 {
     if (DebugLogEnable)
     {
-        LAppPal::PrintLog("[APP]model name: %s", modelName);
+        LAppPal::PrintLog("[APP]model name: %s", QString::fromUtf8(modelName).toLocal8Bit().constData());
     }
     string dir = modelPath + string("/") + modelName + string("/");
     string modelJsonName =  modelName + string(".model3.json");

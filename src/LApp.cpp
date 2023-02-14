@@ -34,8 +34,6 @@ namespace LAppConfig {
     const char* _ConfigPath;
     string _DialogStyleSheet;
     int _TextFadeOutTime;
-    int _DialogWidth;
-    int _DialogHeight;
     int _BgmListLastPosX;
     int _BgmListLastPosY;
     int _DialogWordInterval;
@@ -48,6 +46,14 @@ namespace LAppConfig {
     bool _TransparentBackground;
     bool _MouseOn;
     bool _TransparentCharacter;
+    int _DialogFontSize;
+    string _DialogFontFamily;
+    string _DialogFontColor;
+    string _DialogBackgroundColor;
+    int _DialogYOffset;
+    int _DialogMaxWidth;
+    int _DialogXPadding;
+    int _DialogYPadding;
 };
 
 namespace {
@@ -103,6 +109,7 @@ void LApp::Initialize(int argc, char* argv[])
     _win = new GLWidget();
     BgmListUtils::CheckUpdate();
     HolidayUtils::CheckUpdate();
+    
     LoadConfig();
     _win->setupUI();
 }
@@ -164,13 +171,22 @@ void LApp::LoadConfig() {
 
     LAppConfig::_ShowBackground = !config["UserSettings"]["ShowBackground"].isNull() ? config["UserSettings"]["ShowBackground"].asBool() : false;
     LAppConfig::_TransparentBackground = !config["UserSettings"]["TransparentBackground"].isNull() ? config["UserSettings"]["TransparentBackground"].asBool() : true;
-
+    
     LAppConfig::_NoSound = !config["UserSettings"]["NoSound"].isNull() ? config["UserSettings"]["NoSound"].asBool() : false;
     LAppConfig::_ShowText = !config["UserSettings"]["ShowText"].isNull() ? config["UserSettings"]["ShowText"].asBool() : true;
     LAppConfig::_ShowBgmList = !config["UserSettings"]["ShowBgmList"].isNull() ? config["UserSettings"]["ShowBgmList"].asBool() : true;
     LAppConfig::_TextFadeOutTime = !config["UserSettings"]["TextFadeOutTime"].isNull() ? config["UserSettings"]["TextFadeOutTime"].asInt() : 6;
-    LAppConfig::_DialogWidth = !config["UserSettings"]["Dialog"]["Width"].isNull() ? config["UserSettings"]["Dialog"]["Width"].asInt() : 400;
-    LAppConfig::_DialogHeight = !config["UserSettings"]["Dialog"]["Height"].isNull() ? config["UserSettings"]["Dialog"]["Height"].asInt() : 150;
+
+    LAppConfig::_DialogFontSize = !config["UserSettings"]["Dialog"]["FontSize"].isNull() ? config["UserSettings"]["Dialog"]["FontSize"].asInt() : 10;
+    LAppConfig::_DialogFontFamily = !config["UserSettings"]["Dialog"]["FontFamily"].isNull() ? config["UserSettings"]["Dialog"]["FontFamily"].asCString() : "Comic Sans MS";
+    LAppConfig::_DialogFontColor = !config["UserSettings"]["Dialog"]["FontColor"].isNull() ? config["UserSettings"]["Dialog"]["FontColor"].asCString() : "white";
+    LAppConfig::_DialogBackgroundColor = !config["UserSettings"]["Dialog"]["BackgroundColor"].isNull() ? config["UserSettings"]["Dialog"]["BackgroundColor"].asCString() : "rgba(0, 0, 0, 200)";
+    LAppConfig::_DialogYOffset = !config["UserSettings"]["Dialog"]["YOffset"].isNull() ? config["UserSettings"]["Dialog"]["YOffset"].asInt() : -10;
+    LAppConfig::_DialogMaxWidth = !config["UserSettings"]["Dialog"]["MaxWidth"].isNull() ? config["UserSettings"]["Dialog"]["MaxWidth"].asInt() : 370;
+    LAppConfig::_DialogXPadding = !config["UserSettings"]["Dialog"]["XPadding"].isNull() ? config["UserSettings"]["Dialog"]["XPadding"].asInt() : 10;
+    LAppConfig::_DialogYPadding = !config["UserSettings"]["Dialog"]["YPadding"].isNull() ? config["UserSettings"]["Dialog"]["YPadding"].asInt() : 10;
+
+
     LAppConfig::_LipSyncMagnification = !config["UserSettings"]["LipSyncMagnification"].isNull() ? config["UserSettings"]["LipSyncMagnification"].asFloat() : 1.1;
     LAppConfig::_ApiKey = !config["UserSettings"]["Mlyai"]["APIKey"].isNull() ? config["UserSettings"]["Mlyai"]["APIKey"].asCString() : "82wmm51s1bskwft3";
     LAppConfig::_ApiSecret = !config["UserSettings"]["Mlyai"]["APISecret"].isNull() ? config["UserSettings"]["Mlyai"]["APISecret"].asCString(): "o0vp8k7e";
@@ -179,9 +195,7 @@ void LApp::LoadConfig() {
     GetUserName((TCHAR*)username, &size);
     LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? config["UserSettings"]["UserName"].asCString() : username;
     LAppConfig::_NoteOutPath = !config["UserSettings"]["NoteOutPath"].isNull() ? config["UserSettings"]["NoteOutPath"].asCString() : ".";
-    LAppConfig::_DialogWordInterval = !config["UserSettings"]["Dialog"]["WordInterval"].isNull() ? config["UserSettings"]["Dialog"]["WordInterval"].asInt() : 10;
     LAppConfig::_MotionInterval = !config["UserSettings"]["MotionInterval"].isNull() ? config["UserSettings"]["MotionInterval"].asInt() : 5;
-    LAppConfig::_DialogStyleSheet = !config["UserSettings"]["Dialog"]["StyleSheet"].isNull() ? config["UserSettings"]["Dialog"]["StyleSheet"].asCString() :
         "font-size: 20px;"
         "border: 1px solid rgb(0, 0, 0);"
         "background-color: rgba(0, 0, 0, 200);"
@@ -228,10 +242,6 @@ void LApp::SaveConfig()
     config["UserSettings"]["ModelDir"] = LAppConfig::_ModelDir;
     config["UserSettings"]["ModelName"] = LAppConfig::_ModelName;
     config["UserSettings"]["TextFadeOutTime"] = LAppConfig::_TextFadeOutTime;
-    config["UserSettings"]["Dialog"]["Width"] = LAppConfig::_DialogWidth;
-    config["UserSettings"]["Dialog"]["Height"] = LAppConfig::_DialogHeight;
-    config["UserSettings"]["Dialog"]["StyleSheet"] = LAppConfig::_DialogStyleSheet;
-    config["UserSettings"]["Dialog"]["WordInterval"] = LAppConfig::_DialogWordInterval;
     config["WindowSettings"]["IconPath"] = LAppConfig::_IconPath;
     config["WindowSettings"]["AppName"] = LAppConfig::_AppName;
     config["WindowSettings"]["FPS"] = LAppConfig::_FPS;
@@ -248,6 +258,14 @@ void LApp::SaveConfig()
     config["UserSettings"]["MotionInterval"] = LAppConfig::_MotionInterval;
     config["UserSettings"]["LipSyncMagnification"] = LAppConfig::_LipSyncMagnification;
 
+    config["UserSettings"]["Dialog"]["FontSize"] = LAppConfig::_DialogFontSize;
+    config["UserSettings"]["Dialog"]["FontFamily"] = LAppConfig::_DialogFontFamily;
+    config["UserSettings"]["Dialog"]["FontColor"] = LAppConfig::_DialogFontColor;
+    config["UserSettings"]["Dialog"]["BackgroundColor"] = LAppConfig::_DialogBackgroundColor;
+    config["UserSettings"]["Dialog"]["YOffset"] = LAppConfig::_DialogYOffset;
+    config["UserSettings"]["Dialog"]["MaxWdith"] = LAppConfig::_DialogMaxWidth;
+    config["UserSettings"]["Dialog"]["XPadding"] = LAppConfig::_DialogXPadding;
+    config["UserSettings"]["Dialog"]["YPadding"] = LAppConfig::_DialogYPadding;
     ofstream ofs(LAppConfig::_ConfigPath);
     if (ofs.fail())
     {

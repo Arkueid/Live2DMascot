@@ -23,11 +23,11 @@ namespace LAppConfig {
 	extern bool _ShowText;
 	extern bool _ShowBgmList;
 	extern const char* _ConfigPath;
-	extern string _DialogStyleSheet;
+	extern int _DialogFontSize;
+	extern string _DialogFontFamily;
+	extern string _DialogFontColor;
+	extern string _DialogBackgroundColor;
 	extern int _TextFadeOutTime;
-	extern int _DialogWidth;
-	extern int _DialogHeight;
-	extern int _DialogWordInterval;
 	extern int _BgmListLastPosX;
 	extern int _BgmListLastPosY;
 	extern float _LipSyncMagnification;
@@ -40,6 +40,10 @@ namespace LAppConfig {
 	extern bool _TransparentBackground;
 	extern bool _MouseOn;
 	extern bool _TransparentCharacter;
+	extern int _DialogYOffset;
+	extern int _DialogMaxWidth;
+	extern int _DialogXPadding;
+	extern int _DialogYPadding;
 };
 
 class LApp

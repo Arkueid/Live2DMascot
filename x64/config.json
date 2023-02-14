@@ -5,47 +5,58 @@
 		{
 			"LastPos" : 
 			{
-				"X" : 1345,
-				"Y" : -385
+				"X" : 1286,
+				"Y" : 0
 			}
 		},
 		"Dialog" : 
 		{
+			"BackgroundColor" : "rgba(0, 0, 0, 200)",
+			"FontColor" : "white",
+			"FontFamily" : "Comic Sans MS",
+			"FontSize" : 10,
 			"Height" : 120,
+			"MaxWdith" : 370,
 			"StyleSheet" : "font-size: 20px;border: 1px solid rgb(0, 0, 0);background-color: rgba(0, 0, 0, 200);padding: 10px;margin : 0;color: white;font-family: Comic Sans MS;",
 			"Width" : 300,
-			"WordInterval" : 10
+			"WordInterval" : 10,
+			"XPadding" : 10,
+			"YOffset" : -10,
+			"YPadding" : 10
 		},
-		"KeepQuiet" : true,
+		"KeepQuiet" : false,
+		"LipSyncMagnification" : 1.5,
 		"Mlyai" : 
 		{
 			"APIKey" : "82wmm51s1bskwft3",
 			"APISecret" : "o0vp8k7e"
 		},
-		"ModelDir" : "../Resources",
-		"ModelName" : "shagali",
-		"MotionInterval" : 5,
+		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
+		"ModelName" : "nn",
+		"MotionInterval" : 5.0,
 		"MouseTrack" : true,
-		"NoSound" : true,
+		"NoSound" : false,
 		"NoteOutPath" : ".",
 		"ShowBackground" : false,
-		"ShowBgmList" : true,
-		"ShowText" : false,
-		"StayOnTop" : false,
+		"ShowBgmList" : false,
+		"ShowText" : true,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 4,
+		"TransparentBackground" : true,
+		"TransparentCharacter" : false,
 		"TransparentForMouse" : true,
 		"UserName" : "ArcueidBrunestud"
 	},
 	"WindowSettings" : 
 	{
-		"AppName" : "桃濑日和",
-		"FPS" : 45,
+		"AppName" : "0d00",
+		"FPS" : 48,
 		"Height" : 500,
-		"IconPath" : "../Resources/sample-hiyori_movie.png",
+		"IconPath" : "D:/forDesktop/Live2D Desktop Mascot/Resources/nn/ico_nn.png",
 		"LastPos" : 
 		{
-			"X" : 1629,
-			"Y" : 532
+			"X" : 1506,
+			"Y" : 513
 		},
 		"Width" : 300
 	}

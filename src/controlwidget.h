@@ -81,12 +81,17 @@ class ModelSettings : public QWidget
 	QLabel* lbl_motionJsonPath;
 	QLabel* lbl_motionSoundPath;
 	QLabel* lbl_motionText;
+	QLabel* lbl_motionGroup;
+	QLineEdit* motionGroup;
 	QComboBox* motionJsonPath;
 	QComboBox* motionSoundPath;
 	MyText* motionText;
 	QPushButton* addMotion;
 	QPushButton* deleteMotion;
 	QPushButton* changeModel;
+	QPushButton* addGroup;
+	QPushButton* deleteGroup;
+	QPushButton* updateGroupName;
 public:
 	ModelSettings(QWidget* p);
 	void LoadConfig();
@@ -101,6 +106,9 @@ private slots:
 	void BindMotion(const QString& x);
 	void BindText();
 	void UpdateModel();
+	void AddGroup();
+	void DeleteGroup();
+	void UpdateGroupName();
 };
 
 class ControlWidget : public QTabWidget

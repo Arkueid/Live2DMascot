@@ -7,8 +7,9 @@
 * [Cubism Live2D SDK for Native]
 * Qt5
 * [jsoncpp]  
-* [cpp-httplib]
+* [cpp-httplib] + openssl
 * Hiyori的语音借助[ACGTTS]项目生成  
+* 
 	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：
 	https://zhuanlan.zhihu.com/p/126276925  
 	https://zhuanlan.zhihu.com/p/511077879 
@@ -19,7 +20,26 @@
 
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
 
- 
+
+## ChangeLog
+Fix:
+1. 关闭鼠标追踪人物视线没有归位
+2. Idle动作组未在设置页面显示
+3. 聊天记录乱码
+4. 无法加载包含中文路径的模型数据
+5. 无网络连接的时候更新番剧列表或者节日列表导致程序崩溃
+6. x64的openssl动态库缺失
+
+Add:
+1. 动作组的增删改查
+2. 重写鼠标点击互动播放动作的逻辑
+3. 支持自定义动作组
+
+Change:
+1. 对话框可显示任意长度文本，且对话框大小随文本长度改变
+2. config.json: Dialog.StyleSheet -> FontSize, FontFamily, FontColor, BackgroundColor, MaxWidth, XPadding, YPadding
+
+
 
 ## 功能介绍
 1. 番剧列表  
@@ -35,20 +55,6 @@
 	</div>   
 
 <div align="center"><b>番剧列表，全部展开 </b></div>
-<br>
-<br>
-
-![番剧列表，顶部隐藏](sample_images/bgmlist_hide.png#pic_center)
-<div align="center"><b>顶部隐藏</b></div>    
-
-<br>
-<br>
-
-<div align="center">
-	<img src="sample_images/bgmlist_side_hid.png" width="150px">
-</div>  
-
-<div align="center"><b>侧边隐藏</b></div>    
 <br>
 <br>
 
@@ -77,19 +83,13 @@
 4. 语音播放
    * 语音播放需要在model3.json文件中添加motion的Sound属性
    * 仅支持.wav格式，详细参数参考[Cubism Live2D SDK for Native]的口型同步
-   * 语音和口型同步只支持**单声道**的.wav格式  
+   * 口型同步只支持**单声道**的.wav格式  
 <br>
 <br>
 
 5. 文本显示  
    * 文本显示需要在model3.json文件中添加motion的Text属性
    * 需要自己修改模型的model3.json文件，详细参考Hiyori的模型  
-<br>
-<br>
-
-   
-<br>
-<br>
 
 [贴吧]:https://tieba.baidu.com/p/5377537423
 [bangumi]:https://bgm.tv
@@ -99,7 +99,7 @@
 <br>
 <br>
 
-1. **系统托盘&右键菜单**  
+6. **系统托盘&右键菜单**  
 
 	<img src="./sample_images/preview3.png"/>  
 	<br>
@@ -121,13 +121,13 @@
 <br>
 <br>
 
-1. **设置窗口**  
+7. **设置窗口**  
 
 	效果图如下  
 
 	<img src="./sample_images/settings.png"/>  
 
-	可以通过模型设置修改模型的文本，动作，和语音
+	可以通过模型设置修改模型的文本，动作，动作组，和语音
 
 	<img src="./sample_images/settings2.png"/>
 
@@ -153,7 +153,7 @@
 
 	动作组  
 
-	| 动作组可用字段 | 字段含义 |  
+	| 具有特定功能的动作组名称 | 字段含义 |  
 	| - | - |  
 	| Morning | 0-12点启动问候语 |
 	| Afternoon | 12-18点启动问候语 |  
@@ -209,3 +209,5 @@
 * 音频文件只支持.wav格式，口型同步只支持单声道的.wav格式
 
 * 程序错误无法启动时可删去config.json文件以初始化
+
+* LPK模型需要解压为包含*.moc3, *.model3.json和纹理图片的文件夹形式
