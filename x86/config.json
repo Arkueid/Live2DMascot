@@ -37,15 +37,15 @@
 	"ModelSettings" : 
 	{
 		"LipSyncMagnification" : 9.0,
-		"ModelDir" : "Resources",
+		"ModelDir" : "../Resources",
 		"ModelName" : "nn",
-		"MotionInterval" : 5.0
+		"MotionInterval" : 15.0
 	},
 	"UserSettings" : 
 	{
 		"AppName" : "0d00",
 		"FPS" : 48,
-		"IconPath" : "Resources/nn/ico_nn.png",
+		"IconPath" : "../Resources/nn/ico_nn.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
@@ -63,8 +63,8 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1592,
-			"Y" : 611
+			"X" : 1572,
+			"Y" : 612
 		},
 		"Width" : 300
 	}

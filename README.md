@@ -55,20 +55,20 @@
 	config.json中编辑以下字段
 
 	```json
-	...
+		...
 
-	"ChatAPI" : 
-	{
-		"ChatSavePath" : "chat",  //聊天音频和文本保存路径
-		"CustomChatServer" : 
+		"ChatAPI" : 
 		{
-			"HostPort" : "http://127.0.0.1:50721",  //服务器地址
-			"On" : true,  //开启自定义聊天接口
-			"ReadTimeOut" : 10,  //等待响应时间
-			"Route" : "/chat"  //路径
-		},
-		
-	...
+			"ChatSavePath" : "chat",  //聊天音频和文本保存路径
+			"CustomChatServer" : 
+			{
+				"HostPort" : "http://127.0.0.1:50721",  //服务器地址
+				"On" : true,  //开启自定义聊天接口
+				"ReadTimeOut" : 10,  //等待响应时间
+				"Route" : "/chat"  //路径
+			},
+		}
+		...
 	
 	```
 
@@ -80,17 +80,20 @@
     	text = request.args.get("Text", "")
     	print("文本: %s" % text)
 
-		# 响应头
+		# 构造响应
     	rsp = make_response()
 
-		# 请求头中添加Text字段
+		# 响应头中添加Text字段
     	rsp.headers.add_header("Text", "坐在电脑前很久了哦，快去休息一下吧！".encode("utf-8"))
 		
-		# 响应body写入音频数据
+		# 响应body中写入音频数据
     	with open("serverFiles\\nn.longsittingtip_0.wav", "rb") as f:
         	rsp.set_data(f.read())
     	return rsp
 	```
+
+	添加动作组字段**Chat**，调用茉莉云或者自定义聊天接口时触发的动作  
+
 	注意及时清理聊天相关文件
 
 
@@ -217,6 +220,7 @@
 	| TapHead | 点击头部触发语音 |
 	| TapBody | 点击身体触发语音 |
 	| TapSpecial | 特触（参考碧蓝航线） |  
+	|  Chat   |调用聊天接口时触发的动作|
 
 	选择动作后可在右边修改动作内容  
 
