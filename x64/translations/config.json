@@ -1,0 +1,71 @@
+{
+	"BangumiView" : 
+	{
+		"LastPos" : 
+		{
+			"X" : 500,
+			"Y" : -595
+		}
+	},
+	"ChatAPI" : 
+	{
+		"ChatSavePath" : "chat",
+		"CustomChatServer" : 
+		{
+			"HostPort" : "",
+			"On" : false,
+			"ReadTimeOut" : 10,
+			"Route" : ""
+		},
+		"Mlyai" : 
+		{
+			"APIKey" : "82wmm51s1bskwft3",
+			"APISecret" : "o0vp8k7e"
+		}
+	},
+	"Dialog" : 
+	{
+		"BackgroundColor" : "rgba(0, 0, 0, 200)",
+		"FontColor" : "white",
+		"FontFamily" : "Comic Sans MS",
+		"FontSize" : 10,
+		"MaxWdith" : 370,
+		"XPadding" : 10,
+		"YOffset" : -10,
+		"YPadding" : 10
+	},
+	"ModelSettings" : 
+	{
+		"LipSyncMagnification" : 9.0,
+		"ModelDir" : "Resources",
+		"ModelName" : "nn",
+		"MotionInterval" : 5.0
+	},
+	"UserSettings" : 
+	{
+		"AppName" : "0d00",
+		"FPS" : 48,
+		"IconPath" : "Resources/nn/ico_nn.png",
+		"KeepQuiet" : false,
+		"MouseTrack" : true,
+		"NoSound" : false,
+		"ShowBackground" : false,
+		"ShowBgmList" : true,
+		"ShowText" : true,
+		"StayOnTop" : false,
+		"TextFadeOutTime" : 6,
+		"TransparentBackground" : true,
+		"TransparentCharacter" : false,
+		"UserName" : "ArcueidBrunestud"
+	},
+	"WindowSettings" : 
+	{
+		"Height" : 500,
+		"LastPos" : 
+		{
+			"X" : 83,
+			"Y" : 223
+		},
+		"Width" : 300
+	}
+}

@@ -21,24 +21,77 @@
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
 
 
-## ChangeLog
-Fix:
-1. 关闭鼠标追踪人物视线没有归位
-2. Idle动作组未在设置页面显示
-3. 聊天记录乱码
-4. 无法加载包含中文路径的模型数据
-5. 无网络连接的时候更新番剧列表或者节日列表导致程序崩溃
-6. x64的openssl动态库缺失
+# Changelog
+1. 自定义聊天服务器接口
 
-Add:
-1. 动作组的增删改查
-2. 重写鼠标点击互动播放动作的逻辑
-3. 支持自定义动作组
+	**Request**  
 
-Change:
-1. 对话框可显示任意长度文本，且对话框大小随文本长度改变
-2. config.json: Dialog.StyleSheet -> FontSize, FontFamily, FontColor, BackgroundColor, MaxWidth, XPadding, YPadding
+	```http
+	GET /chat?Text=聊天文本 HTTP/1.1
+	Accept-Charset: UTF-8
+	User-Agent: DesktopLive2D/v0.1.1
+	```
 
+	**Response  格式**
+
+	**- Headers**
+	```json
+	{
+		...
+
+		"Text": "返回文本"  //返回聊天文本，必须
+
+		...
+	} 
+	```
+
+	**- Body**
+	```json
+	bytes of XXX.wav  //音频数据，可无
+	```
+
+	配置
+
+	config.json中编辑以下字段
+
+	```json
+	...
+
+	"ChatAPI" : 
+	{
+		"ChatSavePath" : "chat",  //聊天音频和文本保存路径
+		"CustomChatServer" : 
+		{
+			"HostPort" : "http://127.0.0.1:50721",  //服务器地址
+			"On" : true,  //开启自定义聊天接口
+			"ReadTimeOut" : 10,  //等待响应时间
+			"Route" : "/chat"  //路径
+		},
+		
+	...
+	
+	```
+
+	服务端示例：
+	```python
+	@app.route("/chat", methods=["GET"])
+	def chat():
+		# 接收客户端的聊天文本
+    	text = request.args.get("Text", "")
+    	print("文本: %s" % text)
+
+		# 响应头
+    	rsp = make_response()
+
+		# 请求头中添加Text字段
+    	rsp.headers.add_header("Text", "坐在电脑前很久了哦，快去休息一下吧！".encode("utf-8"))
+		
+		# 响应body写入音频数据
+    	with open("serverFiles\\nn.longsittingtip_0.wav", "rb") as f:
+        	rsp.set_data(f.read())
+    	return rsp
+	```
+	注意及时清理聊天相关文件
 
 
 ## 功能介绍

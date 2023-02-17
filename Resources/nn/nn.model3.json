@@ -42,6 +42,16 @@
 					"File" : "",
 					"Sound" : "sounds/nn.evening_0.wav",
 					"Text" : "晚上好！"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen009_105.wav",
+					"Text" : "今天非常开心，谢谢。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_012.wav",
+					"Text" : "今天真的很累……"
 				}
 			],
 			"Idle" : 
@@ -50,6 +60,96 @@
 					"File" : "",
 					"Sound" : "sounds/nn.idle_encourage.wav",
 					"Text" : "现在感到痛苦的话，行动起来就好了。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen001_010.wav",
+					"Text" : "有什么事的话请随时告诉我。不是学院的事，私事什么的什么都可以。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen010_049.wav",
+					"Text" : "冷静下来……思考……"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen018_053.wav",
+					"Text" : "痛呀痛呀，滚吧~"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_042.wav",
+					"Text" : "拉面，拉面"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_051.wav",
+					"Text" : "叉烧双"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_055.wav",
+					"Text" : "面硬加咸蔬菜加倍蒜末和油多多"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_066.wav",
+					"Text" : "好期待啊。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_077.wav",
+					"Text" : "啊，来了♪这就是拉面♪"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen101_081.wav",
+					"Text" : "但是，那个，面在哪里呢？"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen104_165.wav",
+					"Text" : "确实，没有什么事是一成不变的。即使是同样的‘喜欢’这个词，也有各种各样的‘喜欢’。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen109_009.wav",
+					"Text" : "烤肉啊，我想去烤肉自助餐。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen109_011.wav",
+					"Text" : "是啊……卡拉OK、保龄球、大头贴……"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen109_015.wav",
+					"Text" : "烤肉自助餐，烤肉自助餐，酱汁自助餐"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen109_051.wav",
+					"Text" : "今天真的很开心，能在一起很幸福。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen109_062.wav",
+					"Text" : "即便如此，我还是希望你能保持笑容。希望你保持笑容。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen112_179.wav",
+					"Text" : "用自己的双手创造快乐的时光就好了吧？"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen114_152.wav",
+					"Text" : "欢迎回来……"
+				},
+				{
+					"File" : "motions/afraid.exp3.json",
+					"Sound" : "sounds/nen111_061.wav",
+					"Text" : "「私のオナニーを見て下さいっ」"
 				}
 			],
 			"LongSittingTip" : 
@@ -79,6 +179,11 @@
 					"File" : "",
 					"Sound" : "sounds/nn.morning_1.wav",
 					"Text" : "早上好，今天也请多多关照呢！"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen002_005.wav",
+					"Text" : "早上好。"
 				}
 			],
 			"TapBody" : 
@@ -90,8 +195,38 @@
 				},
 				{
 					"File" : "",
-					"Sound" : "sounds/nn.tap_body_1.wav",
-					"Text" : "一定是梦...这不是真的...这不是真的...不是不是不是..."
+					"Sound" : "sounds/nen001_080.wav",
+					"Text" : "不可能……这是梦……梦、恶梦……对，恶梦……一定是恶梦……不然就奇怪了，这样的事，不可能不可能不可能……"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen001_074.wav",
+					"Text" : "啊？什么事？"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen002_024.wav",
+					"Text" : "昨天……果然……不是梦吧。"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen002_027.wav",
+					"Text" : "……已经不行了……杀了我……干脆杀了我……"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen002_034.wav",
+					"Text" : "啊，是吗？什么事？"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen004_017.wav",
+					"Text" : "……只能死了……只能切腹……"
+				},
+				{
+					"File" : "",
+					"Sound" : "sounds/nen013_035.wav",
+					"Text" : "那么，在被长期记忆之前，还是得想办法消除它。为此还是会给你带来很大的冲击——"
 				}
 			],
 			"TapHead" : 

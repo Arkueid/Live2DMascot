@@ -1,4 +1,6 @@
 #include "conversationwidget.h"
+#include "LAppLive2DManager.hpp"
+#include "LAppModel.hpp"
 #include "NetworkUtils.h"
 #include "LApp.h"
 #include <QtGui/qevent.h>
@@ -9,7 +11,10 @@
 #include <QtCore/qdatetime.h>
 #include <QtCore/qfile.h>
 #include <QtCore/qtextcodec.h>
+#include <io.h>
+#include <QtCore/qdir.h>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -24,8 +29,9 @@ ConversationWidget::ConversationWidget()
 	_fontMetrics = new QFontMetrics(_font);
 	_font.setFamily("微软雅黑");
 	_font.setPointSizeF(14);
-	_outPath = LAppConfig::_NoteOutPath;
+	_outPath = LAppConfig::_ChatSavePath;
 	_focused = false;
+	LAppConfig::_WaitChatResponse = false;
 	startTimer(500);
 }
 void ConversationWidget::paintEvent(QPaintEvent* e)
@@ -41,6 +47,11 @@ void ConversationWidget::paintEvent(QPaintEvent* e)
 	painter.drawText(xpos, ypos, person);
 	xpos += _fontMetrics->width(person) + 7;
 	painter.setPen(Qt::white);
+	if (LAppConfig::_WaitChatResponse)
+	{
+		painter.drawText(xpos, ypos, QString::fromLocal8Bit("获取服务器响应中, 不要太着急哟~"));
+		return;
+	}
 	for (int i=0; i < _text.length(); i++)
 	{
 		if (xpos >= 370)
@@ -57,7 +68,7 @@ void ConversationWidget::paintEvent(QPaintEvent* e)
 			_text = _text.mid(0, i);
 		}
 	}
-	if (blink && _focused)
+	if (blink && _focused && !LAppConfig::_WaitChatResponse)
 	painter.drawText(xpos, ypos, "_");
 }
 void ConversationWidget::focusInEvent(QFocusEvent* e) {
@@ -84,14 +95,7 @@ void ConversationWidget::mouseDoubleClickEvent(QMouseEvent* e)
 	{
 		close();
 		_text.clear();
-		LApp::GetInstance()->GetWindow()->ReleaseText();
 	}
-}
-void ConversationWidget::getInput(const char* outPath)
-{
-	AttachToCharacter();
-	_outPath = outPath;
-	show();
 }
 void ConversationWidget::AttachToCharacter()
 {
@@ -105,39 +109,65 @@ void ConversationWidget::getInput()
 }
 void ConversationWidget::inputMethodEvent(QInputMethodEvent* e)
 {
+	if (LAppConfig::_WaitChatResponse) return;
 	_text.append(e->commitString());
 	update();
 }
+
+void ConversationWidget::ProcessNetworkResponse()
+{
+	close();
+	LAppConfig::_WaitChatResponse = true;
+	if (_text.isEmpty()) {
+		return;
+	}
+	GLWidget* win = LApp::GetInstance()->GetWindow();
+	string x = _text.toUtf8();
+	LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
+	string text, soundPath;
+	if (LAppConfig::_CustomChatServerOn)
+	{
+		ChatAPI::Chat(x, text, soundPath);
+	}
+	else {
+		ChatAPI::AskMlyai(x, text);
+	}
+	QDir dir(_outPath.c_str());
+	if (!dir.exists())
+	{
+		dir.mkpath(".");
+	}
+	LAppLive2DManager::GetInstance()->GetModel(0)->Speak(text.c_str(), soundPath.c_str());
+	QDateTime date = QDateTime::currentDateTime();
+	QFile f(string(_outPath).append("/").append(date.toString("yyyy-MM-dd").toStdString()).append(".txt").c_str());
+	f.open(QIODevice::Append);
+	f.write(date.toString("[yyyy-MM-dd hh:mm:ss]\n").toStdString().c_str());
+	f.write(LAppConfig::_UserName.c_str());
+	f.write(": ");
+	f.write(_text.toUtf8().toStdString().c_str());
+	f.write("\n");
+	f.write(QString(LAppConfig::_AppName.c_str()).append(": ").toUtf8().toStdString().c_str());
+	f.write(QString::fromUtf8(text.c_str()).toUtf8().toStdString().c_str());
+	f.write("\n");
+	f.close();
+	LAppConfig::_WaitChatResponse = false;
+	_text.clear();
+}
 void ConversationWidget::keyPressEvent(QKeyEvent* e)
 {
+	if (LAppConfig::_WaitChatResponse) return;
 	if (e->key() == Qt::Key_Backspace)
 	{
 		_text = _text.mid(0, _text.length() - 1);
 	}
 	else if (e->key() == Qt::Key_Return)
 	{
-		close();
-		if (_text.isEmpty()) {
-			return;
+		if (!LAppConfig::_WaitChatResponse) 
+		{
+			PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);   //停止当前语音
+			LAppLive2DManager::GetInstance()->GetModel(0)->StopLipSync();
+			std::thread(&ConversationWidget::ProcessNetworkResponse, this).detach();
 		}
-		GLWidget* win = LApp::GetInstance()->GetWindow();
-		win->ReleaseText();
-		const char* rsp = ChatAPI::AskMlyai(_text.toStdString().c_str());
-		win->showDialog(QString::fromLocal8Bit(rsp).toStdString().c_str());
-		QDateTime date = QDateTime::currentDateTime();
-		QFile f(string().append(_outPath).append("/").append(date.toString("yyyy-MM-dd").toStdString()).append(".txt").c_str());
-		f.open(QIODevice::Append);
-		f.write(date.toString("[yyyy-MM-dd hh:mm:ss]\n").toStdString().c_str());
-		f.write(LAppConfig::_UserName.c_str());
-		f.write(": ");
-		QTextCodec* codec = QTextCodec::codecForName("gbk");
-		f.write(codec->fromUnicode(_text.toStdString().c_str()));
-		f.write("\n");
-		f.write("Hiyori: ");
-		f.write(rsp);
-		f.write("\n");
-		f.close();
-		_text.clear();
 	}
 	else {
 		_text.append(e->text());

@@ -18,6 +18,7 @@ protected:
 	void inputMethodEvent(QInputMethodEvent* e);
 	void focusInEvent(QFocusEvent* e);
 	void focusOutEvent(QFocusEvent* e);
+	void ProcessNetworkResponse();
 private:
 	QString _text;
 	QFontMetrics* _fontMetrics;

@@ -1,62 +1,70 @@
 {
-	"UserSettings" : 
+	"BangumiView" : 
 	{
-		"BgmList" : 
+		"LastPos" : 
 		{
-			"LastPos" : 
-			{
-				"X" : 1286,
-				"Y" : 0
-			}
-		},
-		"Dialog" : 
+			"X" : 500,
+			"Y" : -595
+		}
+	},
+	"ChatAPI" : 
+	{
+		"ChatSavePath" : "chat",
+		"CustomChatServer" : 
 		{
-			"BackgroundColor" : "rgba(0, 0, 0, 200)",
-			"FontColor" : "white",
-			"FontFamily" : "Comic Sans MS",
-			"FontSize" : 10,
-			"Height" : 120,
-			"MaxWdith" : 370,
-			"StyleSheet" : "font-size: 20px;border: 1px solid rgb(0, 0, 0);background-color: rgba(0, 0, 0, 200);padding: 10px;margin : 0;color: white;font-family: Comic Sans MS;",
-			"Width" : 300,
-			"WordInterval" : 10,
-			"XPadding" : 10,
-			"YOffset" : -10,
-			"YPadding" : 10
+			"HostPort" : "",
+			"On" : false,
+			"ReadTimeOut" : 10,
+			"Route" : ""
 		},
-		"KeepQuiet" : false,
-		"LipSyncMagnification" : 1.5,
 		"Mlyai" : 
 		{
 			"APIKey" : "82wmm51s1bskwft3",
 			"APISecret" : "o0vp8k7e"
-		},
-		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
+		}
+	},
+	"Dialog" : 
+	{
+		"BackgroundColor" : "rgba(0, 0, 0, 200)",
+		"FontColor" : "white",
+		"FontFamily" : "Comic Sans MS",
+		"FontSize" : 10,
+		"MaxWdith" : 370,
+		"XPadding" : 10,
+		"YOffset" : -10,
+		"YPadding" : 10
+	},
+	"ModelSettings" : 
+	{
+		"LipSyncMagnification" : 9.0,
+		"ModelDir" : "../Resources",
 		"ModelName" : "nn",
-		"MotionInterval" : 5.0,
+		"MotionInterval" : 5.0
+	},
+	"UserSettings" : 
+	{
+		"AppName" : "0d00",
+		"FPS" : 48,
+		"IconPath" : "Resources/nn/ico_nn.png",
+		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
-		"NoteOutPath" : ".",
 		"ShowBackground" : false,
-		"ShowBgmList" : false,
+		"ShowBgmList" : true,
 		"ShowText" : true,
-		"StayOnTop" : true,
-		"TextFadeOutTime" : 4,
+		"StayOnTop" : false,
+		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
-		"TransparentForMouse" : true,
 		"UserName" : "ArcueidBrunestud"
 	},
 	"WindowSettings" : 
 	{
-		"AppName" : "0d00",
-		"FPS" : 48,
 		"Height" : 500,
-		"IconPath" : "D:/forDesktop/Live2D Desktop Mascot/Resources/nn/ico_nn.png",
 		"LastPos" : 
 		{
-			"X" : 1506,
-			"Y" : 513
+			"X" : 83,
+			"Y" : 223
 		},
 		"Width" : 300
 	}

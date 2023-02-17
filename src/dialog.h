@@ -9,9 +9,10 @@ protected:
 	void mouseReleaseEvent(QMouseEvent* e);
 public:
 	Dialog();
-	void pop(const char* text);
+	void Pop(const char* text);
 	void Release();
 	void AttachToCharacter();
+	void WaitChatResponse();
 	void paintEvent(QPaintEvent* e);
 private:
 	QPropertyAnimation* animation;

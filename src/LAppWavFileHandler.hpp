@@ -42,7 +42,6 @@ public:
      * @param[in] filePath wavファイルのパス
      */
     void Start(const Csm::csmString& filePath);
-
     /**
      * @brief 現在のRMS値取得
      *

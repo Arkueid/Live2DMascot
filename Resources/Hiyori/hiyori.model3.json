@@ -22,6 +22,14 @@
 					"Text" : "嗯嗯，今天下午也很惬意呢！"
 				}
 			],
+			"Chat" : 
+			[
+				{
+					"File" : "motions/Hiyori_m03.motion3.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
 			"Evening" : 
 			[
 				{

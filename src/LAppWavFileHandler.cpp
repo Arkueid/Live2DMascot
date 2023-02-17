@@ -93,7 +93,7 @@ Csm::csmBool LAppWavFileHandler::LoadWavFile(const Csm::csmString& filePath)
     {
         ReleasePcmData();
     }
-
+    if (filePath.GetLength() == 0) return false;
     // ファイルロード
     _byteReader._fileByte = LAppPal::LoadFileAsBytes(filePath.GetRawString(), &(_byteReader._fileSize));
     _byteReader._readOffset = 0;

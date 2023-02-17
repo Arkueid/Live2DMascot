@@ -388,7 +388,7 @@ bool Reader::parse(const char* beginDoc, const char* endDoc, Value& root,
 
 bool Reader::readValue() {
   // readValue() may call itself only if it calls readObject() or ReadArray().
-  // These methods execute nodes_.push() just before and nodes_.pop)() just
+  // These methods execute nodes_.push() just before and nodes_.Pop)() just
   // after calling readValue(). parse() executes one nodes_.push(), so > instead
   // of >=.
   if (nodes_.size() > stackLimit_g)

@@ -1,0 +1,132 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "xuefeng_3.moc3",
+    "Textures": [
+      "textures/texture_00.png"
+    ],
+    "Physics": "xuefeng_3.physics3.json",
+    "Motions": {
+      "TapBody": [
+        {
+          "File": "motions/touch_body.motion3.json",
+          "Sound": "sounds/touch.body.wav",
+          "Text": "呼……吓我一跳（小声）嗯？没什么"
+        }
+      ],
+      "TapHead": [
+        {
+          "File": "motions/touch_head.motion3.json",
+          "Sound": "sounds/touch.head.wav",
+          "Text": "呼……吓我一跳（小声）嗯？哼，没什么，继续做你的事去吧"
+        }
+      ],
+      "TapSpecial": [
+        {
+          "File": "motions/touch_special.motion3.json",
+          "Sound": "sounds/touch.special.wav",
+          "Text": "你……竟敢……呜……！去死吧！"
+        }
+      ],
+      "Idle": [
+        {
+          "File": "motions/complete.motion3.json",
+          "Sound": "sounds/complete.0.wav",
+          "Text": "汪！你确定委托完成时喊一声奖励会更好吗……"
+        },
+        {
+          "File": "motions/effect.motion3.json",
+          "Sound": "sounds/self.introduction.wav",
+          "Text": "听好了，我乃高贵的，幸运的，无敌的，雪风・Eight・阳炎The.Geni……（咬舌）什么啊，这个词好难念啊！（低声）咳咳，总而言之，能得到我是你的幸运，你就尽管依靠本大人的运气吧，HO,HO,HO！"
+        },
+        {
+          "File": "motions/home.motion3.json",
+          "Sound": "sounds/home.wav",
+          "Text": "你能平安无事也是多亏了我的幸运，快感谢我吧！"
+        },
+        {
+          "File": "motions/idle.motion3.json",
+          "Sound": "sounds/idle.wav",
+          "Text": "你以为我不会过来吗？成熟的雪风大人才不会那么幼稚，哼！"
+        },
+        {
+          "File": "motions/mail.motion3.json",
+          "Sound": "sounds/mail.wav",
+          "Text": "你的信……可恶，居然比我还要受欢迎"
+        },
+        {
+          "File": "motions/main_1.motion3.json",
+          "Sound": "sounds/main.3.wav",
+          "Text": "指挥官，你求我的话也不是不能帮你一下哦~"
+        },
+        {
+          "File": "motions/main_2.motion3.json",
+          "Sound": "sounds/main.2.wav",
+          "Text": "HO,HO,HO，雪风大人可是无敌的口牙！"
+        },
+        {
+          "File": "motions/main_3.motion3.json",
+          "Sound": "sounds/main.1.wav",
+          "Text": "Na,Nya（日语拟声词にゃ 结合碧蓝白猫形象的雪风立绘 此处为猫叫）……哼，雪风大人心情好，就难得满足一下你"
+        },
+        {
+          "File": "motions/mission.motion3.json",
+          "Sound": "sounds/mission.wav",
+          "Text": "还有任务剩下，指挥官，你还嫩啊（鄙视）"
+        },
+        {
+          "File": "motions/mission_complete.motion3.json",
+          "Sound": "sounds/complete.wav",
+          "Text": "任务奖励是……干，干什么，我才没想偷看！我只是事先帮你确认一下！"
+        },
+        {
+          "File": "motions/wedding.motion3.json",
+          "Sound": "sounds/wedding.wav",
+          "Text": "既然这是你发自内心的请求，雪风大人就大发慈悲收下好了，特别允许你把雪风大人抱起来也没关系哦，来吧，你还在等什么，这可是千载难逢的好机会！"
+        }
+      ],
+      "Morning": [
+        {
+          "File": "motions/login.motion3.json",
+          "Sound": "sounds/login.wav",
+          "Text": "终于回来了，为了雪风大人赶紧好好工作吧！"
+        }
+      ],
+      "Afternoon": [
+        {
+          "File": "motions/login.motion3.json",
+          "Sound": "sounds/login.wav",
+          "Text": "终于回来了，为了雪风大人赶紧好好工作吧！"
+        }
+      ],
+      "Evening": [
+        {
+          "File": "motions/login.motion3.json",
+          "Sound": "sounds/login.wav",
+          "Text": "终于回来了，为了雪风大人赶紧好好工作吧！"
+        }
+      ],
+      "Midnight": [
+        {
+          "File": "motions/login.motion3.json",
+          "Sound": "sounds/login.wav",
+          "Text": "终于回来了，为了雪风大人赶紧好好工作吧！"
+        }
+      ]
+    }
+  },
+  "HitAreas": [
+    {
+      "Name": "Body",
+      "Id": "TouchBody"
+    },
+    {
+      "Name": "Head",
+      "Id": "TouchHead"
+    },
+    {
+      "Name": "Special",
+      "Id": "TouchSpecial"
+    }
+  ]
+}

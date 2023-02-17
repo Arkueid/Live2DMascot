@@ -55,7 +55,7 @@ GLWidget::GLWidget()
 	mouseY = 0;
 
 	currentTimerIndex = -1;
-	_LastState = true;
+	_LastShowText = true;
 }
 
 GLWidget::~GLWidget()
@@ -163,20 +163,7 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent* e)
 {
 	if (e->button() == Qt::RightButton) {
 		_cvWidget->getInput();
-		HoldText();
 	}
-}
-
-void GLWidget::HoldText()
-{
-	_LastState = LAppConfig::_ShowText;
-	LAppConfig::_ShowText = false;
-	_dialog->hide();
-}
-
-void GLWidget::ReleaseText()
-{
-	LAppConfig::_ShowText = _LastState;
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent* e)
@@ -484,12 +471,6 @@ void GLWidget::saveConfig()
 	LApp::GetInstance()->SaveConfig();
 }
 #pragma endregion
-
-
-void GLWidget::showDialog(const char* text)
-{
-	_dialog->pop(text);
-}
 
 void GLWidget::setShowBgmList(bool on)
 {

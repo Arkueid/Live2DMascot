@@ -32,7 +32,8 @@ private:
 	BgmListView* _bgmlist = NULL;  //追番列表
 	ConversationWidget* _cvWidget = NULL;  //聊天输入框
 	ControlWidget* _control = NULL;  //设置
-	bool _LastState;
+	bool _LastShowText;
+	bool _LastNoSound;
 	bool _transparent = false;  //窗体透过
 	bool _drawBackground = false;
 public:
@@ -46,10 +47,8 @@ public:
 	void saveConfig();
 	void Release();
 	void Run();
-	void showDialog(const char* text);
+	Dialog* GetDialog() { return _dialog; }
 	BgmListView* GetBgmListView() { return _bgmlist; }
-	void HoldText();
-	void ReleaseText();
 	void LoadConfig();
 protected:
 	void initializeGL();

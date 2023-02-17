@@ -31,7 +31,6 @@ namespace LAppConfig {
 	extern int _BgmListLastPosX;
 	extern int _BgmListLastPosY;
 	extern float _LipSyncMagnification;
-	extern string _NoteOutPath;
 	extern string _ApiKey;
 	extern string _ApiSecret;
 	extern float _MotionInterval;
@@ -44,6 +43,13 @@ namespace LAppConfig {
 	extern int _DialogMaxWidth;
 	extern int _DialogXPadding;
 	extern int _DialogYPadding;
+	extern bool _WaitChatResponse;
+
+	extern string _ChatSavePath;
+	extern string _CustomChatServerHostPort;
+	extern string _CustomChatServerRoute;
+	extern bool _CustomChatServerOn;
+	extern int _CustomChatServerReadTimeOut;
 };
 
 class LApp

@@ -25,11 +25,12 @@ class LAppModel : public Csm::CubismUserModel
 public:
     int _frameCount = 0;
     bool isFinished();
+    CubismMotionQueueEntryHandle Speak(const char* text, const char* soundPath);
     /**
      * @brief コンストラクタ
      */
     LAppModel();
-
+    void StopLipSync();
     /**
      * @brief デストラクタ
      *
@@ -109,7 +110,10 @@ public:
      * @param[in]   x               判定を行うX座標
      * @param[in]   y               判定を行うY座標
      */
+#if 0
     virtual Csm::csmBool HitTest(const Csm::csmChar* hitAreaName, Csm::csmFloat32 x, Csm::csmFloat32 y);
+#endif
+
     virtual Csm::csmString HitTest(Csm::csmFloat32 x, Csm::csmFloat32 y);
 
     /**

@@ -16,21 +16,33 @@ Dialog::Dialog()
 	animation = new QPropertyAnimation(this, NULL);
 	animation->setStartValue(1);
 	animation->setEndValue(0);
-	animation->setDuration(LAppConfig::_TextFadeOutTime * 1000);
 	connect(animation, SIGNAL(finished()), this, SLOT(close()));
 	_xBorder = LAppConfig::_DialogXPadding;
 	_yBorder = LAppConfig::_DialogYPadding;
 }
 
-void Dialog::pop(const char* text)
+void Dialog::Pop(const char* text)
 {
 	_text = QString::fromStdString(text).toUtf8();
 	animation->stop();
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
+	animation->setDuration(LAppConfig::_TextFadeOutTime * 1000);
 	update();
 	setVisible(true);
 	animation->start();
 }
+
+void Dialog::WaitChatResponse()
+{
+	_text = QString::fromUtf8("......");
+	animation->stop();
+	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
+	update();
+	animation->setDuration(LAppConfig::_CustomChatServerReadTimeOut * 1000);
+	setVisible(true);
+	animation->start();
+}
+
 void Dialog::Release()
 {
 }
