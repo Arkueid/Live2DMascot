@@ -13,7 +13,7 @@
 		"CustomChatServer" : 
 		{
 			"HostPort" : "",
-			"On" : false,
+			"On" : true,
 			"ReadTimeOut" : 10,
 			"Route" : ""
 		},
@@ -48,11 +48,11 @@
 		"IconPath" : "../Resources/nn/ico_nn.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
-		"NoSound" : true,
+		"NoSound" : false,
 		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
-		"StayOnTop" : true,
+		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
@@ -63,8 +63,8 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 137,
-			"Y" : 85
+			"X" : 1600,
+			"Y" : 616
 		},
 		"Width" : 300
 	}
