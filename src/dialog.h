@@ -14,6 +14,7 @@ public:
 	void AttachToCharacter();
 	void WaitChatResponse();
 	void paintEvent(QPaintEvent* e);
+	void LoadConfig();
 private:
 	QPropertyAnimation* animation;
 	int _xBorder;

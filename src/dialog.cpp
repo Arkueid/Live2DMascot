@@ -9,8 +9,7 @@
 Dialog::Dialog()
 {
 	_font.setFamily(LAppConfig::_DialogFontFamily.c_str());
-	_font.setPointSizeF(LAppConfig::_DialogFontSize);
-	_fontMetrics = new QFontMetrics(_font);
+	LoadConfig();
 	setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	animation = new QPropertyAnimation(this, NULL);
@@ -32,6 +31,17 @@ void Dialog::Pop(const char* text)
 	animation->start();
 }
 
+void Dialog::LoadConfig()
+{
+	_font.setPointSizeF(LAppConfig::_DialogFontSize);
+	if (_fontMetrics != NULL)
+	{
+		delete _fontMetrics;
+		_fontMetrics = NULL;
+	}
+	_fontMetrics = new QFontMetrics(_font);
+}
+
 void Dialog::WaitChatResponse()
 {
 	_text = QString::fromUtf8("......");
@@ -50,7 +60,6 @@ void Dialog::Release()
 void Dialog::AttachToCharacter()
 {
 	GLWidget* win = LApp::GetInstance()->GetWindow();
-	//move(win->x() + (win->width() - width()) / 2, win->y() + (win->height() - height()) * 2 / 3);
 	move(win->x() + (win->width() - width()) / 2, win->y() - height() + LAppConfig::_DialogYOffset);
 }
 

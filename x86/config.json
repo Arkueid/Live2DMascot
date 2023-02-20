@@ -3,8 +3,8 @@
 	{
 		"LastPos" : 
 		{
-			"X" : 500,
-			"Y" : -595
+			"X" : 1269,
+			"Y" : 0
 		}
 	},
 	"ChatAPI" : 
@@ -48,11 +48,11 @@
 		"IconPath" : "../Resources/nn/ico_nn.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
-		"NoSound" : false,
+		"NoSound" : true,
 		"ShowBackground" : false,
-		"ShowBgmList" : true,
+		"ShowBgmList" : false,
 		"ShowText" : true,
-		"StayOnTop" : false,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
@@ -63,8 +63,8 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1572,
-			"Y" : 612
+			"X" : 137,
+			"Y" : 85
 		},
 		"Width" : 300
 	}

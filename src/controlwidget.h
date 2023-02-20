@@ -9,6 +9,7 @@
 #include <QtWidgets/qlayout.h>
 #include <QtCore/qpropertyanimation.h>
 #include <vector>
+#include <QtWidgets/qcheckbox.h>
 #include <QtWidgets/qtextedit.h>
 #include <QtWidgets/qtreewidget.h>
 #include "json/json.h"
@@ -33,28 +34,31 @@ class AppSettings : public QWidget
 	QLineEdit* username;
 	QLineEdit* iconPath;
 	QLineEdit* fps;
-	QLineEdit* appKey;
-	QLineEdit* appSecret;
 	QLineEdit* windowHeight;
 	QLineEdit* windowWidth;
 	QLineEdit* modelDir;
 	QLineEdit* motionInterval;
 	QLineEdit* lipSync;
+	QLabel* lbl_dialogMaxWidth;
+	QLineEdit* dialogMaxWidth;
+	QLabel* lbl_dialogFontSize;
+	QLineEdit* dialogFontSize;
+	QLabel* lbl_dialogYOffset;
+	QLineEdit* dialogYOffset;
+	
 	QLabel* lbl_motioninterval;
 	QLabel* lbl_lipsync;
 	QLabel* lbl_appName;
 	QLabel* lbl_username;
 	QLabel* lbl_iconPath;
 	QLabel* lbl_FPS;
-	QLabel* lbl_appKey;
-	QLabel* lbl_appSecret;
 	QLabel* lbl_windowWidth;
 	QLabel* lbl_windowHeight;
 	QLabel* lbl_modelDir;
 	QPushButton* openFile;
 	QPushButton* chooseDir;
 	QPushButton* apply;
-	QPushButton* cancel;
+	QPushButton* reset;
 	QGridLayout* grid;
 	QWidget* _parent;
 public:
@@ -63,7 +67,7 @@ public:
 private slots:
 	void OpenFile();
 	void Apply();
-	void Cancel();
+	void Reset();
 	void OpenSourceDir();
 };
 
@@ -75,7 +79,7 @@ class ModelSettings : public QWidget
 	QLabel* lbl_model;
 	QTreeWidget* _motionGroups;
 	QPushButton* apply;
-	QPushButton* cancel;
+	QPushButton* reset;
 	QGridLayout* grid;
 	Json::Value _modelJson;
 	QLabel* lbl_motionJsonPath;
@@ -96,7 +100,7 @@ public:
 	ModelSettings(QWidget* p);
 	void LoadConfig();
 private slots:
-	void Cancel();
+	void Reset();
 	void Apply();
 	void AddMotion();
 	void DeleteMotion();
@@ -111,11 +115,47 @@ private slots:
 	void UpdateGroupName();
 };
 
+class ChatSettings : public QWidget
+{
+	Q_OBJECT
+private:
+	QLineEdit* savePath;
+	QLineEdit* apiKey;
+	QLineEdit* apiSecret;
+	QLineEdit* hostPort;
+	QLineEdit* readTimeOut;
+	QLineEdit* route;
+	QLabel* lbl_savePath;
+	QLabel* lbl_apiKey;
+	QLabel* lbl_apiSecret;
+	QLabel* lbl_hostPort;
+	QLabel* lbl_readTimeOut;
+	QLabel* lbl_route;
+	QCheckBox* MlyAI;
+	QCheckBox* CustomChatServer;
+	QPushButton* chooseDir;
+	QPushButton* apply;
+	QPushButton* reset;
+	QGridLayout* grid;
+	QWidget* _parent;
+public:
+	ChatSettings(QWidget* p);
+	void LoadConfig();
+	void UpdateState();
+private slots:
+	void Reset();
+	void Apply();
+	void ChooseDir();
+	void MlyAIChecked();
+	void CustomChecked();
+};
+
 class ControlWidget : public QTabWidget
 {
 private:
 	AppSettings* _appSettings;
 	ModelSettings* _modelSettings;
+	ChatSettings* _chatSettings;
 public:
 	friend class AppSettings;
 	ControlWidget();

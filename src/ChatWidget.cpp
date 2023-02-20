@@ -1,4 +1,4 @@
-#include "conversationwidget.h"
+#include "ChatWidget.h"
 #include "LAppLive2DManager.hpp"
 #include "LAppModel.hpp"
 #include "NetworkUtils.h"
@@ -10,7 +10,6 @@
 #include <QtGui/qfontmetrics.h>
 #include <QtCore/qdatetime.h>
 #include <QtCore/qfile.h>
-#include <QtCore/qtextcodec.h>
 #include <io.h>
 #include <QtCore/qdir.h>
 #include <iostream>
@@ -29,7 +28,6 @@ ConversationWidget::ConversationWidget()
 	_fontMetrics = new QFontMetrics(_font);
 	_font.setFamily("Œ¢»Ì—≈∫⁄");
 	_font.setPointSizeF(14);
-	_outPath = LAppConfig::_ChatSavePath;
 	_focused = false;
 	LAppConfig::_WaitChatResponse = false;
 	startTimer(500);
@@ -116,11 +114,7 @@ void ConversationWidget::inputMethodEvent(QInputMethodEvent* e)
 
 void ConversationWidget::ProcessNetworkResponse()
 {
-	close();
 	LAppConfig::_WaitChatResponse = true;
-	if (_text.isEmpty()) {
-		return;
-	}
 	GLWidget* win = LApp::GetInstance()->GetWindow();
 	string x = _text.toUtf8();
 	LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
@@ -132,14 +126,14 @@ void ConversationWidget::ProcessNetworkResponse()
 	else {
 		ChatAPI::AskMlyai(x, text);
 	}
-	QDir dir(_outPath.c_str());
+	QDir dir(LAppConfig::_ChatSavePath.c_str());
 	if (!dir.exists())
 	{
 		dir.mkpath(".");
 	}
 	LAppLive2DManager::GetInstance()->GetModel(0)->Speak(text.c_str(), soundPath.c_str());
 	QDateTime date = QDateTime::currentDateTime();
-	QFile f(string(_outPath).append("/").append(date.toString("yyyy-MM-dd").toStdString()).append(".txt").c_str());
+	QFile f(string(LAppConfig::_ChatSavePath).append("/").append(date.toString("yyyy-MM-dd").toStdString()).append(".txt").c_str());
 	f.open(QIODevice::Append);
 	f.write(date.toString("[yyyy-MM-dd hh:mm:ss]\n").toStdString().c_str());
 	f.write(LAppConfig::_UserName.c_str());
@@ -162,6 +156,8 @@ void ConversationWidget::keyPressEvent(QKeyEvent* e)
 	}
 	else if (e->key() == Qt::Key_Return)
 	{
+		close();
+		if (_text.isEmpty()) return;
 		if (!LAppConfig::_WaitChatResponse) 
 		{
 			PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);   //Õ£÷πµ±«∞”Ô“Ù

@@ -1,5 +1,5 @@
 #pragma once
-#include "glwidget.h"
+#include "GLWidget.h"
 #include <QtCore/qtextcodec.h>
 #include <QtWidgets/qapplication.h>
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "BgmListView.h"
-#include "conversationwidget.h"
-#include "controlwidget.h"
-#include "dialog.h" 
+#include "ChatWidget.h"
+#include "ControlWidget.h"
+#include "Dialog.h" 
 #include <QtWidgets/qopenglwidget.h>
 #include <QtGui/qevent.h>
 #include <QtWidgets/qsystemtrayicon.h>

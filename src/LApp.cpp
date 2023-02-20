@@ -4,7 +4,6 @@
 #include <lmcons.h>
 #include <io.h>
 #include <QtWidgets/qmessagebox.h>
-
 #include "LAppDelegate.hpp"
 #include "LApp.h"
 #include "LAppDefine.hpp"
@@ -142,7 +141,7 @@ void LApp::LoadConfig() {
         try {
             file >> config;
         }
-        catch (exception e)
+        catch (...)
         {
             LApp::Warning("Json配置文件格式有误！");
             file.close();
@@ -156,7 +155,7 @@ void LApp::LoadConfig() {
 
     const char* path = QString::fromUtf8(LAppConfig::_ModelDir.c_str()).toLocal8Bit();
     Log("Resource Dir", path);
-    if (_access(path, 0) == -1) {
+    if (_access(path, 0) != 0) {
         LApp::Warning("资源文件夹路径不正确！\n请修改config.json文件");
         exit(0);
     }

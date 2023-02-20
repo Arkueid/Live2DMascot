@@ -5,10 +5,10 @@
 ## 开发环境
 * Visual Studio 2022
 * [Cubism Live2D SDK for Native]
-* Qt5
+* [Qt5](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4)  
 * [jsoncpp]  
-* [cpp-httplib] + openssl
-* Hiyori的语音借助[ACGTTS]项目生成  
+* [cpp-httplib] + [openssl](https://slproweb.com/products/Win32OpenSSL.html)  
+* 模型的语音借助[ACGTTS]生成  
 * 
 	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：
 	https://zhuanlan.zhihu.com/p/126276925  
@@ -21,8 +21,9 @@
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
 
 
-# Changelog
-1. 自定义聊天服务器接口
+# 功能 
+
+* 自定义聊天服务器接口（可在设置页面更改）
 
 	**Request**  
 
@@ -46,7 +47,7 @@
 	```
 
 	**- Body**
-	```json
+	```
 	bytes of XXX.wav  //音频数据，可无
 	```
 
@@ -73,32 +74,32 @@
 	```
 
 	服务端示例：
+
 	```python
 	@app.route("/chat", methods=["GET"])
 	def chat():
 		# 接收客户端的聊天文本
-    	text = request.args.get("Text", "")
-    	print("文本: %s" % text)
+		text = request.args.get("Text", "")
+		print("文本: %s" % text)
 
 		# 构造响应
-    	rsp = make_response()
+		rsp = make_response()
 
 		# 响应头中添加Text字段
-    	rsp.headers.add_header("Text", "坐在电脑前很久了哦，快去休息一下吧！".encode("utf-8"))
+		rsp.headers.add_header("Text", "坐在电脑前很久了哦，快去休息一下吧！".encode("utf-8"))
 		
 		# 响应body中写入音频数据
-    	with open("serverFiles\\nn.longsittingtip_0.wav", "rb") as f:
-        	rsp.set_data(f.read())
-    	return rsp
+		with open("serverFiles\\nn.longsittingtip_0.wav", "rb") as f:
+			rsp.set_data(f.read())
+		return rsp
 	```
 
-	添加动作组字段**Chat**，调用茉莉云或者自定义聊天接口时触发的动作  
+	动作组**Chat**，调用茉莉云或者自定义聊天接口时触发的动作。
 
-	注意及时清理聊天相关文件
+	每次聊天都会在本地产生文本记录和语音（如有使用语音），注意及时清理。
 
 
-## 功能介绍
-1. 番剧列表  
+* 番剧列表  
    * 功能<del>参考</del>[贴吧]  
    * 双击打开番剧介绍页面
    * 每周一更新一次
@@ -115,13 +116,13 @@
 <br>
 
 
-2. 节日提醒
+* 节日提醒
    * 一年更新一次，节日当天运行会有提示
    * 节日列表源是[免费节日api]
 <br>
 <br>
   
-3. 接入茉莉云的聊天机器人api  
+* 接入茉莉云的聊天机器人api  
    * 右键双击打开聊天输入板，回车提交输入，左键双击聊天板取消并关闭
    * api来自[茉莉云]
    * 可自行注册茉莉云账号，创建机器人，并在设置中修改key和secret
@@ -136,15 +137,15 @@
 <br>
 <br>
 
-4. 语音播放
-   * 语音播放需要在model3.json文件中添加motion的Sound属性
+* 语音播放
+   * 语音播放需要在model3.json文件中添加motion的Sound属性，或者通过设置页面修改
    * 仅支持.wav格式，详细参数参考[Cubism Live2D SDK for Native]的口型同步
    * 口型同步只支持**单声道**的.wav格式  
 <br>
 <br>
 
-5. 文本显示  
-   * 文本显示需要在model3.json文件中添加motion的Text属性
+* 文本显示  
+   * 文本显示需要在model3.json文件中添加motion的Text属性，也可直接在设置页面编辑
    * 需要自己修改模型的model3.json文件，详细参考Hiyori的模型  
 
 [贴吧]:https://tieba.baidu.com/p/5377537423
@@ -155,7 +156,7 @@
 <br>
 <br>
 
-6. **系统托盘&右键菜单**  
+* **系统托盘&右键菜单**  
 
 	<img src="./sample_images/preview3.png"/>  
 	<br>
@@ -177,7 +178,7 @@
 <br>
 <br>
 
-7. **设置窗口**  
+* **设置窗口**  
 
 	效果图如下  
 
@@ -268,3 +269,45 @@
 * 程序错误无法启动时可删去config.json文件以初始化
 
 * LPK模型需要解压为包含*.moc3, *.model3.json和纹理图片的文件夹形式
+
+
+# 编译
+下载官方的Native SDK，按照官方教程用VS编译windows opengl sample成功之后，用本仓库里面的Framework文件夹替换SDK下的Framework文件夹，用本仓库里面的src文件夹替换SDK下的Samples\OpenGL\Demo\proj.win.cmake\src文件夹
+
+1. 加入以下库静态库，需要自行下载:  
+
+	**Qt库**  
+	* Qt5Widgets.lib  
+	* Qt5Core.lib  
+	* Qt5Gui.lib  
+	* qtmain.lib  (子系统设置为窗口时需要)  
+
+	**Windows系统**
+	* Winmm.lib  
+	
+	**[Openssl]**
+	* libssl.lib  
+	* libcrypto.lib
+
+[Openssl]:https://slproweb.com/products/Win32OpenSSL.html  
+
+2. 引入头文件[\<httplib.h\>](https://github.com/yhirose/cpp-httplib)
+
+3. 运行时需要的动态库:  
+
+	**Qt运行环境**
+	安装Qt后，使用Qt\bin下的windeployqt.exe 执行: 
+	```cmd
+	windeployqt.exe "编译之后的程序.exe"
+	```
+	**Openssl (32位)**
+	* libssl-3.dll  
+	* libcrypto-3.dll  
+
+  	**Openssl (64位)**
+	* libssl-3-x64.dll  
+	* libcrypto-3-x64.dll
+  
+设置DEBUG配置时需要定义宏DEBUG_FLAG  
+
+以上步骤可能无法解决所有问题，需要自行查找方案（我的项目配置太乱很难移动到其设备上，所以只能放上源码了。之后会整理一下项目然后上传。除了最开始的cubism sdk源码阅读和加入qt，大部分功能都是sample已经实现的，opengl绘图只是之前了解一丁点，口型同步，渲染和动作播放部分的代码也没有仔细研究，只是向外包装成GUI，没有太多技术含量。）  

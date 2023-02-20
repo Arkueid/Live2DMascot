@@ -193,6 +193,7 @@ private:
     LAppWavFileHandler _wavFileHandler; ///< wavファイルハンドラ
 
     Csm::Rendering::CubismOffscreenFrame_OpenGLES2  _renderBuffer;   ///< フレームバッファ以外の描画先
+
 };
 
 

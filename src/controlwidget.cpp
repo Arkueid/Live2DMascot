@@ -1,5 +1,5 @@
 #include "LAppModel.hpp"
-#include "controlwidget.h"
+#include "ControlWidget.h"
 #include "LApp.h"
 #include <fstream>
 #include <vector>
@@ -36,7 +36,7 @@ namespace {
 
 Tip::Tip()
 {
-	resize(100, 40);
+	resize(100, 40); //预设值，不设置第一次显示时不居中
 	setAttribute(Qt::WA_TransparentForMouseEvents);
 	setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
 	anime = new QPropertyAnimation(this, "windowOpacity");
@@ -164,16 +164,12 @@ AppSettings::AppSettings(QWidget* p)
 	lbl_username = new QLabel(QString::fromLocal8Bit("用户名称"));
 	lbl_iconPath = new QLabel(QString::fromLocal8Bit("托盘图标"));
 	lbl_FPS = new QLabel("FPS");
-	lbl_appKey = new QLabel(QString::fromLocal8Bit("Key"));
-	lbl_appSecret = new QLabel(QString::fromLocal8Bit("Secret"));
 	lbl_windowWidth = new QLabel(QString::fromLocal8Bit("窗口宽度"));
 	lbl_windowHeight = new QLabel(QString::fromLocal8Bit("窗口高度"));
 	lbl_modelDir = new QLabel(QString::fromLocal8Bit("模型路径"));
 	appName = new QLineEdit();
 	username = new QLineEdit();
 	iconPath = new QLineEdit();
-	appKey = new QLineEdit();
-	appSecret = new QLineEdit();
 	fps = new QLineEdit();
 	windowWidth = new QLineEdit();
 	windowHeight = new QLineEdit();
@@ -188,32 +184,35 @@ AppSettings::AppSettings(QWidget* p)
 	motionInterval = new QLineEdit();
 	motionInterval->setValidator(v3);
 
-	/*appName->setFixedHeight(30);
-	username->setFixedHeight(30);
-	iconPath->setFixedHeight(30);
-	appKey->setFixedHeight(30);
-	appSecret->setFixedHeight(30);
-	fps->setFixedHeight(30);
-	windowWidth->setFixedHeight(30);
-	windowHeight->setFixedHeight(30);
-	modelDir->setFixedHeight(30);*/
-
 	windowWidth->setFixedWidth(50);
 	windowHeight->setFixedWidth(50);
 	lipSync->setFixedWidth(50);
 	motionInterval->setFixedWidth(50);
-
-
 	const QValidator* v = new QRegExpValidator(QRegExp("[0-9]{1,2}"));
-	fps->setValidator(v);
 	const QValidator* v2 = new QRegExpValidator(QRegExp("[0-9]{1,4}"));
+	const QValidator* v4 = new QRegExpValidator(QRegExp("[\\-]?[0-9]{1,4}"));
+
+	lbl_dialogMaxWidth = new QLabel(QString::fromLocal8Bit("对话框宽度限制"));
+	dialogMaxWidth = new QLineEdit();
+
+	lbl_dialogFontSize = new QLabel(QString::fromLocal8Bit("对话框字体大小"));
+	dialogFontSize = new QLineEdit();
+
+	lbl_dialogYOffset = new QLabel(QString::fromLocal8Bit("对话框垂直位置"));
+	dialogYOffset = new QLineEdit();
+
+	dialogYOffset->setValidator(v4);
+	dialogFontSize->setValidator(v);
+	dialogMaxWidth->setValidator(v2);
+
+	fps->setValidator(v);
 	windowWidth->setValidator(v2);
 	windowHeight->setValidator(v2);
 
 	openFile = new QPushButton(QString::fromLocal8Bit("打开"));
 	chooseDir = new QPushButton(QString::fromLocal8Bit("打开"));
 	apply = new QPushButton(QString::fromLocal8Bit("应用"));
-	cancel = new QPushButton(QString::fromLocal8Bit("重置"));
+	reset = new QPushButton(QString::fromLocal8Bit("重置"));
 
 	grid = new QGridLayout();
 
@@ -237,19 +236,21 @@ AppSettings::AppSettings(QWidget* p)
 	grid->addWidget(windowWidth, 4, 7, 1, 1, 0);
 	grid->addWidget(lbl_windowHeight, 4, 8, 1, 1, 0);
 	grid->addWidget(windowHeight, 4, 9, 1, 1, 0);
-	grid->addWidget(lbl_appKey, 5, 0, 0);
-	grid->addWidget(appKey, 5, 1, 1, 4, 0);
-	grid->addWidget(lbl_appSecret, 6, 0, 0);
-	grid->addWidget(appSecret, 6, 1, 1, 4, 0);
 	grid->addWidget(apply, 7, 6, 1, 2, 0);
-	grid->addWidget(cancel, 7, 8, 1, 2, 0);
+	grid->addWidget(reset, 7, 8, 1, 2, 0);
+	grid->addWidget(lbl_dialogMaxWidth, 6, 0, 1, 2);
+	grid->addWidget(dialogMaxWidth, 6, 2, 1, 1);
+	grid->addWidget(lbl_dialogYOffset, 6, 3, 1, 2);
+	grid->addWidget(dialogYOffset, 6, 5, 1, 1);
+	grid->addWidget(lbl_dialogFontSize, 6, 6, 1, 2);
+	grid->addWidget(dialogFontSize, 6, 8, 1, 1);
 	setLayout(grid);
 	
 	connect(openFile, SIGNAL(clicked()), SLOT(OpenFile()));
 	connect(chooseDir, SIGNAL(clicked()), SLOT(OpenSourceDir()));
 
 	connect(apply, SIGNAL(clicked()), SLOT(Apply()));
-	connect(cancel, SIGNAL(clicked()), SLOT(Cancel()));
+	connect(reset, SIGNAL(clicked()), SLOT(Reset()));
 }
 
 void AppSettings::OpenFile()
@@ -271,14 +272,16 @@ void AppSettings::Apply()
 	_AppName = appName->text().toUtf8().toStdString();
 	_UserName = username->text().toUtf8().toStdString();
 	_IconPath = iconPath->text().toUtf8().toStdString();
-	_ApiKey = appKey->text().toUtf8().toStdString();
-	_ApiSecret = appSecret->text().toUtf8().toStdString();
 	_FPS = fps->text().toInt() == 0? _FPS : fps->text().toInt();
 	_WindowWidth = windowWidth->text().toInt() == 0 ? _WindowWidth : windowWidth->text().toInt();
 	_WindowHeight = windowHeight->text().toInt() == 0 ? _WindowHeight : windowHeight->text().toInt();
 	_ModelDir = modelDir->text().isEmpty() ? _ModelDir : modelDir->text().toUtf8().toStdString();
 	_MotionInterval = motionInterval->text().isEmpty() ? _MotionInterval : motionInterval->text().toFloat();
 	_LipSyncMagnification = lipSync->text().isEmpty() ? _LipSyncMagnification : lipSync->text().toFloat();
+	_DialogFontSize = dialogFontSize->text().toInt() == 0 ? _DialogFontSize : dialogFontSize->text().toInt();
+	_DialogMaxWidth = dialogMaxWidth->text().toInt() == 0 ? _DialogMaxWidth : dialogMaxWidth->text().toInt();
+	_DialogYOffset = dialogYOffset->text().isEmpty() ? _DialogYOffset : dialogYOffset->text().toInt();
+	LApp::GetInstance()->GetWindow()->GetDialog()->LoadConfig();
 	LApp::GetInstance()->GetWindow()->LoadConfig();
 	_parent->setWindowTitle(QString::fromUtf8(_AppName.c_str()));
 	LoadConfig();
@@ -300,7 +303,7 @@ void AppSettings::Apply()
 		p->_modelSettings->LoadConfig();
 	}
 }
-void AppSettings::Cancel()
+void AppSettings::Reset()
 {
 	LoadConfig();
 }
@@ -310,11 +313,12 @@ void AppSettings::LoadConfig()
 	username->setText(QString::fromUtf8(_UserName.c_str()));
 	iconPath->setText(QString::fromUtf8(_IconPath.c_str()));
 	fps->setText(to_string(_FPS).c_str());
-	appKey->setText(QString::fromUtf8(_ApiKey.c_str()));
-	appSecret->setText(QString::fromUtf8(_ApiSecret.c_str()));
 	windowWidth->setText(to_string(_WindowWidth).c_str());
 	windowHeight->setText(to_string(_WindowHeight).c_str());
 	modelDir->setText(QString::fromUtf8(_ModelDir.c_str()));
+	dialogMaxWidth->setText(to_string(_DialogMaxWidth).c_str());
+	dialogYOffset->setText(to_string(_DialogYOffset).c_str());
+	dialogFontSize->setText(to_string(_DialogFontSize).c_str());
 	stringstream ss1;
 	ss1 << _MotionInterval;
 	motionInterval->setText(ss1.str().c_str());
@@ -332,7 +336,7 @@ ModelSettings::ModelSettings(QWidget* p)
 
 	_motionGroups->setHeaderLabel(QString::fromLocal8Bit("动作组"));
 	apply = new QPushButton(QString::fromLocal8Bit("保存"));
-	cancel = new QPushButton(QString::fromLocal8Bit("重置"));
+	reset = new QPushButton(QString::fromLocal8Bit("重置"));
 
 	motionJsonPath = new QComboBox();
 	motionSoundPath = new QComboBox();
@@ -354,7 +358,7 @@ ModelSettings::ModelSettings(QWidget* p)
 	updateGroupName = new QPushButton(QString::fromLocal8Bit("修改动作组名称"));
 	
 	connect(apply, SIGNAL(clicked()), SLOT(Apply()));
-	connect(cancel, SIGNAL(clicked()), SLOT(Cancel()));
+	connect(reset, SIGNAL(clicked()), SLOT(Reset()));
 	grid = new QGridLayout();
 	grid->addWidget(lbl_model, 0, 0, 0);
 	grid->addWidget(model, 0, 1, 0);
@@ -374,7 +378,7 @@ ModelSettings::ModelSettings(QWidget* p)
 	grid->addWidget(addMotion, 5, 0, 0);
 	grid->addWidget(deleteMotion, 5, 1, 0);
 	grid->addWidget(apply, 5, 3, 0);
-	grid->addWidget(cancel, 5, 4, 0);
+	grid->addWidget(reset, 5, 4, 0);
 	setLayout(grid);
 
 	connect(_motionGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(ShowMotionInfo(QTreeWidgetItem*, int)));
@@ -430,7 +434,7 @@ void ModelSettings::Apply()
 	
 }
 
-void ModelSettings::Cancel()
+void ModelSettings::Reset()
 {
 	LoadConfig();
 }
@@ -594,7 +598,6 @@ void ModelSettings::AddMotion()
 		motion["Sound"] = "";
 		motion["Text"] = "";
 		_modelJson["FileReferences"]["Motions"][_motionGroups->currentItem()->text(0).toStdString()].append(motion);
-
 		int idx = _motionGroups->currentItem()->childCount();
 		QTreeWidgetItem* subItem = new QTreeWidgetItem();
 		subItem->setText(0, QString(_motionGroups->currentItem()->text(0)).append("_").append(to_string(idx).c_str()));
@@ -777,15 +780,138 @@ void ModelSettings::UpdateModel()
 	Tip::GetInstance()->Pop(_parent, "模型已更换");
 }
 
+ChatSettings::ChatSettings(QWidget* p)
+{
+	_parent = p;
+	savePath = new QLineEdit();
+	apiKey = new QLineEdit();
+	apiSecret = new QLineEdit();
+	hostPort = new QLineEdit();
+	QRegExpValidator* v = new QRegExpValidator(QRegExp("[0-9]{1,4}"));
+	readTimeOut = new QLineEdit();
+	readTimeOut->setValidator(v);
+	readTimeOut->setFixedWidth(100);
+	route = new QLineEdit();
+	lbl_apiKey = new QLabel(QString::fromLocal8Bit("ApiKey"));
+	lbl_apiSecret = new QLabel(QString::fromLocal8Bit("ApiKey"));
+	lbl_hostPort = new QLabel(QString::fromLocal8Bit("服务器地址"));
+	lbl_route = new QLabel(QString::fromLocal8Bit("服务器路径"));
+	lbl_readTimeOut = new QLabel(QString::fromLocal8Bit("最长响应时间"));
+	lbl_savePath = new QLabel(QString::fromLocal8Bit("聊天保存位置"));
+	apply = new QPushButton(QString::fromLocal8Bit("保存"));
+	reset = new QPushButton(QString::fromLocal8Bit("重置"));
+	chooseDir = new QPushButton(QString::fromLocal8Bit("打开"));
+	MlyAI = new QCheckBox(QString::fromLocal8Bit("茉莉云API"));
+	CustomChatServer = new QCheckBox(QString::fromLocal8Bit("自定义聊天服务器"));
+
+	grid = new QGridLayout();
+
+	grid->addWidget(lbl_savePath, 0, 0, 1, 1);
+	grid->addWidget(savePath, 0, 1, 1, 4);
+	grid->addWidget(chooseDir, 0, 5, 1, 1);
+	grid->addWidget(MlyAI, 1, 0, 1, 1);
+	grid->addWidget(lbl_apiKey, 2, 0, 1, 1);
+	grid->addWidget(apiKey, 2, 1, 1, 4);
+	grid->addWidget(lbl_apiSecret, 3, 0, 1, 1);
+	grid->addWidget(apiSecret, 3, 1, 1, 4);
+	grid->addWidget(CustomChatServer, 4, 0, 1, 1);
+	grid->addWidget(lbl_hostPort, 5, 0, 1, 1);
+	grid->addWidget(hostPort, 5, 1, 1, 4);
+	grid->addWidget(lbl_route, 6, 0, 1, 1);
+	grid->addWidget(route, 6, 1, 1, 4);
+	grid->addWidget(lbl_readTimeOut, 7, 0, 1, 1);
+	grid->addWidget(readTimeOut, 7, 1, 1, 4);
+	grid->addWidget(apply, 8, 4, 1, 1);
+	grid->addWidget(reset, 8, 5, 1, 1);
+
+	this->setLayout(grid);
+
+	connect(apply, SIGNAL(clicked()), SLOT(Apply()));
+	connect(reset, SIGNAL(clicked()), SLOT(Reset()));
+	connect(MlyAI, SIGNAL(clicked()), SLOT(MlyAIChecked()));
+	connect(CustomChatServer, SIGNAL(clicked()), SLOT(CustomChecked()));
+	connect(chooseDir, SIGNAL(clicked()), SLOT(ChooseDir()));
+
+}
+void ChatSettings::Apply()
+{
+	_CustomChatServerHostPort = hostPort->text().toUtf8().toStdString();
+	_CustomChatServerRoute = route->text().toUtf8().toStdString();
+	_CustomChatServerReadTimeOut = readTimeOut->text().isEmpty() ? _CustomChatServerReadTimeOut : readTimeOut->text().toInt();
+	_ChatSavePath = savePath->text().toUtf8().toStdString();
+	_ApiKey = apiKey->text().toUtf8().toStdString();
+	_ApiSecret = apiSecret->text().toUtf8().toStdString();
+	_CustomChatServerOn = CustomChatServer->isChecked();
+	LApp::GetInstance()->SaveConfig();
+	Tip::GetInstance()->Pop(_parent, "保存成功!");
+}
+
+void ChatSettings::Reset()
+{
+	LoadConfig();
+	Tip::GetInstance()->Pop(_parent, "已重置!");
+}
+
+void ChatSettings::ChooseDir()
+{
+	QString dir = QFileDialog::getExistingDirectory(_parent, QString::fromLocal8Bit("聊天保存路径"), ".");
+	if (!dir.isEmpty()) savePath->setText(dir);
+}
+
+void ChatSettings::LoadConfig()
+{
+	if (_CustomChatServerOn)
+	{
+		 CustomChatServer->setChecked(true);
+		 MlyAI->setChecked(false);
+	}
+	else
+	{
+		MlyAI->setChecked(true);
+		CustomChatServer->setChecked(false);
+	}
+	savePath->setText(QString::fromUtf8(_ChatSavePath.c_str()));
+	apiKey->setText(QString::fromUtf8(_ApiKey.c_str()));
+	apiSecret->setText(QString::fromUtf8(_ApiSecret.c_str()));
+	hostPort->setText(QString::fromUtf8(_CustomChatServerHostPort.c_str()));
+	route->setText(QString::fromUtf8(_CustomChatServerRoute.c_str()));
+	readTimeOut->setText(QString::fromUtf8(to_string(_CustomChatServerReadTimeOut).c_str()));
+	UpdateState();
+}
+
+void ChatSettings::MlyAIChecked()
+{
+	CustomChatServer->setChecked(!MlyAI->isChecked());
+	UpdateState();
+}
+
+void ChatSettings::CustomChecked()
+{
+	MlyAI->setChecked(!CustomChatServer->isChecked());
+	UpdateState();
+}
+
+void ChatSettings::UpdateState()
+{
+	apiKey->setEnabled(MlyAI->isChecked());
+	apiSecret->setEnabled(MlyAI->isChecked());
+	hostPort->setEnabled(CustomChatServer->isChecked());
+	route->setEnabled(CustomChatServer->isChecked());
+	readTimeOut->setEnabled(CustomChatServer->isChecked());
+}
+
 ControlWidget::ControlWidget()
 {
-	setFixedSize(620, 450);
+	setFixedSize(650, 450);
 	setWindowFlags(Qt::Tool);
 	setWindowTitle(QString::fromUtf8(_AppName.c_str()));
+	setWindowFlag(Qt::WindowStaysOnTopHint, true);
 	_appSettings = new AppSettings(this);
 	_modelSettings = new ModelSettings(this);
+	_chatSettings = new ChatSettings(this);
 	addTab(_appSettings, QString::fromLocal8Bit("用户设置"));
 	addTab(_modelSettings, QString::fromLocal8Bit("模型设置"));
+	addTab(_chatSettings, QString::fromLocal8Bit("ChatAPI"));
 	setStyleSheet("QTabBar::tab{font-family: 微软雅黑; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
 		"QTabBar::tab:selected{background-color: rgb(30, 30, 30); color: rgba(255, 255, 255, 180); }"
 		"QTabBar{background-color: rgb(37, 37, 38);}"
@@ -798,6 +924,16 @@ ControlWidget::ControlWidget()
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QPushButton{width: 100px; font: 13.5px; border-radius: 10px; font-family: 微软雅黑; color: rgba(255, 255, 255, 200); background-color: rgba(50, 150, 235, 190); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+	);
+	_chatSettings->setStyleSheet(
+		"QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: 微软雅黑;}"
+		"QLabel{background: transparent; color: rgba(255, 255, 255, 200); font: 15px}"
+		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
+		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
+		"QLineEdit::!enabled{background-color: rgba(60, 60, 60, 100); color: grey; border: 1px solid rgba(80, 80, 80, 100)}"
+		"QPushButton{width: 100px; font: 13.5px; border-radius: 10px; font-family: 微软雅黑; color: rgba(255, 255, 255, 200); background-color: rgba(50, 150, 235, 190); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+		"QCheckBox{font: 13.5px;  font-family: 微软雅黑; color: rgba(255, 255, 255, 200);background: transparent;}"
 	);
 	_modelSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: 微软雅黑}"
 		"QLabel{background: transparent; color: rgba(255 ,255, 255, 200); font: 15px}"
@@ -813,7 +949,6 @@ ControlWidget::ControlWidget()
 		"QPushButton{width: 100px;font: 13.5px; border-radius: 10px; font-family: 微软雅黑; color: rgba(255, 255, 255, 200); background-color: rgba(50, 150, 235, 190); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 		"QComboBox{height: 30px; padding: 1px 18px 1px 3px;}"
-		
 	);
 }
 
@@ -822,6 +957,7 @@ void ControlWidget::Pop()
 {
 	_appSettings->LoadConfig();
 	_modelSettings->LoadConfig();
+	_chatSettings->LoadConfig();
 	show();
 	raise();
 }

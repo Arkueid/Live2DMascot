@@ -6,7 +6,6 @@ class ConversationWidget : public QWidget
 {
 public:
 	ConversationWidget();
-	void getInput(const char* outPath);
 	void getInput();
 	void AttachToCharacter();
 protected:
@@ -25,5 +24,4 @@ private:
 	bool blink;
 	QFont _font;
 	bool _focused;
-	std::string _outPath;
 };

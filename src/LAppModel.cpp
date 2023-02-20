@@ -297,7 +297,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     else {
         group = "Midnight";
     }
-    StartRandomMotion(group, PriorityForce, NULL);
+    StartRandomMotion(group, PriorityForce);
 
     _updating = false;
     _initialized = true;
@@ -417,10 +417,11 @@ void LAppModel::Update()
     //-----------------------------------------------------------------
     _model->LoadParameters(); // 前回セーブされた状態をロード
 
-    if (_motionManager->IsFinished() && _frameCount / LAppConfig::_FPS >= LAppConfig::_MotionInterval)
+    if (_motionManager->IsFinished() && LAppConfig::_MotionInterval != 0 && _frameCount / LAppConfig::_FPS >= LAppConfig::_MotionInterval)
     {
         // モーションの再生がない場合、待機モーションの中からランダムで再生する
         StartRandomMotion(MotionGroupIdle, PriorityIdle);
+        _frameCount = 0;
     }
     else
     {
@@ -501,6 +502,14 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     {
         _motionManager->SetReservePriority(priority);
     }
+    else if (!PlaySound(NULL, NULL, SND_NODEFAULT | SND_FILENAME | SND_ASYNC | SND_NOSTOP))
+    {
+        if (_debugMode)
+        {
+            LAppPal::PrintLog("[APP]can't start motion: previous sound not finished");
+        }
+        return NULL;
+    }
     else if (!_motionManager->ReserveMotion(priority))
     {
         if (_debugMode)
@@ -511,7 +520,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     }
     const csmString fileName = _modelSetting->GetMotionFileName(group, no);
 
-    //ex) idle_0
+    //motion
     csmString name = Utils::CubismString::GetFormatedString("%s_%d", group, no);
     CubismMotion* motion = static_cast<CubismMotion*>(_motions[name.GetRawString()]);
     csmBool autoDelete = false;
@@ -552,11 +561,16 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     {
         motion->SetFinishedMotionHandler(onFinishedMotionHandler);
     }
-    if (LAppConfig::_WaitChatResponse) return NULL;
 
+    if (LAppConfig::_WaitChatResponse) return NULL;
+    if (_debugMode)
+    {
+        LAppPal::PrintLog("[APP]start motion: [%s_%d]", group, no);
+    }
+
+    bool _soundFinished = true;
     //voice
     csmString voice = _modelSetting->GetMotionSoundFileName(group, no);
-    bool preSoundFinished = true;
     if (strcmp(voice.GetRawString(), "") != 0)
     {
         csmString path = voice;
@@ -571,21 +585,33 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
             _wavFileHandler.Start(path);
             if (priority == PriorityForce)
             {
-                preSoundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME | SND_ASYNC);
+                 _soundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME | SND_ASYNC);
             }
-            else preSoundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME|SND_ASYNC | SND_NOSTOP);
-            if (DebugLogEnable)
+            else _soundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME|SND_ASYNC | SND_NOSTOP);
+            if (DebugLogEnable && _soundFinished)
             {
                 LAppPal::PrintLog("[APP]sound play: %s", path.GetRawString());
+            }
+            else if (DebugLogEnable)
+            {
+                LAppPal::PrintLog("[APP]no sound played: %s", "previous sound not finished");
             }
             if (motion)
             motion->SetEffectIds(_eyeBlinkIds, _lipSyncIds);
         }
+        else if (DebugLogEnable)
+        {
+            LAppPal::PrintLog("[APP]no sound played: %s", "slient mode");
+        }
+    }
+    else if (DebugLogEnable)
+    {
+        LAppPal::PrintLog("[APP]no sound played: %s", "no sound path provided");
     }
 
     //text
     bool forceShow =  (group == "Morning" || group == "Evening" || group == "Afternoon" || group == "LongSittingTip");
-    if ((LAppConfig::_ShowText && preSoundFinished ) || forceShow )
+    if ((LAppConfig::_ShowText && _soundFinished ) || forceShow )
     {
         csmString text = _modelSetting->GetTextForMotion(group, no);
         if (strcmp(text.GetRawString(), "") != 0)
@@ -603,11 +629,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         }
     }
 
-    if (_debugMode)
-    {
-        LAppPal::PrintLog("[APP]start motion: [%s_%d]", group, no);
-    }
-    _frameCount = 0;
+    
     return  _motionManager->StartMotionPriority(motion, autoDelete, priority);
 }
 

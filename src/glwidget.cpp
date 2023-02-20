@@ -1,7 +1,7 @@
 #include "LAppDelegate.hpp"
 #include "LAppLive2DManager.hpp"
 #include "LAppPal.hpp"
-#include "conversationwidget.h"
+#include "ChatWidget.h"
 #include "glwidget.h"
 #include "LAppDefine.hpp"
 #include "LAppView.hpp"
@@ -32,15 +32,6 @@
 
 using namespace LAppDefine;
 using namespace std;
-
-
-void FinishedMotion(ACubismMotion* self)
-{
-	if (DebugLogEnable)
-	{
-		LAppPal::PrintLog("Motion Finished: %x", self);
-	}
-}
 
 GLWidget::GLWidget() 
 {
@@ -95,9 +86,6 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		{
 			if (!LAppConfig::_KeepQuiet && (!LAppConfig::_TransparentBackground ||  
 				strlen(LAppLive2DManager::GetInstance()->GetModel(0)->HitTest(x, y).GetRawString()) != 0
-#if 0
-				(LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Body", x, y) || LAppLive2DManager::GetInstance()->GetModel(0)->HitTest("Head", x, y))
-#endif
 					)
 				)
 			{
@@ -131,7 +119,7 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 	if (runFor / LAppConfig::_FPS > 3600)
 	{
-		LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce, FinishedMotion);
+		LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce);
 		runFor = 0;
 	}
 	runFor++;
@@ -437,7 +425,7 @@ void GLWidget::setupUI()
 	QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
 	if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
 	else if (LAppConfig::_BgmListLastPosX <= 0) _bgmlist->move(0, LAppConfig::_BgmListLastPosY);
-	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 30) _bgmlist->move(screen->width() - 30, LAppConfig::_BgmListLastPosY);
+	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 5) _bgmlist->move(screen->width() - 5, LAppConfig::_BgmListLastPosY);
 }
 #pragma endregion
 
@@ -457,7 +445,7 @@ void GLWidget::LoadConfig()
 	//设置应用名称
 	trayIcon->setToolTip(QString::fromUtf8(LAppConfig::_AppName.c_str()));
 
-	//设置fps
+	//重设置fps
 	if (currentTimerIndex != -1)
 	{
 		killTimer(currentTimerIndex);
