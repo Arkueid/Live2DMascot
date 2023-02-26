@@ -26,9 +26,6 @@
 
 	用Visual Studio 2022 (建议VS 2022) 打开 			vs_project\proj_msvc2022_x86_mt\Demo.sln，修改Debug配置为Console，然后编译
 
-已知问题：
-少数情况下程序启动失败，原因未知。
-
 
 # 功能 
 
@@ -41,8 +38,6 @@
 	* 会显示网格部件列表，选中网格部件会在右侧渲染的模型上显示选中的区域，这个区域就是你想点击交互的区域，记下这个区域的id 例如: ArtMesh51
 
 	* 然后退出Viewer，注意退出时不要保存模型设置，不然之前设置的语音和文本会被清空
-
-	* 
 
 
 * 自定义聊天服务器接口（可在设置页面更改）
@@ -75,7 +70,12 @@
 
 	配置
 
-	config.json中编辑以下字段
+	* 在设置页面修改  
+
+
+		![chatapi](sample_images/chatapi.png)
+
+	* config.json中编辑以下字段
 
 	```json
 		...
@@ -293,10 +293,9 @@
 * LPK模型需要解压为包含*.moc3, *.model3.json和纹理图片的文件夹形式
 
 
-# 编译
-下载官方的Native SDK，按照官方教程用VS编译windows opengl sample成功之后，用本仓库里面的Framework文件夹替换SDK下的Framework文件夹，用本仓库里面的src文件夹替换SDK下的Samples\OpenGL\Demo\proj.win.cmake\src文件夹
+# 依赖
 
-1. 加入以下库静态库，需要自行下载:  
+1. 使用以下库静态库:  
 
 	**Qt库**  
 	* Qt5Widgets.lib  
