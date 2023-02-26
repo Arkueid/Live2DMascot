@@ -13,7 +13,7 @@
 		"CustomChatServer" : 
 		{
 			"HostPort" : "",
-			"On" : true,
+			"On" : false,
 			"ReadTimeOut" : 10,
 			"Route" : ""
 		},
@@ -36,14 +36,14 @@
 	},
 	"ModelSettings" : 
 	{
-		"LipSyncMagnification" : 9.0,
+		"LipSyncMagnification" : 1.2000000476837158,
 		"ModelDir" : "../Resources",
 		"ModelName" : "nn",
-		"MotionInterval" : 15.0
+		"MotionInterval" : 60.0
 	},
 	"UserSettings" : 
 	{
-		"AppName" : "0d00",
+		"AppName" : "宁宁",
 		"FPS" : 48,
 		"IconPath" : "../Resources/nn/ico_nn.png",
 		"KeepQuiet" : false,
@@ -63,8 +63,8 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1600,
-			"Y" : 616
+			"X" : 1518,
+			"Y" : 608
 		},
 		"Width" : 300
 	}

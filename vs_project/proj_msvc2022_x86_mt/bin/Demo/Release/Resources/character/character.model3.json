@@ -1,0 +1,897 @@
+{
+	"Controllers" : 
+	{
+		"Accelerometer" : 
+		{
+			"Enabled" : true
+		},
+		"AreaTrigger" : {},
+		"ArtmeshColor" : {},
+		"ArtmeshCulling" : 
+		{
+			"DefaultMode" : 0
+		},
+		"ArtmeshOpacity" : {},
+		"AutoBreath" : 
+		{
+			"Enabled" : true
+		},
+		"ExtraMotion" : 
+		{
+			"Enabled" : true
+		},
+		"EyeBlink" : 
+		{
+			"Enabled" : true,
+			"Items" : 
+			[
+				{
+					"BlendMode" : 2,
+					"Id" : "ParamEyeLOpen",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : 0.0
+				},
+				{
+					"BlendMode" : 2,
+					"Id" : "ParamEyeROpen",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : 0.0
+				}
+			],
+			"MaxInterval" : 6000,
+			"MinInterval" : 500
+		},
+		"FaceTracking" : 
+		{
+			"Enabled" : true
+		},
+		"HandTracking" : {},
+		"HandTrigger" : {},
+		"IntimacySystem" : 
+		{
+			"Enabled" : true,
+			"InitValue" : 10,
+			"MaxValue" : 100
+		},
+		"KeyTrigger" : {},
+		"LipSync" : 
+		{
+			"Gain" : 5.0
+		},
+		"Microphone" : {},
+		"MouseTracking" : 
+		{
+			"Enabled" : true,
+			"SmoothTime" : 0.14999999999999999
+		},
+		"ParamHit" : 
+		{
+			"Enabled" : true,
+			"Items" : 
+			[
+				{
+					"Axis" : 1,
+					"Factor" : 0.001,
+					"HitArea" : "XW_ART_Skirt",
+					"Id" : "XW_PAR_Skirt01",
+					"Name" : "Skirt",
+					"ReleaseType" : 0
+				},
+				{
+					"Axis" : 0,
+					"EndMtn" : "SexJioaquan",
+					"Factor" : 0.10000000000000001,
+					"HitArea" : "XW_ART_Sex",
+					"Id" : "XW_PAR_Sex",
+					"Name" : "JJ",
+					"ReleaseType" : 0
+				}
+			]
+		},
+		"ParamLoop" : {},
+		"ParamTrigger" : {},
+		"ParamValue" : {},
+		"PartOpacity" : {},
+		"Transform" : {}
+	},
+	"FileReferences" : 
+	{
+		"Moc" : "FileReferences_Moc_0.moc3",
+		"Motions" : 
+		{
+			"Afternoon" : 
+			[
+				{
+					"File" : "motions/character_Start_0.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
+			"Evening" : 
+			[
+				{
+					"File" : "motions/character_Start_0.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
+			"Idle" : 
+			[
+				{
+					"File" : "motions/character_Idle_0.json",
+					"Name" : "001",
+					"Sound" : ""
+				}
+			],
+			"IdleVoice" : 
+			[
+				{
+					"Name" : "000"
+				}
+			],
+			"Leave30_180_240" : 
+			[
+				{
+					"Name" : "idlevoice",
+					"NextMtn" : "IdleVoice",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 0",
+							"Name" : "idlevoice",
+							"Type" : 1
+						}
+					]
+				}
+			],
+			"Midnight" : 
+			[
+				{
+					"File" : "motions/character_Start_0.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
+			"Morning" : 
+			[
+				{
+					"File" : "motions/character_Start_0.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
+			"SexFinal" : 
+			[
+				{
+					"File" : "motions/character_Idle_0.json",
+					"PostCommand" : "parameters set Param73,Param75,Param74 0"
+				}
+			],
+			"SexInsert" : 
+			[
+				{
+					"BlendMode" : 1,
+					"Name" : "001",
+					"Sound" : "sounds/character_SexInsert_0.ogg",
+					"SoundChannel" : 2
+				},
+				{
+					"BlendMode" : 1,
+					"Name" : "002",
+					"Sound" : "sounds/character_SexInsert_1.ogg",
+					"SoundChannel" : 2
+				},
+				{
+					"BlendMode" : 1,
+					"Name" : "003",
+					"Sound" : "sounds/character_SexInsert_2.ogg",
+					"SoundChannel" : 2
+				},
+				{
+					"Name" : "004",
+					"Sound" : "sounds/character_SexInsert_3.ogg",
+					"SoundChannel" : 2
+				}
+			],
+			"SexJioaquan" : 
+			[
+				{
+					"File" : "motions/character_SexJioaquan_0.json",
+					"Name" : "000",
+					"Sound" : "sounds/character_SexJioaquan_0.mp3",
+					"Text" : "✪ω✪ Honey! Fire!",
+					"TextDuration" : 5000,
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 0",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "001",
+					"Sound" : "sounds/character_SexJioaquan_1.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "002",
+					"Sound" : "sounds/character_SexJioaquan_2.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "003",
+					"Sound" : "sounds/character_SexJioaquan_3.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "004",
+					"Sound" : "sounds/character_SexJioaquan_4.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "005",
+					"Sound" : "sounds/character_SexJioaquan_5.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "006",
+					"Sound" : "sounds/character_SexJioaquan_6.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "007",
+					"Sound" : "sounds/character_SexJioaquan_7.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "008",
+					"Sound" : "sounds/character_SexJioaquan_8.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "start_mtn SexInsert",
+					"Name" : "009",
+					"Sound" : "sounds/character_SexJioaquan_9.ogg",
+					"SoundChannel" : 1,
+					"Text" : "✪ω✪00{$vi_sex01}",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "lower 10",
+							"Name" : "sex01",
+							"Type" : 1
+						},
+						{
+							"Code" : "add 1",
+							"Name" : "sex01",
+							"Type" : 2
+						}
+					]
+				}
+			],
+			"Start" : 
+			[
+				{
+					"Command" : "physics disable",
+					"File" : "motions/character_Start_0.json",
+					"Name" : "001",
+					"PostCommand" : "physics enable",
+					"Sound" : "sounds/character_Start_0.ogg",
+					"Text" : "灯光Come on！见识下白鹰的black dragon，新泽西的热舞吧~"
+				}
+			],
+			"TapBody" : 
+			[
+				{
+					"File" : "motions/character_TapTouchHentai#1_0.json",
+					"Sound" : "",
+					"Text" : ""
+				},
+				{
+					"File" : "motions/character_SexJioaquan_0.json",
+					"Sound" : "",
+					"Text" : ""
+				},
+				{
+					"File" : "motions/character_TapTouchHentai#1_1.json",
+					"Sound" : "",
+					"Text" : ""
+				}
+			],
+			"TapMenu001" : 
+			[
+				{
+					"Command" : "parameters lock Param26 1",
+					"Name" : "sex",
+					"Sound" : "sounds/character_TapTouchFUN_0.ogg",
+					"SoundChannel" : 2,
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 0",
+							"Name" : "m01",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 1",
+							"Name" : "m01",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "parameters lock Param26 0",
+					"Name" : "sex",
+					"Sound" : "sounds/character_TapTouchHentai#1_1.ogg",
+					"SoundChannel" : 2,
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 1",
+							"Name" : "m01",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 0",
+							"Name" : "m01",
+							"Type" : 2
+						}
+					]
+				}
+			],
+			"TapMenu002" : 
+			[
+				{
+					"Text" : "[ - 未解锁 - ]"
+				}
+			],
+			"TapMenu003" : 
+			[
+				{
+					"Command" : "parameters lock Param28 0",
+					"Name" : "000",
+					"Sound" : "sounds/character_TapTouchFUN_0.ogg",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 0",
+							"Name" : "m03",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 1",
+							"Name" : "m03",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "parameters lock Param28 1",
+					"Name" : "000",
+					"Sound" : "sounds/character_TapTouchHentai#1_1.ogg",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 1",
+							"Name" : "m03",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 0",
+							"Name" : "m03",
+							"Type" : 2
+						}
+					]
+				}
+			],
+			"TapMenu004" : 
+			[
+				{
+					"Command" : "parameters lock Param29 0",
+					"Name" : "000",
+					"Sound" : "sounds/character_TapTouchFUN_0.ogg",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 0",
+							"Name" : "m04",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 1",
+							"Name" : "m04",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "parameters lock Param29 1",
+					"Name" : "000",
+					"Sound" : "sounds/character_TapTouchHentai#1_1.ogg",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 1",
+							"Name" : "m04",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 0",
+							"Name" : "m04",
+							"Type" : 2
+						}
+					]
+				}
+			],
+			"TapMenu005" : 
+			[
+				{
+					"Text" : "[ - 未解锁 - ]"
+				}
+			],
+			"TapTouchAES" : 
+			[
+				{
+					"Name" : "AES",
+					"Text" : "[  - 誓约之证 -  ]"
+				}
+			],
+			"TapTouchBody" : 
+			[
+				{
+					"Name" : "001",
+					"Sound" : "sounds/character_TapTouchBody_0.ogg",
+					"Text" : "看入迷了吗？看入迷了才正常吧？指挥官以为我是谁啊～哈哈哈♪"
+				},
+				{
+					"Name" : "002",
+					"Sound" : "sounds/character_TapTouchBody_1.ogg",
+					"Text" : "比起跳舞应该先看战斗报告吗？知道啦~看我旋转跳跃——哎？刚才那非常完美？"
+				}
+			],
+			"TapTouchBreast" : 
+			[
+				{
+					"Name" : "001",
+					"Sound" : "sounds/character_TapTouchBreast_0.ogg",
+					"Text" : "虽然…不是禁止触摸啦…但还是稍微考虑一下时间和场合吧？"
+				},
+				{
+					"Name" : "002",
+					"Sound" : "sounds/character_TapTouchBreast_1.ogg",
+					"Text" : "指挥官，你已经处于“被动”了哦，各种意义上的~"
+				}
+			],
+			"TapTouchCOS" : 
+			[
+				{
+					"Choices" : 
+					[
+						{
+							"NextMtn" : "[COS]:001",
+							"Text" : "◇001◇"
+						},
+						{
+							"NextMtn" : "[COS]:002",
+							"Text" : "◇002◇"
+						},
+						{
+							"NextMtn" : "[COS]:003",
+							"Text" : "◇003◇"
+						}
+					],
+					"Name" : "COS",
+					"Text" : "[  - 服装切换 -  ]"
+				}
+			],
+			"TapTouchFUN" : 
+			[
+				{
+					"Choices" : 
+					[
+						{
+							"NextMtn" : "[FUN]:背景开启",
+							"Text" : "-背景显示：开-"
+						},
+						{
+							"NextMtn" : "[FUN]:背景关闭",
+							"Text" : "-背景显示：关-"
+						}
+					],
+					"Name" : "FUN",
+					"Sound" : "sounds/character_TapTouchFUN_0.ogg",
+					"SoundChannel" : 2,
+					"Text" : "[  - 功能面板 -  ]"
+				}
+			],
+			"TapTouchHead" : 
+			[
+				{
+					"Name" : "001",
+					"Sound" : "sounds/character_TapTouchHead_0.ogg",
+					"Text" : "这个舞当然是只给指挥官和伙伴们看的啦，不然我怎么会这么努力练习呢？"
+				},
+				{
+					"Name" : "002",
+					"Sound" : "sounds/character_TapTouchHead_1.ogg",
+					"Text" : "求指导求建议！直接点表达下想法就好？"
+				},
+				{
+					"Name" : "003",
+					"Sound" : "sounds/character_TapTouchHead_2.ogg",
+					"Text" : "摸完了吗？好，那就乖乖坐下，该轮到我摸了~"
+				}
+			],
+			"TapTouchHentai#1" : 
+			[
+				{
+					"File" : "motions/character_TapTouchHentai#1_0.json",
+					"Sound" : "sounds/character_TapTouchFUN_0.ogg",
+					"SoundChannel" : 2,
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 0",
+							"Name" : "menu",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 1",
+							"Name" : "menu",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"File" : "motions/character_TapTouchHentai#1_1.json",
+					"Sound" : "sounds/character_TapTouchHentai#1_1.ogg",
+					"SoundChannel" : 2,
+					"VarFloats" : 
+					[
+						{
+							"Code" : "equal 1",
+							"Name" : "menu",
+							"Type" : 1
+						},
+						{
+							"Code" : "assign 0",
+							"Name" : "menu",
+							"Type" : 2
+						}
+					]
+				}
+			],
+			"TapTouchLeg" : 
+			[
+				{
+					"Name" : "001",
+					"Sound" : "sounds/character_TapTouchLeg_0.ogg",
+					"Text" : "嗯？你怎么一脸疲倦的样子……果然是超负荷工作了吧？来，躺这里，这次就让我照顾你吧。嗯哼…就把我的大腿当成你临时的枕头吧~”指挥官就喜欢这样的感觉吧~？"
+				},
+				{
+					"Name" : "002",
+					"Sound" : "sounds/character_TapTouchLeg_1.ogg",
+					"Text" : "我知道的哦，你就喜欢这样的事情对吧~哈哈哈♪"
+				}
+			],
+			"[AES]" : 
+			[
+				{
+					"Intimacy" : 
+					{
+						"Min" : 99
+					},
+					"Name" : "Aes"
+				}
+			],
+			"[COS]" : 
+			[
+				{
+					"Name" : "001"
+				},
+				{
+					"Name" : "002"
+				},
+				{
+					"Name" : "003"
+				}
+			],
+			"[FUN]" : 
+			[
+				{
+					"Name" : "待机开启",
+					"Text" : "【待机语音已开启】",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "assign 0",
+							"Name" : "idlevoice",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Name" : "待机关闭",
+					"Text" : "【待机语音已关闭】",
+					"VarFloats" : 
+					[
+						{
+							"Code" : "assign 1",
+							"Name" : "idlevoice",
+							"Type" : 2
+						}
+					]
+				},
+				{
+					"Command" : "parameters lock XW_PAR_Bghide 1",
+					"Name" : "背景开启",
+					"Text" : "【背景已开启】"
+				},
+				{
+					"Command" : "parameters lock XW_PAR_Bghide 0",
+					"Name" : "背景关闭",
+					"Text" : "【背景已关闭】"
+				}
+			],
+			"_________" : 
+			[
+				{
+					"Name" : "NULL"
+				}
+			],
+			"_________#1" : 
+			[
+				{
+					"Name" : "NULL"
+				}
+			],
+			"_________#2" : 
+			[
+				{
+					"Name" : "NULL"
+				}
+			],
+			"_________#3" : 
+			[
+				{
+					"Name" : "NULL"
+				}
+			],
+			"_________#4" : 
+			[
+				{
+					"Name" : "NULL"
+				}
+			],
+			"_________#5" : 
+			[
+				{
+					"Name" : "NULL"
+				}
+			]
+		},
+		"Physics" : "FileReferences_Physics_0.json",
+		"PhysicsV2" : 
+		{
+			"File" : "FileReferences_Physics_0.json"
+		},
+		"Textures" : 
+		[
+			"FileReferences_Textures_0_0.png",
+			"FileReferences_Textures_1_0.png"
+		]
+	},
+	"HitAreas" : 
+	[
+		{
+			"Id" : "XW_ART_Head",
+			"Motion" : "TapTouchHead",
+			"Name" : "XW_ART_Head",
+			"Order" : 6
+		},
+		{
+			"Id" : "XW_ART_Breast",
+			"Motion" : "TapTouchBreast",
+			"Name" : "XW_ART_Breast",
+			"Order" : 7
+		},
+		{
+			"Id" : "XW_ART_Body",
+			"Motion" : "TapTouchBody",
+			"Name" : "XW_ART_Body"
+		},
+		{
+			"Id" : "XW_ART_Leg2",
+			"Motion" : "TapTouchLeg",
+			"Name" : "XW_ART_Leg2"
+		},
+		{
+			"Id" : "XW_ART_M_Sex",
+			"Motion" : "TapMenu001",
+			"Name" : "XW_ART_M_Sex",
+			"Order" : 5
+		},
+		{
+			"Id" : "XW_ART_M_Sex2",
+			"Motion" : "TapMenu002",
+			"Name" : "XW_ART_M_Sex2",
+			"Order" : 5
+		},
+		{
+			"Id" : "XW_ART_M_Skirt",
+			"Motion" : "TapMenu003",
+			"Name" : "XW_ART_M_Skirt",
+			"Order" : 5
+		},
+		{
+			"Id" : "XW_ART_M_Breast",
+			"Motion" : "TapMenu004",
+			"Name" : "XW_ART_M_Breast",
+			"Order" : 5
+		},
+		{
+			"Id" : "XW_ART_M_Glass",
+			"Motion" : "TapMenu005",
+			"Name" : "XW_ART_M_Glass",
+			"Order" : 5
+		},
+		{
+			"Id" : "XW_ART_Hentai",
+			"Motion" : "TapTouchHentai#1",
+			"Name" : "XW_ART_Hentai"
+		},
+		{
+			"Id" : "XW_MENU",
+			"Motion" : "TapTouchFUN",
+			"Name" : "XW_MENU",
+			"Order" : 5
+		},
+		{
+			"Id" : "XW_ART_Sex",
+			"Name" : "XW_ART_Sex",
+			"Order" : 7
+		},
+		{
+			"Id" : "XW_ART_Skirt",
+			"Name" : "XW_ART_Skirt",
+			"Order" : 8
+		}
+	],
+	"Options" : 
+	{
+		"AllowMod" : false,
+		"PositionX" : -3.0,
+		"ScaleFactor" : 2.0,
+		"TexFixed" : true
+	},
+	"Version" : 3
+}

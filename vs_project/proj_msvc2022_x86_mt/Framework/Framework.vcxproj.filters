@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismCdiJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismDefaultParameterId.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismFramework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismModelSettingJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Effect\CubismBreath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Effect\CubismEyeBlink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Effect\CubismPose.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Id\CubismId.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Id\CubismIdManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismMatrix44.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismModelMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismTargetPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismVector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismViewMatrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismMoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismModelUserData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismModelUserDataJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismUserModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\ACubismMotion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismExpressionMotion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionQueueEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionQueueManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Physics\CubismPhysics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Physics\CubismPhysicsJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Rendering\CubismRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Rendering\OpenGL\CubismOffscreenSurface_OpenGLES2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Rendering\OpenGL\CubismRenderer_OpenGLES2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\csmRectF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\csmString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Utils\CubismDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Utils\CubismJson.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Utils\CubismString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismCdiJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismDefaultParameterId.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismFramework.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismFrameworkConfig.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismModelSettingJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\CubismJsonHolder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\ICubismAllocator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\ICubismModelSetting.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Live2DCubismCore.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Effect\CubismBreath.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Effect\CubismEyeBlink.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Effect\CubismPose.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Id\CubismId.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Id\CubismIdManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismMath.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismMatrix44.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismModelMatrix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismTargetPoint.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismVector2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Math\CubismViewMatrix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismMoc.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismModel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismModelUserData.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismModelUserDataJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Model\CubismUserModel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\ACubismMotion.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismExpressionMotion.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotion.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionInternal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionQueueEntry.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Motion\CubismMotionQueueManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Physics\CubismPhysics.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Physics\CubismPhysicsInternal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Physics\CubismPhysicsJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Rendering\CubismRenderer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Rendering\OpenGL\CubismOffscreenSurface_OpenGLES2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Rendering\OpenGL\CubismRenderer_OpenGLES2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\csmMap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\csmRectF.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\csmString.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\csmVector.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Type\CubismBasicType.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Utils\CubismDebug.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Utils\CubismJson.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src\Utils\CubismString.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{237F0E11-5D4D-3E3F-B4D2-D805FCDCEB73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{311009D0-A696-327E-ADDB-D4754E03EF38}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

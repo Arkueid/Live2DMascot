@@ -1,0 +1,107 @@
+{
+	"BangumiView" : 
+	{
+		"LastPos" : 
+		{
+			"X" : 500,
+			"Y" : 0
+		}
+	},
+	"ChatAPI" : 
+	{
+		"ChatSavePath" : "chat",
+		"CustomChatServer" : 
+		{
+			"HostPort" : "",
+			"On" : false,
+			"ReadTimeOut" : 10,
+			"Route" : ""
+		},
+		"Mlyai" : 
+		{
+			"APIKey" : "82wmm51s1bskwft3",
+			"APISecret" : "o0vp8k7e"
+		}
+	},
+	"Dialog" : 
+	{
+		"BackgroundColor" : "rgba(0, 0, 0, 200)",
+		"FontColor" : "white",
+		"FontFamily" : "Comic Sans MS",
+		"FontSize" : 10,
+		"MaxWdith" : 370,
+		"XPadding" : 10,
+		"YOffset" : -10,
+		"YPadding" : 10
+	},
+	"ModelSettings" : 
+	{
+		"LipSyncMagnification" : 1.1000000238418579,
+		"ModelDir" : "Resources",
+		"ModelName" : "nn",
+		"MotionInterval" : 5.0
+	},
+	"UserSettings" : 
+	{
+		"AppName" : "0d00",
+		"BgmList" : 
+		{
+			"LastPos" : 
+			{
+				"X" : 599,
+				"Y" : 0
+			}
+		},
+		"Dialog" : 
+		{
+			"BackgroundColor" : "rgba(0, 0, 0, 200)",
+			"FontColor" : "white",
+			"FontFamily" : "Comic Sans MS",
+			"FontSize" : 10,
+			"Height" : 150,
+			"MaxWdith" : 370,
+			"Width" : 400,
+			"WordInterval" : 0,
+			"XPadding" : 10,
+			"YOffset" : -10,
+			"YPadding" : 10
+		},
+		"FPS" : 48,
+		"IconPath" : "C:/Users/ArcueidBrunestud/Desktop/新建文件夹/Resources/hiyori.jpg",
+		"KeepQuiet" : false,
+		"LipSyncMagnification" : 0.0,
+		"Mlyai" : 
+		{
+			"APIKey" : "82wmm51s1bskwft3",
+			"APISecret" : "o0vp8k7e"
+		},
+		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
+		"ModelName" : "Hiyori",
+		"MotionInterval" : 5.0,
+		"MouseTrack" : true,
+		"NoSound" : false,
+		"NoteOutPath" : ".",
+		"ShowBackground" : false,
+		"ShowBgmList" : true,
+		"ShowText" : true,
+		"StayOnTop" : false,
+		"TextFadeOutTime" : 6,
+		"TransparentBackground" : true,
+		"TransparentCharacter" : false,
+		"TransparentForMouse" : true,
+		"UserName" : "ArcueidBrunestud"
+	},
+	"WindowSettings" : 
+	{
+		"AppName" : "0d00",
+		"FPS" : 48,
+		"Height" : 500,
+		"IconPath" : "C:/Users/ArcueidBrunestud/Desktop/新建文件夹/Resources/hiyori.jpg",
+		"LastPos" : 
+		{
+			"X" : 1446,
+			"Y" : 314
+		},
+		"Width" : 500
+	}
+}
