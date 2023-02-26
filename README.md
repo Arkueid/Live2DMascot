@@ -29,15 +29,101 @@
 
 # 功能 
 
-* 自定义动作组与点击触发位置
-  
-	以Mao模型为例，需要准备的工具有Live2D Viewer(安装Cubism Editor会自带安装Viewer)
+* 自定义动作组与点击触发位置  
 
-	* 用Viewer打开模型，点击左上角文件目录中的moc文件，在左下角选择网格部件
 
-	* 会显示网格部件列表，选中网格部件会在右侧渲染的模型上显示选中的区域，这个区域就是你想点击交互的区域，记下这个区域的id 例如: ArtMesh51
+  参考 https://github.com/murcherful/Live2D_Displyer
 
-	* 然后退出Viewer，注意退出时不要保存模型设置，不然之前设置的语音和文本会被清空
+  以下是上述项目关于自定义动作组和触发位置说明的引用  
+  - 设置触发区域和相应动作组
+  - 首先要了解`model3.json`中有关动作和触发区域的设定，以及文件的结构
+    - 文件的结构大致为，模型文件可能不包含`Groups`和`HitAreas`，如果没有，请安以下规则填写，`Group`可无
+      ```
+      {
+      	"Version":3,
+      	"FileReferences": {...},
+      	"Groups": [...],
+      	"HitAreas": [...]
+      }
+      ```
+    - `FileReferences`的结构
+      ```
+      "FileReferences": {
+      	"Moc": ...,
+      	"Textures": [...],
+      	"Motions": {...},
+      	...
+      }
+      ```
+    - `Motions`的结构为，`path`为`yyy.motion3.json`与`xxx.model3.json`的相对路径
+      ```
+      "Motions": {
+      	"Idle":[
+      		{"File": "path", "FeedINTime": 0.5, "FeedOutTime": 0.5},
+      		{"File": "path", "FeedINTime": 0.5, "FeedOutTime": 0.5},
+      		...
+      	],
+      	"TapBody":[
+      		{"File": "path", "FeedINTime": 0.5, "FeedOutTime": 0.5},
+      		{"File": "path", "FeedINTime": 0.5, "FeedOutTime": 0.5},
+      		...
+      	],
+      	"TapArea1":[
+      		{"File": "path", "FeedINTime": 0.5, "FeedOutTime": 0.5},
+      		{"File": "path", "FeedINTime": 0.5, "FeedOutTime": 0.5},
+      		...
+      	],
+      	...
+      }
+      ```
+      `Motions`下的分组，比如`Idle`，`TapBody`，`TapArea1`等，表示鼠标点击至相应区域会触发的动作组，触发时，会随机一个动作组中的动作。注意，程序定义的分组标识有
+      ```
+      Idle
+      TapBody
+      TapArea1
+      TapArea2
+      TapArea3
+      TapArea4
+      TapArea5
+      TapArea6
+      TapArea7
+      TapArea8
+      TapArea9
+      ```
+      其中`Idle`为空闲时的动作组，其他为触发相应区域的动作组
+    - `HitAreas`的结构为
+      ```
+      "HitAreas": [
+      	{"Name": "Body", "Id":"id"},
+      	{"Name": "Area1", "Id":"id"},
+      	{"Name": "Area2", "Id":"id"},
+      	...
+      ]
+      ```
+      其中`Name`为指定的区域名，程序定义的区域名有
+      ```
+      Body
+      Area1
+      Area2
+      Area3
+      Area4
+      Area5
+      Area6
+      Area7
+      Area8
+      Area9
+      ```
+      这些区域与动作组的名称像对应
+  - 了解了文件结构，想要设置相应的动作，首先要定义触发区域。而定义触发区域首先要知道模型区域的名字。这时：
+    - 下载Live2D Cubsim3 Viewer，见[百度贴吧帖子](https://tieba.baidu.com/p/6066105365?red_tag=2138000797)或去[官网](https://www.live2d.com/download/cubism/)（注意直接下载**Cubism Editor**，不是**Cubism Viewer for Unity**）下载，下载安装后自动有Viewer，这个是免费的
+    - 打开Viewer，将模型打开
+    - 点击左上角的`xxx.moc3`，左下角出现信息
+    - 将信息顶端的`Parameter`替换为`ArtMesh`
+    - 点击相应的`ID`可以看见相应的区域变蓝
+    - 选择你想要的区域，记下`ID`
+    - 根据上面的介绍，将`id`替换为你记下`ID`，选择一个区域名，
+    - 将区域名对应的动作组表示加入`Motions`中，并添加相应的动作
+    - 保存模型，运行程序即可
 
 
 * 自定义聊天服务器接口（可在设置页面更改）
