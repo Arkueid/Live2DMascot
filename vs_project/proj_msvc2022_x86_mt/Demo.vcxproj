@@ -57,7 +57,7 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
     <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/build/proj_msvc2022_x86_mt/bin/Demo/$(Configuration)</LocalDebuggerWorkingDirectory>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\build\proj_msvc2022_x86_mt\bin\Demo\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bin\Demo\Release\</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">bin\Demo\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Demo.dir\Release\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">Demo.dir\Release\</IntDir>
@@ -73,8 +73,8 @@
     <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/build/proj_msvc2022_x86_mt/bin/Demo/$(Configuration)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\cdk\qt\5.15.2\msvc2019\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\cdk\OpenSSL-Win32\lib;D:\cdk\qt\5.15.2\msvc2019\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>..\thirdParty\OpenSSL-Win32\lib;..\thirdParty\Qt\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
@@ -144,7 +144,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\cdk\OpenSSL-Win32\include;D:\cdk\side-libs\httplib;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\stb;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\thirdParty\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\thirdParty\OpenSSL-Win32\include;..\thirdParty\httplib;..\thirdParty\stb;..\Framework\src;..\thirdParty\glew\include;..\thirdParty\glfw\include;..\thirdParty\Qt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -177,7 +177,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Message>
       </Message>
       <Command>setlocal
-"D:\Visual Studio\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Samples/Resources D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/build/proj_msvc2022_x86_mt/bin/Demo/Release/Resources
+"$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ..\Resources bin/Demo/Release/Resources
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -187,7 +187,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>Framework\Release\Framework.lib;glfw\src\Release\glfw3.lib;opengl32.lib;glu32.lib;-NODEFAULTLIB:libcmt.lib;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\lib\windows\x86\143\Live2DCubismCore_MT.lib;lib\Release\libglew32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;Qt5Core.lib;Qt5Widgets.lib;Qt5Gui.lib;qtmain.lib;Winmm.lib;libssl.lib;libcrypto.lib</AdditionalDependencies>
+      <AdditionalDependencies>Framework\Release\Framework.lib;glfw\src\Release\glfw3.lib;opengl32.lib;glu32.lib;-NODEFAULTLIB:libcmt.lib;..\Core\lib\windows\x86\143\Live2DCubismCore_MT.lib;lib\Release\libglew32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;Qt5Core.lib;Qt5Widgets.lib;Qt5Gui.lib;qtmain.lib;Winmm.lib;libssl.lib;libcrypto.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -235,7 +235,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Message>
       </Message>
       <Command>setlocal
-"D:\Visual Studio\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../Resources bin/Demo/Release/Resources
+"$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../Resources bin/Demo/Release/Resources
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -298,6 +298,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\src\LAppWavFileHandler.hpp" />
     <ClInclude Include="..\src\NetworkUtils.h" />
     <ClInclude Include="..\src\TouchManager.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Demo.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\hiyori.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

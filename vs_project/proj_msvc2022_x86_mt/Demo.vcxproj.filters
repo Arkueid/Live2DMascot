@@ -117,6 +117,7 @@
     <ClInclude Include="..\src\TouchManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -125,5 +126,11 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{311009D0-A696-327E-ADDB-D4754E03EF38}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Demo.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\hiyori.ico" />
   </ItemGroup>
 </Project>
