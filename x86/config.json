@@ -45,7 +45,7 @@
 	{
 		"AppName" : "Live2D Displayer",
 		"FPS" : 48,
-		"IconPath" : "",
+		"IconPath" : "../Resources/hiyori.jpg",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
@@ -60,12 +60,12 @@
 	},
 	"WindowSettings" : 
 	{
-		"Height" : 700,
+		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1307,
-			"Y" : 191
+			"X" : 1513,
+			"Y" : 507
 		},
-		"Width" : 500
+		"Width" : 300
 	}
 }
