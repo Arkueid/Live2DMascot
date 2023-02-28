@@ -36,10 +36,26 @@ Tip::Tip()
 	anime->setEndValue(0);
 	anime->setDuration(2000);
 }
+Tip::~Tip()
+{
+	if (LAppDefine::DebugLogEnable)
+	printf("Tip destroyed\n");
+}
+
+void Tip::ReleaseInstance()
+{
+	if (_tip)
+	{
+		_tip->Release();
+		_tip->deleteLater();
+	}
+}
 
 void Tip::Release()
 {
-	delete _tip;
+	if (this->anime)
+		this->anime->deleteLater();
+	close();
 }
 void Tip::paintEvent(QPaintEvent* e)
 {
@@ -324,6 +340,11 @@ void AppSettings::LoadConfig()
 	lipSync->setText(ss2.str().c_str());
 }
 
+void AppSettings::Release()
+{
+	
+}
+
 ModelSettings::ModelSettings(QWidget* p)
 {
 	_parent = p;
@@ -411,6 +432,11 @@ ModelSettings::ModelSettings(QWidget* p)
 	motionJsonPath->setView(new QListView());
 	motionSoundPath->setView(new QListView());
 
+}
+
+void ModelSettings::Release()
+{
+	
 }
 
 void ModelSettings::Apply()
@@ -830,6 +856,12 @@ ChatSettings::ChatSettings(QWidget* p)
 	connect(chooseDir, SIGNAL(clicked()), SLOT(ChooseDir()));
 
 }
+
+void ChatSettings::Release()
+{
+
+}
+
 void ChatSettings::Apply()
 {
 	_CustomChatServerHostPort = hostPort->text().toUtf8().toStdString();
@@ -949,11 +981,26 @@ ControlWidget::ControlWidget()
 	);
 }
 
-ControlWidget::~ControlWidget()
+void ControlWidget::Release()
 {
-	
+	if (_appSettings)
+	{
+		_appSettings->Release();
+		_appSettings->deleteLater();
+	}
+	if (_modelSettings)
+	{
+		_modelSettings->Release();
+		_modelSettings->deleteLater();
+	}
+	if (_chatSettings)
+	{
+		_chatSettings->Release();
+		_chatSettings->deleteLater();
+	}
+	Tip::ReleaseInstance();
+	close();
 }
-
 
 void ControlWidget::Pop()
 {

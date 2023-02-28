@@ -2,6 +2,8 @@
 #include "GLWidget.h"
 #include <QtCore/qtextcodec.h>
 #include <QtWidgets/qapplication.h>
+#include <QtCore/qthread.h>
+#include <QtCore/qdebug.h>
 
 void Log(const char* handler, const char* msg);
 
@@ -59,11 +61,10 @@ private:
 	GLWidget* _win;
 public:
 	LApp();
-	~LApp();
 	static LApp* GetInstance();
 	void SaveConfig();
 	static void Warning(const char* x);
-	void Initialize(int argc, char* argv[]);
+	void Initialize(QApplication* app);
 	void Run();
 	void Release();
 	void LoadConfig();

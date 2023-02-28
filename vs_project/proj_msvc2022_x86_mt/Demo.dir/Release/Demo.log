@@ -19,4 +19,4 @@
   moc_glwidget.cpp
   NetworkUtils.cpp
   TouchManager.cpp
-  Demo.vcxproj -> D:\Live2D\CubismSdkForNative-4-r.5.1\proj_msvc2022_x86_mt\bin\Demo\Release\Live2D-x86-debug.exe
+  Demo.vcxproj -> D:\Live2D\CubismSdkForNative-4-r.5.1\proj_msvc2022_x86_mt\bin\Demo\Release\Live2D-x86.exe

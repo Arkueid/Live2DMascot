@@ -10,6 +10,7 @@
 #include "LAppPal.hpp"
 #include "json/json.h"
 #include "NetworkUtils.h"
+#include <QtCore/qtimer.h>
 using namespace std;
 using namespace LAppDefine;
 
@@ -85,11 +86,6 @@ LApp::LApp()
     _win = NULL;
 }
 
-LApp::~LApp()
-{
-
-}
-
 LApp* LApp::GetInstance()
 {
 	if (!_instance)
@@ -109,10 +105,11 @@ GLWidget* LApp::GetWindow()
     return _win;
 }
 
-void LApp::Initialize(int argc, char* argv[])
+void LApp::Initialize(QApplication* app)
 {
-    _app = new QApplication(argc, argv);
-    _app->connect(qApp, &QGuiApplication::commitDataRequest, [&](QSessionManager& manager) {
+    _app = app;
+    //_app->setQuitOnLastWindowClosed(true);
+    QObject::connect(qApp, &QGuiApplication::commitDataRequest, [&](QSessionManager& manager) {
         // 关机、重启、注销前 保存数据
         // 例如Win系统，有时关机缓慢，用户会点击“强制关机”，系统会直接kill剩余进程
         // 所以在得知系统即将关机的时候，便应立即保存数据，以免被kill而错失时机
@@ -145,8 +142,7 @@ void LApp::LoadConfig() {
         {
             LApp::Warning("Json配置文件格式有误！");
             file.close();
-            LApp::GetInstance()->GetApp()->quit();
-            exit(0);
+            LApp::GetInstance()->GetApp()->exit(-1);
         }
     }
     file.close();
@@ -179,10 +175,7 @@ void LApp::LoadConfig() {
     LAppConfig::_BgmListLastPosX = !config["BangumiView"]["LastPos"]["X"].isNull() ? config["BangumiView"]["LastPos"]["X"].asInt() : 500;
     LAppConfig::_BgmListLastPosY = !config["BangumiView"]["LastPos"]["Y"].isNull() ? config["BangumiView"]["LastPos"]["Y"].asInt() : 0;
 
-    TCHAR username[UNLEN + 1];
-    DWORD size = UNLEN + 1;
-    GetUserName((TCHAR*)username, &size);
-    LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? config["UserSettings"]["UserName"].asCString() : username;
+    LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? config["UserSettings"]["UserName"].asCString() : "User0721";
     LAppConfig::_FPS = !config["UserSettings"]["FPS"].isNull() ? config["UserSettings"]["FPS"].asInt() : 48;
     LAppConfig::_MouseTrack = !config["UserSettings"]["MouseTrack"].isNull() ? config["UserSettings"]["MouseTrack"].asBool() : true;
     LAppConfig::_IconPath = !config["UserSettings"]["IconPath"].isNull() ? config["UserSettings"]["IconPath"].asCString() : "";
@@ -219,15 +212,14 @@ void LApp::Run()
 {
     _win->Run();
     _app->exec();
+    if (LAppDefine::DebugLogEnable)
+    printf("App Quit\n");
 }
 
 void LApp::Release()
 {
-    _win->Release();
-    delete _win;
-    _app->quit();
     LAppDelegate::GetInstance()->Release();
-    exit(0);
+    _app->quit();
 }
 
 void LApp::SaveConfig()

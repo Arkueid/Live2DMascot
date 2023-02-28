@@ -9,6 +9,7 @@
 #include <QtWidgets/qlayout.h>
 #include <QtCore/qpropertyanimation.h>
 #include <vector>
+#include "LAppDefine.hpp"
 #include <QtWidgets/qcheckbox.h>
 #include <QtWidgets/qtextedit.h>
 #include <QtWidgets/qtreewidget.h>
@@ -31,9 +32,11 @@ class Tip : public QWidget
 {
 public:
 	Tip();
+	~Tip();
 	void Pop(QWidget* p, const char* text);
 	static Tip* GetInstance();
-	static void Release();
+	static void ReleaseInstance();
+	void Release();
 protected:
 	void paintEvent(QPaintEvent* e);
 	const char* text = NULL;
@@ -77,7 +80,9 @@ class AppSettings : public QWidget
 	QWidget* _parent;
 public:
 	AppSettings(QWidget* p);
+	~AppSettings() { if (LAppDefine::DebugLogEnable) printf("AppSettings destroyed\n"); }
 	void LoadConfig();
+	void Release();
 private slots:
 	void OpenFile();
 	void Apply();
@@ -112,7 +117,10 @@ class ModelSettings : public QWidget
 	QPushButton* updateGroupName;
 public:
 	ModelSettings(QWidget* p);
+	~ModelSettings() { if (LAppDefine::DebugLogEnable) printf("ModelSettings destroyed\n"); }
+
 	void LoadConfig();
+	void Release();
 private slots:
 	void Reset();
 	void Apply();
@@ -154,7 +162,10 @@ private:
 	QWidget* _parent;
 public:
 	ChatSettings(QWidget* p);
+	~ChatSettings() { if (LAppDefine::DebugLogEnable) printf("ChatSettings destroyed\n"); }
+
 	void LoadConfig();
+	void Release();
 	void UpdateState();
 private slots:
 	void Reset();
@@ -172,7 +183,8 @@ private:
 	ChatSettings* _chatSettings;
 public:
 	friend class AppSettings;
-	~ControlWidget();
 	ControlWidget();
+	~ControlWidget() { if (LAppDefine::DebugLogEnable) printf("ControlWidget destroyed\n"); }
+	void Release();
 	void Pop();
 };

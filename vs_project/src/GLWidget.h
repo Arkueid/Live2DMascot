@@ -8,6 +8,7 @@
 #include <QtWidgets/qsystemtrayicon.h>
 #include <QtWidgets/qaction.h>
 #include <QtWidgets/qmenu.h>
+#include "LAppDefine.hpp"
 using namespace std;
 
 class GLWidget : public QOpenGLWidget
@@ -38,7 +39,7 @@ private:
 	bool _drawBackground = false;
 public:
 	GLWidget();
-	~GLWidget();
+	~GLWidget() { if (LAppDefine::DebugLogEnable) printf("GLWdiget destroyed\n"); }
 	void mousePressEvent(QMouseEvent* e);
 	void mouseReleaseEvent(QMouseEvent* e);
 	void mouseMoveEvent(QMouseEvent* e);
@@ -56,7 +57,6 @@ protected:
 	void paintGL();
 	void timerEvent(QTimerEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
-	void keepQuiet(bool on);
 	void keepMouseTrack(bool on);
 	void setShowBgmList(bool on);
 	int mouseX;

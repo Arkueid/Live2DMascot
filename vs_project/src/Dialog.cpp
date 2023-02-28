@@ -58,6 +58,9 @@ void Dialog::WaitChatResponse()
 
 void Dialog::Release()
 {
+	if (animation)
+		animation->deleteLater();
+	close();
 }
 
 void Dialog::AttachToCharacter()

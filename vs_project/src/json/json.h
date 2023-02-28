@@ -159,7 +159,7 @@ public:
   }
 
   /**
-   * Release memory which was allocated for N items at pointer P.
+   * ReleaseInstance memory which was allocated for N items at pointer P.
    *
    * The memory block is filled with zeroes before being released.
    */

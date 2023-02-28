@@ -3,7 +3,7 @@
 	{
 		"LastPos" : 
 		{
-			"X" : 1269,
+			"X" : 500,
 			"Y" : 0
 		}
 	},
@@ -36,16 +36,16 @@
 	},
 	"ModelSettings" : 
 	{
-		"LipSyncMagnification" : 1.2000000476837158,
-		"ModelDir" : "../Resources",
-		"ModelName" : "nn",
-		"MotionInterval" : 60.0
+		"LipSyncMagnification" : 1.1000000238418579,
+		"ModelDir" : "Resources",
+		"ModelName" : "Hiyori",
+		"MotionInterval" : 5.0
 	},
 	"UserSettings" : 
 	{
-		"AppName" : "宁宁",
+		"AppName" : "Live2D Displayer",
 		"FPS" : 48,
-		"IconPath" : "../Resources/nn/ico_nn.png",
+		"IconPath" : "",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
@@ -60,12 +60,12 @@
 	},
 	"WindowSettings" : 
 	{
-		"Height" : 400,
+		"Height" : 700,
 		"LastPos" : 
 		{
-			"X" : 1518,
-			"Y" : 608
+			"X" : 1307,
+			"Y" : 191
 		},
-		"Width" : 300
+		"Width" : 500
 	}
 }

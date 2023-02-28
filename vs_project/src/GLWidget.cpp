@@ -46,11 +46,6 @@ GLWidget::GLWidget()
 	_LastNoSound = false;
 }
 
-GLWidget::~GLWidget()
-{
-
-}
-
 void GLWidget::initializeGL()
 {
 	LAppDelegate::GetInstance()->Initialize(this);
@@ -199,22 +194,42 @@ void GLWidget::showRightMenu()
 void GLWidget::quitOnTriggered()
 {
 	Release();
+	deleteLater();
 	LApp::GetInstance()->Release();
 }
 
 void GLWidget::Release()
 {
+	close();
 	saveConfig();
+	killTimer(currentTimerIndex);
 	trayIcon->hide();
 	trayIcon->deleteLater();
+	if (_control)
+	{
+		_control->Release();
+		_control->deleteLater();
+	}
 	for each (QAction * act in rightMenu->actions())
 	{
 		act->deleteLater();
 	}
 	rightMenu->deleteLater();
-	_dialog->deleteLater();
-	_bgmlist->deleteLater();
-	close();
+	if (_dialog)
+	{
+		_dialog->Release();
+		_dialog->deleteLater();
+	}
+	if (_bgmlist)
+	{
+		_bgmlist->Release();
+		_bgmlist->deleteLater();
+	}
+	if (_cvWidget)
+	{
+		_cvWidget->Release();
+		_cvWidget->deleteLater();
+	}
 }
 
 void GLWidget::hideOnTriggered()
@@ -413,6 +428,7 @@ void GLWidget::setupUI()
 	_cvWidget = new ConversationWidget();
 	_control = new ControlWidget();
 	_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
+
 	QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
 	if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
 	else if (LAppConfig::_BgmListLastPosX <= 0) _bgmlist->move(0, LAppConfig::_BgmListLastPosY);

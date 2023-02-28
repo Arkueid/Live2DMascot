@@ -1,13 +1,17 @@
 #pragma once
 #include <QtWidgets/qwidget.h>
+#include "LAppDefine.hpp"
+
 
 
 class ConversationWidget : public QWidget
 {
 public:
 	ConversationWidget();
+	~ConversationWidget() { if (LAppDefine::DebugLogEnable) printf("ConversationWidget destroyed\n"); }
 	void getInput();
 	void AttachToCharacter();
+	void Release();
 protected:
 	void paintEvent(QPaintEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
@@ -24,4 +28,5 @@ private:
 	bool blink;
 	QFont _font;
 	bool _focused;
+	int currentTimerIndex;
 };

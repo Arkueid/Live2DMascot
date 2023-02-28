@@ -21,16 +21,14 @@
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
 
 # ChangeLog
-* 上传项目  
-	在vs_project文件夹下，目前只整理了x86的项目，所有绝对路径已经改成相对路径，支持库也已经打包在vs_project\thirdParty文件夹下，应该可以做到开箱即用
+* 修复  
+	* 程序启动失败的问题，目前找到的**可能**原因是启动时获取当前系统用户名的代码运行错误，现已删除获取当前系统用户名，默认用户名固定为UserXXXX。
 
-	用Visual Studio 2022 (建议VS 2022) 打开 			vs_project\proj_msvc2022_x86_mt\Demo.sln，有两个项目配置:  
-	* Console -> Debug
-	* Window -> Release  
+		![错误代码](sample_images\error_fixed.png)
+	* 番剧列表初次加载频闪问题（第二次） 
 
 
-  然后任选一个配置编译即可
-
+	本次只更新了x86版本
 
 # 功能 
 
@@ -383,7 +381,12 @@
 * LPK模型需要解压为包含*.moc3, *.model3.json和纹理图片的文件夹形式
 
 
-# 依赖
+# 编译
+在vs_project文件夹下，目前只整理了x86的项目，所有绝对路径已经改成相对路径，支持库也已经打包在vs_project\thirdParty文件夹下，应该可以做到开箱即用（maybe）
+
+	用Visual Studio 2022 (建议VS 2022) 打开 			vs_project\proj_msvc2022_x86_mt\Demo.sln，有两个项目配置:  
+	* Console -> Debug
+	* Window -> Release  
 
 1. 使用以下库静态库:  
 

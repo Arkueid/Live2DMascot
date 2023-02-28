@@ -9,8 +9,8 @@
 
 int main(int argc, char* argv[])
 {
-    LApp::GetInstance()->Initialize(argc, argv);
+    QApplication app(argc, argv);
+    LApp::GetInstance()->Initialize(&app);
     LApp::GetInstance()->Run();
-    LApp::GetInstance()->Release();
     return 0;
 }

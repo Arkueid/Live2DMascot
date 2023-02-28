@@ -38,7 +38,13 @@ ConversationWidget::ConversationWidget()
 	_font.setPointSizeF(14);
 	_focused = false;
 	LAppConfig::_WaitChatResponse = false;
-	startTimer(500);
+	currentTimerIndex = startTimer(500);
+}
+
+void ConversationWidget::Release()
+{
+	if (currentTimerIndex != -1) killTimer(currentTimerIndex);
+	close();
 }
 
 //根据输入内容绘制文字，实现简单换行（不识别标点）

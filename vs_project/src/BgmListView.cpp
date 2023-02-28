@@ -28,7 +28,8 @@ BgmListView::BgmListView()
 	_mouseY = 0;
 	_currentIndex = -1;
 	_w = 250;
-	_currentAnimation = NULL;
+	_currentAnimation = new QPropertyAnimation(this, "geometry");
+	_currentAnimation->setDuration(200);
 	ifstream ifs(BgmListUtils::_BgmListJsonPath);
 	if (ifs.good())
 	{
@@ -41,12 +42,17 @@ BgmListView::BgmListView()
 	else {
 		_ylen = 70;
 	}
+	resize(_w, _ylen);
 	ifs.close();
 }
 
-BgmListView::~BgmListView()
+void BgmListView::Release()
 {
-	delete _currentAnimation;
+	if (_currentAnimation)
+	{
+		_currentAnimation->deleteLater();
+	}
+	close();
 }
 
 void BgmListView::paintEvent(QPaintEvent* e)
@@ -55,7 +61,6 @@ void BgmListView::paintEvent(QPaintEvent* e)
 	QColor normal = Qt::white;
 	QColor hover(240, 120, 180);
 	QPainter painter(this);
-	resize(_w, _ylen);
 	painter.fillRect(this->rect(), QColor(0, 0, 0, 180));
 	painter.fillRect(QRectF(0, 0, _w, 30), QColor(0, 0, 0, 180));
 
@@ -129,61 +134,51 @@ void BgmListView::mouseDoubleClickEvent(QMouseEvent* e)
 
 void BgmListView::enterEvent(QEvent* e)
 {
+	_currentAnimation->stop();
+	update();
 	QDesktopWidget* screen = QApplication::desktop();
 	if (this->y() <= 0)
 	{
-		_currentAnimation = new QPropertyAnimation(this, "geometry");
-		_currentAnimation->setDuration(200);
-		_currentAnimation->setStartValue(QRect(x(), -height() + 5, width(), height()));
+		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(x(), 0, width(), height()));
-		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+		_currentAnimation->start();
 	}
 	else if (this->x() + 250 >= screen->size().width())
 	{
-		_currentAnimation = new QPropertyAnimation(this, "geometry");
-		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(screen->width() - 5, y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(screen->width() - width(), y(), width(), height()));
-		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+		_currentAnimation->start();
 	}
 	else if (this->x() <= 0)
 	{
-		_currentAnimation = new QPropertyAnimation(this, "geometry");
-		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(-width() + 5, y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(0, y(), width(), height()));
-		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+		_currentAnimation->start();
 	}
 }
 
 void BgmListView::leaveEvent(QEvent* e)
 {
+	_currentAnimation->stop();
 	_currentIndex = -1;
-	this->update();
 	QDesktopWidget* screen = QApplication::desktop();
 	if (this->y() <= 0)
 	{
-		_currentAnimation = new QPropertyAnimation(this, "geometry");
-		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(x(), 0, width(), height()));
 		_currentAnimation->setEndValue(QRect(x(), -height() + 5, width(), height()));
-		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+		_currentAnimation->start();
 	}
 	else if (this->x() + 250 >= screen->size().width())
 	{
-		_currentAnimation = new QPropertyAnimation(this, "geometry");
-		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(screen->width() - 5, y(), width(), height()));
-		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+		_currentAnimation->start();
 	}
 	else if (this->x() <= 0)
 	{
-		_currentAnimation = new QPropertyAnimation(this, "geometry");
-		_currentAnimation->setDuration(200);
 		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
 		_currentAnimation->setEndValue(QRect(-width() + 5, y(), width(), height()));
-		_currentAnimation->start(QPropertyAnimation::DeleteWhenStopped);
+		_currentAnimation->start();
 	}
-
+	update();
 }
