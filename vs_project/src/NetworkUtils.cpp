@@ -29,18 +29,19 @@ namespace BgmListUtils {
 		return false;
 	}
 
-	void UpdateBgmList()
+	bool UpdateBgmList()
 	{
 		Client cli("https://api.bgm.tv");
 		Json::Reader reader;
 		Json::Value json;
-		cli.set_proxy("", -1);
 		Result rsp = cli.Get("/calendar");
+		if (rsp.error() != Error::Success) return false;
 		reader.parse(rsp.value().body, json);
 		cli.stop();
 		ofstream ofs(_BgmListJsonPath);
 		ofs << json;
 		ofs.close();
+		return true;
 	}
 
 	void CheckUpdate()
@@ -49,8 +50,10 @@ namespace BgmListUtils {
 		{
 			try {
 				Log("BgmListUtils", "正在拉取番剧列表...");
-				UpdateBgmList();
-				Log("BgmListUtils", string("番剧列表更新完毕: ").append(_BgmListJsonPath).c_str());
+				bool ret = UpdateBgmList();
+				if (ret)
+					Log("BgmListUtils", string("番剧列表更新完毕: ").append(_BgmListJsonPath).c_str());
+				else Log("BgmListUtils", "番剧列表更新失败!");
 			}
 			catch (...)
 			{
@@ -67,19 +70,20 @@ namespace HolidayUtils
 {
 	string _HolidayJsonPath = "year.json";
 	const bool _DebugLogEnable = true;
-	void GetHolidayJson()
+	bool GetHolidayJson()
 	{
 		Log("BgmListUtils", "正在拉取节日列表...");
 		Client cli("https://timor.tech");
 		Json::Value json;
 		Json::Reader reader;
-		cli.set_proxy("", -1);
 		Result res = cli.Get("/api/holiday/year");
+		if (res.error() != Error::Success) return false;
 		reader.parse(res.value().body, json);
 		cli.stop();
 		ofstream ofs(_HolidayJsonPath, ios::binary);
 		ofs << json;
 		ofs.close();
+		return true;
 	}
 
 	bool ShouldUpdate()
@@ -97,8 +101,10 @@ namespace HolidayUtils
 		if (ShouldUpdate())
 		{
 			try {
-				GetHolidayJson();
-				Log("HolidayUtils", string("节日列表更新完毕: ").append(_HolidayJsonPath).c_str());
+				bool ret = GetHolidayJson();
+				if (ret)
+					Log("HolidayUtils", string("节日列表更新完毕: ").append(_HolidayJsonPath).c_str());
+				else Log("HolidayUtils", "节日列表更新失败!");
 			}
 			catch (...)
 			{
@@ -113,6 +119,7 @@ namespace HolidayUtils
 	const char* WhatsToday()
 	{
 		ifstream ifs(_HolidayJsonPath);
+		if (ifs.fail()) return NULL;
 		Json::Value json;
 		ifs >> json;
 		ifs.close();

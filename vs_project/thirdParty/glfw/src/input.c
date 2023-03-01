@@ -550,7 +550,7 @@ GLFWAPI void glfwSetInputMode(GLFWwindow* handle, int mode, int value)
         {
             int i;
 
-            // Release all sticky keys
+            // ReleaseInstance all sticky keys
             for (i = 0;  i <= GLFW_KEY_LAST;  i++)
             {
                 if (window->keys[i] == _GLFW_STICK)
@@ -570,7 +570,7 @@ GLFWAPI void glfwSetInputMode(GLFWwindow* handle, int mode, int value)
         {
             int i;
 
-            // Release all sticky mouse buttons
+            // ReleaseInstance all sticky mouse buttons
             for (i = 0;  i <= GLFW_MOUSE_BUTTON_LAST;  i++)
             {
                 if (window->mouseButtons[i] == _GLFW_STICK)

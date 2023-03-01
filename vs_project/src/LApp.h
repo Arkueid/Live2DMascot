@@ -64,7 +64,7 @@ public:
 	static LApp* GetInstance();
 	void SaveConfig();
 	static void Warning(const char* x);
-	void Initialize(QApplication* app);
+	void Initialize(int argc, char* argv[]);
 	void Run();
 	void Release();
 	void LoadConfig();

@@ -12,7 +12,9 @@
 Dialog::Dialog()
 {
 	_font.setFamily(LAppConfig::_DialogFontFamily.c_str());
+	_fontMetrics = NULL;
 	LoadConfig();
+	printf("dialog end load config\n");
 	setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	animation = new QPropertyAnimation(this, NULL);

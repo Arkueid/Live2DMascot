@@ -22,20 +22,29 @@
 
 # ChangeLog
 * 修复  
-	* 程序启动失败的问题，目前找到的**可能**原因是启动时获取当前系统用户名的代码运行错误，现已删除获取当前系统用户名，默认用户名固定为UserXXXX。
+	* 程序启动失败的问题  
 
-		![错误代码](sample_images\error_fixed.png)
-	* 番剧列表初次加载频闪问题（第二次） 
+		**可能原因1**  
+
+		启动时获取当前系统用户名的代码运行错误，现已删除获取当前系统用户名，默认用户名固定为UserXXXX。  
+
+		![错误代码1](sample_images\error_fixed.png)
+
+		**已确认原因2**  
+
+		Dialog初始化时未给_fontMetrics变量赋值，程序启动时分配的初始值不为NULL，在LoadConfig函数中导致用delete释放了一个未被分配的内存。<del>哼哼哼啊啊啊(#>д<)ﾉ</del>
+
+		![错误代码2](sample_images\bug_fixed.png)  
 
 
-	本次只更新了x86版本
+	* 番剧列表初次加载频闪问题（第二次修复） 
+	* 网络请求模块无网络时导致程序崩溃 (第二次修复)
 
 # 功能 
 
 * 自定义聊天服务器接口（可在设置页面更改）
   
 	**Request**  
-
 	```http
 	GET /chat?Text=聊天文本 HTTP/1.1
 	Accept-Charset: UTF-8
@@ -47,11 +56,9 @@
 	**- Headers**
 	```json
 	{
-		...
 
-		"Text": "返回文本"  //返回聊天文本，必须
-
-		...
+		"Text": "返回文本",  //返回聊天文本，必须
+		"...": "..."  //其他字段不做要求
 	} 
 	```
 
@@ -70,20 +77,18 @@
 	* config.json中编辑以下字段
 
 	```json
-		...
 
 		"ChatAPI" : 
 		{
 			"ChatSavePath" : "chat",  //聊天音频和文本保存路径
 			"CustomChatServer" : 
 			{
-				"HostPort" : "http://127.0.0.1:50721",  //服务器地址
+				"HostPort" : "http://127.0.0.1:50721",  //服务器地址,http或https均可
 				"On" : true,  //开启自定义聊天接口
-				"ReadTimeOut" : 10,  //等待响应时间
+				"ReadTimeOut" : 10,  //等待响应时间(秒)
 				"Route" : "/chat"  //路径
 			},
 		}
-		...
 	
 	```
 
@@ -240,6 +245,7 @@
 
 <div align="center">
 	<img src="sample_images/chat.png" width="500">
+	<br>
 	<img src="sample_images/chat_rsp.png", width="400">
 </div>  
 
@@ -285,6 +291,8 @@
 	|静音|关闭语音播放|
 	|显示文本|播放动作时同时显示语音的文本|
 	|隐藏|最小化|
+
+
 <br>
 <br>
 
@@ -300,6 +308,7 @@
 
 	<img src="./sample_images/settings3.png"/>
 
+
 	用户设置参数介绍：
 	|名称|解释|
 	|-|-|
@@ -314,6 +323,7 @@
 	|窗口高度|人物绘制高度，同上|
 	|Key|茉莉云聊天机器人api的key值，可前往官网免费注册|
 	|Secret|茉莉云聊天机器人api的secret值，同上|  
+
 	<br><br>
 
 	模型设置介绍：  
@@ -411,7 +421,7 @@
 
 	**Qt运行环境**
 	安装Qt后，使用Qt\bin下的windeployqt.exe 执行: 
-	```cmd
+	```shell
 	windeployqt.exe "编译之后的程序.exe"
 	```
 	**Openssl (32位)**
@@ -421,7 +431,12 @@
   	**Openssl (64位)**
 	* libssl-3-x64.dll  
 	* libcrypto-3-x64.dll
-  
-设置DEBUG配置时需要定义宏DEBUG_FLAG  
+
+	**对于没有Visual C++的环境需要额外安装或者将以下dll放在exe文件同目录下**
+
+	* vcruntime140_1.dll 	**(x64)**
+	* vcruntime140.dll 		**(x86/x64)**
+	* msvcp140.dll 			**(x86/x64)**
+	* msvcp140_1.dll 		**(x86/x64)**
 
 以上步骤可能无法解决所有问题，需要自行查找方案.

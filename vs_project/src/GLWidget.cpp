@@ -356,6 +356,9 @@ void GLWidget::setupUI()
 	
 	LoadConfig();
 
+	if (LAppDefine::DebugLogEnable)
+		printf("[DEBUG]GLwin end load config\n");
+
 	connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconOnActivated(QSystemTrayIcon::ActivationReason)));
 
 	//ÓÒ¼ü²Ëµ¥
@@ -423,10 +426,25 @@ void GLWidget::setupUI()
 	rightMenu->addAction(act_quit);
 	rightMenu->setFixedWidth(120);
 	rightMenu->setStyleSheet("QMenu { background-color: white; padding-top: 8px; padding-bottom: 8px; border: 1px solid rgb(214, 214, 214); padding: 4px; color: black;} QMenu::item::selected{background-color: rgba(50, 150, 240, 200); color: white;} QMenu::item {padding: 0 0 0 20px; margin-left: 4px; margin-right: 4px;color: rgb(90, 90, 90);} QMenu::indicator{width: 13px;} QMenu::item:checked, QMenu::item:unchecked{padding-left: 7;}");
+	if (LAppDefine::DebugLogEnable)
+		printf("GLwin end load rightmenu\n");
+
 	_dialog = new Dialog();
+	if (LAppDefine::DebugLogEnable)
+		printf("[DEBUG]GLwin end load dialog\n");
+
 	_bgmlist = new BgmListView();
+	if (LAppDefine::DebugLogEnable)
+		printf("[DEBUG]GLwin end load bgmlist\n");
+
 	_cvWidget = new ConversationWidget();
+	if (LAppDefine::DebugLogEnable)
+		printf("[DEBUG]GLwin end load cv\n");
+
 	_control = new ControlWidget();
+	if (LAppDefine::DebugLogEnable)
+		printf("[DEBUG]GLwin end load control\n");
+
 	_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
 
 	QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();

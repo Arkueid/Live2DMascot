@@ -10,13 +10,13 @@ namespace BgmListUtils
 {
 	extern std::string _BgmListJsonPath;
 	bool ShouldUpdate();
-	void UpdateBgmList();
+	bool UpdateBgmList();
 	void CheckUpdate();
 }
 
 namespace HolidayUtils
 {
-	void GetHolidayJson();
+	bool GetHolidayJson();
 	void CheckUpdate();
 	bool ShouldUpdate();
 	const char* WhatsToday();

@@ -39,13 +39,13 @@
 		"LipSyncMagnification" : 1.1000000238418579,
 		"ModelDir" : "Resources",
 		"ModelName" : "Hiyori",
-		"MotionInterval" : 5.0
+		"MotionInterval" : 15.0
 	},
 	"UserSettings" : 
 	{
-		"AppName" : "Live2D Displayer",
+		"AppName" : "Hiyori",
 		"FPS" : 48,
-		"IconPath" : "../Resources/hiyori.jpg",
+		"IconPath" : "Resources/hiyori.jpg",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,

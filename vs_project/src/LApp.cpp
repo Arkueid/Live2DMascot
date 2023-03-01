@@ -105,11 +105,10 @@ GLWidget* LApp::GetWindow()
     return _win;
 }
 
-void LApp::Initialize(QApplication* app)
+void LApp::Initialize(int argc, char* argv[])
 {
-    _app = app;
-    //_app->setQuitOnLastWindowClosed(true);
-    QObject::connect(qApp, &QGuiApplication::commitDataRequest, [&](QSessionManager& manager) {
+    _app = new QApplication(argc, argv);
+    QObject::connect(_app, &QGuiApplication::commitDataRequest, [&](QSessionManager& manager) {
         // 关机、重启、注销前 保存数据
         // 例如Win系统，有时关机缓慢，用户会点击“强制关机”，系统会直接kill剩余进程
         // 所以在得知系统即将关机的时候，便应立即保存数据，以免被kill而错失时机
@@ -118,9 +117,10 @@ void LApp::Initialize(QApplication* app)
     _win = new GLWidget();
     BgmListUtils::CheckUpdate();
     HolidayUtils::CheckUpdate();
-    
     LoadConfig();
     _win->setupUI();
+    if (LAppDefine::DebugLogEnable)
+        printf("[DEBUG]LApp end initialize\n");
 }
 
 void LApp::LoadConfig() {
@@ -153,16 +153,19 @@ void LApp::LoadConfig() {
     Log("Resource Dir", path);
     if (_access(path, 0) != 0) {
         LApp::Warning("资源文件夹路径不正确！\n请修改config.json文件");
+        _app->exit();
         exit(0);
     }
     LAppConfig::_ModelName = !config["ModelSettings"]["ModelName"].isNull() ? QString::fromUtf8(config["ModelSettings"]["ModelName"].asCString()).toStdString() : "Hiyori";
     
     path = QString::fromUtf8(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str()).toLocal8Bit();
-    if (_access(path, 0) == -1)
+    if (_access(path, 0) != 0)
     {
         LApp::Warning("模型文件不存在！\n请修改config.json文件");
+        _app->exit();
         exit(0);
     }
+
     LAppConfig::_MotionInterval = !config["ModelSettings"]["MotionInterval"].isNull() ? config["ModelSettings"]["MotionInterval"].asInt() : 5;
     LAppConfig::_LipSyncMagnification = !config["ModelSettings"]["LipSyncMagnification"].isNull() ? config["ModelSettings"]["LipSyncMagnification"].asFloat() : 1.1;
 
@@ -206,6 +209,7 @@ void LApp::LoadConfig() {
     LAppConfig::_CustomChatServerRoute = !config["ChatAPI"]["CustomChatServer"]["Route"].isNull() ? config["ChatAPI"]["CustomChatServer"]["Route"].asCString() : "";
     LAppConfig::_ChatSavePath = !config["ChatAPI"]["ChatSavePath"].isNull() ? config["ChatAPI"]["ChatSavePath"].asCString() : "chat";
     LAppConfig::_CustomChatServerReadTimeOut = !config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].isNull() ? config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].asInt() : 10;
+    printf("lapp end init\n");
 }
 
 void LApp::Run()
@@ -213,12 +217,13 @@ void LApp::Run()
     _win->Run();
     _app->exec();
     if (LAppDefine::DebugLogEnable)
-    printf("App Quit\n");
+        printf("App Quit\n");
 }
 
 void LApp::Release()
 {
     LAppDelegate::GetInstance()->Release();
+
     _app->quit();
 }
 

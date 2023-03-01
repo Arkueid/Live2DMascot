@@ -1,0 +1,1 @@
+D:\cdk\qt\5.15.2\msvc2019_64\bin\windeployqt.exe Live2D-x64.exe

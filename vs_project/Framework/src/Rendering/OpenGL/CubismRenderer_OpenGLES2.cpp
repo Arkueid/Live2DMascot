@@ -1708,7 +1708,7 @@ GLuint CubismShader_OpenGLES2::LoadShaderProgram(const csmChar* vertShaderSrc, c
         return 0;
     }
 
-    // Release vertex and fragment shaders.
+    // ReleaseInstance vertex and fragment shaders.
     if (vertShader)
     {
         glDetachShader(shaderProgram, vertShader);
