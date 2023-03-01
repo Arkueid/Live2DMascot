@@ -28,13 +28,13 @@
 
 		启动时获取当前系统用户名的代码运行错误，现已删除获取当前系统用户名，默认用户名固定为UserXXXX。  
 
-		![错误代码1](sample_images\error_fixed.png)
+		![错误代码1](sample_images/error_fixed.png)
 
 		**已确认原因2**  
 
 		Dialog初始化时未给_fontMetrics变量赋值，程序启动时分配的初始值不为NULL，在LoadConfig函数中导致用delete释放了一个未被分配的内存。<del>哼哼哼啊啊啊(#>д<)ﾉ</del>
 
-		![错误代码2](sample_images\bug_fixed.png)  
+		![错误代码2](sample_images/bug_fixed.png)  
 
 
 	* 番剧列表初次加载频闪问题（第二次修复） 

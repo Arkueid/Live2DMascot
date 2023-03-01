@@ -37,7 +37,7 @@
 	"ModelSettings" : 
 	{
 		"LipSyncMagnification" : 1.1000000238418579,
-		"ModelDir" : "Resources",
+		"ModelDir" : "../Resources",
 		"ModelName" : "Hiyori",
 		"MotionInterval" : 15.0
 	},
@@ -45,7 +45,7 @@
 	{
 		"AppName" : "Hiyori",
 		"FPS" : 48,
-		"IconPath" : "Resources/hiyori.jpg",
+		"IconPath" : "../Resources/hiyori.jpg",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
