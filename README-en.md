@@ -1,7 +1,7 @@
 # Live2D Desktop Mascot
 
 ***
-**[Chinese](README.md)** | **English**
+**[中文](README.md)** | **English**
 
 ## Developing Environment
 * Visual Studio 2022
@@ -21,6 +21,10 @@
 [Cubism Live2D SDK for Native]:https://www.live2d.com/download/cubism-sdk/
 
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
+
+# Security Warning
+
+As is mentioned in [Live2D: Security Tranwreck](https://undeleted.ronsor.com/zh-cn/live2d-a-security-trainwreck/), it may be **unsafe** to load untrusted live2d models using programs that based on Cubism SDK Core. So be cautious about using models that are untrusted or downloaded from suspicious websites through Live2d Mascot .  
 
 # Features 
 

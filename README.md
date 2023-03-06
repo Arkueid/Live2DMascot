@@ -2,7 +2,7 @@
 
 ***
 
-**Chinese** | **[English](README-en.md)**
+**中文** | **[English](README-en.md)**
 
 ## 开发环境
 * Visual Studio 2022
