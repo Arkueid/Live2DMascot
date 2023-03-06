@@ -3,7 +3,7 @@
 	{
 		"LastPos" : 
 		{
-			"X" : 500,
+			"X" : 902,
 			"Y" : 0
 		}
 	},
@@ -38,8 +38,8 @@
 	{
 		"LipSyncMagnification" : 1.1000000238418579,
 		"ModelDir" : "../Resources",
-		"ModelName" : "Hiyori",
-		"MotionInterval" : 15.0
+		"ModelName" : "nn",
+		"MotionInterval" : 60.0
 	},
 	"UserSettings" : 
 	{
@@ -52,7 +52,7 @@
 		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
-		"StayOnTop" : false,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
@@ -60,11 +60,11 @@
 	},
 	"WindowSettings" : 
 	{
-		"Height" : 500,
+		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1513,
-			"Y" : 507
+			"X" : 1589,
+			"Y" : 623
 		},
 		"Width" : 300
 	}

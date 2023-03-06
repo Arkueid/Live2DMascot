@@ -23,7 +23,10 @@
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
 
 # ChangeLog
+* 2023-3-6 修复
+	* x64下打开设置页面导致程序崩溃
 * 修复  
+	* Win64下设置页面打开导致程序崩溃
 	* 程序启动失败的问题  
 
 		**可能原因1**  
