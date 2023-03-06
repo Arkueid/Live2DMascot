@@ -22,9 +22,14 @@
 
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
 
+
+# 关于Cubism SDK的安全性问题 （2023-3-6）  
+
+
+由于[Cubism SDK Core可能具有安全隐患](https://undeleted.ronsor.com/zh-cn/live2d-a-security-trainwreck/)，不怀好意的攻击者可能通过live2d模型来侵入使用者的设备，因此请谨慎使用本程序加载安全性未知或来源不明的模型。  
+
+
 # ChangeLog
-* 2023-3-6 修复
-	* x64下打开设置页面导致程序崩溃
 * 修复  
 	* Win64下设置页面打开导致程序崩溃
 	* 程序启动失败的问题  
