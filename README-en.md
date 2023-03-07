@@ -268,7 +268,7 @@ As is mentioned in [Live2D: Security Tranwreck](https://undeleted.ronsor.com/zh-
 	Right menu options： 
 
 	|名称|介绍|English|
-	|-|-|
+	|-|-|-|
 	|番剧列表|显示或隐藏番剧列表|Turn on/off bangumi List|
 	|鼠标追踪|开启后角色会看向鼠标|Mouse tracking|
 	|背景穿透|除可交互的位置外，鼠标点击会透过窗体|Translucent window|
@@ -290,7 +290,7 @@ As is mentioned in [Live2D: Security Tranwreck](https://undeleted.ronsor.com/zh-
 
 	<img src="./sample_images/settings.png"/>  
 
-	Text, motion file, motion groups are editable
+	Text, motion file, motion groups are editable in the right content
 
 	<img src="./sample_images/settings2.png"/>
 
@@ -299,7 +299,7 @@ As is mentioned in [Live2D: Security Tranwreck](https://undeleted.ronsor.com/zh-
 
 	User settings：
 	|名称|解释|English|
-	|-|-|
+	|-|-|-|
 	|应用名称|应用的名称，在系统托盘和设置标题栏上显示|AppName|
 	|用户名称|默认为当前用户的名称，暂无用途|UserName|
 	|托盘图标|任务栏图标，可使用自定义图片|Image for trayIcon|
@@ -330,8 +330,6 @@ As is mentioned in [Live2D: Security Tranwreck](https://undeleted.ronsor.com/zh-
 	| TapBody | 点击身体触发语音 |
 	| TapSpecial | 特触（参考碧蓝航线） |  
 	|  Chat   |调用聊天接口时触发的动作|
-
-	Edit text, sound and motion in the right content  
 
 	**Motion groups are stored in XXXX.model3.json. Motion groups can be edited either in setting widget or in json files**  
 
