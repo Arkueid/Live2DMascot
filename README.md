@@ -1,58 +1,41 @@
-# Live2D Desktop Mascot
+# Live2D Desktop Mascot  
 
+### 语言: **中文** | **[English](README-en.md)**  
 ***
+## 目录
 
-**中文** | **[English](README-en.md)**
+1. [安全性问题](#关于cubism-sdk的安全性问题-2023-3-6)
+2. [预览](#预览)
+3. [功能](#功能)  
+	* [自定义聊天服务器接口](#自定义聊天服务器接口可在设置页面更改)
+	* [自定义动作组](#自定义动作组与点击触发位置)
+	* [番剧列表](#番剧列表)
+	* [节日提醒](#节日提醒)
+	* [系统托盘](#系统托盘右键菜单)
+	* [设置窗口](#设置窗口)
+	* [语音播放](#语音播放)
+	* [文本显示](#文本显示)  
+4. [注意事项](#注意事项)
+5. [更新内容](#changelog)
+6. [开发环境](#开发环境)
+7. [编译](#编译)     
 
-## 开发环境
-* Visual Studio 2022
-* [Cubism Live2D SDK for Native]
-* [Qt5](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4)  
-* [jsoncpp]  
-* [cpp-httplib] + [openssl](https://slproweb.com/products/Win32OpenSSL.html)  
-* 模型的语音借助[ACGTTS]生成  
-* 
-	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：
-	https://zhuanlan.zhihu.com/p/126276925  
-	https://zhuanlan.zhihu.com/p/511077879 
+## 预览  
 
-[cpp-httplib]:https://github.com/yhirose/cpp-httplib
-[jsoncpp]:https://github.com/open-source-parsers/jsoncpp
-[Cubism Live2D SDK for Native]:https://www.live2d.com/download/cubism-sdk/
+![启动](/sample_images/Snipaste_2023-03-07_13-21-15.png)  
 
-[ACGTTS]:https://github.com/chinoll/ACGTTS  
+![聊天](/sample_images/Snipaste_2023-03-07_13-21-55.png)  
 
-
-# 关于Cubism SDK的安全性问题 （2023-3-6）  
-
-
-由于[Cubism SDK Core可能具有安全隐患](https://undeleted.ronsor.com/zh-cn/live2d-a-security-trainwreck/)，不怀好意的攻击者可能通过live2d模型来侵入使用者的设备，因此请谨慎使用本程序加载安全性未知或来源不明的模型。  
-
-
-# ChangeLog
-* 修复  
-	* Win64下设置页面打开导致程序崩溃
-	* 程序启动失败的问题  
-
-		**可能原因1**  
-
-		启动时获取当前系统用户名的代码运行错误，现已删除获取当前系统用户名，默认用户名固定为UserXXXX。  
-
-		![错误代码1](sample_images/error_fixed.png)
-
-		**已确认原因2**  
-
-		Dialog初始化时未给_fontMetrics变量赋值，程序启动时分配的初始值不为NULL，在LoadConfig函数中导致用delete释放了一个未被分配的内存。<del>哼哼哼啊啊啊(#>д<)ﾉ</del>
-
-		![错误代码2](sample_images/bug_fixed.png)  
+![回复](/sample_images/Snipaste_2023-03-07_13-22-06.png)
 
 
-	* 番剧列表初次加载频闪问题（第二次修复） 
-	* 网络请求模块无网络时导致程序崩溃 (第二次修复)
+## 关于Cubism SDK的安全性问题 （2023-3-6）  
+* 由于[Cubism SDK Core可能具有安全隐患](https://undeleted.ronsor.com/zh-cn/live2d-a-security-trainwreck/)，不怀好意的攻击者可能通过live2d模型来侵入使用者的设备，因此请谨慎使用本程序加载安全性未知或来源不明的模型。
 
-# 功能 
 
-* 自定义聊天服务器接口（可在设置页面更改）
+## 功能 
+
+* ### 自定义聊天服务器接口（可在设置页面更改）
   
 	**Request**  
 	```http
@@ -127,7 +110,7 @@
 
 	每次聊天都会在本地产生文本文件和音频文件（如有使用语音），注意及时清理。
 
-* 自定义动作组与点击触发位置  
+* ### 自定义动作组与点击触发位置  
 
 
   参考 https://github.com/murcherful/Live2D_Displyer
@@ -224,7 +207,7 @@
     - 保存模型，运行程序即可
 
 
-* 番剧列表  
+* ### 番剧列表  
    * 功能<del>参考</del>[贴吧]  
    * 双击打开番剧介绍页面
    * 每周一更新一次
@@ -241,7 +224,7 @@
 <br>
 
 
-* 节日提醒
+* ### 节日提醒
    * 一年更新一次，节日当天运行会有提示
    * 节日列表源是[免费节日api]
 <br>
@@ -263,14 +246,14 @@
 <br>
 <br>
 
-* 语音播放
+* ### 语音播放
    * 语音播放需要在model3.json文件中添加motion的Sound属性，或者通过设置页面修改
    * 仅支持.wav格式，详细参数参考[Cubism Live2D SDK for Native]的口型同步
    * 口型同步只支持**单声道**的.wav格式  
 <br>
 <br>
 
-* 文本显示  
+* ### 文本显示  
    * 文本显示需要在model3.json文件中添加motion的Text属性，也可直接在设置页面编辑
    * 需要自己修改模型的model3.json文件，详细参考Hiyori的模型  
 
@@ -282,7 +265,7 @@
 <br>
 <br>
 
-* **系统托盘&右键菜单**  
+* ### **系统托盘&右键菜单**  
 
 	<img src="./sample_images/preview3.png"/>  
 	<br>
@@ -306,7 +289,7 @@
 <br>
 <br>
 
-* **设置窗口**  
+* ### **设置窗口**  
 
 	效果图如下  
 
@@ -401,7 +384,47 @@
 * LPK模型需要解压为包含*.moc3, *.model3.json和纹理图片的文件夹形式
 
 
-# 编译
+## 开发环境
+* Visual Studio 2022
+* [Cubism Live2D SDK for Native]
+* [Qt5](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4)  
+* [jsoncpp]  
+* [cpp-httplib] + [openssl](https://slproweb.com/products/Win32OpenSSL.html)  
+* 模型的语音借助[ACGTTS]生成  
+* 
+	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：
+	https://zhuanlan.zhihu.com/p/126276925  
+	https://zhuanlan.zhihu.com/p/511077879 
+
+[cpp-httplib]:https://github.com/yhirose/cpp-httplib
+[jsoncpp]:https://github.com/open-source-parsers/jsoncpp
+[Cubism Live2D SDK for Native]:https://www.live2d.com/download/cubism-sdk/
+
+[ACGTTS]:https://github.com/chinoll/ACGTTS  
+
+
+# ChangeLog
+* 修复  
+	* Win64下设置页面打开导致程序崩溃
+	* 程序启动失败的问题  
+
+		**可能原因1**  
+
+		启动时获取当前系统用户名的代码运行错误，现已删除获取当前系统用户名，默认用户名固定为UserXXXX。  
+
+		![错误代码1](sample_images/error_fixed.png)
+
+		**已确认原因2**  
+
+		Dialog初始化时未给_fontMetrics变量赋值，程序启动时分配的初始值不为NULL，在LoadConfig函数中导致用delete释放了一个未被分配的内存。<del>哼哼哼啊啊啊(#>д<)ﾉ</del>
+
+		![错误代码2](sample_images/bug_fixed.png)  
+
+
+	* 番剧列表初次加载频闪问题（第二次修复） 
+	* 网络请求模块无网络时导致程序崩溃 (第二次修复)
+
+## 编译
 在vs_project文件夹下，目前只整理了x86的项目，所有绝对路径已经改成相对路径，支持库也已经打包在vs_project\thirdParty文件夹下，应该可以做到开箱即用（maybe）
 
 	用Visual Studio 2022 (建议VS 2022) 打开 			vs_project\proj_msvc2022_x86_mt\Demo.sln，有两个项目配置:  
