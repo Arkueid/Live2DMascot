@@ -20,11 +20,11 @@
 
 ## Preview    
 
-![OnLaunch](/sample_images/Snipaste_2023-03-07_13-21-15.png)  
+![OnLaunch](sample_images/Snipaste_2023-03-07_13-21-15.png)  
 
-![Chat](/sample_images/Snipaste_2023-03-07_13-21-55.png)  
+![Chat](sample_images/Snipaste_2023-03-07_13-21-55.png)  
 
-![Response](/sample_images/Snipaste_2023-03-07_13-22-06.png) 
+![Response](sample_images/Snipaste_2023-03-07_13-22-06.png) 
 
 # Security Warning
 

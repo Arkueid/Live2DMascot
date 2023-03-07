@@ -22,11 +22,11 @@
 
 ## 预览  
 
-![启动](/sample_images/Snipaste_2023-03-07_13-21-15.png)  
+![启动](sample_images/Snipaste_2023-03-07_13-21-15.png)  
 
-![聊天](/sample_images/Snipaste_2023-03-07_13-21-55.png)  
+![聊天](sample_images/Snipaste_2023-03-07_13-21-55.png)  
 
-![回复](/sample_images/Snipaste_2023-03-07_13-22-06.png)
+![回复](sample_images/Snipaste_2023-03-07_13-22-06.png)
 
 
 ## 关于Cubism SDK的安全性问题 （2023-3-6）  
