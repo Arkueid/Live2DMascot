@@ -293,7 +293,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>Framework\Release\Framework.lib;glfw\src\Release\glfw3.lib;opengl32.lib;glu32.lib;-NODEFAULTLIB:libcmt.lib;-NODEFAULTLIB:msvcrtd.lib;..\Core\lib\windows\x86_64\143\Live2DCubismCore_MT.lib;lib\Release\libglew32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Gui.lib;qtmain.lib;Winmm.lib;libssl.lib;libcrypto.lib</AdditionalDependencies>
+      <AdditionalDependencies>Framework\Release\Framework.lib;glfw\src\Release\glfw3.lib;opengl32.lib;glu32.lib;-NODEFAULTLIB:libcmt.lib;-NODEFAULTLIB:msvcrtd.lib;..\Core\lib\windows\x86_64\143\Live2DCubismCore_MT.lib;lib\Release\libglew32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Gui.lib;qtmain.lib;Winmm.lib;libssl.lib;libcrypto.lib;qt5multimedia.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -424,6 +424,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\AudioUtils.h" />
     <ClInclude Include="..\src\BgmListView.h" />
     <ClInclude Include="..\src\ChatWidget.h" />
     <ClInclude Include="..\src\ControlWidget.h" />
@@ -446,6 +447,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\AudioUtils.cpp" />
     <ClCompile Include="..\src\BgmListView.cpp" />
     <ClCompile Include="..\src\ChatWidget.cpp" />
     <ClCompile Include="..\src\ControlWidget.cpp" />

@@ -8,7 +8,7 @@ class ConversationWidget : public QWidget
 {
 public:
 	ConversationWidget();
-	~ConversationWidget() { if (LAppDefine::DebugLogEnable) printf("ConversationWidget destroyed\n"); }
+	~ConversationWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ConversationWidget destroyed\n"); }
 	void getInput();
 	void AttachToCharacter();
 	void Release();

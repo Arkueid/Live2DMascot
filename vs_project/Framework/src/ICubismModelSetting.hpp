@@ -167,8 +167,8 @@ public:
      */
     virtual const csmChar* GetMotionSoundFileName(const csmChar* groupName, csmInt32 index) = 0;
 
-
     virtual const csmChar* GetTextForMotion(const csmChar* groupName, csmInt32 index) = 0;
+
     /**
      * @brief        モーション開始時のフェードイン処理時間を取得する
      *
@@ -186,7 +186,7 @@ public:
      * @return       フェードアウト処理時間[秒]
      */
     virtual csmFloat32 GetMotionFadeOutTimeValue(const csmChar* groupName, csmInt32 index) = 0;
-   
+
     /**
     * @brief        ユーザデータのファイル名を取得する
     *

@@ -7,6 +7,7 @@
 
 #include "CubismMoc.hpp"
 #include "CubismModel.hpp"
+#include <fstream>
 
 namespace Live2D { namespace Cubism { namespace Framework {
 
@@ -25,7 +26,16 @@ CubismMoc* CubismMoc::Create(const csmByte* mocBytes, csmSizeInt size)
         cubismMoc = CSM_NEW CubismMoc(moc);
         cubismMoc->_mocVersion = version;
     }
-
+    
+   /* if (HasMocConsistency(moc, size)) CubismLogInfo("Moc file is valid");
+    else {
+        std::ofstream f("CubismMoc_fatal_error.log", std::ios::out);
+        if (f.is_open()) {
+            f << "Please check moc file of current model because it failed to pass the consistency test, which means it maybe insecure.\n";
+        }
+        f.close();
+        exit(0);
+    }*/
     return cubismMoc;
 }
 
@@ -80,6 +90,12 @@ Core::csmMocVersion CubismMoc::GetLatestMocVersion()
 Core::csmMocVersion CubismMoc::GetMocVersion()
 {
     return _mocVersion;
+}
+
+csmBool CubismMoc::HasMocConsistency(void* address, const csmUint32 size)
+{
+    csmInt32 consistencyFlags = Core::csmHasMocConsistency(address, size);
+    return consistencyFlags != 0 ? true : false;
 }
 
 }}}

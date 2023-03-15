@@ -88,7 +88,6 @@ public:
 
     const csmChar* GetTextForMotion(const csmChar* groupName, csmInt32 index);
 
-
     csmFloat32 GetMotionFadeInTimeValue(const csmChar* groupName, csmInt32 index);
 
     csmFloat32 GetMotionFadeOutTimeValue(const csmChar* groupName, csmInt32 index);
@@ -202,7 +201,9 @@ private:
      * @retval       false -> キーが存在しない
      */
     csmBool IsExistMotionSoundFile(const csmChar* groupName, csmInt32 index) const;
-    csmBool IsExistTextForMotion(const csmChar* groupName, csmInt32 index) const;
+
+    csmBool IsExistText(const csmChar* groupName, csmInt32 index) const;
+
     /**
      * @brief        引数で指定したモーションに対応するフェードイン時間のキーが存在するかどうかを確認する
      *

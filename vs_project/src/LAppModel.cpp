@@ -23,6 +23,7 @@
 #include "NetworkUtils.h"
 #include "LAppTextureManager.hpp"
 #include "LAppDelegate.hpp"
+#include "AudioUtils.h"
 #include "LApp.h"
 
 using namespace Live2D::Cubism::Framework;
@@ -120,7 +121,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     _initialized = false;
 
     _modelSetting = setting;
-
+    
     csmByte* buffer;
     csmSizeInt size;
 
@@ -140,6 +141,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         }
 
         buffer = CreateBuffer(path.GetRawString(), &size);
+        
         LoadModel(buffer, size);
         DeleteBuffer(buffer, path.GetRawString());
     }
@@ -302,7 +304,82 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     _updating = false;
     _initialized = true;
 }
+/**
+* @brief    重新计算动作文件中的参数
+*/
 
+void RepairMotion(
+    const char* jsonPath,
+    csmInt32* totalCurveCount=NULL,
+    csmInt32* totalSegmentCount=NULL,
+    csmInt32* totalPointCount=NULL
+) {
+    int segmentCount = 0, pointCount = 0, curveCount = 0;
+
+    Json::Value motionJson;
+    ifstream jsonFile(jsonPath);
+    if (!jsonFile.is_open()) {
+        if (DebugLogEnable) printf("[APP]file open error: %s\n", jsonPath);
+        return;
+    }
+    jsonFile >> motionJson;
+    jsonFile.close();
+
+    if (!motionJson["Meta"]["Repaired"].isNull() && motionJson["Meta"]["Repaired"].asBool()) {
+        if (DebugLogEnable)
+            printf("[APP]MotionJson already repaired: %s\n", jsonPath);
+        return;
+    }    
+
+    curveCount = motionJson["Curves"].size();
+
+    for (Json::Value curve : motionJson["Curves"]) {
+        Json::Value segments = curve["Segments"];
+        int end_pos = segments.size();
+        pointCount += 1;
+        int v = 2;
+        while (v < end_pos) 
+        {
+            int identifier = segments[v].asInt();
+            if (identifier == 0 || identifier == 2 || identifier == 3) {
+                pointCount++;
+                v += 3;
+            }
+            else if (identifier == 1) {
+                pointCount += 3;
+                v += 7;
+            }
+            else {
+                if (DebugLogEnable) 
+                    printf("[APP]Unknown identifier in motionJson: %s\n", jsonPath);
+                return;
+            }
+            segmentCount += 1;
+        }
+    }
+    motionJson["Meta"]["CurveCount"] = curveCount;
+    motionJson["Meta"]["TotalSegmentCount"] = segmentCount;
+    motionJson["Meta"]["TotalPointCount"] = pointCount;
+    motionJson["Meta"]["Repaired"] = true;
+
+    ofstream outfile(jsonPath);
+    if (outfile.fail()) {
+        if (DebugLogEnable)
+            printf("[APP]file open error: %s\n", jsonPath);
+        outfile.close();
+        return;
+    }
+
+    outfile << motionJson;
+    outfile.close();
+    if (DebugLogEnable)
+        printf("[APP]MotionJson repaired: %s\n", jsonPath);
+}
+
+/**
+* @brief    修改过的预加载动作组
+* @param    group   动作组名称
+*/
 void LAppModel::PreloadMotionGroup(const csmChar* group)
 {
     const csmInt32 count = _modelSetting->GetMotionCount(group);
@@ -313,6 +390,7 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         csmString name = Utils::CubismString::GetFormatedString("%s_%d", group, i);
         csmString path = _modelSetting->GetMotionFileName(group, i);
 
+        //定义了动作但是没有动作路径
         if (strlen(path.GetRawString()) == 0)
         {
             if (_debugMode)
@@ -334,6 +412,9 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
 
         csmByte* buffer;
         csmSizeInt size;
+        if (LAppConfig::_RepairModeOn)
+            RepairMotion(path.GetRawString());
+
         buffer = CreateBuffer(path.GetRawString(), &size);
         CubismMotion* tmpMotion = static_cast<CubismMotion*>(LoadMotion(buffer, size, name.GetRawString()));
         csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, i);
@@ -496,13 +577,22 @@ void LAppModel::Update()
 
 }
 
+
+/**
+* @brief    修改过的播放动作
+* @param    group       动作组名称
+* @param    no          动作在动作组中的引索
+* @param    priority    优先级
+* @param    onFinishedMotionHandler 回调函数
+*/
 CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt32 no, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
 {
     if (priority == PriorityForce)
     {
         _motionManager->SetReservePriority(priority);
     }
-    else if (!PlaySound(NULL, NULL, SND_NODEFAULT | SND_FILENAME | SND_ASYNC | SND_NOSTOP))
+    //之前播放的语音未结束不会加载动作，除非优先级priority为PriorityForce（强制播放）
+    else if (AudioUtils::IsSoundPlaying())
     {
         if (_debugMode)
         {
@@ -539,6 +629,10 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
 
             csmByte* buffer;
             csmSizeInt size;
+
+            if (LAppConfig::_RepairModeOn)
+                RepairMotion(path.GetRawString());
+
             buffer = CreateBuffer(path.GetRawString(), &size);
             motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, onFinishedMotionHandler));
             csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, no);
@@ -568,9 +662,10 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         LAppPal::PrintLog("[APP]start motion: [%s_%d]", group, no);
     }
 
-    bool _soundFinished = true;
+    bool _soundPlayed = true;
     //voice
     csmString voice = _modelSetting->GetMotionSoundFileName(group, no);
+    //路径为空，即该动作没有对应音频
     if (strcmp(voice.GetRawString(), "") != 0)
     {
         csmString path = voice;
@@ -582,15 +677,13 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
 
         if (!LAppConfig::_NoSound)
         {
+            //口型同步，无音频
             _wavFileHandler.Start(path);
-            if (priority == PriorityForce)
+            //播放音乐
+            _soundPlayed = AudioUtils::StartSound(path.GetRawString(), LAppConfig::_SoundVolume, PriorityForce == priority);
+            if (DebugLogEnable && _soundPlayed)
             {
-                 _soundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME | SND_ASYNC);
-            }
-            else _soundFinished = PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME|SND_ASYNC | SND_NOSTOP);
-            if (DebugLogEnable && _soundFinished)
-            {
-                LAppPal::PrintLog("[APP]sound play: %s", path.GetRawString());
+                LAppPal::PrintLog("[APP]Sound play: %s", path.GetRawString());
             }
             else if (DebugLogEnable)
             {
@@ -611,13 +704,15 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
 
     //text
     bool forceShow =  (group == "Morning" || group == "Evening" || group == "Afternoon" || group == "LongSittingTip");
-    if ((LAppConfig::_ShowText && _soundFinished ) || forceShow )
+    //动作有语音的时候，仅在语音成功播放的时候显示文本；无语音则直接显示文本；文本显示选项关闭时不显示文本
+    if ((LAppConfig::_ShowText && _soundPlayed ) || forceShow )
     {
         csmString text = _modelSetting->GetTextForMotion(group, no);
         if (strcmp(text.GetRawString(), "") != 0)
         {
             if (forceShow)
             {
+                //启动时会提示今天是什么日子
                 const char* holiday = HolidayUtils::WhatsToday();
                 if (holiday)
                 {
@@ -632,7 +727,11 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     
     return  _motionManager->StartMotionPriority(motion, autoDelete, priority);
 }
-
+/**
+* @brief    聊天动作，使用聊天api时调用，基于StartMotion函数修改
+* @param    txt         文本
+* @param    soundPath   语音路径
+*/
 CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* soundPath)
 {
     _motionManager->SetReservePriority(PriorityForce);
@@ -649,7 +748,6 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
     if (motion == NULL)
     {
         csmString path = fileName;
-
 
         if (strlen(path.GetRawString()) != 0)  //模型没有动作文件但是model3.json中定义了动作，如果动作路径为空则不读取，以此解除对动作文件的依赖
         {
@@ -697,7 +795,7 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
             {
                 LAppPal::PrintLog("[APP]sound play: %s", path.GetRawString());
             }
-            PlaySound(TEXT(path.GetRawString()), NULL, SND_FILENAME | SND_ASYNC);
+            AudioUtils::StartSound(path.GetRawString(), LAppConfig::_SoundVolume, true);
             _wavFileHandler.Start(path);
             if (motion)
                 motion->SetEffectIds(_eyeBlinkIds, _lipSyncIds);
@@ -741,7 +839,9 @@ void LAppModel::DoDraw()
 
     GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->DrawModel();
 }
-
+/**
+* @brief    停止口型同步
+*/
 void LAppModel::StopLipSync()
 {
     _wavFileHandler.Start("");
@@ -760,7 +860,10 @@ void LAppModel::Draw(CubismMatrix44& matrix)
 
     DoDraw();
 }
-
+/**
+* @brief    实现自定义触发位置的关键函数，基于官方HitTest函数修改
+* @param    x, y    鼠标点击位置的Live2D坐标，已经过坐标系变换
+*/
 csmString LAppModel::HitTest(csmFloat32 x, csmFloat32 y)
 {
     // 透明時は当たり判定なし。
@@ -769,6 +872,8 @@ csmString LAppModel::HitTest(csmFloat32 x, csmFloat32 y)
         return false;
     }
     const csmInt32 count = _modelSetting->GetHitAreasCount();
+    //遍历hitArea，逐一检测是否被点击
+    //hitArea之间可能被覆盖，需要在model3.json中调整顺序
     for (csmInt32 i = 0; i < count; i++)
     {
         const CubismIdHandle drawID = _modelSetting->GetHitAreaId(i);

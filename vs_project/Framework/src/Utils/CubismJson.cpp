@@ -83,7 +83,7 @@ CubismJson* CubismJson::Create(const csmByte* buffer, csmSizeInt size)
     CubismJson* json = CSM_NEW CubismJson();
     const csmBool succeeded = json->ParseBytes(buffer, size);
 
-    /*if (!succeeded)
+    if (!succeeded)
     {
         CubismJson::Delete(json);
         return NULL;
@@ -91,8 +91,7 @@ CubismJson* CubismJson::Create(const csmByte* buffer, csmSizeInt size)
     else
     {
         return json;
-    }*/
-    return json;
+    }
 }
 
 

@@ -4,9 +4,6 @@
     <ClInclude Include="..\src\LApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\NetworkUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="..\src\LAppAllocator.hpp">
       <Filter>Header Files\live2d</Filter>
@@ -59,6 +56,12 @@
     <ClInclude Include="..\src\json\json-forwards.h">
       <Filter>Header Files\json</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\NetworkUtils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioUtils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -85,11 +88,14 @@
     <Filter Include="Header Files\json">
       <UniqueIdentifier>{00f70c58-4bce-4352-b925-279baf32c187}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{5c3b74a2-147b-4d75-bdf9-86e6184d3782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{809fb972-3ee7-4e26-8c63-e3dbb069762b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\NetworkUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="..\src\GLWidget.cpp">
       <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\NetworkUtils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioUtils.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

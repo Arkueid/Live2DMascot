@@ -8,12 +8,14 @@
 #include <QtWidgets/qlabel.h>
 #include <QtWidgets/qlayout.h>
 #include <QtCore/qpropertyanimation.h>
-#include <vector>
-#include "LAppDefine.hpp"
+#include <QtWidgets/qslider.h>
 #include <QtWidgets/qcheckbox.h>
 #include <QtWidgets/qtextedit.h>
 #include <QtWidgets/qtreewidget.h>
+#include <vector>
+#include "LAppDefine.hpp"
 #include "json/json.h"
+
 
 class MyText : public QTextEdit {
 	Q_OBJECT
@@ -62,7 +64,7 @@ class AppSettings : public QWidget
 	QLineEdit* dialogFontSize;
 	QLabel* lbl_dialogYOffset;
 	QLineEdit* dialogYOffset;
-	
+	QSlider* volumeSlider;
 	QLabel* lbl_motioninterval;
 	QLabel* lbl_lipsync;
 	QLabel* lbl_appName;
@@ -72,15 +74,19 @@ class AppSettings : public QWidget
 	QLabel* lbl_windowWidth;
 	QLabel* lbl_windowHeight;
 	QLabel* lbl_modelDir;
+	QLabel* lbl_volume;
+	QLabel* lbl_sliderVal;
+	QLabel* lbl_repairMode;
 	QPushButton* openFile;
 	QPushButton* chooseDir;
 	QPushButton* apply;
 	QPushButton* reset;
 	QGridLayout* grid;
 	QWidget* _parent;
+	QPushButton* repairModeControl;
 public:
 	AppSettings(QWidget* p);
-	~AppSettings() { if (LAppDefine::DebugLogEnable) printf("AppSettings destroyed\n"); }
+	~AppSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]AppSettings destroyed\n"); }
 	void LoadConfig();
 	void Release();
 private slots:
@@ -88,6 +94,8 @@ private slots:
 	void Apply();
 	void Reset();
 	void OpenSourceDir();
+	void SetVolume();
+	void SetRepairMode();
 };
 
 class ModelSettings : public QWidget
@@ -117,7 +125,7 @@ class ModelSettings : public QWidget
 	QPushButton* updateGroupName;
 public:
 	ModelSettings(QWidget* p);
-	~ModelSettings() { if (LAppDefine::DebugLogEnable) printf("ModelSettings destroyed\n"); }
+	~ModelSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ModelSettings destroyed\n"); }
 
 	void LoadConfig();
 	void Release();
@@ -162,7 +170,7 @@ private:
 	QWidget* _parent;
 public:
 	ChatSettings(QWidget* p);
-	~ChatSettings() { if (LAppDefine::DebugLogEnable) printf("ChatSettings destroyed\n"); }
+	~ChatSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ChatSettings destroyed\n"); }
 
 	void LoadConfig();
 	void Release();
@@ -184,7 +192,7 @@ private:
 public:
 	friend class AppSettings;
 	ControlWidget();
-	~ControlWidget() { if (LAppDefine::DebugLogEnable) printf("ControlWidget destroyed\n"); }
+	~ControlWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ControlWidget destroyed\n"); }
 	void Release();
 	void Pop();
 };

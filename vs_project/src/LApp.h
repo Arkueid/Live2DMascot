@@ -46,12 +46,13 @@ namespace LAppConfig {
 	extern int _DialogXPadding;
 	extern int _DialogYPadding;
 	extern bool _WaitChatResponse;
-
+	extern double _SoundVolume;
 	extern string _ChatSavePath;
 	extern string _CustomChatServerHostPort;
 	extern string _CustomChatServerRoute;
 	extern bool _CustomChatServerOn;
 	extern int _CustomChatServerReadTimeOut;
+	extern bool _RepairModeOn;
 };
 
 class LApp

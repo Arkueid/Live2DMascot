@@ -1,4 +1,5 @@
-﻿  BgmListView.cpp
+﻿  AudioUtils.cpp
+  BgmListView.cpp
   ChatWidget.cpp
   ControlWidget.cpp
   Dialog.cpp

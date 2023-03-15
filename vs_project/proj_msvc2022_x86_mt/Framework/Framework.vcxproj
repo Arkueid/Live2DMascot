@@ -55,7 +55,7 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Framework</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\build\proj_msvc2022_x86_mt\Framework\Release\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">Framework\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Framework.dir\Release\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">Framework.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Framework</TargetName>
@@ -144,7 +144,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR="Release";CONSOLE_FLAG</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>

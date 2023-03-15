@@ -180,6 +180,20 @@ extern "C"
      */
     csmApi csmMocVersion csmCallingConvention csmGetMocVersion(const void* address, const unsigned int size);
 
+    /* ----------- *
+     * CONSISTENCY *
+     * ----------- */
+
+    /**
+     * Checks consistency of a moc.
+     *
+     * @param  address  Address of unrevived moc. The address must be aligned to 'csmAlignofMoc'.
+     * @param  size     Size of moc (in bytes).
+     *
+     * @return  '1' if Moc is valid; '0' otherwise.
+     */
+    csmApi int csmCallingConvention csmHasMocConsistency(void* address, const unsigned int size);
+
     /* ------- *
      * LOGGING *
      * ------- */

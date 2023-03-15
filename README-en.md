@@ -14,9 +14,10 @@
 	* [Setting widget](#setting-widget)
 	* [Sound](#playing-sound)
 	* [Text for sound](#text-display)  
-4. [Notice](#notice)
-5. [Dev-Environment](#developing-environment)
-6. [Compiling](#compile)  
+4. [Changelog](CHANGELOG.md)
+5. [Notice](#notice)
+6. [Dev-Environment](#developing-environment)
+7. [Compiling](#compile)  
 
 ## Preview    
 

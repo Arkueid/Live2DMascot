@@ -8,7 +8,7 @@ class BgmListView : public QWidget
 {
 public:
 	BgmListView();
-	~BgmListView() { if (LAppDefine::DebugLogEnable) printf("BgmListView destroyed\n"); }
+	~BgmListView() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]BgmListView destroyed\n"); }
 	void enterEvent(QEvent* e);
 	void leaveEvent(QEvent* e);
 	void Release();

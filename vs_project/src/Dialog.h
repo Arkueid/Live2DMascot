@@ -10,7 +10,7 @@ protected:
 	void mouseReleaseEvent(QMouseEvent* e);
 public:
 	Dialog();
-	~Dialog() { if (LAppDefine::DebugLogEnable) printf("Dialog destroyed\n"); }
+	~Dialog() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]Dialog destroyed\n"); }
 	void Pop(const char* text);
 	void Release();
 	void AttachToCharacter();

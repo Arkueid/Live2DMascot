@@ -4,7 +4,7 @@
 		"LastPos" : 
 		{
 			"X" : 255,
-			"Y" : 0
+			"Y" : -475
 		}
 	},
 	"ChatAPI" : 
@@ -49,9 +49,11 @@
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
+		"RepairModeOn" : false,
 		"ShowBackground" : false,
 		"ShowBgmList" : true,
 		"ShowText" : true,
+		"SoundVolume" : 0.040000000000000001,
 		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,

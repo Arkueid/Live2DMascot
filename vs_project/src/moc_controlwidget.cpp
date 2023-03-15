@@ -131,8 +131,8 @@ void MyText::loseFocus()
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 struct qt_meta_stringdata_AppSettings_t {
-    QByteArrayData data[6];
-    char stringdata0[48];
+    QByteArrayData data[8];
+    char stringdata0[72];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -146,11 +146,13 @@ QT_MOC_LITERAL(1, 12, 8), // "OpenFile"
 QT_MOC_LITERAL(2, 21, 0), // ""
 QT_MOC_LITERAL(3, 22, 5), // "Apply"
 QT_MOC_LITERAL(4, 28, 5), // "Reset"
-QT_MOC_LITERAL(5, 34, 13) // "OpenSourceDir"
+QT_MOC_LITERAL(5, 34, 13), // "OpenSourceDir"
+QT_MOC_LITERAL(6, 48, 9), // "SetVolume"
+QT_MOC_LITERAL(7, 58, 13) // "SetRepairMode"
 
     },
     "AppSettings\0OpenFile\0\0Apply\0Reset\0"
-    "OpenSourceDir"
+    "OpenSourceDir\0SetVolume\0SetRepairMode"
 };
 #undef QT_MOC_LITERAL
 
@@ -160,7 +162,7 @@ static const uint qt_meta_data_AppSettings[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -168,12 +170,16 @@ static const uint qt_meta_data_AppSettings[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x08 /* Private */,
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    0,   36,    2, 0x08 /* Private */,
-       5,    0,   37,    2, 0x08 /* Private */,
+       1,    0,   44,    2, 0x08 /* Private */,
+       3,    0,   45,    2, 0x08 /* Private */,
+       4,    0,   46,    2, 0x08 /* Private */,
+       5,    0,   47,    2, 0x08 /* Private */,
+       6,    0,   48,    2, 0x08 /* Private */,
+       7,    0,   49,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -192,6 +198,8 @@ void AppSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->Apply(); break;
         case 2: _t->Reset(); break;
         case 3: _t->OpenSourceDir(); break;
+        case 4: _t->SetVolume(); break;
+        case 5: _t->SetRepairMode(); break;
         default: ;
         }
     }
@@ -227,13 +235,13 @@ int AppSettings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }

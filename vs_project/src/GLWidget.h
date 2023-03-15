@@ -39,7 +39,7 @@ private:
 	bool _drawBackground = false;
 public:
 	GLWidget();
-	~GLWidget() { if (LAppDefine::DebugLogEnable) printf("GLWdiget destroyed\n"); }
+	~GLWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]GLWdiget destroyed\n"); }
 	void mousePressEvent(QMouseEvent* e);
 	void mouseReleaseEvent(QMouseEvent* e);
 	void mouseMoveEvent(QMouseEvent* e);

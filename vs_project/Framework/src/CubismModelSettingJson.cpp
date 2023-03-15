@@ -58,7 +58,7 @@ const csmChar* Parameter = "Parameter";
 const csmChar* SoundPath = "Sound";
 const csmChar* FadeInTime = "FadeInTime";
 const csmChar* FadeOutTime = "FadeOutTime";
-const csmChar* Text = "Text";
+
 // Layout
 const csmChar* CenterX = "CenterX";
 const csmChar* CenterY = "CenterY";
@@ -130,9 +130,9 @@ csmBool CubismModelSettingJson::IsExistMotionSoundFile(const csmChar* groupName,
     Utils::Value& node = (*_jsonValue[FrequentNode_Motions])[groupName][index][SoundPath];
     return !node.IsNull() && !node.IsError();
 }
-csmBool CubismModelSettingJson::IsExistTextForMotion(const csmChar* groupName, csmInt32 index) const
+csmBool CubismModelSettingJson::IsExistText(const csmChar* groupName, csmInt32 index) const
 {
-    Utils::Value& node = (*_jsonValue[FrequentNode_Motions])[groupName][index][Text];
+    Utils::Value& node = (*_jsonValue[FrequentNode_Motions])[groupName][index]["Text"];
     return !node.IsNull() && !node.IsError();
 }
 csmBool CubismModelSettingJson::IsExistMotionFadeIn(const csmChar* groupName, csmInt32 index) const
@@ -351,20 +351,20 @@ csmInt32 CubismModelSettingJson::GetMotionCount(const csmChar* groupName)
 
 const csmChar* CubismModelSettingJson::GetMotionFileName(const csmChar* groupName, csmInt32 index)
 {
-    if (!IsExistMotionGroupName(groupName) || (*_jsonValue[FrequentNode_Motions])[groupName][index][FilePath].IsNull())return "";
+    if (!IsExistMotionGroupName(groupName))return "";
     return (*_jsonValue[FrequentNode_Motions])[groupName][index][FilePath].GetRawString();
 }
 
 const csmChar* CubismModelSettingJson::GetMotionSoundFileName(const csmChar* groupName, csmInt32 index)
 {
-    if (!IsExistMotionSoundFile(groupName, index) || (*_jsonValue[FrequentNode_Motions])[groupName][index][SoundPath].IsNull())return "";
+    if (!IsExistMotionSoundFile(groupName, index))return "";
     return (*_jsonValue[FrequentNode_Motions])[groupName][index][SoundPath].GetRawString();
 }
 
 const csmChar* CubismModelSettingJson::GetTextForMotion(const csmChar* groupName, csmInt32 index)
 {
-    if (!IsExistTextForMotion(groupName, index) || (*_jsonValue[FrequentNode_Motions])[groupName][index][Text].IsNull()) return "";
-    return (*_jsonValue[FrequentNode_Motions])[groupName][index][Text].GetRawString();
+    if (!IsExistText(groupName, index))return "";
+    return (*_jsonValue[FrequentNode_Motions])[groupName][index]["Text"].GetRawString();
 }
 
 csmFloat32 CubismModelSettingJson::GetMotionFadeInTimeValue(const csmChar* groupName, csmInt32 index)

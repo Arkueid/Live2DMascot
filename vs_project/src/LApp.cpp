@@ -45,6 +45,8 @@ namespace LAppConfig {
     bool _ShowBackground;
     bool _TransparentBackground;
     bool _TransparentCharacter;
+    double _SoundVolume;
+    bool _RepairModeOn;
     //dialog设置
     int _DialogFontSize;
     string _DialogFontFamily;
@@ -119,8 +121,6 @@ void LApp::Initialize(int argc, char* argv[])
     HolidayUtils::CheckUpdate();
     LoadConfig();
     _win->setupUI();
-    if (LAppDefine::DebugLogEnable)
-        printf("[DEBUG]LApp end initialize\n");
 }
 
 void LApp::LoadConfig() {
@@ -128,7 +128,7 @@ void LApp::LoadConfig() {
     LAppConfig::_ConfigPath = testConfigPath;
     if (DebugLogEnable)
     {
-        Log("Config", testConfigPath);
+        Log("[CONFIG]Path", testConfigPath);
     }
     ifstream file;
     file.open(testConfigPath);
@@ -150,7 +150,7 @@ void LApp::LoadConfig() {
     LAppConfig::_ModelDir = !config["ModelSettings"]["ModelDir"].isNull() ? config["ModelSettings"]["ModelDir"].asCString() : "Resources";
 
     const char* path = QString::fromUtf8(LAppConfig::_ModelDir.c_str()).toLocal8Bit();
-    Log("Resource Dir", path);
+    Log("[CONFIG]Resource Dir", path);
     if (_access(path, 0) != 0) {
         LApp::Warning("资源文件夹路径不正确！\n请修改config.json文件");
         _app->exit();
@@ -192,6 +192,8 @@ void LApp::LoadConfig() {
     LAppConfig::_ShowText = !config["UserSettings"]["ShowText"].isNull() ? config["UserSettings"]["ShowText"].asBool() : true;
     LAppConfig::_ShowBgmList = !config["UserSettings"]["ShowBgmList"].isNull() ? config["UserSettings"]["ShowBgmList"].asBool() : true;
     LAppConfig::_TextFadeOutTime = !config["UserSettings"]["TextFadeOutTime"].isNull() ? config["UserSettings"]["TextFadeOutTime"].asInt() : 6;
+    LAppConfig::_SoundVolume = !config["UserSettings"]["SoundVolume"].isNull() ? config["UserSettings"]["SoundVolume"].asDouble() : 1;
+    LAppConfig::_RepairModeOn = !config["UserSettings"]["RepairModeOn"].isNull() ? config["UserSettings"]["RepairModeOn"].asBool() : false;
 
     LAppConfig::_DialogFontSize = !config["Dialog"]["FontSize"].isNull() ? config["Dialog"]["FontSize"].asInt() : 10;
     LAppConfig::_DialogFontFamily = !config["Dialog"]["FontFamily"].isNull() ? config["Dialog"]["FontFamily"].asCString() : "Comic Sans MS";
@@ -209,7 +211,8 @@ void LApp::LoadConfig() {
     LAppConfig::_CustomChatServerRoute = !config["ChatAPI"]["CustomChatServer"]["Route"].isNull() ? config["ChatAPI"]["CustomChatServer"]["Route"].asCString() : "";
     LAppConfig::_ChatSavePath = !config["ChatAPI"]["ChatSavePath"].isNull() ? config["ChatAPI"]["ChatSavePath"].asCString() : "chat";
     LAppConfig::_CustomChatServerReadTimeOut = !config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].isNull() ? config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].asInt() : 10;
-    printf("lapp end init\n");
+    if (LAppDefine::DebugLogEnable)
+        Log("[CONFIG]Load", "Finished");
 }
 
 void LApp::Run()
@@ -217,7 +220,7 @@ void LApp::Run()
     _win->Run();
     _app->exec();
     if (LAppDefine::DebugLogEnable)
-        printf("App Quit\n");
+        Log("Exit", "Success");
 }
 
 void LApp::Release()
@@ -260,6 +263,8 @@ void LApp::SaveConfig()
     config["UserSettings"]["NoSound"] = LAppConfig::_NoSound;
     config["UserSettings"]["ShowText"] = LAppConfig::_ShowText;
     config["UserSettings"]["ShowBgmList"] = LAppConfig::_ShowBgmList;
+    config["UserSettings"]["SoundVolume"] = LAppConfig::_SoundVolume;
+    config["UserSettings"]["RepairModeOn"] = LAppConfig::_RepairModeOn;
 
     config["BangumiView"]["LastPos"]["X"] = LApp::GetInstance()->GetWindow()->GetBgmListView()->x();
     config["BangumiView"]["LastPos"]["Y"] = LApp::GetInstance()->GetWindow()->GetBgmListView()->y();

@@ -3,7 +3,7 @@
 	{
 		"LastPos" : 
 		{
-			"X" : 902,
+			"X" : 786,
 			"Y" : 0
 		}
 	},
@@ -37,7 +37,7 @@
 	"ModelSettings" : 
 	{
 		"LipSyncMagnification" : 1.1000000238418579,
-		"ModelDir" : "../Resources",
+		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
 		"ModelName" : "nn",
 		"MotionInterval" : 60.0
 	},
@@ -52,7 +52,8 @@
 		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
-		"StayOnTop" : true,
+		"SoundVolume" : 0.28000000000000003,
+		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
@@ -63,8 +64,8 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1589,
-			"Y" : 623
+			"X" : 1292,
+			"Y" : 458
 		},
 		"Width" : 300
 	}

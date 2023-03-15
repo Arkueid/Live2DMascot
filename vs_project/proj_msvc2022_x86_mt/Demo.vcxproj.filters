@@ -1,123 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\src\BgmListView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\ChatWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\ControlWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Dialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\GLWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\jsoncpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\LApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\LAppAllocator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppDefine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppDelegate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppLive2DManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppPal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppTextureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LAppWavFileHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\moc_controlwidget.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\src\LAppAllocator.cpp">
+      <Filter>Source Files\live2d</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\moc_glwidget.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\src\LAppDefine.cpp">
+      <Filter>Source Files\live2d</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\NetworkUtils.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\src\LAppDelegate.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppLive2DManager.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppPal.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppModel.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppTextureManager.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppView.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppWavFileHandler.cpp">
+      <Filter>Source Files\live2d</Filter>
     </ClCompile>
     <ClCompile Include="..\src\TouchManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BgmListView.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ChatWidget.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ControlWidget.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Dialog.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLWidget.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioUtils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\NetworkUtils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_controlwidget.cpp">
+      <Filter>Source Files\qmeta objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_glwidget.cpp">
+      <Filter>Source Files\qmeta objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\BgmListView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ChatWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\ControlWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Dialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\GLWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\LApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="..\src\LAppAllocator.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppDefine.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppDelegate.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppLive2DManager.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppModel.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppPal.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppTextureManager.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppView.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\LAppWavFileHandler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\NetworkUtils.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
     <ClInclude Include="..\src\TouchManager.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\live2d</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\src\BgmListView.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ChatWidget.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ControlWidget.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Dialog.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLWidget.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\NetworkUtils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioUtils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -125,6 +131,27 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{311009D0-A696-327E-ADDB-D4754E03EF38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\live2d">
+      <UniqueIdentifier>{b613306e-3550-4d49-982e-5e58d45d65bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\win">
+      <UniqueIdentifier>{3fbddb51-b327-4703-ac1f-608ab252a8e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{ce3149c2-1213-4f67-9dad-bb573bde22f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\live2d">
+      <UniqueIdentifier>{c1e5d4d5-a484-4bc5-815a-fb27eeaac9b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win">
+      <UniqueIdentifier>{75358797-80df-4274-98f3-fa7924db59d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{5176c530-d29d-466a-8724-cd1a4e108c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\qmeta objects">
+      <UniqueIdentifier>{6ed3489e-383e-4592-a8e3-09b9d3e65ffe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

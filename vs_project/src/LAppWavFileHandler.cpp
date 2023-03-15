@@ -6,6 +6,7 @@
  */
 
 #include "LAppWavFileHandler.hpp"
+#include "AudioUtils.h"
 #include <cmath>
 #include <cstdint>
 #include "LAppPal.hpp"
@@ -77,6 +78,7 @@ void LAppWavFileHandler::Start(const Csm::csmString& filePath)
 
     // RMS値をリセット
     _lastRms = 0.0f;
+
 }
 
 Csm::csmFloat32 LAppWavFileHandler::GetRms() const
@@ -185,7 +187,6 @@ Csm::csmBool LAppWavFileHandler::LoadWavFile(const Csm::csmString& filePath)
         ret = true;
 
     }  while (false);
-
     // ファイル開放
     LAppPal::ReleaseBytes(_byteReader._fileByte);
     _byteReader._fileByte = NULL;

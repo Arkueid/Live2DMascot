@@ -202,7 +202,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\thirdParty\stb;..\Framework\src;..\thirdParty\glew\include;..\thirdParty\glfw\include;..\thirdParty\httplib;..\thirdParty\Qt\include;..\thirdParty\OpenSSL-Win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\thirdParty\stb;..\Framework\src;..\thirdParty\glew\include;..\thirdParty\glfw\include;..\thirdParty\httplib;..\thirdParty\Qt\include;..\thirdParty\OpenSSL-Win32\include;..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "../Core/include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -260,6 +260,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\AudioUtils.cpp" />
     <ClCompile Include="..\src\BgmListView.cpp" />
     <ClCompile Include="..\src\ChatWidget.cpp" />
     <ClCompile Include="..\src\ControlWidget.cpp" />
@@ -281,6 +282,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\src\moc_glwidget.cpp" />
     <ClCompile Include="..\src\NetworkUtils.cpp" />
     <ClCompile Include="..\src\TouchManager.cpp" />
+    <ClInclude Include="..\src\AudioUtils.h" />
     <ClInclude Include="..\src\BgmListView.h" />
     <ClInclude Include="..\src\ChatWidget.h" />
     <ClInclude Include="..\src\ControlWidget.h" />

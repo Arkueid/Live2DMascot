@@ -554,6 +554,7 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
     // Curves
     for (csmInt32 curveCount = 0; curveCount < _motionData->CurveCount; ++curveCount)
     {
+        //curve 的target属性，只有以下三种
         if (strcmp(json->GetMotionCurveTarget(curveCount), TargetNameModel) == 0)
         {
             _motionData->Curves[curveCount].Type = CubismMotionCurveTarget_Model;
@@ -571,6 +572,7 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
             CubismLogWarning("Warning : Unable to get segment type from Curve! The number of \"CurveCount\" may be incorrect!");
         }
 
+        //其他属性
         _motionData->Curves[curveCount].Id = json->GetMotionCurveId(curveCount);
 
         _motionData->Curves[curveCount].BaseSegmentIndex = totalSegmentCount;
@@ -584,9 +586,10 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
                     ? json->GetMotionCurveFadeOutTime(curveCount)
                     : -1.0f;
 
-        // Segments
+        // 遍历Segments数组
         for (csmInt32 segmentPosition = 0; segmentPosition < json->GetMotionCurveSegmentCount(curveCount);)
         {
+            //第一个位置
             if (segmentPosition == 0)
             {
                 _motionData->Segments[totalSegmentCount].BasePointIndex = totalPointCount;
@@ -606,6 +609,7 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
 
             switch (segment)
             {
+                                                //segment == 0
             case CubismMotionSegmentType_Linear: {
                 _motionData->Segments[totalSegmentCount].SegmentType = CubismMotionSegmentType_Linear;
                 _motionData->Segments[totalSegmentCount].Evaluate = LinearEvaluate;
@@ -618,6 +622,7 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
 
                 break;
             }
+                                                //segment == 1
             case CubismMotionSegmentType_Bezier: {
                 _motionData->Segments[totalSegmentCount].SegmentType = CubismMotionSegmentType_Bezier;
                 if (areBeziersRestructed || UseOldBeziersCurveMotion) {
@@ -642,6 +647,7 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
 
                 break;
             }
+                                               //segment == 2
             case CubismMotionSegmentType_Stepped: {
                 _motionData->Segments[totalSegmentCount].SegmentType = CubismMotionSegmentType_Stepped;
                 _motionData->Segments[totalSegmentCount].Evaluate = SteppedEvaluate;
@@ -654,6 +660,7 @@ void CubismMotion::Parse(const csmByte* motionJson, const csmSizeInt size)
 
                 break;
             }
+                                                //segment == 3
             case CubismMotionSegmentType_InverseStepped: {
                 _motionData->Segments[totalSegmentCount].SegmentType = CubismMotionSegmentType_InverseStepped;
                 _motionData->Segments[totalSegmentCount].Evaluate = InverseSteppedEvaluate;

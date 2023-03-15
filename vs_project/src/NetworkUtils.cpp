@@ -49,19 +49,19 @@ namespace BgmListUtils {
 		if (ShouldUpdate())
 		{
 			try {
-				Log("BgmListUtils", "正在拉取番剧列表...");
+				Log("[BgmList]Update", "正在拉取番剧列表...");
 				bool ret = UpdateBgmList();
 				if (ret)
-					Log("BgmListUtils", string("番剧列表更新完毕: ").append(_BgmListJsonPath).c_str());
-				else Log("BgmListUtils", "番剧列表更新失败!");
+					Log("[BgmList]Update", string("番剧列表更新完毕: ").append(_BgmListJsonPath).c_str());
+				else Log("[BgmList]Update", "番剧列表更新失败!");
 			}
 			catch (...)
 			{
-				Log("UpdateBgmList", "无网络连接，更新已取消!");
+				Log("[BgmList]Exception", "无网络连接，更新已取消!");
 			}
 		}
 		else {
-			Log("BgmListUtils", "番剧列表已是最新，无需更新！");
+			Log("[BgmList]Update", "番剧列表已是最新，无需更新！");
 		}
 	}
 }
@@ -72,7 +72,7 @@ namespace HolidayUtils
 	const bool _DebugLogEnable = true;
 	bool GetHolidayJson()
 	{
-		Log("BgmListUtils", "正在拉取节日列表...");
+		Log("[Holiday]Update", "正在拉取节日列表...");
 		Client cli("https://timor.tech");
 		Json::Value json;
 		Json::Reader reader;
@@ -103,16 +103,16 @@ namespace HolidayUtils
 			try {
 				bool ret = GetHolidayJson();
 				if (ret)
-					Log("HolidayUtils", string("节日列表更新完毕: ").append(_HolidayJsonPath).c_str());
-				else Log("HolidayUtils", "节日列表更新失败!");
+					Log("[Holiday]Update", string("节日列表更新完毕: ").append(_HolidayJsonPath).c_str());
+				else Log("[Holiday]Exception", "节日列表更新失败!");
 			}
 			catch (...)
 			{
-				Log("HolidayUtils", "无网络连接，更新已取消!");
+				Log("[Holiday]Exception", "无网络连接，更新已取消!");
 			}
 		}
 		else {
-			Log("HolidayUtils", "节日列表已是最新，无需更新！");
+			Log("[Holiday]Update", "节日列表已是最新，无需更新！");
 		}
 	}
 
@@ -148,7 +148,7 @@ namespace ChatAPI {
 			Json::Value json;
 			reader.parse(res.value().body, json);
 			QTextCodec* codec = QTextCodec::codecForName("gbk");
-			Log("ChatAI", codec->fromUnicode(json["message"].asCString()));
+			Log("[ChatAI]Response Msg", codec->fromUnicode(json["message"].asCString()));
 			if (strcmp(json["code"].asCString(), "00000") == 0)
 				resText = QString::fromUtf8(json["data"][0]["content"].asCString()).toStdString();
 			else {
@@ -189,7 +189,7 @@ namespace ChatAPI {
 			);
 			if (res.error() != Error::Success)
 			{
-				Log("ChatApi", "请求失败!");
+				Log("[ChatApi]Exception", "请求失败!");
 				resText = QString::fromLocal8Bit("无法连接到服务器!").toStdString();
 				soundPath.clear();
 				return;
