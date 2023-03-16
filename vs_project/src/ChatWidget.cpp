@@ -27,96 +27,62 @@ ConversationWidget::ConversationWidget()
 	//透明背景
 	setAttribute(Qt::WA_TranslucentBackground);
 	//大小
-	resize(400, 200);
-	//获取焦点？
-	setEnabled(true);
-	//开启后可检测输入法输入
-	setAttribute(Qt::WA_InputMethodEnabled, true);
-	blink = false;
-	_fontMetrics = new QFontMetrics(_font);
-	_font.setFamily("微软雅黑");
-	_font.setPointSizeF(14);
-	_focused = false;
+	setFixedSize(LAppConfig::_ChatWidgetWidth, LAppConfig::_ChatWidgetHeight);
+	_font.setFamily(QString::fromUtf8(LAppConfig::_ChatWidgetFontFamily.c_str()));
+	_font.setPointSizeF(LAppConfig::_ChatWidgetFontSize);
 	LAppConfig::_WaitChatResponse = false;
-	currentTimerIndex = startTimer(500);
+
+	_frame = new QFrame(this);
+	_frame->setFixedSize(LAppConfig::_ChatWidgetWidth, LAppConfig::_ChatWidgetHeight);
+
+	inputArea = new QTextEdit();
+	inputArea->setFont(_font);
+	inputArea->setPlaceholderText(QString::fromLocal8Bit("prompt..."));
+	inputArea->setStyleSheet(
+		QString("QTextEdit {background-color: rgba(0, 0, 0, 0); color: ").append(LAppConfig::_ChatWidgetFontColor.c_str()).append("; border: none; }")
+	);
+	_frame->setObjectName("ChatWidget");
+	_frame->setStyleSheet(
+		QString("QScrollBar:vertical{width: 8px;background: #DDD;border: none}"
+			"QScrollBar::handle:vertical{background: #AAA;}"
+			"QScrollBar::handle:vertical:hover{background: #888;}"
+			"QWidget#ChatWidget{background-color: ").append(LAppConfig::_ChatWidgetBackgroundColor.c_str()).append("; }")
+	);
+	_Send = new QPushButton(QString::fromLocal8Bit("发送"));
+	_Close = new QPushButton(QString::fromLocal8Bit("关闭"));
+	grid = new QGridLayout();
+	grid->addWidget(inputArea, 0, 0, 2, 4);
+	grid->addWidget(_Send, 4, 3, 1, 1);
+	grid->addWidget(_Close, 4, 2, 1, 1);
+	_frame->setLayout(grid);
+	
+	connect(_Send, SIGNAL(clicked()), SLOT(SendRequest()));
+	connect(_Close, SIGNAL(clicked()), SLOT(Cancel()));
+
+	mouseX = 0;
+	mouseY = 0;
 }
 
 void ConversationWidget::Release()
 {
-	if (currentTimerIndex != -1) killTimer(currentTimerIndex);
+	_Send->deleteLater();
+	_Close->deleteLater();
+	grid->deleteLater();
+	inputArea->deleteLater();
 	close();
 }
 
-//根据输入内容绘制文字，实现简单换行（不识别标点）
-void ConversationWidget::paintEvent(QPaintEvent* e)
-{
-	QPainter painter(this);
-	painter.fillRect(this->rect(), QColor(0,0,0,200));
-	painter.setFont(_font);
-	int xpos=20;
-	int ypos=25;
-	QString x;
-	painter.setPen(QColor(51, 150, 210));
-	QString person = QString::fromLocal8Bit("你: ");
-	painter.drawText(xpos, ypos, person);
-	xpos += _fontMetrics->width(person) + 7;
-	painter.setPen(Qt::white);
-	if (LAppConfig::_WaitChatResponse)
-	{
-		painter.drawText(xpos, ypos, QString::fromLocal8Bit("获取服务器响应中, 不要太着急哟~"));
-		return;
-	}
-	for (int i=0; i < _text.length(); i++)
-	{
-		if (xpos >= 370)
-		{
-			ypos += _fontMetrics->height() + 10;
-			xpos = 20;
-		}
-		x = _text.at(i);
-		int cwidth = _fontMetrics->width(x) + 7;
-		painter.drawText(xpos, ypos, x);
-		xpos += cwidth;
-		if (ypos + _fontMetrics->height() + 10 > 220)
-		{
-			_text = _text.mid(0, i);
-		}
-	}
-	if (blink && _focused && !LAppConfig::_WaitChatResponse)
-	painter.drawText(xpos, ypos, "_");
-}
-
-//获得焦点
-void ConversationWidget::focusInEvent(QFocusEvent* e) {
-	_focused = true;
-}
-
-//失去焦点
-void ConversationWidget::focusOutEvent(QFocusEvent* e)
-{
-	_focused = false;
-}
-
-//鼠标单击进入输入模式
 void ConversationWidget::mousePressEvent(QMouseEvent* e)
 {
-	if (e->button() == Qt::RightButton)
-	{
-		_text.append(QGuiApplication::clipboard()->text());
-		update();
-	}
-	else {
-		setFocus();
-	}
+	mouseX = e->pos().x();
+	mouseY = e->pos().y();
 }
 
-//鼠标双击关闭
-void ConversationWidget::mouseDoubleClickEvent(QMouseEvent* e)
+void ConversationWidget::mouseMoveEvent(QMouseEvent* e)
 {
-	if (e->button() == Qt::LeftButton)
+	if (e->buttons() == Qt::RightButton)
 	{
-		close();
-		_text.clear();
+		move(x() + e->pos().x() - mouseX, y() + e->pos().y() - mouseY);
 	}
 }
 
@@ -130,24 +96,22 @@ void ConversationWidget::AttachToCharacter()
 //弹出
 void ConversationWidget::getInput()
 {
+	_msg.clear();
+	inputArea->clear();
 	AttachToCharacter();
 	show();
 }
 
-//输入法输入事件
-void ConversationWidget::inputMethodEvent(QInputMethodEvent* e)
-{
-	if (LAppConfig::_WaitChatResponse) return; //已有请求时阻断输入
-	_text.append(e->commitString());
-	update();
-}
 
 //处理聊天文本发送和接收
 void ConversationWidget::ProcessNetworkResponse()
 {
+	inputArea->setPlaceholderText("waiting...");
+	_Send->setEnabled(false);
 	LAppConfig::_WaitChatResponse = true;
 	GLWidget* win = LApp::GetInstance()->GetWindow();
-	string x = _text.toUtf8();
+	string x = _msg.toUtf8();
+	
 	LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
 	string text, soundPath;
 	if (LAppConfig::_CustomChatServerOn)
@@ -169,28 +133,31 @@ void ConversationWidget::ProcessNetworkResponse()
 	f.write(date.toString("[yyyy-MM-dd hh:mm:ss]\n").toStdString().c_str());
 	f.write(LAppConfig::_UserName.c_str());
 	f.write(": ");
-	f.write(_text.toUtf8().toStdString().c_str());
+	f.write(_msg.toUtf8().toStdString().c_str());
 	f.write("\n");
 	f.write(QString(LAppConfig::_AppName.c_str()).append(": ").toUtf8().toStdString().c_str());
 	f.write(QString::fromUtf8(text.c_str()).toUtf8().toStdString().c_str());
 	f.write("\n");
 	f.close();
 	LAppConfig::_WaitChatResponse = false;
-	_text.clear();
+	_Send->setEnabled(true);
+	inputArea->setPlaceholderText("prompt...");
+}
+
+void ConversationWidget::Cancel() {
+	inputArea->clear();
+	close();
 }
 
 //键盘输入事件处理，不含输入法输入
-void ConversationWidget::keyPressEvent(QKeyEvent* e)
+void ConversationWidget::SendRequest()
 {
 	if (LAppConfig::_WaitChatResponse) return;
-	if (e->key() == Qt::Key_Backspace)
+	else
 	{
-		_text = _text.mid(0, _text.length() - 1);
-	}
-	else if (e->key() == Qt::Key_Return)
-	{
-		close();
-		if (_text.isEmpty()) return;
+		if (inputArea->toPlainText().isEmpty()) return;
+		_msg = inputArea->toPlainText();
+		inputArea->clear();
 		if (!LAppConfig::_WaitChatResponse) 
 		{
 			PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);   //停止当前语音
@@ -198,15 +165,4 @@ void ConversationWidget::keyPressEvent(QKeyEvent* e)
 			std::thread(&ConversationWidget::ProcessNetworkResponse, this).detach();  //启动线程发送聊天文本
 		}
 	}
-	else {
-		_text.append(e->text());
-	}
-	update();
-}
-
-//输入光标闪烁计时器
-void ConversationWidget::timerEvent(QTimerEvent* e)
-{
-	blink = !blink;
-	update();
 }

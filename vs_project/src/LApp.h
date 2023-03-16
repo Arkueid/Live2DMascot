@@ -25,10 +25,23 @@ namespace LAppConfig {
 	extern bool _ShowText;
 	extern bool _ShowBgmList;
 	extern const char* _ConfigPath;
+
 	extern int _DialogFontSize;
 	extern string _DialogFontFamily;
 	extern string _DialogFontColor;
 	extern string _DialogBackgroundColor;
+	extern int _DialogYOffset;
+	extern int _DialogMaxWidth;
+	extern int _DialogXPadding;
+	extern int _DialogYPadding;
+
+	extern int _ChatWidgetFontSize;
+	extern string _ChatWidgetFontFamily;
+	extern string _ChatWidgetFontColor;
+	extern string _ChatWidgetBackgroundColor;
+	extern int _ChatWidgetWidth;
+	extern int _ChatWidgetHeight;
+
 	extern int _TextFadeOutTime;
 	extern int _BgmListLastPosX;
 	extern int _BgmListLastPosY;
@@ -41,10 +54,7 @@ namespace LAppConfig {
 	extern bool _TransparentBackground;
 	extern bool _MouseOn;
 	extern bool _TransparentCharacter;
-	extern int _DialogYOffset;
-	extern int _DialogMaxWidth;
-	extern int _DialogXPadding;
-	extern int _DialogYPadding;
+	
 	extern bool _WaitChatResponse;
 	extern double _SoundVolume;
 	extern string _ChatSavePath;

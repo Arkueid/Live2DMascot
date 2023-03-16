@@ -47,6 +47,13 @@ namespace LAppConfig {
     bool _TransparentCharacter;
     double _SoundVolume;
     bool _RepairModeOn;
+    //ChatWidget…Ë÷√
+    int _ChatWidgetFontSize;
+    string _ChatWidgetFontFamily;
+    string _ChatWidgetFontColor;
+    string _ChatWidgetBackgroundColor;
+    int _ChatWidgetWidth;
+    int _ChatWidgetHeight;
     //dialog…Ë÷√
     int _DialogFontSize;
     string _DialogFontFamily;
@@ -203,7 +210,14 @@ void LApp::LoadConfig() {
     LAppConfig::_DialogMaxWidth = !config["Dialog"]["MaxWidth"].isNull() ? config["Dialog"]["MaxWidth"].asInt() : 370;
     LAppConfig::_DialogXPadding = !config["Dialog"]["XPadding"].isNull() ? config["Dialog"]["XPadding"].asInt() : 10;
     LAppConfig::_DialogYPadding = !config["Dialog"]["YPadding"].isNull() ? config["Dialog"]["YPadding"].asInt() : 10;
-    
+
+    LAppConfig::_ChatWidgetFontSize = !config["ChatWidget"]["FontSize"].isNull() ? config["ChatWidget"]["FontSize"].asInt() : 14;
+    LAppConfig::_ChatWidgetFontFamily = !config["ChatWidget"]["FontFamily"].isNull() ? config["ChatWidget"]["FontFamily"].asCString() : QString::fromLocal8Bit("Œ¢»Ì—≈∫⁄").toUtf8().constData();
+    LAppConfig::_ChatWidgetFontColor = !config["ChatWidget"]["FontColor"].isNull() ? config["ChatWidget"]["FontColor"].asCString() : "white";
+    LAppConfig::_ChatWidgetBackgroundColor = !config["ChatWidget"]["BackgroundColor"].isNull() ? config["ChatWidget"]["BackgroundColor"].asCString() : "rgba(0, 0, 0, 180)";
+    LAppConfig::_ChatWidgetWidth = !config["ChatWidget"]["Width"].isNull() ? config["ChatWidget"]["Width"].asInt() : 410;
+    LAppConfig::_ChatWidgetHeight = !config["ChatWidget"]["Height"].isNull() ? config["ChatWidget"]["Height"].asInt() : 200;
+
     LAppConfig::_ApiKey = !config["ChatAPI"]["Mlyai"]["APIKey"].isNull() ? config["ChatAPI"]["Mlyai"]["APIKey"].asCString() : "82wmm51s1bskwft3";
     LAppConfig::_ApiSecret = !config["ChatAPI"]["Mlyai"]["APISecret"].isNull() ? config["ChatAPI"]["Mlyai"]["APISecret"].asCString() : "o0vp8k7e";
     LAppConfig::_CustomChatServerOn = !config["ChatAPI"]["CustomChatServer"]["On"].isNull() ? config["ChatAPI"]["CustomChatServer"]["On"].asBool() : false;
@@ -277,6 +291,13 @@ void LApp::SaveConfig()
     config["Dialog"]["MaxWdith"] = LAppConfig::_DialogMaxWidth;
     config["Dialog"]["XPadding"] = LAppConfig::_DialogXPadding;
     config["Dialog"]["YPadding"] = LAppConfig::_DialogYPadding;
+
+    config["ChatWidget"]["FontSize"] = LAppConfig::_ChatWidgetFontSize;
+    config["ChatWidget"]["FontFamily"] = LAppConfig::_ChatWidgetFontFamily;
+    config["ChatWidget"]["FontColor"] = LAppConfig::_ChatWidgetFontColor;
+    config["ChatWidget"]["BackgroundColor"] = LAppConfig::_ChatWidgetBackgroundColor;
+    config["ChatWidget"]["Width"] = LAppConfig::_ChatWidgetWidth;
+    config["ChatWidget"]["Height"] = LAppConfig::_ChatWidgetHeight;
 
     config["ChatAPI"]["CustomChatServer"]["On"] = LAppConfig::_CustomChatServerOn;
     config["ChatAPI"]["CustomChatServer"]["HostPort"] = LAppConfig::_CustomChatServerHostPort;

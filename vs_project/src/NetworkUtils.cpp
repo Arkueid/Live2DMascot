@@ -124,6 +124,7 @@ namespace HolidayUtils
 		ifs >> json;
 		ifs.close();
 		string td = QDateTime::currentDateTime().toString("MM-dd").toStdString();
+		Log("[HolidayUtils]Today", td.c_str());
 		if (!json["holiday"][td].isNull() && json["holiday"][td]["holiday"].asBool())
 		{
 			return json["holiday"][td]["name"].asCString();
@@ -144,6 +145,10 @@ namespace ChatAPI {
 		data["from"] = LAppConfig::_UserName;
 		try {
 			Result res = cli.Post("/reply", { {"Api-Key", LAppConfig::_ApiKey}, {"Api-Secret", LAppConfig::_ApiSecret} }, data.toStyledString().c_str(), "application/json; charset=UTF-8");
+			if (res.error() != Error::Success) {
+				resText = QString::fromLocal8Bit("Õ¯¬Á¡¨Ω””–ŒÛ≈∂~").toStdString();
+				return;
+			}
 			Json::Reader reader;
 			Json::Value json;
 			reader.parse(res.value().body, json);

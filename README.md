@@ -2,6 +2,9 @@
 
 ### 语言: **中文** | **[English](README-en.md)**  
 ***
+
+[更新内容](CHANGELOG.md)
+
 ## 目录
 
 1. [安全性问题](#关于cubism-sdk的安全性问题-2023-3-6)
@@ -16,17 +19,16 @@
 	* [语音播放](#语音播放)
 	* [文本显示](#文本显示)  
 4. [注意事项](#注意事项)
-5. [更新内容](CHANGELOG.md)
-6. [开发环境](#开发环境)
-7. [编译](#编译)     
+5. [开发环境](#开发环境)
+6. [编译](#编译)     
 
 ## 预览  
 
 ![启动](sample_images/Snipaste_2023-03-07_13-21-15.png)  
 
-![聊天](sample_images/Snipaste_2023-03-07_13-21-55.png)  
+![聊天](sample_images/chat.png)  
 
-![回复](sample_images/Snipaste_2023-03-07_13-22-06.png)
+![回复](sample_images/Snipaste_2023-03-16_21-42-04.png)
 
 
 ## 关于Cubism SDK的安全性问题 （2023-3-6）  
@@ -239,7 +241,7 @@
 <div align="center">
 	<img src="sample_images/chat.png" width="500">
 	<br>
-	<img src="sample_images/chat_rsp.png", width="400">
+	<img src="sample_images/Snipaste_2023-03-16_21-42-04.png", width="400">
 </div>  
 
 <div align="center">AI可以在茉莉云上进行调教，普通用户每日500次访问，一般来说是够了</div>

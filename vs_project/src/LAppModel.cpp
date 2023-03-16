@@ -609,7 +609,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         return InvalidMotionQueueEntryHandleValue;
     }
     const csmString fileName = _modelSetting->GetMotionFileName(group, no);
-
+    if (fileName == "Error:type mismatch") return NULL;
     //motion
     csmString name = Utils::CubismString::GetFormatedString("%s_%d", group, no);
     CubismMotion* motion = static_cast<CubismMotion*>(_motions[name.GetRawString()]);
@@ -632,7 +632,6 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
 
             if (LAppConfig::_RepairModeOn)
                 RepairMotion(path.GetRawString());
-
             buffer = CreateBuffer(path.GetRawString(), &size);
             motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, onFinishedMotionHandler));
             csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, no);
@@ -862,7 +861,7 @@ void LAppModel::Draw(CubismMatrix44& matrix)
 }
 /**
 * @brief    实现自定义触发位置的关键函数，基于官方HitTest函数修改
-* @param    x, y    鼠标点击位置的Live2D坐标，已经过坐标系变换
+* @param    x, y    鼠标点击位置的Live2D坐标，x，y需进行坐标系变换
 */
 csmString LAppModel::HitTest(csmFloat32 x, csmFloat32 y)
 {

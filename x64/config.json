@@ -4,7 +4,7 @@
 		"LastPos" : 
 		{
 			"X" : 500,
-			"Y" : -385
+			"Y" : 0
 		}
 	},
 	"ChatAPI" : 
@@ -22,6 +22,15 @@
 			"APIKey" : "82wmm51s1bskwft3",
 			"APISecret" : "o0vp8k7e"
 		}
+	},
+	"ChatWidget" : 
+	{
+		"BackgroundColor" : "rgba(0, 0, 0, 180)",
+		"FontColor" : "white",
+		"FontFamily" : "微软雅黑",
+		"FontSize" : 14,
+		"Height" : 200,
+		"Width" : 410
 	},
 	"Dialog" : 
 	{
@@ -49,9 +58,11 @@
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
+		"RepairModeOn" : false,
 		"ShowBackground" : false,
 		"ShowBgmList" : true,
 		"ShowText" : true,
+		"SoundVolume" : 1.0,
 		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,

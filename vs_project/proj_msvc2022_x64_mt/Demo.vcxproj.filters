@@ -162,6 +162,9 @@
     <ClCompile Include="..\src\AudioUtils.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\moc_chatwidget.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Demo.rc" />

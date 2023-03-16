@@ -23,12 +23,21 @@
 			"APISecret" : "o0vp8k7e"
 		}
 	},
+	"ChatWidget" : 
+	{
+		"BackgroundColor" : "rgba(0, 0, 0, 180)",
+		"FontColor" : "white",
+		"FontFamily" : "微软雅黑",
+		"FontSize" : 14,
+		"Height" : 200,
+		"Width" : 410
+	},
 	"Dialog" : 
 	{
 		"BackgroundColor" : "rgba(0, 0, 0, 200)",
 		"FontColor" : "white",
 		"FontFamily" : "Comic Sans MS",
-		"FontSize" : 10,
+		"FontSize" : 12,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
 		"YOffset" : -10,
@@ -36,9 +45,9 @@
 	},
 	"ModelSettings" : 
 	{
-		"LipSyncMagnification" : 1.1000000238418579,
+		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
-		"ModelName" : "nn",
+		"ModelName" : "nn2",
 		"MotionInterval" : 60.0
 	},
 	"UserSettings" : 
@@ -53,7 +62,7 @@
 		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
-		"SoundVolume" : 0.080000000000000002,
+		"SoundVolume" : 0.20999999999999999,
 		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
@@ -65,7 +74,7 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1292,
+			"X" : 1295,
 			"Y" : 458
 		},
 		"Width" : 300

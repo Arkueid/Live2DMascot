@@ -62,10 +62,13 @@
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="..\src\moc_controlwidget.cpp">
-      <Filter>Source Files\qmeta objects</Filter>
+      <Filter>Source Files\meta</Filter>
     </ClCompile>
     <ClCompile Include="..\src\moc_glwidget.cpp">
-      <Filter>Source Files\qmeta objects</Filter>
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_chatwidget.cpp">
+      <Filter>Source Files\meta</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +153,7 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{5176c530-d29d-466a-8724-cd1a4e108c2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\qmeta objects">
+    <Filter Include="Source Files\meta">
       <UniqueIdentifier>{6ed3489e-383e-4592-a8e3-09b9d3e65ffe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

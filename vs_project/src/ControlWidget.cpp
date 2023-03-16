@@ -84,24 +84,24 @@ void getDirNames(string path, vector<string>& files)
 {
 	//文件句柄
 #ifdef WIN64_FLAG
-	__int64   hFile = 0;
+	__int64		hFile = 0;
 #else
-	long	hFile = 0;
+	long		hFile = 0;
 #endif // WIN64_FLAG
 
 	//文件信息
 #ifdef WIN64_FLAG
-	struct __finddata64_t fileinfo;
+	struct		__finddata64_t fileinfo;
 #else
-	struct _finddata_t fileinfo;
+	struct		_finddata_t fileinfo;
 #endif // WIN64_FLAG
 
 	string p;
 	if (
 #ifdef WIN64_FLAG
-	(hFile = _findfirst64(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1L
+	(hFile	=	_findfirst64(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1L
 #else
-	(hFile = _findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1
+	(hFile	=	_findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1
 #endif // WIN64_FLAG
 		)
 	{
@@ -134,20 +134,20 @@ void getFileNames(string path, vector<string>& files)
 {
 	//文件句柄
 #ifdef WIN64_FLAG
-	__int64   hFile = 0;
-	struct __finddata64_t fileinfo;
+	__int64		hFile = 0;
+	struct		__finddata64_t fileinfo;
 #else
-	long   hFile = 0;
-	struct _finddata_t fileinfo;
+	long		hFile = 0;
+	struct		_finddata_t fileinfo;
 #endif // WIN64_FLAG
 
 	//文件信息
 	string p;
 	if (
 #ifdef WIN64_FLAG
-	(hFile = _findfirst64(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1L
+	(hFile	=	_findfirst64(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1L
 #else
-	(hFile = _findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1
+	(hFile	=	_findfirst(p.assign(path).append("\\*").c_str(), &fileinfo)) != -1
 #endif // WIN64_FLAG
 		)
 	{
@@ -192,20 +192,12 @@ AppSettings::AppSettings(QWidget* p)
 	volumeSlider->setMaximum(100);
 	volumeSlider->setMinimum(0);
 	volumeSlider->setOrientation(Qt::Horizontal);
-	volumeSlider->setStyleSheet(
-		"QSlider{background: transparent}"
-		"QSlider::sub-page:horizontal {background: rgb(80, 150, 255); margin-top: 8px; margin-bottom: 8px}"
-		"QSlider::handle:horizontal {background: rgb(193, 204, 208); border: 1px solid rgb(193, 204, 208); width: 5px; height: 5px; border-radius: 2px; margin-top: 6px; margin-bottom: 6px; padding: 0;}"
-	);
 	volumeSlider->setPageStep(1);
 
 	lbl_repairMode = new QLabel(QString::fromLocal8Bit("修复模式"));
 	repairModeControl = new QPushButton();
 	repairModeControl->setCheckable(true);
-	repairModeControl->setStyleSheet(
-		"QPushButton{background: rgb(80, 120, 230)}"
-		"QPushButton:checked{background: rgb(80, 180, 255);}"
-	);
+	repairModeControl->setObjectName("repairModeControl");
 
 	lbl_lipsync = new QLabel(QString::fromLocal8Bit("口型同步"));
 	lipSync = new QLineEdit();
@@ -454,7 +446,7 @@ ModelSettings::ModelSettings(QWidget* p)
 	connect(updateGroupName, SIGNAL(clicked()), SLOT(UpdateGroupName()));
 
 	connect(changeModel, SIGNAL(clicked()), SLOT(UpdateModel()));
-
+	_motionGroups->setObjectName("motionGroups");
 	_motionGroups->setStyleSheet(
 		QString("QScrollBar:vertical{width: 8px;background: #DDD;border: none}"
 			"QTreeWidget::branch::open:has-children{border-image: url(").append(_ModelDir.c_str()).append("/open.png); }"
@@ -470,6 +462,7 @@ ModelSettings::ModelSettings(QWidget* p)
 	model->setStyleSheet(styleSheet);
 	motionJsonPath->setStyleSheet(styleSheet);
 	motionSoundPath->setStyleSheet(styleSheet);
+
 	model->setView(new QListView());
 	motionJsonPath->setView(new QListView());
 	motionSoundPath->setView(new QListView());
@@ -828,6 +821,7 @@ void ModelSettings::StartMotion(QTreeWidgetItem* w, int idx)
 		string groupname = w->parent()->text(0).toUtf8();
 		int idx = w->data(1, 0).toInt();
 		LAppLive2DManager::GetInstance()->GetModel(0)->StartMotion(groupname.c_str(), idx, PriorityForce);
+
 	}
 	else {
 		motionJsonPath->setCurrentText("");
@@ -995,6 +989,12 @@ ControlWidget::ControlWidget()
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QPushButton{width: 100px; font-family: 微软雅黑; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(190, 235, 255); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+
+		"QSlider{background: transparent}"
+		"QSlider::sub-page:horizontal {background: rgb(80, 150, 255); margin-top: 8px; margin-bottom: 8px}"
+		"QSlider::handle:horizontal {background: rgb(193, 204, 208); border: 1px solid rgb(193, 204, 208); width: 5px; height: 5px; border-radius: 2px; margin-top: 6px; margin-bottom: 6px; padding: 0;}"
+		"QPushButton#repairModeControl{ background: rgba(70, 172, 255, 150);; color: rgb(180, 180, 180); font-weight: bold; border: 1px outset}"
+		"QPushButton#repairModeControl:checked{background-color: rgba(70, 172, 255, 190); color: rgb(220, 220, 220); border: 1px inset}"
 	);
 	_chatSettings->setStyleSheet(
 		"QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: 微软雅黑;}"

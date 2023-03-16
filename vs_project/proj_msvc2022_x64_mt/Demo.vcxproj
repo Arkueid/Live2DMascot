@@ -465,6 +465,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\src\LAppView.cpp" />
     <ClCompile Include="..\src\LAppWavFileHandler.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\moc_chatwidget.cpp" />
     <ClCompile Include="..\src\moc_controlwidget.cpp" />
     <ClCompile Include="..\src\moc_glwidget.cpp" />
     <ClCompile Include="..\src\NetworkUtils.cpp" />

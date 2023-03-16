@@ -1,11 +1,16 @@
 #pragma once
 #include <QtWidgets/qwidget.h>
+#include <QtWidgets/qtextedit.h>
+#include <QtWidgets/qpushbutton.h>
+#include <QtWidgets/qlayout.h>
+#include <QtWidgets/qframe.h>
 #include "LAppDefine.hpp"
 
 
 
 class ConversationWidget : public QWidget
 {
+	Q_OBJECT
 public:
 	ConversationWidget();
 	~ConversationWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ConversationWidget destroyed\n"); }
@@ -13,20 +18,20 @@ public:
 	void AttachToCharacter();
 	void Release();
 protected:
-	void paintEvent(QPaintEvent* e);
-	void mouseDoubleClickEvent(QMouseEvent* e);
-	void mousePressEvent(QMouseEvent* e);
-	void timerEvent(QTimerEvent* e);
-	void keyPressEvent(QKeyEvent* e);
-	void inputMethodEvent(QInputMethodEvent* e);
-	void focusInEvent(QFocusEvent* e);
-	void focusOutEvent(QFocusEvent* e);
 	void ProcessNetworkResponse();
+	void mouseMoveEvent(QMouseEvent* e);
+	void mousePressEvent(QMouseEvent* e);
+private slots:
+	void SendRequest();
+	void Cancel();
 private:
-	QString _text;
-	QFontMetrics* _fontMetrics;
-	bool blink;
 	QFont _font;
-	bool _focused;
-	int currentTimerIndex;
+	QString _msg;
+	QTextEdit* inputArea;
+	QPushButton* _Send;
+	QPushButton* _Close;
+	QGridLayout* grid;
+	QFrame* _frame;
+	int mouseX;
+	int mouseY;
 };

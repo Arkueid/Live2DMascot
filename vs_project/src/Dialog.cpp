@@ -78,7 +78,7 @@ void Dialog::mouseReleaseEvent(QMouseEvent* e)
 void Dialog::paintEvent(QPaintEvent* e)
 {
 	int boxWidth = _fontMetrics->width(_text) > LAppConfig::_DialogMaxWidth ? LAppConfig::_DialogMaxWidth : _fontMetrics->width(_text);
-	boxWidth += 2 * _xBorder;
+	boxWidth += (2 * _xBorder);
 	int boxHeight = (_fontMetrics->width(_text) / LAppConfig::_DialogMaxWidth + 1) * (_fontMetrics->descent() + _fontMetrics->leading() + _fontMetrics->ascent()) + 2 * _yBorder;
 	resize(boxWidth, boxHeight);
 	AttachToCharacter();
@@ -88,20 +88,6 @@ void Dialog::paintEvent(QPaintEvent* e)
 	path.addRoundRect(0, 0, boxWidth, boxHeight, 15);
 	painter.fillPath(path, QColor(LAppConfig::_DialogBackgroundColor.c_str()));
 	painter.setFont(_font);
-	int xpos = _xBorder;
-	int ypos = _yBorder + _fontMetrics->ascent() + _fontMetrics->leading();
-	QString x;
 	painter.setPen(LAppConfig::_DialogFontColor.c_str());
-	for (int i = 0; i < _text.length(); i++)
-	{
-		if (xpos >= LAppConfig::_DialogMaxWidth)
-		{
-			ypos += _fontMetrics->ascent() + _fontMetrics->leading();
-			xpos = _xBorder;
-		}
-		x = _text.at(i);
-		int cwidth =_fontMetrics->width(x);
-		painter.drawText(xpos, ypos, x);
-		xpos += cwidth;
-	}
+	painter.drawText(_xBorder, _yBorder, boxWidth - 2 * _xBorder, boxHeight, Qt::TextWordWrap, _text);
 }
