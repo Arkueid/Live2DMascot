@@ -136,7 +136,6 @@ void GLWidget::mouseMoveEvent(QMouseEvent* e)
 	{
 		move(x() + e->pos().x() - mouseX, y() + e->pos().y() - mouseY);
 		_dialog->AttachToCharacter();
-		_cvWidget->AttachToCharacter();
 	}
 }
 

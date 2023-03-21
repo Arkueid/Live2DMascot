@@ -27,38 +27,35 @@ ConversationWidget::ConversationWidget()
 	//透明背景
 	setAttribute(Qt::WA_TranslucentBackground);
 	//大小
-	setFixedSize(LAppConfig::_ChatWidgetWidth, LAppConfig::_ChatWidgetHeight);
+	setFixedSize(410, 50);
 	_font.setFamily(QString::fromUtf8(LAppConfig::_ChatWidgetFontFamily.c_str()));
 	_font.setPointSizeF(LAppConfig::_ChatWidgetFontSize);
 	LAppConfig::_WaitChatResponse = false;
-
 	_frame = new QFrame(this);
-	_frame->setFixedSize(LAppConfig::_ChatWidgetWidth, LAppConfig::_ChatWidgetHeight);
+	_frame->setFixedSize(400, 50);
 
-	inputArea = new QTextEdit();
+	inputArea = new QLineEdit();
 	inputArea->setFont(_font);
 	inputArea->setPlaceholderText(QString::fromLocal8Bit("prompt..."));
 	inputArea->setStyleSheet(
-		QString("QTextEdit {background-color: rgba(0, 0, 0, 0); color: ").append(LAppConfig::_ChatWidgetFontColor.c_str()).append("; border: none; }")
+		QString("QLineEdit {background-color: rgba(0, 0, 0, 0); color: ").append(LAppConfig::_ChatWidgetFontColor.c_str()).append("; border: none; }")
 	);
 	_frame->setObjectName("ChatWidget");
 	_frame->setStyleSheet(
 		QString("QScrollBar:vertical{width: 8px;background: #DDD;border: none}"
 			"QScrollBar::handle:vertical{background: #AAA;}"
 			"QScrollBar::handle:vertical:hover{background: #888;}"
-			"QWidget#ChatWidget{background-color: ").append(LAppConfig::_ChatWidgetBackgroundColor.c_str()).append("; }")
+			"QWidget#ChatWidget{background-color: ").append(LAppConfig::_ChatWidgetBackgroundColor.c_str()).append("; border-radius: 10px}")
 	);
-	_Send = new QPushButton(QString::fromLocal8Bit("发送"));
-	_Close = new QPushButton(QString::fromLocal8Bit("关闭"));
+	_Send = new QPushButton();
+	_Send->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/send.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/send_active.png)}"
+							"QPushButton:hover{width: 30; height: 30;}"));
+	_Send->setFixedSize(20, 20);
 	grid = new QGridLayout();
-	grid->addWidget(inputArea, 0, 0, 2, 4);
-	grid->addWidget(_Send, 4, 3, 1, 1);
-	grid->addWidget(_Close, 4, 2, 1, 1);
+	grid->addWidget(inputArea, 0, 0, 1, 4);
+	grid->addWidget(_Send, 0, 4, 1, 1);
 	_frame->setLayout(grid);
-	
 	connect(_Send, SIGNAL(clicked()), SLOT(SendRequest()));
-	connect(_Close, SIGNAL(clicked()), SLOT(Cancel()));
-
 	mouseX = 0;
 	mouseY = 0;
 }
@@ -66,10 +63,18 @@ ConversationWidget::ConversationWidget()
 void ConversationWidget::Release()
 {
 	_Send->deleteLater();
-	_Close->deleteLater();
 	grid->deleteLater();
 	inputArea->deleteLater();
 	close();
+}
+
+void ConversationWidget::keyPressEvent(QKeyEvent* e) {
+	if (e->key() == Qt::Key_Escape) {
+		close();
+	}
+	else if (e->key() == Qt::Key_Return) {
+		SendRequest();
+	}
 }
 
 void ConversationWidget::mousePressEvent(QMouseEvent* e)
@@ -100,6 +105,9 @@ void ConversationWidget::getInput()
 	inputArea->clear();
 	AttachToCharacter();
 	show();
+	//调出输入框就能输入，不需要鼠标点击，用setFocus好像不行
+	inputArea->activateWindow();
+	inputArea->setFocus();
 }
 
 
@@ -107,7 +115,6 @@ void ConversationWidget::getInput()
 void ConversationWidget::ProcessNetworkResponse()
 {
 	inputArea->setPlaceholderText("waiting...");
-	_Send->setEnabled(false);
 	LAppConfig::_WaitChatResponse = true;
 	GLWidget* win = LApp::GetInstance()->GetWindow();
 	string x = _msg.toUtf8();
@@ -140,23 +147,18 @@ void ConversationWidget::ProcessNetworkResponse()
 	f.write("\n");
 	f.close();
 	LAppConfig::_WaitChatResponse = false;
-	_Send->setEnabled(true);
 	inputArea->setPlaceholderText("prompt...");
-}
-
-void ConversationWidget::Cancel() {
-	inputArea->clear();
-	close();
 }
 
 //键盘输入事件处理，不含输入法输入
 void ConversationWidget::SendRequest()
 {
+	if (inputArea->text().isEmpty()) close();
 	if (LAppConfig::_WaitChatResponse) return;
 	else
 	{
-		if (inputArea->toPlainText().isEmpty()) return;
-		_msg = inputArea->toPlainText();
+		if (inputArea->text().isEmpty()) return;
+		_msg = inputArea->text();
 		inputArea->clear();
 		if (!LAppConfig::_WaitChatResponse) 
 		{

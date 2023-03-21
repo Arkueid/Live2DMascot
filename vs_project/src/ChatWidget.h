@@ -1,6 +1,6 @@
 #pragma once
 #include <QtWidgets/qwidget.h>
-#include <QtWidgets/qtextedit.h>
+#include <QtWidgets/qlineedit.h>
 #include <QtWidgets/qpushbutton.h>
 #include <QtWidgets/qlayout.h>
 #include <QtWidgets/qframe.h>
@@ -21,15 +21,14 @@ protected:
 	void ProcessNetworkResponse();
 	void mouseMoveEvent(QMouseEvent* e);
 	void mousePressEvent(QMouseEvent* e);
+	void keyPressEvent(QKeyEvent* e);
 private slots:
 	void SendRequest();
-	void Cancel();
 private:
 	QFont _font;
 	QString _msg;
-	QTextEdit* inputArea;
+	QLineEdit* inputArea;
 	QPushButton* _Send;
-	QPushButton* _Close;
 	QGridLayout* grid;
 	QFrame* _frame;
 	int mouseX;

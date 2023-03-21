@@ -37,7 +37,7 @@
 		"BackgroundColor" : "rgba(0, 0, 0, 200)",
 		"FontColor" : "white",
 		"FontFamily" : "Comic Sans MS",
-		"FontSize" : 12,
+		"FontSize" : 10,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
 		"YOffset" : -10,
@@ -46,7 +46,7 @@
 	"ModelSettings" : 
 	{
 		"LipSyncMagnification" : 9.0,
-		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
+		"ModelDir" : "../Resources",
 		"ModelName" : "nn2",
 		"MotionInterval" : 60.0
 	},
@@ -74,8 +74,8 @@
 		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 1295,
-			"Y" : 458
+			"X" : 1317,
+			"Y" : 560
 		},
 		"Width" : 300
 	}

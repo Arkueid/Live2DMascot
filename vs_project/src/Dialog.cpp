@@ -8,6 +8,7 @@
 #include <QtGui/qevent.h>
 #include <QtGui/qfont.h>
 #include <QtGui/qpainterpath.h>
+#include <QtWidgets/qgraphicseffect.h>
 
 Dialog::Dialog()
 {
@@ -89,5 +90,5 @@ void Dialog::paintEvent(QPaintEvent* e)
 	painter.fillPath(path, QColor(LAppConfig::_DialogBackgroundColor.c_str()));
 	painter.setFont(_font);
 	painter.setPen(LAppConfig::_DialogFontColor.c_str());
-	painter.drawText(_xBorder, _yBorder, boxWidth - 2 * _xBorder, boxHeight, Qt::TextWordWrap, _text);
+	painter.drawText(_xBorder, _yBorder, boxWidth - 2 * _xBorder, boxHeight - 2*_yBorder, Qt::TextWordWrap, _text);
 }

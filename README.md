@@ -24,9 +24,9 @@
 
 ## 预览  
 
-![启动](sample_images/Snipaste_2023-03-07_13-21-15.png)  
-
 ![聊天](sample_images/chat.png)  
+
+![发送中](sample_images/Snipaste_2023-03-21_14-12-03.png)
 
 ![回复](sample_images/Snipaste_2023-03-16_21-42-04.png)
 
