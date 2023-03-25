@@ -47,7 +47,7 @@
 	{
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "nn2",
+		"ModelName" : "Hiyori",
 		"MotionInterval" : 60.0
 	},
 	"UserSettings" : 
@@ -62,20 +62,29 @@
 		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
-		"SoundVolume" : 0.20999999999999999,
-		"StayOnTop" : false,
+		"SoundVolume" : 0.029999999999999999,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
 	},
+	"VoiceInput" : 
+	{
+		"BaiduSpeech" : 
+		{
+			"ClientId" : "rCRHPGUaKuRDVZK0E3K1L143",
+			"ClientSecret" : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf"
+		},
+		"CacheDir" : "voice"
+	},
 	"WindowSettings" : 
 	{
-		"Height" : 400,
+		"Height" : 600,
 		"LastPos" : 
 		{
-			"X" : 1317,
-			"Y" : 560
+			"X" : 1608,
+			"Y" : 588
 		},
 		"Width" : 300
 	}

@@ -54,7 +54,7 @@
 	{
 		"AppName" : "0d00",
 		"FPS" : 48,
-		"IconPath" : "Resources/nn/ico_nn.png",
+		"IconPath" : "../Resources/nn/ico_nn.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
