@@ -1,3 +1,7 @@
+/**
+* 语音控制，包括播放，停止，和调整音量大小
+*/
+
 #include "AudioUtils.h"
 #include "LAppDefine.hpp"
 

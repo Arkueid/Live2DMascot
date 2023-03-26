@@ -15,7 +15,8 @@
 			"HostPort" : "",
 			"On" : false,
 			"ReadTimeOut" : 10,
-			"Route" : ""
+			"Route" : "",
+			"VoiceChatRoute" : ""
 		},
 		"Mlyai" : 
 		{
@@ -68,6 +69,15 @@
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
+	},
+	"VoiceInput" : 
+	{
+		"BaiduSpeech" : 
+		{
+			"ClientId" : "rCRHPGUaKuRDVZK0E3K1L143",
+			"ClientSecret" : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf"
+		},
+		"CacheDir" : "voice"
 	},
 	"WindowSettings" : 
 	{

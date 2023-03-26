@@ -18,6 +18,7 @@
 #include <iostream>
 #include <thread>
 
+
 using namespace std;
 
 ConversationWidget::ConversationWidget()
@@ -49,15 +50,25 @@ ConversationWidget::ConversationWidget()
 	);
 	_Send = new QPushButton();
 	_Send->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/send.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/send_active.png)}"
-							"QPushButton:hover{width: 30; height: 30;}"));
-	_Send->setFixedSize(20, 20);
+							));
+	_Send->setFixedSize(25, 25);
+
+	_Record = new QPushButton();
+	_Record->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput_active.png)}"));
+	_Record->setFixedSize(30, 30);
+
 	grid = new QGridLayout();
-	grid->addWidget(inputArea, 0, 0, 1, 4);
-	grid->addWidget(_Send, 0, 4, 1, 1);
+	grid->addWidget(_Record, 0, 0, 1, 1);
+	grid->addWidget(inputArea, 0, 1, 1, 4);
+	grid->addWidget(_Send, 0, 5, 1, 1);
+
+	connect(_Record, SIGNAL(pressed()), SLOT(StartVoiceInput()));
+	connect(_Record, SIGNAL(released()), SLOT(StopVoiceInput()));
+
 	_frame->setLayout(grid);
 	connect(_Send, SIGNAL(clicked()), SLOT(SendRequest()));
 	mouseX = 0;
-	mouseY = 0;
+	mouseY = 0; 
 }
 
 void ConversationWidget::Release()
@@ -74,6 +85,21 @@ void ConversationWidget::keyPressEvent(QKeyEvent* e) {
 	}
 	else if (e->key() == Qt::Key_Return) {
 		SendRequest();
+	}
+	else if (e->key() == Qt::Key_Alt) {
+		_Record->setStyleSheet(
+			QString("border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput_active.png)")
+		);
+		StartVoiceInput();
+	}
+} 
+
+void ConversationWidget::keyReleaseEvent(QKeyEvent* e) {
+	if (e->key() == Qt::Key_Alt) {
+		_Record->setStyleSheet(
+			QString("border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput.png)")
+		);
+		StopVoiceInput();
 	}
 }
 
@@ -167,4 +193,37 @@ void ConversationWidget::SendRequest()
 			std::thread(&ConversationWidget::ProcessNetworkResponse, this).detach();  //启动线程发送聊天文本
 		}
 	}
+}
+
+void ConversationWidget::ProcessBaiduVoiceInput() {
+	LAppConfig::_WaitChatResponse = true;
+	
+	_msg = VoiceInputUtils::DetectSpeech(string(LAppConfig::_VoiceCacheDir).append("/voice-input-temp.pcm").c_str());
+	if (_msg.isEmpty()) {
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]Speech recognition result is empty, stop sending text\n");
+#endif // CONSOLE_FLAG
+		LAppConfig::_WaitChatResponse = false;
+		return;
+	}
+	ProcessNetworkResponse();
+}
+
+
+void ConversationWidget::StartVoiceInput() {
+	if (!workflow.empty()) {
+		VoiceInputUtils::StopRecording();
+		workflow.pop();
+	}
+	if (LAppConfig::_WaitChatResponse) return;
+	std::thread(&VoiceInputUtils::StartRecording).detach();
+	workflow.push(1);
+}
+
+void ConversationWidget::StopVoiceInput() {
+	if (workflow.empty()) return;
+	VoiceInputUtils::StopRecording();
+	if (LAppConfig::_WaitChatResponse) return;
+	std::thread(&ConversationWidget::ProcessBaiduVoiceInput, this).detach(); //启动线程，语音识别然后发送文本
+	workflow.pop(); 
 }

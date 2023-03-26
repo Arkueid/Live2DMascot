@@ -1,8 +1,8 @@
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <httplib.h>
 #include "NetworkUtils.h"
-#include <QtCore/qtextcodec.h>
-#include <QtCore/qdatetime.h>
+#include <QtCore/qdir.h>
+
 
 
 using namespace std;
@@ -171,7 +171,7 @@ namespace ChatAPI {
 	{
 		Client cli(LAppConfig::_CustomChatServerHostPort);
 		Headers headers = {
-			{"User-Agent", "Live2DMascot/v50"},
+			{"User-Agent", "DesktopLive2D/0.3.0(cpp; cpp-httplib; OpenSSL)"},
 			{"Accept-Charset", "UTF-8"},
 			{"Accept", "audio/wav"}
 		};
@@ -220,233 +220,377 @@ namespace ChatAPI {
 		
 	}
 
-}
+	const char* VoiceChat(const char* filePath, string& text, string& soundPath) {
+		ifstream ifs(filePath, ios::in | ios::binary);
+		if (ifs.fail()) {
+#ifdef CONSOLE_FLAG
+			printf("[VoiceInput]File opening error: %s\n", filePath);
+#endif // CONSOLE_FLAG
+			return QString::fromLocal8Bit("好像啥也没说诶").toLocal8Bit().constData();
+		}
 
+		struct stat statbuff;
+		int size = 0;
+		if (stat(filePath, &statbuff) == 0) {
+			size = statbuff.st_size;
+		}
 
-//不实用的to do api接口
-#if 0
+		char* bytes = new char[size];
+		ifs.read(bytes, size);
+		ifs.close();
 
-namespace ToDoUtils
-{
-	Server* server = NULL;
-	const char* client_id = "b86d70b9-affd-4f4c-8f65-28822dd1d5e7";
-	string token;
-	void CountTime()
-	{
-		if (server)
-			Sleep(90000);
-		else return;
-		if (server)
-			ShutDown();
-		else return;
-		Log("ToDoUtils", "auth time out!");
-	}
-	void FullFlowUpdateToken(int port)
-	{
-		//open the auth page in the default explorer
-		system("explorer \"https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=b86d70b9-affd-4f4c-8f65-28822dd1d5e7&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A50721&response_mode=query&scope=offline_access Tasks.Read&state=12345\"");
-		//get an instance of http server to receive authorization code
-		if (!server)
-		{
-			server = new Server();
-		}
-		else {
-			return;
-		}
-		thread(CountTime).detach();
-		//handler for GET request
-		server->Get("/", [](const Request& req, Response& res)
-			{
-				//parse authorization code
-				string code = req.get_param_value("code");
-				if (code.empty())
-				{
-					Log("MS Graph Api", req.get_param_value("error_description").c_str());
-					res.set_content("登录验证失败!", "text/plain");
-					ShutDown();
-					return;
-				}
-				Log("ToDoUtils", string("authorization_code is ").append(code).c_str());
-
-				//use code to get access_token
-				Client client("https://login.microsoftonline.com");
-				httplib::Params data = {
-					{"client_id", client_id},
-					{"grant_type", "authorization_code"},
-					{"code", code},
-					{"redirect_uri", "http://127.0.0.1:50721"},
-					{"scope", "Tasks.Read"}
-				};
-				Result rsp = client.Post("/common/oauth2/v2.0/token", data);
-				Json::Value json;
-				Json::Reader reader;
-				reader.parse(rsp.value().body, json);
-				if (json["access_token"].isNull())
-				{
-					Log("MS Graph Api", json["error_description"].asCString());
-					res.set_content("登录验证失败!", "text/plain");
-					ShutDown();
-					return;
-				}
-				token = json["access_token"].asCString();
-				res.set_content("登录成功，可关闭此页面。\n", "text/plain");
-				json["expires_at"] = time(0) + json["expires_in"].asInt();
-				ofstream ofs("token.json");
-				ofs << json;
-				ofs.close();
-				ShutDown();
-			}
-		);
-		server->listen("127.0.0.1", port);
-	}
-	void ShutDown()
-	{
-		if (server)
-		{
-			if (server->is_running()) server->stop();
-			delete server;
-			server = NULL;
-		}
-	}
-	void Update()
-	{
-		ifstream ifs("token.json");
-		bool ret = false;
-		if (!ifs.good())
-		{
-			Log("ToDoUtils", "no local token, using full flow update...");
-			FullFlowUpdateToken(50721);
-			if (!token.empty())
-			Log("ToDoUtils", "token updated!");
-		}
-		else
-		{
-			Json::Value tokenJson;
-			ifs >> tokenJson;
-			ret = !tokenJson["access_token"].isNull() && tokenJson["expires_at"].asInt() > time(0);
-			if (ret)
-			{
-				Log("ToDoUtils", "access_token is valid, start updating task lists...");
-				token = tokenJson["access_token"].asCString();
-			}
-			else if (tokenJson["refresh_token"].isNull())
-			{
-				Log("ToDoUtils", "local refresh token not found, start full-flow token update...");
-				FullFlowUpdateToken(50721);
-				Log("ToDoUtils", "token updated!");
-			}
-			else
-			{
-				Log("ToDoUtils", "local refresh token found, start refresh update...");
-				ret = RefreshUpdateToken(tokenJson["refresh_token"].asCString());
-				if (!ret)
-				{
-					Log("ToDoUtils", "local refresh token expired, start full-flow token update...");
-					FullFlowUpdateToken(50721);
-					Log("ToDoUtils", "token updated!");
-				}
-				else {
-					Log("ToDoUtils", "token refreshed!");
-				}
-			}
-		}
-		if (ret)
-		{
-			GetTaskLists();
-			Log("ToDoUtils", "task lists update finished!");
-		}
-	}
-	std::string ISO8601ToLocaltime(const std::string& time)
-	{
-		struct std::tm time_struct;
-		std::istringstream ss(time);
-		ss >> std::get_time(&time_struct, "%Y-%m-%dT%H:%M:%SZ");
-		std::time_t time_unix = _mkgmtime(&time_struct);
-		if (time_unix == -1)
-		{
-			return "";
-		}
-		char current_time[32];
-		strftime(current_time, sizeof(current_time), "%Y-%m-%d %H:%M:%S", localtime(&time_unix));
-		std::string local_time_str(current_time);
-
-		return local_time_str;
-	}
-	bool RefreshUpdateToken(const char* refresh_token)
-	{
-		Client cli("https://login.microsoftonline.com");
-		Params params = {
-			{"scope", "Tasks.Read"},
-			{"grant_type", "refresh_token"},
-			{"refresh_token", refresh_token},
-			{"client_id", client_id}
+		httplib::Headers headers = {
+			{"User-Agent", "DesktopLive2D/0.3.0(cpp; cpp-httplib; OpenSSL)"},
+			{"Accept", "text/plain"}
 		};
-		Result rsp = cli.Post("/common/oauth2/v2.0/token", params);
-		Json::Value json;
-		Json::Reader reader;
-		reader.parse(rsp.value().body, json);
-		if (json["access_token"].isNull())
-		{
-			return false;
+
+		httplib::Client client(LAppConfig::_CustomChatServerHostPort);
+		auto rsp = client.Post(LAppConfig::_CustomVoiceChatRoute, headers, bytes, "audio/pcm;rate=16000");
+		if (rsp.error() != Error::Success) {
+#ifdef CONSOLE_FLAG
+			printf("[VoiceInputUtils]Resopnse receiving error\n");
+#endif // CONSOLE_FLAG
+			return QString::fromLocal8Bit("没有收到回复~").toUtf8().constData();
 		}
-		ofstream ofs("token.json");
-		json["refresh_token"].isNull() ? json["refresh_token"] = refresh_token : NULL;
-		json["expires_at"] = time(0) + json["expires_in"].asInt();
-		ofs << json;
+		Json::Value res;
+		Json::Reader reader;
+		reader.parse(rsp.value().body, res);
+		if (res["Text"].isNull()) {
+			return QString::fromLocal8Bit("什么也没听到~").toUtf8().constData();
+		}
+		return res["Text"].asCString();
+	}
+
+}
+
+
+/**
+* @brief VoiceInputUtils 语音输入
+*/
+namespace {
+	//token
+	std::string _token;
+	VoiceInputUtils::Audio* _instance = nullptr;
+	//启动子线程，qt信号需要eventloop才能发送
+	QEventLoop* lp = nullptr;
+}
+
+VoiceInputUtils::Audio* VoiceInputUtils::Audio::CreateInstance() {
+	_instance = new Audio;
+	return _instance;
+}
+
+VoiceInputUtils::Audio* VoiceInputUtils::Audio::GetInstance() {
+	return _instance;
+}
+
+void VoiceInputUtils::Audio::ReleaseInstance() {
+	if (_instance != nullptr) {
+		delete _instance;
+	}
+	_instance = nullptr;
+}
+
+VoiceInputUtils::Audio::Audio()
+{
+	a_file = nullptr;
+	a_input = nullptr;
+	stopped = false;
+	recording = false;
+}
+
+VoiceInputUtils::Audio::~Audio()
+{
+}
+
+/**
+* @brief 录音
+* @param dir 缓存文件夹
+* @param deviceIndex 录音设备序号
+*/
+void VoiceInputUtils::Audio::StartRecord(const char* dir, int deviceIndex) {
+	if (stopped) return;
+	QAudioDeviceInfo device = QAudioDeviceInfo::defaultInputDevice();
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Audio input device name: %s\n", device.deviceName().toLocal8Bit().constData());
+#endif // CONSOLE_FLAG
+	if (device.isNull()) {
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]No audio input device was found\n");
+#endif
+		return;
+	}
+
+	//设置音频格式
+	QAudioFormat a_format;
+	//
+	a_format.setByteOrder(QAudioFormat::LittleEndian);
+	//采样率
+	a_format.setSampleRate(16000);
+	//单声道
+	a_format.setChannelCount(1);
+	//设置位深
+	a_format.setSampleSize(16);
+	//设置编码
+	a_format.setCodec("audio/pcm");
+
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Default audio format (%d, %d, %d, %s)\n",
+		a_format.sampleRate(),
+		a_format.channelCount(),
+		a_format.sampleSize(),
+		a_format.codec().toStdString().c_str()
+	);
+#endif // CONSOLE_FLAG
+
+	if (!device.isFormatSupported(a_format)) {
+		a_format = device.nearestFormat(a_format);
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]Audio format switch to (%d, %d, %d, %s)\n",
+			a_format.sampleRate(),
+			a_format.channelCount(),
+			a_format.sampleSize(),
+			a_format.codec().toStdString().c_str()
+		);
+#endif // _DEBUG
+	}
+
+	QString path = QString("%1/%2").arg(dir).arg("voice-input-temp.pcm");
+
+	QDir cacheDir(LAppConfig::_VoiceCacheDir.c_str());
+	if (!cacheDir.exists())
+	{
+		cacheDir.mkpath(".");
+	}
+
+	a_file = new QFile;
+	a_file->setFileName(path);
+	a_file->open(QIODevice::WriteOnly | QIODevice::Truncate);
+
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Voice input save path: %s\n", path.toLocal8Bit().constData());
+#endif // CONSOLE_FLAG
+
+	a_input = new QAudioInput(a_format, NULL);
+	if (a_input != NULL && a_file != NULL)
+	{
+		mutex mut;
+		mut.lock();
+		a_input->start(a_file);
+		mut.unlock();
+		recording = true;
+	}	
+	else {
+		printf("[VoiceInputUtils]Too much recording in a short time\n");
+	}
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Satrt recording...\n");
+#endif // CONSOLE_FLAG
+	if (stopped) StopRecord();
+}
+
+
+void VoiceInputUtils::Audio::StopRecord() {
+	stopped = true;
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Stop recording.\n");
+#endif // CONSOLE_FLAG
+	if (recording = false) return;
+	if (a_input != nullptr) {
+		if (a_input->state() != QAudio::ActiveState)
+		a_input->stop();
+		a_input->deleteLater();
+	}
+
+	if (a_file != nullptr)
+	{
+		a_file->close();
+		a_file->deleteLater();
+	}
+
+	a_input = NULL;
+	a_file = NULL;
+}
+
+void VoiceInputUtils::StartRecording(){
+	if (Audio::GetInstance() != nullptr) {
+		return;
+	}
+	if (lp != nullptr) {
+		return;
+	}
+	lp = new QEventLoop;
+	Audio::CreateInstance();
+	Audio::GetInstance()->StartRecord(LAppConfig::_VoiceCacheDir.c_str());
+	if (lp != nullptr)
+	lp->exec();
+}
+
+void VoiceInputUtils::StopRecording() {
+	if (!Audio::GetInstance()) return;
+	if (lp != nullptr) {
+		if (lp->isRunning())
+		lp->exit();
+		lp->deleteLater();
+		lp = nullptr;
+	}
+
+	Audio::GetInstance()->StopRecord();
+
+	Audio::ReleaseInstance();
+
+}
+
+
+
+/**
+* @brief 发送录音文件到语音识别服务器
+*/
+const char* VoiceInputUtils::DetectSpeech(const char* filePath) {
+#ifdef CONSOLE_FLAG
+	time_t start = time(0);
+#endif // CONSOLE_FLAG
+
+	httplib::Client client("http://vop.baidu.com");
+	QFile file;
+	file.setFileName(filePath);
+	file.open(QIODevice::ReadOnly);
+	QByteArray bytes = file.readAll();
+	file.close();
+	if (bytes.isEmpty()) {
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]Empty record\n");
+#endif // CONSOLE_FLAG
+		return "";
+	}
+	std::string scope = std::string("/server_api");
+	Json::Value json;
+	json["format"] = "pcm";
+	json["rate"] = 16000;
+	json["channel"] = 1;
+	json["cuid"] = "admin-arkueid-0d000721";
+	json["token"] = _token;
+	json["dev_pid"] = 1537;
+	json["len"] = bytes.length();
+	json["speech"] = bytes.toBase64().toStdString();
+	auto rsp = client.Post(scope, json.toStyledString(), "application/json");
+	if (rsp.error() != httplib::Error::Success) {
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]Response receiving error\n");
+#endif // CONSOLE_FLAG
+		return QString::fromLocal8Bit("无法接入百度语音识别服务").toUtf8().constData();
+	}
+	Json::Value res;
+	Json::Reader reader;
+	reader.parse(rsp.value().body, res);
+	if (res["result"][0].isNull()) {
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]Speech recognizing Fail\n");
+		printf("[VoiceInput]Response: %s", rsp.value().body.c_str());
+#endif // CONSOLE_FLAG
+
+		return QString::fromLocal8Bit("语音识别失败").toUtf8().constData();
+	}
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Speech recognition (%llds): %s\n", time(0) - start, QString::fromUtf8(res["result"][0].asCString()).toLocal8Bit().constData());
+#endif // CONSOLE_FLAG
+	return res["result"][0].asCString();
+}
+
+/**
+* @brief 发送网络请求获取token
+*/
+void VoiceInputUtils::GetToken() {
+	httplib::Client client("https://aip.baidubce.com");
+	string scope = "/oauth/2.0/token";
+	httplib::Headers headers = {
+		{"User-Agent", "DesktopLive2D/0.3.0(cpp; cpp-httplib; OpenSSL)"}
+	};
+	httplib::Params params = {
+		{"grant_type", "client_credentials"},
+		{"client_id", LAppConfig::_BaiduSpeechClientId},
+		{"client_secret", LAppConfig::_BaiduSpeechClientSecret}
+	};
+	auto rsp = client.Post(scope, headers, params);
+	if (rsp.error() != httplib::Error::Success) {
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInputUtils]Resopnse receiving error\n");
+#endif // CONSOLE_FLAG
+		return;
+	}
+
+	Json::Value token;
+	Json::Reader reader;
+
+	reader.parse(rsp.value().body, token);
+
+	token["expires_in"].isNull() ? NULL : token["expires_at"] = time(0) + token["expires_in"].asInt64();
+
+	std::ofstream ofs("baidu.speech.token.json");
+	if (ofs.fail()) {
+#ifdef CONSOLE_FLAG
+		printf("[VloiceInput]Token saving error:\n%s\n", token.toStyledString().c_str());
+#endif // CONSOLE_FLAG
 		ofs.close();
-		token = json["access_token"].asCString();
+		return;
+	}
+	ofs << token;
+	ofs.close();
+
+#ifdef CONSOLE_FLAG
+	printf("[VoiceInput]Speech token update: baidu.speech.token.json\n");
+#endif // CONSOLE_FLAG
+
+	if (token["access_token"].isNull())
+		return;
+	else
+		_token = token["access_token"].asCString();
+}
+
+
+/**
+* @brief 检查是否需要更新token
+*/
+bool VoiceInputUtils::ShouldUpdateToken() {
+	std::ifstream ifs("baidu.speech.token.json");
+	if (ifs.fail()) {
+		ifs.close();
 		return true;
 	}
-	bool GetTaskLists()
-	{
-		
-		//using token to obtain task lists
-		string base_url = string("/v1.0/me/todo/lists");
-		Client cli("https://graph.microsoft.com");
-		Headers headers = { {"authorization", token} };
-		Json::Value json; Json::Reader reader;
-		Result rsp = cli.Get(base_url, headers);
-		reader.parse(rsp.value().body, json);
-		if (json["value"].isNull())
-		{
-			Log("MS Graph Api", json.toStyledString().c_str());
-			ShutDown();
-			return false;
-		}
-		int size = json["value"].size();
-		Json::Value taskLists;
-		Json::Value batches;
-		Json::Value req;
-		Json::Value temp;
-		for (int i = 0; i < size; i++)
-		{
-			req["id"] = i;
-			req["method"] = "GET";
-			req["url"] = string("/me/todo/lists/").append(json["value"][i]["id"].asCString()).append("/tasks");
-			batches["requests"].append(req);
-			req.clear();
-		}
-		rsp = cli.Post("/v1.0/$batch", headers, batches.toStyledString(), "application/json");
-		reader.parse(rsp.value().body, batches);
-		batches = batches["responses"];
-		for (int i = 0; i < batches.size(); i++)
-		{
-			if (batches[i]["status"].asInt() == 200)
-			{
-				for (int j = 0; j < batches[i]["body"]["value"].size(); j++)
-				{	
-					if (strcmp(batches[i]["body"]["value"][j]["status"].asCString(), "completed") != 0)
-					{
-						taskLists.append(batches[i]["body"]["value"][j]);
-					}
-				}
-			}
-		}
-		ofstream ofs("tasks.json");
-		ofs << taskLists;
-		ofs.close();
-		return true;
+	Json::Value token;
+	ifs >> token;
+	ifs.close();
+	if (token["expires_at"].isNull()) return true;
+	else if (token["access_token"].isNull()) return true;
+	else if (token["expires_at"].asInt64() < time(0)) return true;
+	return false;
+}
+
+/**
+* @brief 检测本地token是否过期，过期就更新
+*/
+void VoiceInputUtils::CheckUpdate() {
+	if (ShouldUpdateToken())
+		GetToken();
+	else {
+		GetLocalToken();
+#ifdef CONSOLE_FLAG
+		printf("[VoiceInput]Speech token found in local file\n");
+#endif // CONSOLE_FLAG
+
 	}
 }
 
-#endif
+
+/**
+* @brief 读取本地储存的百度语音识别token
+*/
+void VoiceInputUtils::GetLocalToken() {
+	std::ifstream ifs("baidu.speech.token.json");
+	if (ifs.fail()) return GetToken();
+	Json::Value token;
+	ifs >> token;
+	ifs.close();
+	_token = token["access_token"].asCString();
+}
+

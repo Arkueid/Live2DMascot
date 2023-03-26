@@ -63,6 +63,12 @@ namespace LAppConfig {
 	extern bool _CustomChatServerOn;
 	extern int _CustomChatServerReadTimeOut;
 	extern bool _RepairModeOn;
+
+	extern string _VoiceCacheDir;
+	extern string _BaiduSpeechClientId;
+	extern string _BaiduSpeechClientSecret;
+	extern string _CustomVoiceChatRoute;
+	extern bool _CustomVoiceChatOn;
 };
 
 class LApp

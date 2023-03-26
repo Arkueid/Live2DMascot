@@ -1,5 +1,14 @@
 # Changelog
 
+### 2023-3-26
+* 语音输入
+	* 录音和绘图放在不同线程，不会造成卡顿
+	* 不要在短时间内多次点击录音按钮
+	* 长按**语音输入按钮**或者激活输入窗口后按**alt键**进行录音
+	* 目前使用百度语音识别 [api](https://ai.baidu.com/ai-doc/SPEECH/Vk38lxily#raw-%E6%96%B9%E5%BC%8F%E4%B8%8A%E4%BC%A0%E9%9F%B3%E9%A2%91)，client_id 和 client_secret 可以在 config.json 中更换
+
+		![语音输入](sample_images/Snipaste_2023-03-26_11-11-53.png)
+
 ### 2023-3-25
 * 语音输入
 	* 目前使用百度语音识别 [api](https://ai.baidu.com/ai-doc/SPEECH/Vk38lxily#raw-%E6%96%B9%E5%BC%8F%E4%B8%8A%E4%BC%A0%E9%9F%B3%E9%A2%91)，client_id 和 client_secret 可以在 config.json 中更换

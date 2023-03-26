@@ -15,7 +15,8 @@
 			"HostPort" : "",
 			"On" : false,
 			"ReadTimeOut" : 10,
-			"Route" : ""
+			"Route" : "",
+			"VoiceChatRoute" : ""
 		},
 		"Mlyai" : 
 		{
@@ -83,8 +84,8 @@
 		"Height" : 600,
 		"LastPos" : 
 		{
-			"X" : 1608,
-			"Y" : 588
+			"X" : 1622,
+			"Y" : 518
 		},
 		"Width" : 300
 	}

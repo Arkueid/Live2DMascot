@@ -67,15 +67,23 @@ namespace LAppConfig {
     string _CustomChatServerHostPort;
     string _CustomChatServerRoute;
     bool _CustomChatServerOn;
+    bool _CustomVoiceChatOn;
     int _CustomChatServerReadTimeOut;  //等待响应的最长时间
-    //聊天保存路径
-    string _ChatSavePath;
+    string _CustomVoiceChatRoute;
+    //保存路径
+    string _ChatSavePath;  //聊天
     //茉莉云api
     string _ApiKey;
     string _ApiSecret;
     //瞬时状态
     bool _WaitChatResponse;
     bool _MouseOn;
+
+    //语音输入
+    string _VoiceCacheDir;  //保存路径
+    string _BaiduSpeechClientId;  //client_id
+    string _BaiduSpeechClientSecret;  //client_secret
+
 };
 
 namespace {
@@ -127,6 +135,7 @@ void LApp::Initialize(int argc, char* argv[])
     BgmListUtils::CheckUpdate();
     HolidayUtils::CheckUpdate();
     LoadConfig();
+    VoiceInputUtils::CheckUpdate();
     _win->setupUI();
 }
 
@@ -225,6 +234,12 @@ void LApp::LoadConfig() {
     LAppConfig::_CustomChatServerRoute = !config["ChatAPI"]["CustomChatServer"]["Route"].isNull() ? config["ChatAPI"]["CustomChatServer"]["Route"].asCString() : "";
     LAppConfig::_ChatSavePath = !config["ChatAPI"]["ChatSavePath"].isNull() ? config["ChatAPI"]["ChatSavePath"].asCString() : "chat";
     LAppConfig::_CustomChatServerReadTimeOut = !config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].isNull() ? config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].asInt() : 10;
+    LAppConfig::_BaiduSpeechClientSecret = !config["ChatAPI"]["CustomChatServer"]["VoiceChatRoute"].isNull() ? config["ChatAPI"]["CustomChatServer"]["VoiceChatRoute"].asCString() : "/voice";
+
+    LAppConfig::_VoiceCacheDir = !config["VoiceInput"]["CacheDir"].isNull() ? config["VoiceInput"]["CacheDir"].asCString() : "voice";
+    LAppConfig::_BaiduSpeechClientId = !config["VoiceInput"]["BaiduSpeech"]["ClientId"].isNull() ? config["VoiceInput"]["BaiduSpeech"]["ClientId"].asCString() : "rCRHPGUaKuRDVZK0E3K1L143";
+    LAppConfig::_BaiduSpeechClientSecret = !config["VoiceInput"]["BaiduSpeech"]["ClientSecret"].isNull() ? config["VoiceInput"]["BaiduSpeech"]["ClientSecret"].asCString() : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf";
+
     if (LAppDefine::DebugLogEnable)
         Log("[CONFIG]Load", "Finished");
 }
@@ -306,6 +321,12 @@ void LApp::SaveConfig()
     config["ChatAPI"]["Mlyai"]["APIKey"] = LAppConfig::_ApiKey;
     config["ChatAPI"]["Mlyai"]["APISecret"] = LAppConfig::_ApiSecret;
     config["ChatAPI"]["ChatSavePath"] = LAppConfig::_ChatSavePath;
+    config["ChatAPI"]["CustomChatServer"]["VoiceChatRoute"] = LAppConfig::_CustomVoiceChatRoute;
+
+    config["VoiceInput"]["CacheDir"] = LAppConfig::_VoiceCacheDir;
+    config["VoiceInput"]["BaiduSpeech"]["ClientId"] = LAppConfig::_BaiduSpeechClientId;
+    config["VoiceInput"]["BaiduSpeech"]["ClientSecret"] = LAppConfig::_BaiduSpeechClientSecret;
+
 
     ofstream ofs(LAppConfig::_ConfigPath);
     if (ofs.fail())
