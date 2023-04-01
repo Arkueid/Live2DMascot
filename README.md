@@ -24,11 +24,12 @@
 
 ## 预览  
 
-![聊天](sample_images/chat.png)  
+![聊天1](./sample_images/Snipaste_2023-04-01_20-27-55.png)
 
-![发送中](sample_images/Snipaste_2023-03-21_14-12-03.png)
+![聊天2](./sample_images/Snipaste_2023-04-01_20-56-24.png) 
 
-![回复](sample_images/Snipaste_2023-03-16_21-42-04.png)
+Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://www.bilibili.com/video/BV1KU4y1x7ep)  
+
 
 
 ## 关于Cubism SDK的安全性问题 （2023-3-6）  
@@ -393,6 +394,11 @@
 * [jsoncpp]  
 * [cpp-httplib] + [openssl](https://slproweb.com/products/Win32OpenSSL.html)  
 * 模型的语音借助[ACGTTS]生成  
+* live2d模型来自:  
+	* 碧蓝航线  
+	* Cubism官方   
+	* [再看一眼就会爆炸！波奇酱免费模型2.0](https://www.bilibili.com/video/BV1PY411k7Kj)  
+	* [【虚拟主播模型】 宁宁vup化！](https://www.bilibili.com/video/BV1s7411d7y9)
 * 
 	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：
 	https://zhuanlan.zhihu.com/p/126276925  
