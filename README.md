@@ -24,9 +24,9 @@
 
 ## 预览  
 
-![聊天1](./sample_images/Snipaste_2023-04-01_20-27-55.png)
+![聊天1](sample_images/Snipaste_2023-04-01_20-27-55.png)
 
-![聊天2](./sample_images/Snipaste_2023-04-01_20-56-24.png) 
+![聊天2](sample_images/Snipaste_2023-04-01_20-56-24.png) 
 
 Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://www.bilibili.com/video/BV1KU4y1x7ep)  
 
