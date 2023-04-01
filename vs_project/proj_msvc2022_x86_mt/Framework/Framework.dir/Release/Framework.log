@@ -1,2 +1,0 @@
-﻿D:\Visual Studio\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(2116,5): warning : The referenced project 'D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\build\proj_msvc2022_x86_mt\glew\glew_s.vcxproj' does not exist.
-  Framework.vcxproj -> D:\Live2D\CubismSdkForNative-4-r.5.1\proj_msvc2022_x86_mt\Framework\Release\Framework.lib
