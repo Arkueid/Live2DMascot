@@ -22,13 +22,21 @@
 		{
 			"APIKey" : "82wmm51s1bskwft3",
 			"APISecret" : "o0vp8k7e"
+		},
+		"VoiceInput" : 
+		{
+			"BaiduSpeech" : 
+			{
+				"ClientId" : "rCRHPGUaKuRDVZK0E3K1L143",
+				"ClientSecret" : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf"
+			}
 		}
 	},
 	"ChatWidget" : 
 	{
 		"BackgroundColor" : "rgba(0, 0, 0, 180)",
 		"FontColor" : "white",
-		"FontFamily" : "微软雅黑",
+		"FontFamily" : "黑体",
 		"FontSize" : 14,
 		"Height" : 200,
 		"Width" : 410
@@ -37,7 +45,7 @@
 	{
 		"BackgroundColor" : "rgba(0, 0, 0, 200)",
 		"FontColor" : "white",
-		"FontFamily" : "Comic Sans MS",
+		"FontFamily" : "黑体",
 		"FontSize" : 10,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
@@ -48,7 +56,7 @@
 	{
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "nn",
+		"ModelName" : "LSS",
 		"MotionInterval" : 5.0
 	},
 	"UserSettings" : 
@@ -66,7 +74,7 @@
 		"SoundVolume" : 1.0,
 		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
-		"TransparentBackground" : true,
+		"TransparentBackground" : false,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
 	},
@@ -84,8 +92,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1047,
-			"Y" : 298
+			"X" : 1226,
+			"Y" : 322
 		},
 		"Width" : 300
 	}
