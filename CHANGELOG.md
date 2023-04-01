@@ -4,22 +4,22 @@
 * 语音输入
 	* 频繁点击录音按钮现在不会造成崩溃  
 
-	* 添加自定义语音聊天接口，详细见test-server的[模板](./test-server/server.py)  
+	* 添加自定义语音聊天接口，详细见test-server的[模板](test-server/server.py)  
 
 	* 录音文件是.wav格式，采样率16000，单声道，其他参数需要自行测试
 
 * 聊天记录
 	* 添加聊天记录窗口，支持语音播放，仅显示本次运行的所有聊天，下次启动会清空
 
-		![聊天记录窗口](./sample_images/Snipaste_2023-04-01_20-27-55.png)
+		![聊天记录窗口](sample_images/Snipaste_2023-04-01_20-27-55.png)
 
-		![测试结果](./sample_images/Snipaste_2023-04-01_20-56-24.png)
+		![测试结果](sample_images/Snipaste_2023-04-01_20-56-24.png)
 	
 	* 聊天记录窗口和输入窗口可以拖住边缘移动，聊天记录窗口支持屏幕侧边隐藏
 
 	* 本地聊天记录改为html格式，记录时间，角色名，聊天内容，语音路径（可播放），浏览器打开如下：  
 
-		![Html聊天记录](./sample_images/Snipaste_2023-04-01_20-48-56.png)
+		![Html聊天记录](sample_images/Snipaste_2023-04-01_20-48-56.png)
 
 * 关于自定义
 
