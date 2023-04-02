@@ -25,7 +25,11 @@
 
 ![聊天1](sample_images/Snipaste_2023-04-01_20-27-55.png)
 
-![聊天2](sample_images/Snipaste_2023-04-01_20-56-24.png) 
+![聊天2](sample_images/Snipaste_2023-04-02_13-49-57.png)
+
+![聊天3](sample_images/Snipaste_2023-04-02_13-50-14.png)
+
+![聊天4](sample_images/Snipaste_2023-04-01_20-56-24.png) 
 
 Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://www.bilibili.com/video/BV1KU4y1x7ep)  
 
@@ -34,74 +38,7 @@ Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://ww
 
 * ### 自定义聊天服务器接口（可在设置页面更改）
   
-	**Request**  
-	```http
-	GET /chat?Text=聊天文本 HTTP/1.1
-	Accept-Charset: UTF-8
-	User-Agent: DesktopLive2D/v0.1.1
-	```
-
-	**Response  格式**
-
-	**- Headers**
-	```json
-	{
-
-		"Text": "返回文本",  //返回聊天文本，必须
-		"...": "..."  //其他字段不做要求
-	} 
-	```
-
-	**- Body**
-	```
-	bytes of XXX.wav  //音频数据，可无
-	```
-
-	配置
-
-	* 在设置页面修改  
-
-
-		![chatapi](sample_images/chatapi.png)
-
-	* config.json中编辑以下字段
-
-	```json
-
-		"ChatAPI" : 
-		{
-			"ChatSavePath" : "chat",  //聊天音频和文本保存路径
-			"CustomChatServer" : 
-			{
-				"HostPort" : "http://127.0.0.1:50721",  //服务器地址,http或https均可
-				"On" : true,  //开启自定义聊天接口
-				"ReadTimeOut" : 10,  //等待响应时间(秒)
-				"Route" : "/chat"  //路径
-			},
-		}
-	
-	```
-
-	服务端示例：
-
-	```python
-	@app.route("/chat", methods=["GET"])
-	def chat():
-		# 接收客户端的聊天文本
-		text = request.args.get("Text", "")
-		print("文本: %s" % text)
-
-		# 构造响应
-		rsp = make_response()
-
-		# 响应头中添加Text字段
-		rsp.headers.add_header("Text", "坐在电脑前很久了哦，快去休息一下吧！".encode("utf-8"))
-		
-		# 响应body中写入音频数据
-		with open("serverFiles\\nn.longsittingtip_0.wav", "rb") as f:
-			rsp.set_data(f.read())
-		return rsp
-	```
+	详细见[server模板](test-server/server.py)
 
 	动作组**Chat**，调用茉莉云或者自定义聊天接口时触发的动作。
 
