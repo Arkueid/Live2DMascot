@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ConversationWidget_t {
-    QByteArrayData data[12];
-    char stringdata0[137];
+    QByteArrayData data[15];
+    char stringdata0[174];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,20 +36,24 @@ QT_MOC_LITERAL(0, 0, 18), // "ConversationWidget"
 QT_MOC_LITERAL(1, 19, 18), // "textInputTriggered"
 QT_MOC_LITERAL(2, 38, 0), // ""
 QT_MOC_LITERAL(3, 39, 11), // "const char*"
-QT_MOC_LITERAL(4, 51, 11), // "SendRequest"
-QT_MOC_LITERAL(5, 63, 15), // "StartVoiceInput"
-QT_MOC_LITERAL(6, 79, 14), // "StopVoiceInput"
-QT_MOC_LITERAL(7, 94, 11), // "ShowHistory"
-QT_MOC_LITERAL(8, 106, 13), // "UpdateHistory"
-QT_MOC_LITERAL(9, 120, 5), // "chara"
-QT_MOC_LITERAL(10, 126, 4), // "text"
-QT_MOC_LITERAL(11, 131, 5) // "sound"
+QT_MOC_LITERAL(4, 51, 17), // "popDialogInThread"
+QT_MOC_LITERAL(5, 69, 8), // "waitMode"
+QT_MOC_LITERAL(6, 78, 11), // "SendRequest"
+QT_MOC_LITERAL(7, 90, 15), // "StartVoiceInput"
+QT_MOC_LITERAL(8, 106, 14), // "StopVoiceInput"
+QT_MOC_LITERAL(9, 121, 11), // "ShowHistory"
+QT_MOC_LITERAL(10, 133, 13), // "UpdateHistory"
+QT_MOC_LITERAL(11, 147, 5), // "chara"
+QT_MOC_LITERAL(12, 153, 4), // "text"
+QT_MOC_LITERAL(13, 158, 5), // "sound"
+QT_MOC_LITERAL(14, 164, 9) // "PopDialog"
 
     },
     "ConversationWidget\0textInputTriggered\0"
-    "\0const char*\0SendRequest\0StartVoiceInput\0"
-    "StopVoiceInput\0ShowHistory\0UpdateHistory\0"
-    "chara\0text\0sound"
+    "\0const char*\0popDialogInThread\0waitMode\0"
+    "SendRequest\0StartVoiceInput\0StopVoiceInput\0"
+    "ShowHistory\0UpdateHistory\0chara\0text\0"
+    "sound\0PopDialog"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,32 +63,36 @@ static const uint qt_meta_data_ConversationWidget[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    3,   44,    2, 0x06 /* Public */,
+       1,    3,   54,    2, 0x06 /* Public */,
+       4,    1,   61,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    0,   53,    2, 0x08 /* Private */,
-       7,    0,   54,    2, 0x08 /* Private */,
-       8,    3,   55,    2, 0x08 /* Private */,
+       6,    0,   64,    2, 0x08 /* Private */,
+       7,    0,   65,    2, 0x08 /* Private */,
+       8,    0,   66,    2, 0x08 /* Private */,
+       9,    0,   67,    2, 0x08 /* Private */,
+      10,    3,   68,    2, 0x08 /* Private */,
+      14,    1,   75,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    2,    2,    2,
+    QMetaType::Void, QMetaType::Bool,    5,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    9,   10,   11,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,   11,   12,   13,
+    QMetaType::Void, QMetaType::Bool,    5,
 
        0        // eod
 };
@@ -96,11 +104,13 @@ void ConversationWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->textInputTriggered((*reinterpret_cast< const char*(*)>(_a[1])),(*reinterpret_cast< const char*(*)>(_a[2])),(*reinterpret_cast< const char*(*)>(_a[3]))); break;
-        case 1: _t->SendRequest(); break;
-        case 2: _t->StartVoiceInput(); break;
-        case 3: _t->StopVoiceInput(); break;
-        case 4: _t->ShowHistory(); break;
-        case 5: _t->UpdateHistory((*reinterpret_cast< const char*(*)>(_a[1])),(*reinterpret_cast< const char*(*)>(_a[2])),(*reinterpret_cast< const char*(*)>(_a[3]))); break;
+        case 1: _t->popDialogInThread((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 2: _t->SendRequest(); break;
+        case 3: _t->StartVoiceInput(); break;
+        case 4: _t->StopVoiceInput(); break;
+        case 5: _t->ShowHistory(); break;
+        case 6: _t->UpdateHistory((*reinterpret_cast< const char*(*)>(_a[1])),(*reinterpret_cast< const char*(*)>(_a[2])),(*reinterpret_cast< const char*(*)>(_a[3]))); break;
+        case 7: _t->PopDialog((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -109,6 +119,13 @@ void ConversationWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
             using _t = void (ConversationWidget::*)(const char * , const char * , const char * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ConversationWidget::textInputTriggered)) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (ConversationWidget::*)(bool );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ConversationWidget::popDialogInThread)) {
+                *result = 1;
                 return;
             }
         }
@@ -144,13 +161,13 @@ int ConversationWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }
@@ -160,6 +177,13 @@ void ConversationWidget::textInputTriggered(const char * _t1, const char * _t2, 
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void ConversationWidget::popDialogInThread(bool _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

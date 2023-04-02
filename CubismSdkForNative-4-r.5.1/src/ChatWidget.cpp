@@ -73,6 +73,7 @@ ConversationWidget::ConversationWidget()
 	connect(_Record, SIGNAL(pressed()), SLOT(StartVoiceInput()));
 	connect(_Record, SIGNAL(released()), SLOT(StopVoiceInput()));
 	connect(_History, SIGNAL(clicked()), SLOT(ShowHistory()));
+	connect(this, SIGNAL(popDialogInThread(bool)), SLOT(PopDialog(bool)));
 
 	connect(this, SIGNAL(textInputTriggered(const char*, const char*, const char*)), this, SLOT(UpdateHistory(const char*, const char*, const char*)));
 
@@ -160,7 +161,10 @@ void ConversationWidget::getInput()
 	inputArea->activateWindow();
 	inputArea->setFocus();
 }
-
+void ConversationWidget::PopDialog(bool waitMode) {
+	if (waitMode) LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
+	else LApp::GetInstance()->GetWindow()->GetDialog()->Pop(text.c_str());
+}
 
 //处理聊天文本发送和接收
 void ConversationWidget::ProcessNetworkResponse(bool voice)
@@ -169,7 +173,8 @@ void ConversationWidget::ProcessNetworkResponse(bool voice)
 	LAppConfig::_WaitChatResponse = true;
 	GLWidget* win = LApp::GetInstance()->GetWindow();
 	string x = _msg.toUtf8();
-	LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
+	LApp::GetInstance()->GetWindow()->GetDialog()->moveToThread(LApp::GetInstance()->GetApp()->thread());
+	emit popDialogInThread(true);
 	emit textInputTriggered(LAppConfig::_UserName.c_str(), x.empty() ? "语音输入" : x.c_str(), "");
 	if (LAppConfig::_CustomChatServerOn && voice)
 	{
@@ -206,7 +211,7 @@ void ConversationWidget::ProcessNetworkResponse(bool voice)
 		f.write(string("<audio controls><source src=\"").append(soundPath).append("\"></audio>").c_str());
 	f.write("</div>");
 	f.close();
-
+	emit popDialogInThread(false);
 	emit textInputTriggered(LAppConfig::_AppName.c_str(), text.c_str(), soundPath.c_str());
 
 	LAppConfig::_WaitChatResponse = false;

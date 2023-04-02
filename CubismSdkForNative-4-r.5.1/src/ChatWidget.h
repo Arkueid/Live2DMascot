@@ -30,6 +30,7 @@ private slots:
 	void StopVoiceInput();
 	void ShowHistory();
 	void UpdateHistory(const char* chara, const char* text, const char* sound);
+	void PopDialog(bool waitMode);
 private:
 	QFont _font;
 	QString _msg;
@@ -46,4 +47,5 @@ private:
 	string soundPath;
 signals:
 	void textInputTriggered(const char*, const char*, const char*);
+	void popDialogInThread(bool waitMode);
 };
