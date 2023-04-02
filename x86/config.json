@@ -13,7 +13,7 @@
 		"CustomChatServer" : 
 		{
 			"HostPort" : "http://127.0.0.1:50721",
-			"On" : true,
+			"On" : false,
 			"ReadTimeOut" : 10,
 			"Route" : "/chat",
 			"VoiceChatRoute" : "/voice"
@@ -68,7 +68,7 @@
 		"MouseTrack" : true,
 		"NoSound" : false,
 		"RepairModeOn" : false,
-		"ShowBackground" : false,
+		"ShowBackground" : true,
 		"ShowBgmList" : false,
 		"ShowText" : true,
 		"SoundVolume" : 0.029999999999999999,
@@ -92,8 +92,8 @@
 		"Height" : 300,
 		"LastPos" : 
 		{
-			"X" : 325,
-			"Y" : 416
+			"X" : 1576,
+			"Y" : 723
 		},
 		"Width" : 300
 	}

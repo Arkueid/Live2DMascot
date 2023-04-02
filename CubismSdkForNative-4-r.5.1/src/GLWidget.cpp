@@ -71,8 +71,8 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		int mY = QCursor::pos().y();
 		QSize screen = LApp::GetInstance()->GetApp()->desktop()->size();
 		// 视线计算的x，y，用于drag(x, y)
-		float dragX = mX - x();
-		float dragY = mY - y();
+		float dragX = mX / 1.0f / x() * width()/ 2.0f;
+		float dragY = mY / 1.0f / y() * height()/2.0f;
 		// 鼠标点击的x，y，用于HitTest(x, y)
 		float clickX = mX - this->x();
 		float clickY = mY - this->y();
