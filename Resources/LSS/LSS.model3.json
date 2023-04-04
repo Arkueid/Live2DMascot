@@ -22,5 +22,15 @@
 			"Name": "LipSync",
 			"Ids": []
 		}
+	],
+	"HitAreas": [
+		{
+			"Name": "TapHead",
+			"Id": "ArtMesh46"
+		},
+		{
+			"Name": "TapBody",
+			"Id": "ArtMesh50"
+		}
 	]
 }

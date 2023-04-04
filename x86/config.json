@@ -13,7 +13,7 @@
 		"CustomChatServer" : 
 		{
 			"HostPort" : "http://127.0.0.1:50721",
-			"On" : false,
+			"On" : true,
 			"ReadTimeOut" : 10,
 			"Route" : "/chat",
 			"VoiceChatRoute" : "/voice"
@@ -37,7 +37,7 @@
 		"BackgroundColor" : "rgba(0, 0, 0, 180)",
 		"FontColor" : "white",
 		"FontFamily" : "黑体",
-		"FontSize" : 14,
+		"FontSize" : 12,
 		"Height" : 200,
 		"Width" : 410
 	},
@@ -46,7 +46,7 @@
 		"BackgroundColor" : "rgba(0, 0, 0, 200)",
 		"FontColor" : "white",
 		"FontFamily" : "黑体",
-		"FontSize" : 10,
+		"FontSize" : 12,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
 		"YOffset" : -10,
@@ -61,20 +61,20 @@
 	},
 	"UserSettings" : 
 	{
-		"AppName" : "Hiyori",
+		"AppName" : "Elaina",
 		"FPS" : 48,
-		"IconPath" : "../Resources/hiyori.jpg",
+		"IconPath" : "../Resources/LSS/ico_lss.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
 		"RepairModeOn" : false,
-		"ShowBackground" : true,
+		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
 		"SoundVolume" : 0.029999999999999999,
 		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
-		"TransparentBackground" : false,
+		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
 	},
@@ -92,8 +92,8 @@
 		"Height" : 300,
 		"LastPos" : 
 		{
-			"X" : 1588,
-			"Y" : 727
+			"X" : 1529,
+			"Y" : 449
 		},
 		"Width" : 300
 	}
