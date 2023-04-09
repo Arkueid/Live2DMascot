@@ -1,8 +1,0 @@
-# CMake generation dependency list for this directory.
-D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/thirdParty/glew/build/cmake/CMakeLists.txt
-D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/thirdParty/glew/build/cmake/cmake_uninstall.cmake.in
-D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/thirdParty/glew/glew.pc.in
-D:/cdk/cmake/share/cmake-3.24/Modules/FindOpenGL.cmake
-D:/cdk/cmake/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake
-D:/cdk/cmake/share/cmake-3.24/Modules/FindPackageMessage.cmake
-D:/cdk/cmake/share/cmake-3.24/Modules/GNUInstallDirs.cmake

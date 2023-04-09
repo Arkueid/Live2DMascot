@@ -12,6 +12,7 @@
 		"ChatSavePath" : "chat",
 		"CustomChatServer" : 
 		{
+			"CustomVoiceChat" : false,
 			"HostPort" : "",
 			"On" : false,
 			"ReadTimeOut" : 10,
@@ -92,8 +93,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1226,
-			"Y" : 322
+			"X" : 1222,
+			"Y" : 319
 		},
 		"Width" : 300
 	}

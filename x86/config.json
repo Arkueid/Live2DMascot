@@ -12,8 +12,9 @@
 		"ChatSavePath" : "chat",
 		"CustomChatServer" : 
 		{
-			"HostPort" : "http://127.0.0.1:50721",
-			"On" : true,
+			"CustomVoiceChat" : false,
+			"HostPort" : "http://127.0.0.1:8080",
+			"On" : false,
 			"ReadTimeOut" : 10,
 			"Route" : "/chat",
 			"VoiceChatRoute" : "/voice"
@@ -92,8 +93,8 @@
 		"Height" : 300,
 		"LastPos" : 
 		{
-			"X" : 1529,
-			"Y" : 449
+			"X" : 1576,
+			"Y" : 698
 		},
 		"Width" : 300
 	}

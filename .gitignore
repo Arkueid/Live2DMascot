@@ -1,3 +1,6 @@
 *.rar
 x86/chat/*
 x64/chat/*
+Resources/llny
+Resources/nn
+*/*.rar
