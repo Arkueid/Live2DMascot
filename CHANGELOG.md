@@ -1,5 +1,8 @@
 # Changelog
 
+### 2023-4-26
+* 添加分支develop，用于保存工程项目
+
 ### 2023-4-4
 Fix:  
 * 修复[#11](https://github.com/Arkueid/Live2DMascot/issues/11)

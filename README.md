@@ -19,7 +19,7 @@
 	* [文本显示](#文本显示)  
 3. [注意事项](#注意事项)
 4. [开发环境](#开发环境)
-5. [编译](#编译)     
+5. [项目源码](https://github.com/Arkueid/Live2DMascot/tree/develop)     
 
 ## 预览  
 
@@ -249,56 +249,3 @@ Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://ww
 [Cubism Live2D SDK for Native]:https://www.live2d.com/download/cubism-sdk/
 
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
-
-
-
-
-## 编译
-在vs_project文件夹下，目前只整理了x86的项目，所有绝对路径已经改成相对路径，支持库也已经打包在vs_project\thirdParty文件夹下，应该可以做到开箱即用（maybe）
-
-	用Visual Studio 2022 (建议VS 2022) 打开 			vs_project\proj_msvc2022_x86_mt\Demo.sln，有两个项目配置:  
-	* Console -> Debug
-	* Window -> Release  
-
-1. 使用以下库静态库:  
-
-	**Qt库**  
-	* Qt5Widgets.lib  
-	* Qt5Core.lib  
-	* Qt5Gui.lib  
-	* qtmain.lib  (子系统设置为窗口时需要)  
-
-	**Windows系统**
-	* Winmm.lib  
-	
-	**[Openssl]**
-	* libssl.lib  
-	* libcrypto.lib
-
-[Openssl]:https://slproweb.com/products/Win32OpenSSL.html  
-
-2. 引入头文件[\<httplib.h\>](https://github.com/yhirose/cpp-httplib)
-
-3. 运行时需要的动态库:  
-
-	**Qt运行环境**
-	安装Qt后，使用Qt\bin下的windeployqt.exe 执行: 
-	```shell
-	windeployqt.exe "编译之后的程序.exe"
-	```
-	**Openssl (32位)**
-	* libssl-3.dll  
-	* libcrypto-3.dll  
-
-  	**Openssl (64位)**
-	* libssl-3-x64.dll  
-	* libcrypto-3-x64.dll
-
-	**对于没有Visual C++的环境需要额外安装或者将以下dll放在exe文件同目录下**
-
-	* vcruntime140_1.dll 	**(x64)**
-	* vcruntime140.dll 		**(x86/x64)**
-	* msvcp140.dll 			**(x86/x64)**
-	* msvcp140_1.dll 		**(x86/x64)**
-
-以上步骤可能无法解决所有问题，需要自行查找方案.
