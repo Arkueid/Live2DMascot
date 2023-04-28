@@ -1,0 +1,96 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "爱.moc3",
+		"Textures": [
+			"爱.2048/texture_00.png"
+		],
+		"Physics": "爱.physics3.json",
+		"DisplayInfo": "爱.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "smile-1",
+				"File": "expressions/smile-1.exp3.json"
+			},
+			{
+				"Name": "smile-2",
+				"File": "expressions/smile-2.exp3.json"
+			},
+			{
+				"Name": "angry",
+				"File": "expressions/angry.exp3.json"
+			},
+			{
+				"Name": "astonish",
+				"File": "expressions/astonish.exp3.json"
+			},
+			{
+				"Name": "angry.hd",
+				"File": "expressions/angry.hd.exp3.json"
+			},
+			{
+				"Name": "astonish.hd",
+				"File": "expressions/astonish.hd.exp3.json"
+			},
+			{
+				"Name": "smile-1.hd",
+				"File": "expressions/smile-1.hd.exp3.json"
+			},
+			{
+				"Name": "smile-2.hd",
+				"File": "expressions/smile-2.hd.exp3.json"
+			}
+		],
+		"Motions": {
+			"TapHand": [
+				{
+					"File": "motions/shoot.motion3.json"
+				}
+			]
+		}
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": [
+				"ParamMouthOpenY"
+			]
+		}
+	],
+	"HitAreas" : 
+	[
+		{
+			"Id" : "ArtMesh29",
+			"Name" : "TapHead"
+		},
+		{
+			"Id" : "ArtMesh2",
+			"Name" : "TapBody"
+		},
+		{
+			"Id" : "ArtMesh3",
+			"Name" : "TapBody"
+		},
+		{
+			"Id" : "ArtMesh33",
+			"Name" : "TapBody"
+		},
+		{
+			"Id" : "ArtMesh36",
+			"Name" : "TapHand"
+		},
+		{
+			"Id" : "ArtMesh37",
+			"Name" : "TapHand"
+		}
+	]
+}
