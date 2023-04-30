@@ -1,0 +1,147 @@
+{
+	"Type": "Live2D Expression",
+	"FadeInTime": 0.18,
+	"FadeOutTime": 0.18,
+	"Parameters": [
+		{
+			"Id": "ParamEyeLOpen",
+			"Value": 0,
+			"Blend": "Multiply"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeLForm",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"Value": 0,
+			"Blend": "Multiply"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeRForm",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeBTwinkle",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "Parameyesub",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamCheek",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"Value": -0.4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"Value": -0.4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLX",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRX",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"Value": 1.4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"Value": 1.4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"Value": 0.02,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthWidth",
+			"Value": -0.2,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthHight",
+			"Value": -0.8,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamsweatS1",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamsweatS2",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamsweatS3",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamsweatP",
+			"Value": 0,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamsweatR",
+			"Value": 0,
+			"Blend": "Add"
+		}
+	]
+}

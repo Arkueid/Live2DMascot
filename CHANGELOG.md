@@ -2,22 +2,23 @@
 
 ### 2023-4-30
 * 增加模型设置  
-	* 增加画布缩放设置
-    	* 参数范围：>=0
 	* 增加角色X，Y坐标设置
-    	* 参数范围：-1.0~1.0
-    	* (0.0, 0.0)为窗口中心坐标，即对应屏幕坐标(windowWidth/2, windowHeight/2)
-	* 缺陷
-    	* 每次更换模型需要手动微调参数以达到最佳显示位置  
+    	* 参数范围：-1.00~1.00 (精度最高2位小数)
+    	* 坐标(0, 0)为窗口中心坐标，即对应屏幕坐标(windowWidth/2, windowHeight/2)
+	* 对于[#14](https://github.com/Arkueid/Live2DMascot/issues/14)中提及的类似模型，可以通过调整窗口大小和角色X、Y来达到最佳显示位置
 
 * 已知问题：  
   1. [#12](https://github.com/Arkueid/Live2DMascot/issues/12)
-  2. 详细参考:   
+  2. [#14](https://github.com/Arkueid/Live2DMascot/issues/14)的截图中出现了类似[#12](https://github.com/Arkueid/Live2DMascot/issues/12)的问题，同时角色嘴唇附近出现黑边，详细参考下方链接： 
     	* https://docs.live2d.com/zh-CHS/cubism-sdk-manual/texture-trouble-shooting/
     	* https://tieba.baidu.com/p/6029180797  
 	* 问题解释
     	* 问题1、2可能是同一原因导致
-    	* 由于在Live2D Viewer中测试可以正常显示，因此不太可能是设备适配问题，可能与纹理图片的正片叠底有关？（官方文档的解释，不太懂，目前能力有限无法解决）
+    	* 由于在Live2D Viewer中测试可以正常显示，因此不太可能是设备适配问题，可能与纹理图片的正片叠底有关？
+	* 问题解决
+    	* 目前只有问题2得到解决，问题1由于在我的设备上没遇到过不能确定是否解决，如果问题2和问题1是同一原因导致那么本次更新将解决[#12](https://github.com/Arkueid/Live2DMascot/issues/12)
+		* 运行效果
+		* ![运行效果](sample_images/Snipaste_2023-04-30_14-29-43.png)
 
 ### 2023-4-28
 #### develop分支

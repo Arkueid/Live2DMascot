@@ -55,12 +55,12 @@
 	},
 	"ModelSettings" : 
 	{
-		"CanvasScale" : 1.0,
+		"CanvasScale" : 1.3999999761581421,
 		"CharacterX" : 0.0,
-		"CharacterY" : 0.0,
+		"CharacterY" : -0.69999998807907104,
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "爱",
+		"ModelName" : "model",
 		"MotionInterval" : 60.0
 	},
 	"UserSettings" : 
@@ -93,12 +93,12 @@
 	},
 	"WindowSettings" : 
 	{
-		"Height" : 700,
+		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1427,
-			"Y" : 201
+			"X" : 1248,
+			"Y" : 290
 		},
-		"Width" : 300
+		"Width" : 500
 	}
 }

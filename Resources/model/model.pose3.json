@@ -1,0 +1,52 @@
+{
+	"Type": "Live2D Pose",
+	"FadeInTime": 0,
+	"Groups": [
+		[
+			{
+				"Id": "PartArmCL",
+				"Link": []
+			},
+			{
+				"Id": "PartArmAL",
+				"Link": []
+			},
+			{
+				"Id": "PartArmBL",
+				"Link": []
+			},
+			{
+				"Id": "PartArmDL",
+				"Link": []
+			}
+		],
+		[
+			{
+				"Id": "PartArmAR",
+				"Link": []
+			},
+			{
+				"Id": "PartArmBR",
+				"Link": []
+			},
+			{
+				"Id": "PartArmCR",
+				"Link": []
+			},
+			{
+				"Id": "PartArmDR",
+				"Link": []
+			}
+		],
+		[
+			{
+				"Id": "PartJacketB",
+				"Link": []
+			},
+			{
+				"Id": "PartJacketA",
+				"Link": []
+			}
+		]
+	]
+}
