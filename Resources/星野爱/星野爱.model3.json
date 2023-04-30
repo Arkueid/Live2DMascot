@@ -1,0 +1,67 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "星野爱.moc3",
+		"Textures": [
+			"星野爱.8192/texture_00.png",
+			"星野爱.8192/texture_01.png"
+		],
+		"Physics": "星野爱.physics3.json",
+		"DisplayInfo": "星野爱.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "哭哭哭.exp3.json",
+				"File": "哭哭哭.exp3.json"
+			},
+			{
+				"Name": "噶.exp3.json",
+				"File": "噶.exp3.json"
+			},
+			{
+				"Name": "爱心眼.exp3.json",
+				"File": "爱心眼.exp3.json"
+			},
+			{
+				"Name": "生气.exp3.json",
+				"File": "生气.exp3.json"
+			},
+			{
+				"Name": "舌头.exp3.json",
+				"File": "舌头.exp3.json"
+			},
+			{
+				"Name": "姿势1.exp3.json",
+				"File": "姿势1.exp3.json"
+			},
+			{
+				"Name": "姿势2.exp3.json",
+				"File": "姿势2.exp3.json"
+			}
+		],
+		"Motions": {
+			"": [
+				{
+					"File": "动画.motion3.json"
+				}
+			]
+		}
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": [
+				"ParamMouthOpenY"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		}
+	],
+	"HitAreas": []
+}

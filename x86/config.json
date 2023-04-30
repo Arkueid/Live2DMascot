@@ -55,9 +55,12 @@
 	},
 	"ModelSettings" : 
 	{
+		"CanvasScale" : 1.0,
+		"CharacterX" : 0.0,
+		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "LSS",
+		"ModelName" : "爱",
 		"MotionInterval" : 60.0
 	},
 	"UserSettings" : 
@@ -69,13 +72,13 @@
 		"MouseTrack" : true,
 		"NoSound" : false,
 		"RepairModeOn" : false,
-		"ShowBackground" : false,
+		"ShowBackground" : true,
 		"ShowBgmList" : false,
 		"ShowText" : true,
 		"SoundVolume" : 0.029999999999999999,
 		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
-		"TransparentBackground" : true,
+		"TransparentBackground" : false,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
 	},
@@ -90,11 +93,11 @@
 	},
 	"WindowSettings" : 
 	{
-		"Height" : 300,
+		"Height" : 700,
 		"LastPos" : 
 		{
-			"X" : 1576,
-			"Y" : 698
+			"X" : 1427,
+			"Y" : 201
 		},
 		"Width" : 300
 	}
