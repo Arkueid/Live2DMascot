@@ -1,0 +1,426 @@
+{
+	"Controllers" : 
+	{
+		"Accelerometer" : 
+		{
+			"Enabled" : true
+		},
+		"AreaTrigger" : {},
+		"ArtmeshColor" : {},
+		"ArtmeshCulling" : 
+		{
+			"DefaultMode" : 0
+		},
+		"ArtmeshOpacity" : {},
+		"AutoBreath" : 
+		{
+			"Enabled" : true
+		},
+		"ExtraMotion" : 
+		{
+			"Enabled" : true
+		},
+		"EyeBlink" : 
+		{
+			"Enabled" : true,
+			"MaxInterval" : 6000,
+			"MinInterval" : 500
+		},
+		"FaceTracking" : 
+		{
+			"AngleX" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamAngleX",
+					"Input" : 0,
+					"Max" : 30.0,
+					"Min" : -30.0
+				}
+			],
+			"AngleY" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamAngleY",
+					"Input" : 0,
+					"Max" : 30.0,
+					"Min" : -30.0
+				}
+			],
+			"AngleZ" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamAngleZ",
+					"Input" : 0,
+					"Inverted" : true,
+					"Max" : 30.0,
+					"Min" : -30.0
+				}
+			],
+			"BrowLY" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamBrowLY",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : -1.0
+				}
+			],
+			"BrowRY" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamBrowRY",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : -1.0
+				}
+			],
+			"Enabled" : true,
+			"EyeLOpen" : 
+			[
+				{
+					"DefaultValue" : 1.0,
+					"Id" : "ParamEyeLOpen",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : 0.0
+				}
+			],
+			"EyeROpen" : 
+			[
+				{
+					"DefaultValue" : 1.0,
+					"Id" : "ParamEyeROpen",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : 0.0
+				}
+			],
+			"EyeballX" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamEyeBallX",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : -1.0
+				}
+			],
+			"EyeballY" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamEyeBallY",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : -1.0
+				}
+			],
+			"MouthForm" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamMouthForm",
+					"Input" : 0,
+					"Inverted" : true,
+					"Max" : 1.0,
+					"Min" : -1.0
+				}
+			],
+			"MouthOpenY" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamMouthOpenY",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : 0.0
+				}
+			],
+			"PositionX" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamBodyAngleX",
+					"Input" : 0,
+					"Max" : 10.0,
+					"Min" : -10.0
+				}
+			],
+			"PositionY" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamBodyAngleY",
+					"Input" : 0,
+					"Max" : 10.0,
+					"Min" : -10.0
+				}
+			],
+			"PositionZ" : 
+			[
+				{
+					"DefaultValue" : 0.0,
+					"Id" : "ParamBodyAngleZ",
+					"Input" : 0,
+					"Max" : 10.0,
+					"Min" : -10.0
+				}
+			]
+		},
+		"HandTracking" : {},
+		"HandTrigger" : {},
+		"IntimacySystem" : {},
+		"KeyTrigger" : {},
+		"LipSync" : 
+		{
+			"Gain" : 5.0
+		},
+		"Microphone" : {},
+		"MouseTracking" : 
+		{
+			"Enabled" : true,
+			"Items" : 
+			[
+				{
+					"BlendMode" : 1,
+					"Id" : "ParamAngleX",
+					"Input" : 0,
+					"Max" : 30.0,
+					"Min" : -30.0
+				},
+				{
+					"Axis" : 1,
+					"BlendMode" : 1,
+					"Id" : "ParamAngleY",
+					"Input" : 0,
+					"Max" : 30.0,
+					"Min" : -30.0
+				},
+				{
+					"BlendMode" : 1,
+					"Id" : "ParamAngleZ",
+					"Input" : 0,
+					"Max" : 30.0,
+					"Min" : -30.0
+				},
+				{
+					"BlendMode" : 1,
+					"Id" : "ParamEyeBallX",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : -1.0
+				},
+				{
+					"Axis" : 1,
+					"BlendMode" : 1,
+					"Id" : "ParamEyeBallY",
+					"Input" : 0,
+					"Max" : 1.0,
+					"Min" : -1.0
+				},
+				{
+					"BlendMode" : 1,
+					"Id" : "ParamBodyAngleX",
+					"Input" : 0,
+					"Max" : 10.0,
+					"Min" : -10.0
+				},
+				{
+					"Axis" : 1,
+					"BlendMode" : 1,
+					"Id" : "ParamBodyAngleY",
+					"Input" : 0,
+					"Max" : 10.0,
+					"Min" : -10.0
+				},
+				{
+					"BlendMode" : 1,
+					"Id" : "ParamBodyAngleZ",
+					"Input" : 0,
+					"Max" : 10.0,
+					"Min" : -10.0
+				}
+			],
+			"SmoothTime" : 0.14999999999999999
+		},
+		"ParamHit" : {},
+		"ParamLoop" : {},
+		"ParamTrigger" : {},
+		"ParamValue" : {},
+		"PartOpacity" : {},
+		"Transform" : {}
+	},
+	"FileReferences" : 
+	{
+		"Expressions" : 
+		[
+			{
+				"File" : "exp/exp1.exp3.json",
+				"Name" : "exp1.exp3"
+			},
+			{
+				"File" : "exp/exp2.exp3.json",
+				"Name" : "exp2.exp3"
+			},
+			{
+				"File" : "exp/exp3.exp3.json",
+				"Name" : "exp3.exp3"
+			},
+			{
+				"File" : "exp/exp4.exp3.json",
+				"Name" : "exp4.exp3"
+			},
+			{
+				"File" : "exp/exp5.exp3.json",
+				"Name" : "exp5.exp3"
+			},
+			{
+				"File" : "exp/exp6.exp3.json",
+				"Name" : "exp6.exp3"
+			},
+			{
+				"File" : "exp/exp7.exp3.json",
+				"Name" : "exp7.exp3"
+			}
+		],
+		"Moc" : "Murasame.moc3",
+		"Motions" : 
+		{
+			"Idle" : 
+			[
+				{
+					"File" : "motion/motion01.motion3.json",
+					"Interruptable" : true
+				}
+			],
+			"Taphair" : 
+			[
+				{
+					"File" : "motion/motion04.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-13-234.mp4.wav",
+					"Text" : "在这里，这里"
+				},
+				{
+					"File" : "motion/motion05.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-22-154.mp4.wav",
+					"Text" : "你看，复原了"
+				}
+			],
+			"Tapleg" : 
+			[
+				{
+					"File" : "motion/motion09.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-58-125.mp4.wav",
+					"Text" : "哪是什么幽灵，别……别别别把本座和那种毫无事实依据的东西混为一谈"
+				},
+				{
+					"File" : "motion/motion11.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-20-24-955.mp4.wav",
+					"Text" : "你醒了吗，主人。早上好"
+				},
+				{
+					"File" : "motion/motion12.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-20-39-029.mp4.wav",
+					"Text" : "本座不是幻觉，更不是幽灵，主人！"
+				}
+			],
+			"Tapqunzi" : 
+			[
+				{
+					"File" : "motion/motion06.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-30-578.mp4.wav",
+					"Text" : "——着陆"
+				},
+				{
+					"File" : "motion/motion08.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-47-794.mp4.wav",
+					"Text" : "本座才不是幽灵！完全不是！不要把幽灵和本座相提并论！"
+				}
+			],
+			"Tapxiongbu" : 
+			[
+				{
+					"File" : "motion/motion07.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-37-560.mp4.wav",
+					"Text" : "主人就是主人。是你拔出了丛雨丸吧？"
+				},
+				{
+					"File" : "motion/motion10.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-20-13-844.mp4.wav",
+					"Text" : "你这————！！"
+				}
+			],
+			"face" : 
+			[
+				{
+					"File" : "motion/motion02.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-18-04-516.mp4.wav",
+					"Text" : "吾名丛雨，乃是这“丛雨丸”的管理者……简单来说，也算是“丛雨丸”的灵魂"
+				},
+				{
+					"File" : "motion/motion03.motion3.json",
+					"Interruptable" : true,
+					"Sound" : "sounds/bandicam 2021-11-23 02-19-03-123.mp4.wav",
+					"Text" : "你，就是本座的主人？"
+				}
+			]
+		},
+		"Physics" : "Murasame.physics3.json",
+		"PhysicsV2" : 
+		{
+			"File" : "Murasame.physics3.json"
+		},
+		"Textures" : 
+		[
+			"Murasame.4096/texture_00.png"
+		]
+	},
+	"HitAreas" : 
+	[
+		{
+			"Id" : "HitArea",
+			"Motion" : "Tapface",
+			"Name" : "face"
+		},
+		{
+			"Id" : "HitArea2",
+			"Motion" : "Taphair",
+			"Name" : "hair"
+		},
+		{
+			"Id" : "HitArea3",
+			"Motion" : "Tapxiongbu",
+			"Name" : "xiongbu"
+		},
+		{
+			"Id" : "HitArea4",
+			"Motion" : "Tapqunzi",
+			"Name" : "qunzi"
+		},
+		{
+			"Id" : "HitArea5",
+			"Motion" : "Tapleg",
+			"Name" : "leg"
+		}
+	],
+	"Options" : 
+	{
+		"ScaleFactor" : 0.69999999999999996
+	},
+	"Version" : 3
+}

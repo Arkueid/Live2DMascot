@@ -1,0 +1,182 @@
+{
+  "SwitchMode": 0,
+  "RemoveAllExpKeys": [
+    0,
+    0,
+    0
+  ],
+  "MotionShortcutKeyDatas": {
+    "Wing2.motion3.json": {
+      "MotionName": "Wing2.motion3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "PlayMaxTime": 0.0,
+      "Mode": 0,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "FadeDuration": 0.5
+    },
+    "Wings.motion3.json": {
+      "MotionName": "Wings.motion3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "PlayMaxTime": 0.0,
+      "Mode": 0,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "FadeDuration": 0.5
+    }
+  },
+  "ExpShortcutKeyDatas": {
+    "expression1.exp3.json": {
+      "ExpName": "expression1.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        304,
+        49,
+        0
+      ],
+      "Mode": 0,
+      "FadeDuration": 0.5
+    },
+    "expression2.exp3.json": {
+      "ExpName": "expression2.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        304,
+        50,
+        0
+      ],
+      "Mode": 0,
+      "FadeDuration": 0.5
+    },
+    "expression3.exp3.json": {
+      "ExpName": "expression3.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        304,
+        51,
+        0
+      ],
+      "Mode": 0,
+      "FadeDuration": 0.5
+    },
+    "expression4.exp3.json": {
+      "ExpName": "expression4.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        304,
+        52,
+        0
+      ],
+      "Mode": 0,
+      "FadeDuration": 0.5
+    },
+    "expression5.exp3.json": {
+      "ExpName": "expression5.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        304,
+        53,
+        0
+      ],
+      "Mode": 0,
+      "FadeDuration": 0.5
+    },
+    "expression6.exp3.json": {
+      "ExpName": "expression6.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        304,
+        54,
+        0
+      ],
+      "Mode": 0,
+      "FadeDuration": 0.5
+    },
+    "放下胳膊.exp3.json": {
+      "ExpName": "放下胳膊.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "Mode": 1,
+      "FadeDuration": 0.5
+    },
+    "穿黑色礼服.exp3.json": {
+      "ExpName": "穿黑色礼服.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "Mode": 1,
+      "FadeDuration": 0.5
+    },
+    "蓝眼睛.exp3.json": {
+      "ExpName": "蓝眼睛.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "Mode": 1,
+      "FadeDuration": 0.5
+    },
+    "裸腿.exp3.json": {
+      "ExpName": "裸腿.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "Mode": 1,
+      "FadeDuration": 0.5
+    },
+    "隐藏光环.exp3.json": {
+      "ExpName": "隐藏光环.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "Mode": 1,
+      "FadeDuration": 0.5
+    },
+    "隐藏翅膀.exp3.json": {
+      "ExpName": "隐藏翅膀.exp3.json",
+      "IsEnable": true,
+      "IsGlobal": true,
+      "Keys": [
+        0,
+        0,
+        0
+      ],
+      "Mode": 1,
+      "FadeDuration": 0.5
+    }
+  }
+}

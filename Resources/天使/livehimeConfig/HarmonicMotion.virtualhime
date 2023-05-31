@@ -1,0 +1,23 @@
+{
+  "OnUse": true,
+  "Configs": [
+    {
+      "DisplayName": "",
+      "Generator": {
+        "OnUse": true,
+        "CycleTime": 3.0
+      },
+      "Map": [
+        {
+          "CubismParameter": "ParamBreath",
+          "DataMin": -1.0,
+          "DataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "OnUse": true,
+          "Flip": false
+        }
+      ]
+    }
+  ]
+}

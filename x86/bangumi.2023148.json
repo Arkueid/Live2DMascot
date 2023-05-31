@@ -1,0 +1,3669 @@
+[
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "1996-01-08",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 6271
+				},
+				"id" : 899,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/01/88/899_Q3F3X.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/01/88/899_Q3F3X.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/01/88/899_Q3F3X.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/01/88/899_Q3F3X.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/01/88/899_Q3F3X.jpg"
+				},
+				"name" : "名探偵コナン",
+				"name_cn" : "名侦探柯南",
+				"rank" : 598,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 22,
+						"10" : 796,
+						"2" : 8,
+						"3" : 15,
+						"4" : 45,
+						"5" : 229,
+						"6" : 825,
+						"7" : 2166,
+						"8" : 2079,
+						"9" : 822
+					},
+					"score" : 7.5999999999999996,
+					"total" : 7007
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/899"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 664
+				},
+				"id" : 323651,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/4c/ee/323651_gE7eZ.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/4c/ee/323651_gE7eZ.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/4c/ee/323651_gE7eZ.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/4c/ee/323651_gE7eZ.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/4c/ee/323651_gE7eZ.jpg"
+				},
+				"name" : "くまクマ熊ベアーぱーんち！",
+				"name_cn" : "熊熊勇闯异世界 Punch!",
+				"rank" : 6251,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 2,
+						"2" : 4,
+						"3" : 3,
+						"4" : 13,
+						"5" : 43,
+						"6" : 72,
+						"7" : 29,
+						"8" : 8,
+						"9" : 2
+					},
+					"score" : 5.7999999999999998,
+					"total" : 176
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/323651"
+			},
+			{
+				"air_date" : "2023-04-10",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 11
+				},
+				"id" : 358569,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/a5/7b/358569_uPCKK.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/a5/7b/358569_uPCKK.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/a5/7b/358569_uPCKK.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/a5/7b/358569_uPCKK.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/a5/7b/358569_uPCKK.jpg"
+				},
+				"name" : "武林不二周刊",
+				"name_cn" : "武林不二周刊",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 1,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 6.5,
+					"total" : 2
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/358569"
+			},
+			{
+				"air_date" : "2023-04-10",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 3109
+				},
+				"id" : 365437,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/0e/c3/365437_O84Is.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/0e/c3/365437_O84Is.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/0e/c3/365437_O84Is.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/0e/c3/365437_O84Is.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/0e/c3/365437_O84Is.jpg"
+				},
+				"name" : "君は放課後インソムニア",
+				"name_cn" : "放学后失眠的你",
+				"rank" : 1066,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 30,
+						"2" : 3,
+						"3" : 4,
+						"4" : 6,
+						"5" : 21,
+						"6" : 98,
+						"7" : 310,
+						"8" : 402,
+						"9" : 63
+					},
+					"score" : 7.4000000000000004,
+					"total" : 939
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/365437"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 472
+				},
+				"id" : 366331,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/c0/e6/366331_l3w8h.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/c0/e6/366331_l3w8h.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/c0/e6/366331_l3w8h.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/c0/e6/366331_l3w8h.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/c0/e6/366331_l3w8h.jpg"
+				},
+				"name" : "アリス・ギア・アイギス EXPANSION",
+				"name_cn" : "机战少女 Alice Expansion",
+				"rank" : 5117,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 5,
+						"2" : 2,
+						"3" : 2,
+						"4" : 7,
+						"5" : 22,
+						"6" : 47,
+						"7" : 45,
+						"8" : 9,
+						"9" : 3
+					},
+					"score" : 6.2000000000000002,
+					"total" : 145
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/366331"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 590
+				},
+				"id" : 378101,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/98/25/378101_XGh49.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/98/25/378101_XGh49.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/98/25/378101_XGh49.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/98/25/378101_XGh49.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/98/25/378101_XGh49.jpg"
+				},
+				"name" : "異世界はスマートフォンとともに。2",
+				"name_cn" : "带着智能手机闯荡异世界。 第二季",
+				"rank" : 7447,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 15,
+						"10" : 13,
+						"2" : 16,
+						"3" : 12,
+						"4" : 40,
+						"5" : 67,
+						"6" : 39,
+						"7" : 5,
+						"8" : 6,
+						"9" : 4
+					},
+					"score" : 4.9000000000000004,
+					"total" : 217
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/378101"
+			},
+			{
+				"air_date" : "2023-04-10",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 334
+				},
+				"id" : 390712,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/56/50/390712_QjcQp.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/56/50/390712_QjcQp.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/56/50/390712_QjcQp.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/56/50/390712_QjcQp.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/56/50/390712_QjcQp.jpg"
+				},
+				"name" : "彼女が公爵邸に行った理由",
+				"name_cn" : "她去公爵家的理由",
+				"rank" : 5340,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 2,
+						"2" : 1,
+						"3" : 3,
+						"4" : 3,
+						"5" : 15,
+						"6" : 41,
+						"7" : 17,
+						"8" : 6,
+						"9" : 3
+					},
+					"score" : 6,
+					"total" : 94
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/390712"
+			},
+			{
+				"air_date" : "2023-04-24",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 6
+				},
+				"id" : 406471,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/25/7e/406471_2PwK7.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/25/7e/406471_2PwK7.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/25/7e/406471_2PwK7.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/25/7e/406471_2PwK7.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/25/7e/406471_2PwK7.jpg"
+				},
+				"name" : "女神有点灵",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 0,
+						"3" : 0,
+						"4" : 1,
+						"5" : 0,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 6,
+					"total" : 4
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/406471"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 194
+				},
+				"id" : 407713,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/c9/1b/407713_jHaH4.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/c9/1b/407713_jHaH4.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/c9/1b/407713_jHaH4.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/c9/1b/407713_jHaH4.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/c9/1b/407713_jHaH4.jpg"
+				},
+				"name" : "絆のアリル",
+				"name_cn" : "绊之Allele",
+				"rank" : 7613,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 30,
+						"10" : 4,
+						"2" : 9,
+						"3" : 21,
+						"4" : 26,
+						"5" : 25,
+						"6" : 17,
+						"7" : 5,
+						"8" : 2,
+						"9" : 2
+					},
+					"score" : 3.8999999999999999,
+					"total" : 141
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/407713"
+			},
+			{
+				"air_date" : "2023-04-10",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 1315
+				},
+				"id" : 408013,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/67/45/408013_5Z5Q3.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/67/45/408013_5Z5Q3.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/67/45/408013_5Z5Q3.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/67/45/408013_5Z5Q3.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/67/45/408013_5Z5Q3.jpg"
+				},
+				"name" : "デッドマウント・デスプレイ",
+				"name_cn" : "亡骸游戏",
+				"rank" : 5243,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 6,
+						"2" : 3,
+						"3" : 7,
+						"4" : 15,
+						"5" : 47,
+						"6" : 139,
+						"7" : 143,
+						"8" : 30,
+						"9" : 2
+					},
+					"score" : 6.2999999999999998,
+					"total" : 392
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/408013"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 411977,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d8/57/411977_C68Kz.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d8/57/411977_C68Kz.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d8/57/411977_C68Kz.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d8/57/411977_C68Kz.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d8/57/411977_C68Kz.jpg"
+				},
+				"name" : "忍たま乱太郎 第31シリーズ",
+				"name_cn" : "忍者乱太郎 第31季",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/411977"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 424450,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/05/ca/424450_mg2G4.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/05/ca/424450_mg2G4.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/05/ca/424450_mg2G4.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/05/ca/424450_mg2G4.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/05/ca/424450_mg2G4.jpg"
+				},
+				"name" : "逆天战纪",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 0,
+						"2" : 0,
+						"3" : 1,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 1.7,
+					"total" : 3
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/424450"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 8
+				},
+				"id" : 426154,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/91/bc/426154_OwOQq.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/91/bc/426154_OwOQq.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/91/bc/426154_OwOQq.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/91/bc/426154_OwOQq.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/91/bc/426154_OwOQq.jpg"
+				},
+				"name" : "ぼさにまる",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 1,
+						"7" : 0,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 7.5,
+					"total" : 2
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/426154"
+			},
+			{
+				"air_date" : "2023-04-03",
+				"air_weekday" : 1,
+				"collection" : 
+				{
+					"doing" : 1
+				},
+				"id" : 427943,
+				"images" : null,
+				"name" : "はなかっぱ 第14期",
+				"name_cn" : "花样河童 第14季",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/427943"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期一",
+			"en" : "Mon",
+			"id" : 1,
+			"ja" : "月耀日"
+		}
+	},
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "2023-04-04",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 4817
+				},
+				"id" : 357961,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/63/4e/357961_RtPiz.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/63/4e/357961_RtPiz.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/63/4e/357961_RtPiz.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/63/4e/357961_RtPiz.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/63/4e/357961_RtPiz.jpg"
+				},
+				"name" : "スキップとローファー",
+				"name_cn" : "跃动青春",
+				"rank" : 384,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 4,
+						"10" : 79,
+						"2" : 4,
+						"3" : 6,
+						"4" : 7,
+						"5" : 18,
+						"6" : 100,
+						"7" : 321,
+						"8" : 852,
+						"9" : 245
+					},
+					"score" : 7.7999999999999998,
+					"total" : 1636
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/357961"
+			},
+			{
+				"air_date" : "2023-04-04",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 66
+				},
+				"id" : 402136,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/6a/aa/402136_1t11g.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/6a/aa/402136_1t11g.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/6a/aa/402136_1t11g.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/6a/aa/402136_1t11g.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/6a/aa/402136_1t11g.jpg"
+				},
+				"name" : "東京ミュウミュウ にゅ～♡ 第2期",
+				"name_cn" : "东京猫猫 NEW～♡ 第二季",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 1,
+						"3" : 1,
+						"4" : 1,
+						"5" : 3,
+						"6" : 5,
+						"7" : 5,
+						"8" : 1,
+						"9" : 2
+					},
+					"score" : 6,
+					"total" : 21
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/402136"
+			},
+			{
+				"air_date" : "2023-04-18",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 405217,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/05/bc/405217_PSmQl.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/05/bc/405217_PSmQl.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/05/bc/405217_PSmQl.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/05/bc/405217_PSmQl.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/05/bc/405217_PSmQl.jpg"
+				},
+				"name" : "披着狼皮的羊",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 7,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/405217"
+			},
+			{
+				"air_date" : "2023-04-25",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 1
+				},
+				"id" : 405312,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d6/fb/405312_xq93r.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d6/fb/405312_xq93r.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d6/fb/405312_xq93r.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d6/fb/405312_xq93r.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d6/fb/405312_xq93r.jpg"
+				},
+				"name" : "生而为猫",
+				"name_cn" : "生而为猫",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/405312"
+			},
+			{
+				"air_date" : "2023-04-11",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 229
+				},
+				"id" : 407659,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d4/2d/407659_Ik7lb.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d4/2d/407659_Ik7lb.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d4/2d/407659_Ik7lb.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d4/2d/407659_Ik7lb.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d4/2d/407659_Ik7lb.jpg"
+				},
+				"name" : "THE MARGINAL SERVICE",
+				"name_cn" : "边缘服务",
+				"rank" : 6308,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 2,
+						"3" : 1,
+						"4" : 13,
+						"5" : 21,
+						"6" : 28,
+						"7" : 4,
+						"8" : 3,
+						"9" : 1
+					},
+					"score" : 5.4000000000000004,
+					"total" : 75
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/407659"
+			},
+			{
+				"air_date" : "2023-04-11",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 88
+				},
+				"id" : 424688,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/96/93/424688_sVaJa.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/96/93/424688_sVaJa.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/96/93/424688_sVaJa.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/96/93/424688_sVaJa.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/96/93/424688_sVaJa.jpg"
+				},
+				"name" : "电器少女",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 0,
+						"2" : 1,
+						"3" : 1,
+						"4" : 1,
+						"5" : 0,
+						"6" : 7,
+						"7" : 19,
+						"8" : 9,
+						"9" : 1
+					},
+					"score" : 6.7000000000000002,
+					"total" : 40
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/424688"
+			},
+			{
+				"air_date" : "2023-04-04",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 6
+				},
+				"id" : 426284,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/29/4d/426284_CPZdI.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/29/4d/426284_CPZdI.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/29/4d/426284_CPZdI.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/29/4d/426284_CPZdI.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/29/4d/426284_CPZdI.jpg"
+				},
+				"name" : "ユーチューニャー",
+				"name_cn" : "YouTu喵",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 1,
+						"2" : 1,
+						"3" : 1,
+						"4" : 0,
+						"5" : 0,
+						"6" : 1,
+						"7" : 1,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 6.2000000000000002,
+					"total" : 6
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/426284"
+			},
+			{
+				"air_date" : "2023-04-04",
+				"air_weekday" : 2,
+				"collection" : 
+				{
+					"doing" : 3
+				},
+				"id" : 427004,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/92/34/427004_ZQ954.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/92/34/427004_ZQ954.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/92/34/427004_ZQ954.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/92/34/427004_ZQ954.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/92/34/427004_ZQ954.jpg"
+				},
+				"name" : "4주 애인",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 1,
+						"3" : 0,
+						"4" : 0,
+						"5" : 1,
+						"6" : 1,
+						"7" : 2,
+						"8" : 1,
+						"9" : 0
+					},
+					"score" : 5.7999999999999998,
+					"total" : 6
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/427004"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期二",
+			"en" : "Tue",
+			"id" : 2,
+			"ja" : "火耀日"
+		}
+	},
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "1999-10-20",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 9260
+				},
+				"id" : 975,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/92/97/975_YKuWd.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/92/97/975_YKuWd.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/92/97/975_YKuWd.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/92/97/975_YKuWd.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/92/97/975_YKuWd.jpg"
+				},
+				"name" : "ONE PIECE",
+				"name_cn" : "海贼王",
+				"rank" : 71,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 69,
+						"10" : 2909,
+						"2" : 36,
+						"3" : 27,
+						"4" : 80,
+						"5" : 237,
+						"6" : 581,
+						"7" : 1379,
+						"8" : 2340,
+						"9" : 1950
+					},
+					"score" : 8.3000000000000007,
+					"total" : 9608
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/975"
+			},
+			{
+				"air_date" : "2023-04-19",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 296
+				},
+				"id" : 325673,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/ed/6c/325673_dUuo2.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/ed/6c/325673_dUuo2.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/ed/6c/325673_dUuo2.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/ed/6c/325673_dUuo2.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/ed/6c/325673_dUuo2.jpg"
+				},
+				"name" : "贄姫と獣の王",
+				"name_cn" : "祭品公主与兽之王",
+				"rank" : 4502,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 1,
+						"2" : 1,
+						"3" : 1,
+						"4" : 2,
+						"5" : 14,
+						"6" : 28,
+						"7" : 32,
+						"8" : 6,
+						"9" : 3
+					},
+					"score" : 6.2000000000000002,
+					"total" : 90
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/325673"
+			},
+			{
+				"air_date" : "2023-04-12",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 110
+				},
+				"id" : 358558,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/6b/f3/358558_u1o2R.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/6b/f3/358558_u1o2R.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/6b/f3/358558_u1o2R.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/6b/f3/358558_u1o2R.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/6b/f3/358558_u1o2R.jpg"
+				},
+				"name" : "爱幽的密室",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 1,
+						"2" : 1,
+						"3" : 3,
+						"4" : 5,
+						"5" : 1,
+						"6" : 9,
+						"7" : 16,
+						"8" : 6,
+						"9" : 4
+					},
+					"score" : 6.0999999999999996,
+					"total" : 49
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/358558"
+			},
+			{
+				"air_date" : "2023-04-26",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 11
+				},
+				"id" : 358666,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/9c/e9/358666_qQB3o.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/9c/e9/358666_qQB3o.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/9c/e9/358666_qQB3o.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/9c/e9/358666_qQB3o.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/9c/e9/358666_qQB3o.jpg"
+				},
+				"name" : "长剑风云 第二季",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 0,
+						"2" : 0,
+						"3" : 1,
+						"4" : 0,
+						"5" : 1,
+						"6" : 1,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 4.4000000000000004,
+					"total" : 5
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/358666"
+			},
+			{
+				"air_date" : "2023-04-05",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 4822
+				},
+				"id" : 376703,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/58/c1/376703_g5559.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/58/c1/376703_g5559.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/58/c1/376703_g5559.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/58/c1/376703_g5559.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/58/c1/376703_g5559.jpg"
+				},
+				"name" : "アイドルマスター シンデレラガールズ U149",
+				"name_cn" : "偶像大师 灰姑娘女孩 U149",
+				"rank" : 259,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 12,
+						"10" : 166,
+						"2" : 3,
+						"3" : 5,
+						"4" : 6,
+						"5" : 15,
+						"6" : 74,
+						"7" : 338,
+						"8" : 720,
+						"9" : 311
+					},
+					"score" : 8,
+					"total" : 1650
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/376703"
+			},
+			{
+				"air_date" : "2023-04-05",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 3539
+				},
+				"id" : 377607,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e5/59/377607_cy005.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e5/59/377607_cy005.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e5/59/377607_cy005.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e5/59/377607_cy005.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e5/59/377607_cy005.jpg"
+				},
+				"name" : "神無き世界のカミサマ活動",
+				"name_cn" : "无神世界的神明活动",
+				"rank" : 2658,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 4,
+						"10" : 38,
+						"2" : 3,
+						"3" : 5,
+						"4" : 20,
+						"5" : 68,
+						"6" : 286,
+						"7" : 566,
+						"8" : 266,
+						"9" : 48
+					},
+					"score" : 7,
+					"total" : 1304
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/377607"
+			},
+			{
+				"air_date" : "2023-04-05",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 5270
+				},
+				"id" : 385209,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/c7/89/385209_hWE7n.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/c7/89/385209_hWE7n.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/c7/89/385209_hWE7n.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/c7/89/385209_hWE7n.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/c7/89/385209_hWE7n.jpg"
+				},
+				"name" : "この素晴らしい世界に爆焔を！",
+				"name_cn" : "为美好的世界献上爆焰！",
+				"rank" : 1460,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 4,
+						"10" : 52,
+						"2" : 4,
+						"3" : 3,
+						"4" : 10,
+						"5" : 47,
+						"6" : 199,
+						"7" : 597,
+						"8" : 520,
+						"9" : 59
+					},
+					"score" : 7.2999999999999998,
+					"total" : 1495
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/385209"
+			},
+			{
+				"air_date" : "2023-04-12",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 9407
+				},
+				"id" : 386809,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/98/5e/386809_1yR81.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/98/5e/386809_1yR81.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/98/5e/386809_1yR81.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/98/5e/386809_1yR81.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/98/5e/386809_1yR81.jpg"
+				},
+				"name" : "【推しの子】",
+				"name_cn" : "【我推的孩子】",
+				"rank" : 412,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 69,
+						"10" : 394,
+						"2" : 15,
+						"3" : 16,
+						"4" : 36,
+						"5" : 87,
+						"6" : 263,
+						"7" : 815,
+						"8" : 1473,
+						"9" : 806
+					},
+					"score" : 7.7999999999999998,
+					"total" : 3974
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/386809"
+			},
+			{
+				"air_date" : "2023-04-12",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 57
+				},
+				"id" : 414597,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/41/26/414597_lBg1Y.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/41/26/414597_lBg1Y.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/41/26/414597_lBg1Y.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/41/26/414597_lBg1Y.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/41/26/414597_lBg1Y.jpg"
+				},
+				"name" : "魔術士オーフェンはぐれ旅 聖域編",
+				"name_cn" : "魔术士奥芬的无赖之旅 圣域篇",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 1,
+						"3" : 1,
+						"4" : 3,
+						"5" : 5,
+						"6" : 2,
+						"7" : 1,
+						"8" : 1,
+						"9" : 1
+					},
+					"score" : 5.2000000000000002,
+					"total" : 17
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/414597"
+			},
+			{
+				"air_date" : "2023-04-12",
+				"air_weekday" : 3,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 428815,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/5a/7e/428815_666M2.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/5a/7e/428815_666M2.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/5a/7e/428815_666M2.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/5a/7e/428815_666M2.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/5a/7e/428815_666M2.jpg"
+				},
+				"name" : "でんでんの電脳電車",
+				"name_cn" : "DENDEN电脑电车",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 1,
+						"7" : 0,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 6,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/428815"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期三",
+			"en" : "Wed",
+			"id" : 3,
+			"ja" : "水耀日"
+		}
+	},
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 1611
+				},
+				"id" : 363101,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/1d/02/363101_T8SWw.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/1d/02/363101_T8SWw.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/1d/02/363101_T8SWw.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/1d/02/363101_T8SWw.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/1d/02/363101_T8SWw.jpg"
+				},
+				"name" : "Dr.STONE NEW WORLD",
+				"name_cn" : "新石纪 NEW WORLD",
+				"rank" : 1795,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 10,
+						"2" : 1,
+						"3" : 1,
+						"4" : 4,
+						"5" : 7,
+						"6" : 54,
+						"7" : 188,
+						"8" : 114,
+						"9" : 11
+					},
+					"score" : 7.2000000000000002,
+					"total" : 391
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/363101"
+			},
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 52
+				},
+				"id" : 375816,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/50/10/375816_g0A2E.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/50/10/375816_g0A2E.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/50/10/375816_g0A2E.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/50/10/375816_g0A2E.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/50/10/375816_g0A2E.jpg"
+				},
+				"name" : "Opus.COLORs",
+				"name_cn" : "色彩高校星",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 1,
+						"2" : 1,
+						"3" : 1,
+						"4" : 5,
+						"5" : 8,
+						"6" : 6,
+						"7" : 2,
+						"8" : 1,
+						"9" : 1
+					},
+					"score" : 5.0999999999999996,
+					"total" : 28
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/375816"
+			},
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 1905
+				},
+				"id" : 379639,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/f4/3f/379639_2wRNn.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/f4/3f/379639_2wRNn.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/f4/3f/379639_2wRNn.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/f4/3f/379639_2wRNn.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/f4/3f/379639_2wRNn.jpg"
+				},
+				"name" : "勇者が死んだ！",
+				"name_cn" : "勇者死了！",
+				"rank" : 6578,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 5,
+						"2" : 1,
+						"3" : 15,
+						"4" : 35,
+						"5" : 141,
+						"6" : 266,
+						"7" : 114,
+						"8" : 29,
+						"9" : 6
+					},
+					"score" : 5.9000000000000004,
+					"total" : 615
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/379639"
+			},
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 1673
+				},
+				"id" : 381666,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/2b/79/381666_RfyR1.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/2b/79/381666_RfyR1.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/2b/79/381666_RfyR1.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/2b/79/381666_RfyR1.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/2b/79/381666_RfyR1.jpg"
+				},
+				"name" : "私の百合はお仕事です！",
+				"name_cn" : "我的百合乃工作是也！",
+				"rank" : 4788,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 6,
+						"10" : 11,
+						"2" : 2,
+						"3" : 8,
+						"4" : 20,
+						"5" : 69,
+						"6" : 145,
+						"7" : 187,
+						"8" : 74,
+						"9" : 9
+					},
+					"score" : 6.4000000000000004,
+					"total" : 531
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/381666"
+			},
+			{
+				"air_date" : "2023-04-13",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 345
+				},
+				"id" : 394997,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/25/25/394997_61Qz6.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/25/25/394997_61Qz6.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/25/25/394997_61Qz6.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/25/25/394997_61Qz6.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/25/25/394997_61Qz6.jpg"
+				},
+				"name" : "王様ランキング 勇気の宝箱",
+				"name_cn" : "国王排名 勇气的宝箱",
+				"rank" : 7288,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 34,
+						"10" : 11,
+						"2" : 7,
+						"3" : 10,
+						"4" : 6,
+						"5" : 15,
+						"6" : 32,
+						"7" : 15,
+						"8" : 14,
+						"9" : 5
+					},
+					"score" : 5,
+					"total" : 149
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/394997"
+			},
+			{
+				"air_date" : "2023-04-20",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 5
+				},
+				"id" : 395290,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/1c/d1/395290_QzgTQ.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/1c/d1/395290_QzgTQ.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/1c/d1/395290_QzgTQ.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/1c/d1/395290_QzgTQ.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/1c/d1/395290_QzgTQ.jpg"
+				},
+				"name" : "不灭神王",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 7,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/395290"
+			},
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 1640
+				},
+				"id" : 397025,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/2a/46/397025_T8Z0D.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/2a/46/397025_T8Z0D.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/2a/46/397025_T8Z0D.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/2a/46/397025_T8Z0D.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/2a/46/397025_T8Z0D.jpg"
+				},
+				"name" : "異世界でチート能力を手にした俺は、現実世界をも無双する～レベルアップは人生を変えた～",
+				"name_cn" : "在异世界获得超强能力的我，在现实世界照样无敌～等级提升改变人生命运～",
+				"rank" : 7488,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 34,
+						"10" : 15,
+						"2" : 20,
+						"3" : 47,
+						"4" : 130,
+						"5" : 172,
+						"6" : 199,
+						"7" : 53,
+						"8" : 17,
+						"9" : 7
+					},
+					"score" : 5.0999999999999996,
+					"total" : 694
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/397025"
+			},
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 1022
+				},
+				"id" : 399820,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/74/ac/399820_yjUcD.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/74/ac/399820_yjUcD.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/74/ac/399820_yjUcD.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/74/ac/399820_yjUcD.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/74/ac/399820_yjUcD.jpg"
+				},
+				"name" : "魔法使いの嫁 SEASON2",
+				"name_cn" : "魔法使的新娘 第二季",
+				"rank" : 1438,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 13,
+						"2" : 2,
+						"3" : 1,
+						"4" : 3,
+						"5" : 6,
+						"6" : 24,
+						"7" : 91,
+						"8" : 68,
+						"9" : 13
+					},
+					"score" : 7.2999999999999998,
+					"total" : 221
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/399820"
+			},
+			{
+				"air_date" : "2023-04-06",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 11
+				},
+				"id" : 400776,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/8b/b7/400776_WbLWV.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/8b/b7/400776_WbLWV.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/8b/b7/400776_WbLWV.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/8b/b7/400776_WbLWV.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/8b/b7/400776_WbLWV.jpg"
+				},
+				"name" : "あんさんぶるスターズ！！追憶セレクション『エレメント』",
+				"name_cn" : "偶像梦幻祭 追忆Selection『Element』",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 2,
+						"3" : 1,
+						"4" : 1,
+						"5" : 6,
+						"6" : 5,
+						"7" : 3,
+						"8" : 2,
+						"9" : 1
+					},
+					"score" : 5.5999999999999996,
+					"total" : 23
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/400776"
+			},
+			{
+				"air_date" : "2023-04-13",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 7
+				},
+				"id" : 405268,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e0/de/405268_kVvp6.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e0/de/405268_kVvp6.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e0/de/405268_kVvp6.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e0/de/405268_kVvp6.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e0/de/405268_kVvp6.jpg"
+				},
+				"name" : "山海际会",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 0,
+						"2" : 2,
+						"3" : 0,
+						"4" : 2,
+						"5" : 1,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 2.7000000000000002,
+					"total" : 7
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/405268"
+			},
+			{
+				"air_date" : "2023-04-20",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 42
+				},
+				"id" : 406472,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d7/21/406472_t99kK.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d7/21/406472_t99kK.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d7/21/406472_t99kK.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d7/21/406472_t99kK.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d7/21/406472_t99kK.jpg"
+				},
+				"name" : "爱上她的理由",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 1,
+						"3" : 1,
+						"4" : 1,
+						"5" : 0,
+						"6" : 2,
+						"7" : 1,
+						"8" : 3,
+						"9" : 0
+					},
+					"score" : 5.7000000000000002,
+					"total" : 11
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/406472"
+			},
+			{
+				"air_date" : "2023-04-20",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 2
+				},
+				"id" : 430696,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/a3/f0/430696_Yqq46.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/a3/f0/430696_Yqq46.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/a3/f0/430696_Yqq46.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/a3/f0/430696_Yqq46.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/a3/f0/430696_Yqq46.jpg"
+				},
+				"name" : "Fired on Mars",
+				"name_cn" : "",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/430696"
+			},
+			{
+				"air_date" : "2023-04-20",
+				"air_weekday" : 4,
+				"collection" : 
+				{
+					"doing" : 3
+				},
+				"id" : 433680,
+				"images" : null,
+				"name" : "ケモ姫と普通の王",
+				"name_cn" : "毛茸茸公主与普通之王",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 7,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/433680"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期四",
+			"en" : "Thu",
+			"id" : 4,
+			"ja" : "木耀日"
+		}
+	},
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 2245
+				},
+				"id" : 349039,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/7c/bd/349039_b4QZQ.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/7c/bd/349039_b4QZQ.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/7c/bd/349039_b4QZQ.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/7c/bd/349039_b4QZQ.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/7c/bd/349039_b4QZQ.jpg"
+				},
+				"name" : "魔法少女マジカルデストロイヤーズ",
+				"name_cn" : "魔法少女毁灭者",
+				"rank" : 5055,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 4,
+						"10" : 7,
+						"2" : 5,
+						"3" : 10,
+						"4" : 39,
+						"5" : 77,
+						"6" : 200,
+						"7" : 248,
+						"8" : 83,
+						"9" : 18
+					},
+					"score" : 6.4000000000000004,
+					"total" : 691
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/349039"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 1593
+				},
+				"id" : 355798,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/16/65/355798_bZmZ5.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/16/65/355798_bZmZ5.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/16/65/355798_bZmZ5.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/16/65/355798_bZmZ5.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/16/65/355798_bZmZ5.jpg"
+				},
+				"name" : "トニカクカワイイ 第2期",
+				"name_cn" : "总之就是非常可爱 第二季",
+				"rank" : 4604,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 4,
+						"10" : 16,
+						"2" : 2,
+						"3" : 7,
+						"4" : 9,
+						"5" : 56,
+						"6" : 144,
+						"7" : 139,
+						"8" : 44,
+						"9" : 11
+					},
+					"score" : 6.5,
+					"total" : 432
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/355798"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 34
+				},
+				"id" : 358562,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/67/89/358562_QOH2O.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/67/89/358562_QOH2O.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/67/89/358562_QOH2O.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/67/89/358562_QOH2O.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/67/89/358562_QOH2O.jpg"
+				},
+				"name" : "希灵纪元",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 2,
+						"3" : 1,
+						"4" : 6,
+						"5" : 6,
+						"6" : 1,
+						"7" : 1,
+						"8" : 1,
+						"9" : 1
+					},
+					"score" : 4.9000000000000004,
+					"total" : 21
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/358562"
+			},
+			{
+				"air_date" : "2023-04-14",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 34
+				},
+				"id" : 358741,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/b7/34/358741_q5576.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/b7/34/358741_q5576.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/b7/34/358741_q5576.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/b7/34/358741_q5576.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/b7/34/358741_q5576.jpg"
+				},
+				"name" : "有兽焉",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 1,
+						"6" : 4,
+						"7" : 5,
+						"8" : 2,
+						"9" : 0
+					},
+					"score" : 6.7000000000000002,
+					"total" : 12
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/358741"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 1489
+				},
+				"id" : 387803,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d7/ea/387803_nQONr.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d7/ea/387803_nQONr.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d7/ea/387803_nQONr.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d7/ea/387803_nQONr.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d7/ea/387803_nQONr.jpg"
+				},
+				"name" : "江戸前エルフ",
+				"name_cn" : "江户前精灵",
+				"rank" : 2313,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 14,
+						"2" : 2,
+						"3" : 1,
+						"4" : 2,
+						"5" : 25,
+						"6" : 72,
+						"7" : 226,
+						"8" : 92,
+						"9" : 13
+					},
+					"score" : 7,
+					"total" : 447
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/387803"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 1371
+				},
+				"id" : 389571,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/72/c3/389571_2T0OF.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/72/c3/389571_2T0OF.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/72/c3/389571_2T0OF.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/72/c3/389571_2T0OF.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/72/c3/389571_2T0OF.jpg"
+				},
+				"name" : "マッシュル-MASHLE-",
+				"name_cn" : "物理魔法使马修",
+				"rank" : 7154,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 7,
+						"2" : 8,
+						"3" : 29,
+						"4" : 70,
+						"5" : 147,
+						"6" : 177,
+						"7" : 73,
+						"8" : 20,
+						"9" : 5
+					},
+					"score" : 5.5,
+					"total" : 539
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/389571"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 823
+				},
+				"id" : 389998,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/1a/ee/389998_vz2FZ.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/1a/ee/389998_vz2FZ.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/1a/ee/389998_vz2FZ.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/1a/ee/389998_vz2FZ.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/1a/ee/389998_vz2FZ.jpg"
+				},
+				"name" : "BIRDIE WING -Golf Girls’ Story- Season 2",
+				"name_cn" : "小鸟之翼 高尔夫少女 第二季",
+				"rank" : 1182,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 9,
+						"2" : 1,
+						"3" : 2,
+						"4" : 2,
+						"5" : 9,
+						"6" : 7,
+						"7" : 73,
+						"8" : 83,
+						"9" : 14
+					},
+					"score" : 7.4000000000000004,
+					"total" : 201
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/389998"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 873
+				},
+				"id" : 398943,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/1c/e1/398943_fC8Lf.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/1c/e1/398943_fC8Lf.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/1c/e1/398943_fC8Lf.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/1c/e1/398943_fC8Lf.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/1c/e1/398943_fC8Lf.jpg"
+				},
+				"name" : "女神のカフェテラス",
+				"name_cn" : "女神的露天咖啡厅",
+				"rank" : 6660,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 5,
+						"2" : 3,
+						"3" : 13,
+						"4" : 21,
+						"5" : 53,
+						"6" : 115,
+						"7" : 36,
+						"8" : 9,
+						"9" : 3
+					},
+					"score" : 5.7000000000000002,
+					"total" : 260
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/398943"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 484
+				},
+				"id" : 402935,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/aa/d2/402935_FLPpF.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/aa/d2/402935_FLPpF.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/aa/d2/402935_FLPpF.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/aa/d2/402935_FLPpF.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/aa/d2/402935_FLPpF.jpg"
+				},
+				"name" : "カワイスギクライシス",
+				"name_cn" : "可爱过头大危机",
+				"rank" : 6143,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 1,
+						"2" : 2,
+						"3" : 4,
+						"4" : 9,
+						"5" : 30,
+						"6" : 83,
+						"7" : 20,
+						"8" : 5,
+						"9" : 4
+					},
+					"score" : 5.7999999999999998,
+					"total" : 159
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/402935"
+			},
+			{
+				"air_date" : "2023-04-14",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 603
+				},
+				"id" : 411247,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/12/1b/411247_YOs4W.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/12/1b/411247_YOs4W.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/12/1b/411247_YOs4W.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/12/1b/411247_YOs4W.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/12/1b/411247_YOs4W.jpg"
+				},
+				"name" : "ポケットモンスター",
+				"name_cn" : "宝可梦 地平线",
+				"rank" : 2724,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 7,
+						"2" : 1,
+						"3" : 2,
+						"4" : 3,
+						"5" : 7,
+						"6" : 29,
+						"7" : 85,
+						"8" : 34,
+						"9" : 4
+					},
+					"score" : 6.9000000000000004,
+					"total" : 175
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/411247"
+			},
+			{
+				"air_date" : "2023-04-07",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 346
+				},
+				"id" : 415587,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/72/02/415587_4qIPV.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/72/02/415587_4qIPV.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/72/02/415587_4qIPV.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/72/02/415587_4qIPV.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/72/02/415587_4qIPV.jpg"
+				},
+				"name" : "六道の悪女たち",
+				"name_cn" : "六道的恶女们",
+				"rank" : 6230,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 1,
+						"2" : 3,
+						"3" : 5,
+						"4" : 9,
+						"5" : 19,
+						"6" : 46,
+						"7" : 14,
+						"8" : 8,
+						"9" : 2
+					},
+					"score" : 5.5999999999999996,
+					"total" : 110
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/415587"
+			},
+			{
+				"air_date" : "2023-04-14",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 1
+				},
+				"id" : 429900,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/af/ff/429900_g9SNW.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/af/ff/429900_g9SNW.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/af/ff/429900_g9SNW.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/af/ff/429900_g9SNW.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/af/ff/429900_g9SNW.jpg"
+				},
+				"name" : "Integra Type S: Chiaki’s Journey II",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 1,
+						"5" : 0,
+						"6" : 3,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 5.7999999999999998,
+					"total" : 5
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/429900"
+			},
+			{
+				"air_date" : "2023-04-28",
+				"air_weekday" : 5,
+				"collection" : 
+				{
+					"doing" : 1
+				},
+				"id" : 431330,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/31/96/431330_Z1Mo8.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/31/96/431330_Z1Mo8.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/31/96/431330_Z1Mo8.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/31/96/431330_Z1Mo8.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/31/96/431330_Z1Mo8.jpg"
+				},
+				"name" : "Frog and Toad",
+				"name_cn" : "青蛙和蛤蟆",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/431330"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期五",
+			"en" : "Fri",
+			"id" : 5,
+			"ja" : "金耀日"
+		}
+	},
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "2023-04-29",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 140
+				},
+				"id" : 293847,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/eb/f1/293847_G0jpp.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/eb/f1/293847_G0jpp.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/eb/f1/293847_G0jpp.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/eb/f1/293847_G0jpp.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/eb/f1/293847_G0jpp.jpg"
+				},
+				"name" : "火凤燎原",
+				"name_cn" : "",
+				"rank" : 1810,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 5,
+						"2" : 1,
+						"3" : 0,
+						"4" : 1,
+						"5" : 4,
+						"6" : 7,
+						"7" : 14,
+						"8" : 28,
+						"9" : 3
+					},
+					"score" : 7.2000000000000002,
+					"total" : 65
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/293847"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 3707
+				},
+				"id" : 325808,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e6/b1/325808_4OXIC.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e6/b1/325808_4OXIC.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e6/b1/325808_4OXIC.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e6/b1/325808_4OXIC.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e6/b1/325808_4OXIC.jpg"
+				},
+				"name" : "地獄楽",
+				"name_cn" : "地狱乐",
+				"rank" : 4708,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 8,
+						"10" : 22,
+						"2" : 3,
+						"3" : 14,
+						"4" : 50,
+						"5" : 113,
+						"6" : 400,
+						"7" : 462,
+						"8" : 166,
+						"9" : 19
+					},
+					"score" : 6.5,
+					"total" : 1257
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/325808"
+			},
+			{
+				"air_date" : "2023-04-08",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 735
+				},
+				"id" : 354421,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/28/eb/354421_I1TZS.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/28/eb/354421_I1TZS.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/28/eb/354421_I1TZS.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/28/eb/354421_I1TZS.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/28/eb/354421_I1TZS.jpg"
+				},
+				"name" : "異世界召喚は二度目です",
+				"name_cn" : "第二次被异世界召唤",
+				"rank" : 7326,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 4,
+						"2" : 9,
+						"3" : 12,
+						"4" : 49,
+						"5" : 71,
+						"6" : 82,
+						"7" : 15,
+						"8" : 1,
+						"9" : 2
+					},
+					"score" : 5.0999999999999996,
+					"total" : 247
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/354421"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 284
+				},
+				"id" : 368289,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/23/69/368289_dxLDV.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/23/69/368289_dxLDV.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/23/69/368289_dxLDV.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/23/69/368289_dxLDV.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/23/69/368289_dxLDV.jpg"
+				},
+				"name" : "EDENS ZERO 第2期",
+				"name_cn" : "伊甸星原 第二季",
+				"rank" : 3634,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 2,
+						"2" : 1,
+						"3" : 0,
+						"4" : 1,
+						"5" : 5,
+						"6" : 25,
+						"7" : 17,
+						"8" : 4,
+						"9" : 2
+					},
+					"score" : 6.4000000000000004,
+					"total" : 58
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/368289"
+			},
+			{
+				"air_date" : "2023-04-08",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 672
+				},
+				"id" : 373833,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/2c/ee/373833_ABS1l.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/2c/ee/373833_ABS1l.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/2c/ee/373833_ABS1l.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/2c/ee/373833_ABS1l.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/2c/ee/373833_ABS1l.jpg"
+				},
+				"name" : "異世界ワンターンキル姉さん ～姉同伴の異世界生活はじめました～",
+				"name_cn" : "异世界一击无双姐姐 ～姐同伴异世界生活开启～",
+				"rank" : 6430,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 2,
+						"10" : 6,
+						"2" : 1,
+						"3" : 4,
+						"4" : 25,
+						"5" : 46,
+						"6" : 87,
+						"7" : 30,
+						"8" : 7,
+						"9" : 4
+					},
+					"score" : 5.7999999999999998,
+					"total" : 212
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/373833"
+			},
+			{
+				"air_date" : "2023-04-08",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 687
+				},
+				"id" : 379442,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e1/34/379442_l87Dd.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e1/34/379442_l87Dd.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e1/34/379442_l87Dd.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e1/34/379442_l87Dd.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e1/34/379442_l87Dd.jpg"
+				},
+				"name" : "おとなりに銀河",
+				"name_cn" : "邻人似银河",
+				"rank" : 6418,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 4,
+						"2" : 1,
+						"3" : 7,
+						"4" : 14,
+						"5" : 54,
+						"6" : 107,
+						"7" : 38,
+						"8" : 8,
+						"9" : 3
+					},
+					"score" : 5.7999999999999998,
+					"total" : 239
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/379442"
+			},
+			{
+				"air_date" : "2023-04-08",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 46
+				},
+				"id" : 390895,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e1/f9/390895_aa7A9.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e1/f9/390895_aa7A9.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e1/f9/390895_aa7A9.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e1/f9/390895_aa7A9.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e1/f9/390895_aa7A9.jpg"
+				},
+				"name" : "猫之茗 第二季",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 3,
+						"2" : 1,
+						"3" : 1,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 5,
+						"8" : 2,
+						"9" : 1
+					},
+					"score" : 7.2999999999999998,
+					"total" : 13
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/390895"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 3441
+				},
+				"id" : 394260,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/01/ee/394260_kqQkM.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/01/ee/394260_kqQkM.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/01/ee/394260_kqQkM.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/01/ee/394260_kqQkM.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/01/ee/394260_kqQkM.jpg"
+				},
+				"name" : "僕の心のヤバイやつ",
+				"name_cn" : "我心里危险的东西",
+				"rank" : 1143,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 11,
+						"10" : 89,
+						"2" : 3,
+						"3" : 9,
+						"4" : 23,
+						"5" : 61,
+						"6" : 158,
+						"7" : 380,
+						"8" : 462,
+						"9" : 137
+					},
+					"score" : 7.4000000000000004,
+					"total" : 1333
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/394260"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 314
+				},
+				"id" : 394784,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/41/c3/394784_6Zqee.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/41/c3/394784_6Zqee.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/41/c3/394784_6Zqee.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/41/c3/394784_6Zqee.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/41/c3/394784_6Zqee.jpg"
+				},
+				"name" : "MIX MEISEI STORY 2ND SEASON ～二度目の夏、空の向こうへ～",
+				"name_cn" : "MIX：明青故事 第二季 ～第二个夏天，迈向晴空～",
+				"rank" : 1862,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 6,
+						"2" : 2,
+						"3" : 0,
+						"4" : 0,
+						"5" : 3,
+						"6" : 9,
+						"7" : 21,
+						"8" : 16,
+						"9" : 5
+					},
+					"score" : 7.2000000000000002,
+					"total" : 63
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/394784"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 1649
+				},
+				"id" : 395684,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/c7/25/395684_Ojam4.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/c7/25/395684_Ojam4.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/c7/25/395684_Ojam4.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/c7/25/395684_Ojam4.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/c7/25/395684_Ojam4.jpg"
+				},
+				"name" : "山田くんとLv999の恋をする",
+				"name_cn" : "和山田谈场Lv999的恋爱",
+				"rank" : 4743,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 7,
+						"10" : 9,
+						"2" : 3,
+						"3" : 6,
+						"4" : 15,
+						"5" : 47,
+						"6" : 190,
+						"7" : 207,
+						"8" : 59,
+						"9" : 9
+					},
+					"score" : 6.4000000000000004,
+					"total" : 552
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/395684"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 8054
+				},
+				"id" : 404804,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/ba/c9/404804_1sTp8.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/ba/c9/404804_1sTp8.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/ba/c9/404804_1sTp8.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/ba/c9/404804_1sTp8.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/ba/c9/404804_1sTp8.jpg"
+				},
+				"name" : "天国大魔境",
+				"name_cn" : "天国大魔境",
+				"rank" : 192,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 13,
+						"10" : 208,
+						"2" : 5,
+						"3" : 4,
+						"4" : 10,
+						"5" : 24,
+						"6" : 95,
+						"7" : 394,
+						"8" : 1288,
+						"9" : 624
+					},
+					"score" : 8.0999999999999996,
+					"total" : 2665
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/404804"
+			},
+			{
+				"air_date" : "2023-04-22",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 12
+				},
+				"id" : 405220,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/62/e2/405220_bZbL6.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/62/e2/405220_bZbL6.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/62/e2/405220_bZbL6.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/62/e2/405220_bZbL6.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/62/e2/405220_bZbL6.jpg"
+				},
+				"name" : "她不当女主很多年",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 1,
+						"7" : 0,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 6,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/405220"
+			},
+			{
+				"air_date" : "2023-04-22",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 2
+				},
+				"id" : 405311,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e8/ae/405311_ndF2D.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e8/ae/405311_ndF2D.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e8/ae/405311_ndF2D.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e8/ae/405311_ndF2D.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e8/ae/405311_ndF2D.jpg"
+				},
+				"name" : "一世独尊",
+				"name_cn" : "",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/405311"
+			},
+			{
+				"air_date" : "2023-04-08",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 6
+				},
+				"id" : 418484,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/f2/25/418484_MHGO6.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/f2/25/418484_MHGO6.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/f2/25/418484_MHGO6.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/f2/25/418484_MHGO6.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/f2/25/418484_MHGO6.jpg"
+				},
+				"name" : "ぐんまちゃん シーズン2",
+				"name_cn" : "群马酱 第二季",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 9,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/418484"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 85
+				},
+				"id" : 422505,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e6/64/422505_M6ePf.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e6/64/422505_M6ePf.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e6/64/422505_M6ePf.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e6/64/422505_M6ePf.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e6/64/422505_M6ePf.jpg"
+				},
+				"name" : "ちびゴジラの逆襲",
+				"name_cn" : "小哥斯拉的逆袭",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 2,
+						"2" : 1,
+						"3" : 1,
+						"4" : 1,
+						"5" : 1,
+						"6" : 6,
+						"7" : 18,
+						"8" : 3,
+						"9" : 2
+					},
+					"score" : 6.5999999999999996,
+					"total" : 36
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/422505"
+			},
+			{
+				"air_date" : "2023-04-01",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 23
+				},
+				"id" : 422759,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/23/3d/422759_KJ79K.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/23/3d/422759_KJ79K.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/23/3d/422759_KJ79K.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/23/3d/422759_KJ79K.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/23/3d/422759_KJ79K.jpg"
+				},
+				"name" : "鬼滅の刃 遊郭編 特別編集版",
+				"name_cn" : "鬼灭之刃 游郭篇 特別编集版",
+				"rank" : 3868,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 4,
+						"2" : 1,
+						"3" : 1,
+						"4" : 2,
+						"5" : 12,
+						"6" : 22,
+						"7" : 18,
+						"8" : 7,
+						"9" : 2
+					},
+					"score" : 6.4000000000000004,
+					"total" : 70
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/422759"
+			},
+			{
+				"air_date" : "2023-04-15",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 424989,
+				"images" : null,
+				"name" : "肥志百科 原来你是这样的植物3",
+				"name_cn" : "",
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/424989"
+			},
+			{
+				"air_date" : "2023-04-08",
+				"air_weekday" : 6,
+				"collection" : 
+				{
+					"doing" : 22
+				},
+				"id" : 428960,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/9c/99/428960_21Tkw.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/9c/99/428960_21Tkw.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/9c/99/428960_21Tkw.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/9c/99/428960_21Tkw.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/9c/99/428960_21Tkw.jpg"
+				},
+				"name" : "結城友奈は勇者である 勇者史異聞 芙蓉友奈は語部となる",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 1,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 2,
+						"8" : 1,
+						"9" : 0
+					},
+					"score" : 6.2999999999999998,
+					"total" : 4
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/428960"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期六",
+			"en" : "Sat",
+			"id" : 6,
+			"ja" : "土耀日"
+		}
+	},
+	{
+		"items" : 
+		[
+			{
+				"air_date" : "2023-04-23",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 39
+				},
+				"id" : 358668,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/9d/24/358668_kFJkD.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/9d/24/358668_kFJkD.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/9d/24/358668_kFJkD.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/9d/24/358668_kFJkD.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/9d/24/358668_kFJkD.jpg"
+				},
+				"name" : "赘婿",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 4,
+						"10" : 1,
+						"2" : 0,
+						"3" : 1,
+						"4" : 6,
+						"5" : 2,
+						"6" : 2,
+						"7" : 3,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 4.7000000000000002,
+					"total" : 20
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/358668"
+			},
+			{
+				"air_date" : "2023-04-09",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 3771
+				},
+				"id" : 369768,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/c9/bb/369768_F05zh.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/c9/bb/369768_F05zh.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/c9/bb/369768_F05zh.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/c9/bb/369768_F05zh.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/c9/bb/369768_F05zh.jpg"
+				},
+				"name" : "鬼滅の刃 刀鍛冶の里編",
+				"name_cn" : "鬼灭之刃 刀匠村篇",
+				"rank" : 2471,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 13,
+						"10" : 38,
+						"2" : 3,
+						"3" : 5,
+						"4" : 20,
+						"5" : 58,
+						"6" : 205,
+						"7" : 438,
+						"8" : 280,
+						"9" : 48
+					},
+					"score" : 7,
+					"total" : 1108
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/369768"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 108
+				},
+				"id" : 369794,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/bc/e9/369794_qQP6n.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/bc/e9/369794_qQP6n.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/bc/e9/369794_qQP6n.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/bc/e9/369794_qQP6n.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/bc/e9/369794_qQP6n.jpg"
+				},
+				"name" : "漣蒼士に純潔を捧ぐ",
+				"name_cn" : "向涟苍士献上纯洁",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 1,
+						"2" : 1,
+						"3" : 0,
+						"4" : 6,
+						"5" : 9,
+						"6" : 4,
+						"7" : 1,
+						"8" : 1,
+						"9" : 1
+					},
+					"score" : 5.4000000000000004,
+					"total" : 24
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/369794"
+			},
+			{
+				"air_date" : "2023-04-09",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 639
+				},
+				"id" : 377769,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/fe/5d/377769_e4pyy.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/fe/5d/377769_e4pyy.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/fe/5d/377769_e4pyy.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/fe/5d/377769_e4pyy.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/fe/5d/377769_e4pyy.jpg"
+				},
+				"name" : "青のオーケストラ",
+				"name_cn" : "蓝色管弦乐",
+				"rank" : 5264,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 1,
+						"2" : 1,
+						"3" : 3,
+						"4" : 5,
+						"5" : 33,
+						"6" : 58,
+						"7" : 48,
+						"8" : 14,
+						"9" : 2
+					},
+					"score" : 6.2000000000000002,
+					"total" : 165
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/377769"
+			},
+			{
+				"air_date" : "2023-04-16",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 1141
+				},
+				"id" : 380448,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/f2/a7/380448_BO7O9.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/f2/a7/380448_BO7O9.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/f2/a7/380448_BO7O9.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/f2/a7/380448_BO7O9.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/f2/a7/380448_BO7O9.jpg"
+				},
+				"name" : "ウマ娘 プリティーダービー Road to the Top",
+				"name_cn" : "赛马娘 Pretty Derby Road to the Top",
+				"rank" : 812,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 53,
+						"2" : 2,
+						"3" : 4,
+						"4" : 9,
+						"5" : 46,
+						"6" : 159,
+						"7" : 654,
+						"8" : 982,
+						"9" : 164
+					},
+					"score" : 7.5999999999999996,
+					"total" : 2076
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/380448"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 1734
+				},
+				"id" : 388067,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/7d/8d/388067_5T0cH.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/7d/8d/388067_5T0cH.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/7d/8d/388067_5T0cH.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/7d/8d/388067_5T0cH.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/7d/8d/388067_5T0cH.jpg"
+				},
+				"name" : "マイホームヒーロー",
+				"name_cn" : "我家的英雄",
+				"rank" : 6790,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 9,
+						"10" : 6,
+						"2" : 4,
+						"3" : 27,
+						"4" : 53,
+						"5" : 126,
+						"6" : 194,
+						"7" : 137,
+						"8" : 26,
+						"9" : 8
+					},
+					"score" : 5.7999999999999998,
+					"total" : 590
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/388067"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 725
+				},
+				"id" : 394746,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d7/4b/394746_3RjUf.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d7/4b/394746_3RjUf.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d7/4b/394746_3RjUf.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d7/4b/394746_3RjUf.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d7/4b/394746_3RjUf.jpg"
+				},
+				"name" : "転生貴族の異世界冒険録 〜自重を知らない神々の使徒〜",
+				"name_cn" : "转生贵族的异世界冒险录 〜不知自重的诸神的使徒〜",
+				"rank" : 7554,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 15,
+						"10" : 6,
+						"2" : 16,
+						"3" : 40,
+						"4" : 56,
+						"5" : 89,
+						"6" : 65,
+						"7" : 18,
+						"8" : 4,
+						"9" : 3
+					},
+					"score" : 4.7000000000000002,
+					"total" : 312
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/394746"
+			},
+			{
+				"air_date" : "2023-04-09",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 4401
+				},
+				"id" : 403238,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/e9/eb/403238_A9mS1.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/e9/eb/403238_A9mS1.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/e9/eb/403238_A9mS1.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/e9/eb/403238_A9mS1.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/e9/eb/403238_A9mS1.jpg"
+				},
+				"name" : "機動戦士ガンダム 水星の魔女 Season2",
+				"name_cn" : "机动战士高达 水星的魔女 Season2",
+				"rank" : 1400,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 8,
+						"10" : 30,
+						"2" : 3,
+						"3" : 8,
+						"4" : 17,
+						"5" : 24,
+						"6" : 112,
+						"7" : 423,
+						"8" : 448,
+						"9" : 59
+					},
+					"score" : 7.2999999999999998,
+					"total" : 1132
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/403238"
+			},
+			{
+				"air_date" : "2023-04-16",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 28
+				},
+				"id" : 405222,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/f2/fe/405222_7LHZH.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/f2/fe/405222_7LHZH.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/f2/fe/405222_7LHZH.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/f2/fe/405222_7LHZH.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/f2/fe/405222_7LHZH.jpg"
+				},
+				"name" : "区区不才，在下野怪",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 0,
+						"2" : 1,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 4,
+						"7" : 2,
+						"8" : 2,
+						"9" : 1
+					},
+					"score" : 6,
+					"total" : 11
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/405222"
+			},
+			{
+				"air_date" : "2023-04-09",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 614
+				},
+				"id" : 408144,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/82/7a/408144_pFp71.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/82/7a/408144_pFp71.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/82/7a/408144_pFp71.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/82/7a/408144_pFp71.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/82/7a/408144_pFp71.jpg"
+				},
+				"name" : "事情を知らない転校生がグイグイくる。",
+				"name_cn" : "什么情况都不知道的转校生一个劲的凑过来。",
+				"rank" : 4957,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 3,
+						"10" : 4,
+						"2" : 3,
+						"3" : 3,
+						"4" : 6,
+						"5" : 19,
+						"6" : 79,
+						"7" : 59,
+						"8" : 21,
+						"9" : 4
+					},
+					"score" : 6.2999999999999998,
+					"total" : 201
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/408144"
+			},
+			{
+				"air_date" : "2023-04-09",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 1106
+				},
+				"id" : 409088,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/d8/4f/409088_Vz40G.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/d8/4f/409088_Vz40G.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/d8/4f/409088_Vz40G.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/d8/4f/409088_Vz40G.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/d8/4f/409088_Vz40G.jpg"
+				},
+				"name" : "ワールドダイスター",
+				"name_cn" : "世界巨星",
+				"rank" : 3291,
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 7,
+						"2" : 2,
+						"3" : 4,
+						"4" : 4,
+						"5" : 18,
+						"6" : 73,
+						"7" : 146,
+						"8" : 40,
+						"9" : 5
+					},
+					"score" : 6.7000000000000002,
+					"total" : 299
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/409088"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 120
+				},
+				"id" : 413786,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/80/50/413786_1NqZt.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/80/50/413786_1NqZt.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/80/50/413786_1NqZt.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/80/50/413786_1NqZt.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/80/50/413786_1NqZt.jpg"
+				},
+				"name" : "逃走中 グレートミッション",
+				"name_cn" : "逃走中 GREAT MISSION",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 2,
+						"2" : 2,
+						"3" : 2,
+						"4" : 2,
+						"5" : 10,
+						"6" : 19,
+						"7" : 9,
+						"8" : 1,
+						"9" : 2
+					},
+					"score" : 5.9000000000000004,
+					"total" : 49
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/413786"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 424818,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/29/6c/424818_AG3T9.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/29/6c/424818_AG3T9.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/29/6c/424818_AG3T9.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/29/6c/424818_AG3T9.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/29/6c/424818_AG3T9.jpg"
+				},
+				"name" : "ゴー！ゴー！びーくるずー",
+				"name_cn" : "Go! Go! Vehicle Zoo",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 9,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/424818"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 7
+				},
+				"id" : 426044,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/64/46/426044_O834O.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/64/46/426044_O834O.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/64/46/426044_O834O.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/64/46/426044_O834O.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/64/46/426044_O834O.jpg"
+				},
+				"name" : "デュエル・マスターズWIN 決闘学園編",
+				"name_cn" : "决斗大师WIN 决斗学园篇",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 1,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 1
+					},
+					"score" : 5.5,
+					"total" : 2
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/426044"
+			},
+			{
+				"air_date" : "2023-04-02",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 4
+				},
+				"id" : 426274,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/43/15/426274_Oipr8.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/43/15/426274_Oipr8.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/43/15/426274_Oipr8.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/43/15/426274_Oipr8.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/43/15/426274_Oipr8.jpg"
+				},
+				"name" : "アニアキングダム",
+				"name_cn" : "安利亚王国",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 0,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 1,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 7,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/426274"
+			},
+			{
+				"air_date" : "2023-04-23",
+				"air_weekday" : 7,
+				"collection" : 
+				{
+					"doing" : 2
+				},
+				"id" : 429536,
+				"images" : 
+				{
+					"common" : "http://lain.bgm.tv/pic/cover/c/83/3d/429536_9xMK4.jpg",
+					"grid" : "http://lain.bgm.tv/pic/cover/g/83/3d/429536_9xMK4.jpg",
+					"large" : "http://lain.bgm.tv/pic/cover/l/83/3d/429536_9xMK4.jpg",
+					"medium" : "http://lain.bgm.tv/pic/cover/m/83/3d/429536_9xMK4.jpg",
+					"small" : "http://lain.bgm.tv/pic/cover/s/83/3d/429536_9xMK4.jpg"
+				},
+				"name" : "青莲剑仙传",
+				"name_cn" : "",
+				"rating" : 
+				{
+					"count" : 
+					{
+						"1" : 1,
+						"10" : 0,
+						"2" : 0,
+						"3" : 0,
+						"4" : 0,
+						"5" : 0,
+						"6" : 0,
+						"7" : 0,
+						"8" : 0,
+						"9" : 0
+					},
+					"score" : 1,
+					"total" : 1
+				},
+				"summary" : "",
+				"type" : 2,
+				"url" : "http://bgm.tv/subject/429536"
+			}
+		],
+		"weekday" : 
+		{
+			"cn" : "星期日",
+			"en" : "Sun",
+			"id" : 7,
+			"ja" : "日耀日"
+		}
+	}
+]

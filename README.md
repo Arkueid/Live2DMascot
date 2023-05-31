@@ -3,19 +3,17 @@
 ### 语言: **中文** | **[English](README-en.md)**  
 ***
 
-
 ### [更新内容](CHANGELOG.md)
-- [ ] #12 
-- [ ] 在历史记录中显示语音识别的结果 #5 
-- [x] 短按录音按钮程序崩溃 #7 
-- [x] 自定义语音聊天接口 #7 
-- [x] 鼠标追踪在窗口对角线上角度变化不自然
-- [x] GalGame式回放窗口 #9 
+
+### 待做
+- [ ] 背景透明问题[#12](https://github.com/Arkueid/DesktopLive2D/issues/12) 
+- [ ] 在历史记录中显示语音识别的结果 [#5](https://github.com/Arkueid/DesktopLive2D/issues/5) 
+
 
 ## 目录
-
-1. [预览](#预览)
-2. [功能](#功能)  
+- [目录](#目录)
+- [预览](#预览)
+- [功能](#功能)  
 	* [自定义聊天服务器接口](#自定义聊天服务器接口可在设置页面更改)
 	* [自定义动作组](#自定义动作组与点击触发位置)
 	* [番剧列表](#番剧列表)
@@ -24,9 +22,9 @@
 	* [设置窗口](#设置窗口)
 	* [语音播放](#语音播放)
 	* [文本显示](#文本显示)  
-3. [注意事项](#注意事项)
-4. [开发环境](#开发环境)
-5. [项目源码](https://github.com/Arkueid/Live2DMascot/tree/develop)     
+- [注意事项](#注意事项)
+- [开发环境](#开发环境)
+- [项目源码](https://github.com/Arkueid/Live2DMascot/tree/develop)     
 
 ## 预览  
 
@@ -247,7 +245,7 @@ Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://ww
 	* [再看一眼就会爆炸！波奇酱免费模型2.0](https://www.bilibili.com/video/BV1PY411k7Kj)  
 	* [【虚拟主播模型】 宁宁vup化！](https://www.bilibili.com/video/BV1s7411d7y9)
 * 
-	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：
+	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：  
 	https://zhuanlan.zhihu.com/p/126276925  
 	https://zhuanlan.zhihu.com/p/511077879 
 

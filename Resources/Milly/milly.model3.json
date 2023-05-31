@@ -1,0 +1,42 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Milly.moc3",
+		"Textures": [
+			"Milly.4096/texture_00.png"
+		],
+		"Physics": "Milly.physics3.json",
+		"DisplayInfo": "Milly.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "E01Angry",
+				"File": "expressions/E01Angry.exp3.json"
+			},
+			{
+				"Name": "E02Smile",
+				"File": "expressions/E02Smile.exp3.json"
+			},
+			{
+				"Name": "E03Sad",
+				"File": "expressions/E03Sad.exp3.json"
+			},
+			{
+				"Name": "P01AntiPose",
+				"File": "P01AntiPose.exp3.json"
+			}
+		]
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	],
+	"HitAreas": []
+}

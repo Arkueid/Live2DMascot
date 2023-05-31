@@ -1,0 +1,351 @@
+{
+  "Map": {
+    "FacePositionX": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "FacePositionY": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "FacePositionZ": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "FaceAngleX": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 3,
+          "CubismParameter": "ParamAngleX",
+          "FaceTrackerDataMin": -30.0,
+          "FaceTrackerDataMax": 30.0,
+          "ParameterMin": -30.0,
+          "ParameterMax": 30.0,
+          "Smooth": 0.15,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 3,
+          "CubismParameter": "ParamBodyAngleX",
+          "FaceTrackerDataMin": -30.0,
+          "FaceTrackerDataMax": 30.0,
+          "ParameterMin": -10.0,
+          "ParameterMax": 10.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "FaceAngleY": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 4,
+          "CubismParameter": "ParamAngleY",
+          "FaceTrackerDataMin": -30.0,
+          "FaceTrackerDataMax": 30.0,
+          "ParameterMin": -30.0,
+          "ParameterMax": 30.0,
+          "Smooth": 0.15,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 4,
+          "CubismParameter": "ParamBodyAngleY",
+          "FaceTrackerDataMin": -30.0,
+          "FaceTrackerDataMax": 30.0,
+          "ParameterMin": -10.0,
+          "ParameterMax": 10.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "FaceAngleZ": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 5,
+          "CubismParameter": "ParamAngleZ",
+          "FaceTrackerDataMin": -30.0,
+          "FaceTrackerDataMax": 30.0,
+          "ParameterMin": -30.0,
+          "ParameterMax": 30.0,
+          "Smooth": 0.3,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 5,
+          "CubismParameter": "ParamBodyAngleZ",
+          "FaceTrackerDataMin": -30.0,
+          "FaceTrackerDataMax": 30.0,
+          "ParameterMin": -10.0,
+          "ParameterMax": 10.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "MouthSmile": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 6,
+          "CubismParameter": "ParamMouthForm",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 6,
+          "CubismParameter": "ParamEyeLSmile",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 6,
+          "CubismParameter": "ParamEyeRSmile",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 6,
+          "CubismParameter": "ParamCheek",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 6,
+          "CubismParameter": "Param35",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 6,
+          "CubismParameter": "SmileBlush",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.2,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "MouthShrink": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "MouthOpen": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 8,
+          "CubismParameter": "ParamMouthOpenY",
+          "FaceTrackerDataMin": 0.0,
+          "FaceTrackerDataMax": 0.6,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.05,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "BrowLeftY": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 9,
+          "CubismParameter": "ParamBrowLY",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.1,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "BrowRightY": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 10,
+          "CubismParameter": "ParamBrowRY",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.1,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "BrowAngle": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 11,
+          "CubismParameter": "ParamBrowLAngle",
+          "FaceTrackerDataMin": -0.7,
+          "FaceTrackerDataMax": 0.7,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.1,
+          "FlipHorizontal": false,
+          "OnUse": true
+        },
+        {
+          "FaceTrackerDataName": 11,
+          "CubismParameter": "ParamBrowRAngle",
+          "FaceTrackerDataMin": -0.7,
+          "FaceTrackerDataMax": 0.7,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.1,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "TongueOut": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "EyeOpenLeft": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 13,
+          "CubismParameter": "ParamEyeLOpen",
+          "FaceTrackerDataMin": 0.2,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.05,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "EyeOpenRight": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 14,
+          "CubismParameter": "ParamEyeROpen",
+          "FaceTrackerDataMin": 0.2,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": 0.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.05,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "EyeBallLeftX": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 15,
+          "CubismParameter": "ParamEyeBallX",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.1,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "EyeBallLeftY": {
+      "OnUse": true,
+      "FaceTrackerParameters": [
+        {
+          "FaceTrackerDataName": 16,
+          "CubismParameter": "ParamEyeBallY",
+          "FaceTrackerDataMin": -1.0,
+          "FaceTrackerDataMax": 1.0,
+          "ParameterMin": -1.0,
+          "ParameterMax": 1.0,
+          "Smooth": 0.1,
+          "FlipHorizontal": false,
+          "OnUse": true
+        }
+      ]
+    },
+    "EyeBallRightX": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "EyeBallRightY": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "Mouth_A": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "Mouth_E": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "Mouth_I": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "Mouth_O": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "Mouth_U": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "MousePosX": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    },
+    "MousePosY": {
+      "OnUse": true,
+      "FaceTrackerParameters": []
+    }
+  }
+}

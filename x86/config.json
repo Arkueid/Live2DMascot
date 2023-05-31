@@ -57,28 +57,28 @@
 	{
 		"CanvasScale" : 1.3999999761581421,
 		"CharacterX" : 0.0,
-		"CharacterY" : -0.69999998807907104,
+		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
-		"ModelDir" : "../Resources",
-		"ModelName" : "model",
-		"MotionInterval" : 60.0
+		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
+		"ModelName" : "Hiyori",
+		"MotionInterval" : 5.0
 	},
 	"UserSettings" : 
 	{
 		"AppName" : "Elaina",
 		"FPS" : 48,
-		"IconPath" : "../Resources/LSS/ico_lss.png",
+		"IconPath" : "D:/forDesktop/Live2D Desktop Mascot/Resources/爱/hoshinoai.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
-		"RepairModeOn" : false,
-		"ShowBackground" : true,
+		"RepairModeOn" : true,
+		"ShowBackground" : false,
 		"ShowBgmList" : false,
 		"ShowText" : true,
 		"SoundVolume" : 0.029999999999999999,
-		"StayOnTop" : true,
+		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
-		"TransparentBackground" : false,
+		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
 	},
@@ -96,9 +96,9 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1248,
-			"Y" : 290
+			"X" : 1498,
+			"Y" : 430
 		},
-		"Width" : 500
+		"Width" : 300
 	}
 }

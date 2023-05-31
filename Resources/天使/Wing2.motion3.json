@@ -1,0 +1,38 @@
+{
+	"Version": 3,
+	"Meta": {
+		"Duration": 0.933,
+		"Fps": 30.0,
+		"Loop": true,
+		"AreBeziersRestricted": true,
+		"CurveCount": 1,
+		"TotalSegmentCount": 2,
+		"TotalPointCount": 7,
+		"UserDataCount": 0,
+		"TotalUserDataSize": 0
+	},
+	"Curves": [
+		{
+			"Target": "Parameter",
+			"Id": "Param_Angle_Rotation_1_ArtMesh78",
+			"Segments": [
+				0,
+				0.5,
+				1,
+				0.156,
+				0.5,
+				0.311,
+				1.5,
+				0.467,
+				1.5,
+				1,
+				0.622,
+				1.5,
+				0.778,
+				2.5,
+				0.933,
+				2.5
+			]
+		}
+	]
+}

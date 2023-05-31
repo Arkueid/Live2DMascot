@@ -1,0 +1,55 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "天使.moc3",
+		"Textures": [
+			"天使.4096/texture_00.png",
+			"天使.4096/texture_01.png",
+			"天使.4096/texture_02.png"
+		],
+		"Physics": "天使.physics3.json",
+		"DisplayInfo": "天使.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "关掉翅膀",
+				"File": "expression1.exp3.json"
+			},
+			{
+				"Name": "关掉光环",
+				"File": "expression2.exp3.json"
+			},
+			{
+				"Name": "穿上黑色礼服",
+				"File": "expression3.exp3.json"
+			},
+			{
+				"Name": "蓝色眼睛",
+				"File": "expression4.exp3.json"
+			},
+			{
+				"Name": "裸腿",
+				"File": "expression5.exp3.json"
+			},
+			{
+				"Name": "放下手臂",
+				"File": "expression6.exp3.json"
+			}
+		]
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		}
+	],
+	"HitAreas": []
+}

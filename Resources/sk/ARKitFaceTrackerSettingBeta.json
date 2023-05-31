@@ -1,0 +1,203 @@
+
+[
+    [
+    ],
+    [
+    ],
+    [
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 3,
+            "CubismParameter"     : "PARAM_ANGLE_X",
+            "FaceTrackerDataMin"  : -25.88571,
+            "FaceTrackerDataMax"  : 24.85714,
+            "ParameterMin"        : -30,
+            "ParameterMax"        : 30,
+            "Smooth"              : 0.15
+        },
+        {
+            "FaceTrackerDataName" : 3,
+            "CubismParameter"     : "PARAM_BODY_ANGLE_X",
+            "FaceTrackerDataMin"  : -30,
+            "FaceTrackerDataMax"  : 30,
+            "ParameterMin"        : -10,
+            "ParameterMax"        : 10,
+            "Smooth"              : 0.2
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 4,
+            "CubismParameter"     : "PARAM_ANGLE_Y",
+            "FaceTrackerDataMin"  : -13.54285,
+            "FaceTrackerDataMax"  : 23.05714,
+            "ParameterMin"        : -30,
+            "ParameterMax"        : 30,
+            "Smooth"              : 0.1271537
+        },
+        {
+            "FaceTrackerDataName" : 4,
+            "CubismParameter"     : "PARAM_BODY_ANGLE_Y",
+            "FaceTrackerDataMin"  : -30,
+            "FaceTrackerDataMax"  : 30,
+            "ParameterMin"        : -10,
+            "ParameterMax"        : 10,
+            "Smooth"              : 0.2
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 5,
+            "CubismParameter"     : "PARAM_ANGLE_Z",
+            "FaceTrackerDataMin"  : -30,
+            "FaceTrackerDataMax"  : 30,
+            "ParameterMin"        : -30,
+            "ParameterMax"        : 30,
+            "Smooth"              : 0.3
+        },
+        {
+            "FaceTrackerDataName" : 5,
+            "CubismParameter"     : "PARAM_BODY_ANGLE_Z",
+            "FaceTrackerDataMin"  : -30,
+            "FaceTrackerDataMax"  : 30,
+            "ParameterMin"        : -10,
+            "ParameterMax"        : 10,
+            "Smooth"              : 0.2
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 6,
+            "CubismParameter"     : "PARAM_MOUTH_FORM",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 0.5799999,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.2
+        },
+        {
+            "FaceTrackerDataName" : 6,
+            "CubismParameter"     : "PARAM_EYE_L_SMILE",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : 0,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.2
+        },
+        {
+            "FaceTrackerDataName" : 6,
+            "CubismParameter"     : "PARAM_EYE_R_SMILE",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : 0,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.2
+        }
+    ],
+    [
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 8,
+            "CubismParameter"     : "PARAM_MOUTH_OPEN_Y",
+            "FaceTrackerDataMin"  : 0,
+            "FaceTrackerDataMax"  : 0.4457144,
+            "ParameterMin"        : 0,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 9,
+            "CubismParameter"     : "PARAM_BROW_L_Y",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 10,
+            "CubismParameter"     : "PARAM_BROW_R_Y",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 11,
+            "CubismParameter"     : "PARAM_BROW_L_ANGLE",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        },
+        {
+            "FaceTrackerDataName" : 11,
+            "CubismParameter"     : "PARAM_BROW_R_ANGLE",
+            "FaceTrackerDataMin"  : -1,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        }
+    ],
+    [
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 13,
+            "CubismParameter"     : "PARAM_EYE_L_OPEN",
+            "FaceTrackerDataMin"  : 0.3457142,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : 0,
+            "ParameterMax"        : 1.5,
+            "Smooth"              : 0.05
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 14,
+            "CubismParameter"     : "PARAM_EYE_R_OPEN",
+            "FaceTrackerDataMin"  : 0.3457142,
+            "FaceTrackerDataMax"  : 1,
+            "ParameterMin"        : 0,
+            "ParameterMax"        : 1.5,
+            "Smooth"              : 0.05
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 15,
+            "CubismParameter"     : "PARAM_EYE_BALL_X",
+            "FaceTrackerDataMin"  : -0.8285714,
+            "FaceTrackerDataMax"  : 0.8028569,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        }
+    ],
+    [
+        {
+            "FaceTrackerDataName" : 16,
+            "CubismParameter"     : "PARAM_EYE_BALL_Y",
+            "FaceTrackerDataMin"  : -0.5885716,
+            "FaceTrackerDataMax"  : 0.7085711,
+            "ParameterMin"        : -1,
+            "ParameterMax"        : 1,
+            "Smooth"              : 0.1
+        }
+    ],
+    [
+    ],
+    [
+    ]
+]

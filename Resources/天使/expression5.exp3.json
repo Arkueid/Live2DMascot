@@ -1,0 +1,10 @@
+{
+	"Type": "Live2D Expression",
+	"Parameters": [
+		{
+			"Id": "Bare_Legs",
+			"Value": 1,
+			"Blend": "Add"
+		}
+	]
+}

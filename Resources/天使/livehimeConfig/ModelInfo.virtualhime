@@ -1,0 +1,46 @@
+{
+  "Visible": true,
+  "Position": {
+    "x": -0.08194447,
+    "y": -0.5930555,
+    "z": 0.0
+  },
+  "Rotation": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "Scale": {
+    "x": 1.50000012,
+    "y": 1.50000012,
+    "z": 1.0
+  },
+  "LayerOrder": 0,
+  "IconPath": "",
+  "CustomName": "",
+  "IdleMotion": "Wings.motion3.json",
+  "OnUsePhysical": true,
+  "PhysicalStrength": 1.0,
+  "PosPhysicalStrength": 0.0,
+  "WindPhysicalStrength": 0.0,
+  "RoleRigidSetModel": {
+    "RigidHardnessValue": 0.5,
+    "IsRigidEffect": true,
+    "IsCannotRigid": false,
+    "RigidSize": {
+      "X": 0.5,
+      "Y": 1.0,
+      "Z": 1.0
+    },
+    "RigidOffset": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    },
+    "RigidScale": {
+      "X": 1.0,
+      "Y": 1.0,
+      "Z": 1.0
+    }
+  }
+}

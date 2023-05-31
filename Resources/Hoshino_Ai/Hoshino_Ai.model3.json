@@ -1,0 +1,111 @@
+{
+	"FileReferences" : 
+	{
+		"DisplayInfo" : "Hoshino_Ai.cdi3.json",
+		"Expressions" : 
+		[
+			{
+				"File" : "xinxin.exp3.json",
+				"Name" : "xinxin.exp3.json"
+			},
+			{
+				"File" : "ga.exp3.json",
+				"Name" : "ga.exp3.json"
+			},
+			{
+				"File" : "sq.exp3.json",
+				"Name" : "sq.exp3.json"
+			},
+			{
+				"File" : "ku.exp3.json",
+				"Name" : "ku.exp3.json"
+			},
+			{
+				"File" : "zs1.exp3.json",
+				"Name" : "zs1.exp3.json"
+			},
+			{
+				"File" : "zs2.exp3.json",
+				"Name" : "zs2.exp3.json"
+			},
+			{
+				"File" : "st.exp3.json",
+				"Name" : "st.exp3.json"
+			},
+			{
+				"File" : "zs3.exp3.json",
+				"Name" : "zs3.exp3.json"
+			},
+			{
+				"File" : "zs4.exp3.json",
+				"Name" : "zs4.exp3.json"
+			},
+			{
+				"File" : "zs5.exp3.json",
+				"Name" : "zs5.exp3.json"
+			},
+			{
+				"File" : "zs6.exp3.json",
+				"Name" : "zs6.exp3.json"
+			},
+			{
+				"File" : "bq1.exp3.json",
+				"Name" : "bq1.exp3.json"
+			},
+			{
+				"File" : "bq2.exp3.json",
+				"Name" : "bq2.exp3.json"
+			},
+			{
+				"File" : "bq3.exp3.json",
+				"Name" : "bq3.exp3.json"
+			}
+		],
+		"Moc" : "Hoshino_Ai.moc3",
+		"Motions" : 
+		{
+			"Idle" : 
+			[
+				{
+					"File" : "motions/donghua.motion3.json"
+				},
+				{
+					"File" : "motions/he.motion3.json"
+				}
+			]
+		},
+		"Physics" : "Hoshino_Ai.physics3.json",
+		"Textures" : 
+		[
+			"Hoshino_Ai.8192/texture_00.png",
+			"Hoshino_Ai.8192/texture_01.png"
+		]
+	},
+	"Groups" : 
+	[
+		{
+			"Ids" : 
+			[
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			],
+			"Name" : "EyeBlink",
+			"Target" : "Parameter"
+		},
+		{
+			"Ids" : 
+			[
+				"ParamMouthOpenY"
+			],
+			"Name" : "LipSync",
+			"Target" : "Parameter"
+		}
+	],
+	"HitAreas" : [
+		{
+			"Id": "ArtMesh58",
+			"Name": "TapHead"
+		}
+	],
+	"Version" : 3
+}
