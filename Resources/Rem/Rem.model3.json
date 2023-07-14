@@ -1,0 +1,480 @@
+{
+  "Version": 3,
+  "Type": 0,
+  "FileReferences": {
+    "Moc": "FileReferences_Moc_0.moc3",
+    "Textures": [
+      "FileReferences_Textures_0_0.png"
+    ],
+    "Physics": "FileReferences_Physics_0.json",
+    "PhysicsV2": {
+      "File": "FileReferences_Physics_0.json"
+    },
+    "Motions": {
+      "Idle": [
+        {
+          "File": "motions/Rem_Idle_0.motion3.json",
+          "Interruptable": true
+        }
+      ],
+      "Tap": [
+        {
+          "File": "motions/Rem_Tap_0.motion3.json",
+          "Sound": "sounds/Rem_Tap_0.wav",
+          "Text": "雷姆會保護大家的。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_1.motion3.json",
+          "Sound": "sounds/Rem_Tap_1.wav",
+          "Text": "達克妮絲大人為什麼總是很高興地看著雷姆的攻擊呢？",
+          "TextDuration": 5000,
+          "MotionDuration": 5000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_2.motion3.json",
+          "Sound": "sounds/Rem_Tap_2.wav",
+          "Text": "我叫雷姆。各種家事都很擅長，有什麼命令的話請儘管吩咐。",
+          "TextDuration": 6000,
+          "MotionDuration": 6000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_3.motion3.json",
+          "Sound": "sounds/Rem_Tap_3.wav",
+          "Text": "不好了。在客人的腦裡，雷姆正被迫遭受下流的凌辱。",
+          "TextDuration": 5000,
+          "MotionDuration": 5000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_4.motion3.json",
+          "Sound": "sounds/Rem_Tap_4.wav",
+          "Text": "雷姆只要有這套制服就夠了。不需要其他衣服。",
+          "TextDuration": 6000,
+          "MotionDuration": 6000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_5.motion3.json",
+          "Sound": "sounds/Rem_Tap_5.wav",
+          "Text": "比起雷姆，姊姊更優秀多了！",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_6.motion3.json",
+          "Sound": "sounds/Rem_Tap_6.wav",
+          "Text": "雷姆並不討厭工作的時間。",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_7.motion3.json",
+          "Sound": "sounds/Rem_Tap_7.wav",
+          "Text": "姊姊就算是幫蔬菜削皮的樣貌也是美如畫呢。",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_8.motion3.json",
+          "Sound": "sounds/Rem_Tap_8.wav",
+          "Text": "與雷姆的約定，請務必要遵守喔？",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_9.motion3.json",
+          "Sound": "sounds/Rem_Tap_9.wav",
+          "Text": "真是厲害，雷姆深感佩服。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_10.motion3.json",
+          "Sound": "sounds/Rem_Tap_10.wav",
+          "Text": "雷姆喜歡的人嗎？．．．呵呵，是祕密。",
+          "TextDuration": 5000,
+          "MotionDuration": 5000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_11.motion3.json",
+          "Sound": "sounds/Rem_Tap_11.wav",
+          "Text": "昴不管在哪裡都有如鬼助呢！",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_12.motion3.json",
+          "Sound": "sounds/Rem_Tap_12.wav",
+          "Text": "這裡也有沙拉醬嗎？想讓昴吃呢。",
+          "TextDuration": 6000,
+          "MotionDuration": 6000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_13.motion3.json",
+          "Sound": "sounds/Rem_Tap_13.wav",
+          "Text": "料理技能．．．取得後就能變得會做菜嗎？真是驚人。",
+          "TextDuration": 8000,
+          "MotionDuration": 8000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_14.motion3.json",
+          "Sound": "sounds/Rem_Tap_14.wav",
+          "Text": "阿克婭大人真不愧是才藝大師呢。以前是不是做過街頭表演呢？",
+          "TextDuration": 7000,
+          "MotionDuration": 7000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_15.motion3.json",
+          "Sound": "sounds/Rem_Tap_15.wav",
+          "Text": "昴兄長大人．．．據某位所言，只要這樣喊，男性就會很開心。",
+          "TextDuration": 8000,
+          "MotionDuration": 8000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_16.motion3.json",
+          "Sound": "sounds/Rem_Tap_16.wav",
+          "Text": "出任務後是否很累呢？如果願意的話，雷姆的膝蓋可以借給你喔。",
+          "TextDuration": 6000,
+          "MotionDuration": 6000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_17.motion3.json",
+          "Sound": "sounds/Rem_Tap_17.wav",
+          "Text": "我叫雷姆，是羅茲瓦爾大人宅邸的傭人。",
+          "TextDuration": 5000,
+          "MotionDuration": 5000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_18.motion3.json",
+          "Sound": "sounds/Rem_Tap_18.wav",
+          "Text": "力量湧了上來．．．！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_19.motion3.json",
+          "Sound": "sounds/Rem_Tap_19.wav",
+          "Text": "現在，從這裡開始吧。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_20.motion3.json",
+          "Sound": "sounds/Rem_Tap_20.wav",
+          "Text": "稍微變強一點了嗎？",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_21.motion3.json",
+          "Sound": "sounds/Rem_Tap_21.wav",
+          "Text": "身體開始發熱了。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_22.motion3.json",
+          "Sound": "sounds/Rem_Tap_22.wav",
+          "Text": "我現在．．．有如鬼助！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_23.motion3.json",
+          "Sound": "sounds/Rem_Tap_23.wav",
+          "Text": "這力量對雷姆來說太浪費了。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_24.motion3.json",
+          "Sound": "sounds/Rem_Tap_24.wav",
+          "Text": "通通交給雷姆吧！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_25.motion3.json",
+          "Sound": "sounds/Rem_Tap_25.wav",
+          "Text": "你的對手是雷姆。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_26.motion3.json",
+          "Sound": "sounds/Rem_Tap_26.wav",
+          "Text": "鬼上身的勝利。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_27.motion3.json",
+          "Sound": "sounds/Rem_Tap_27.wav",
+          "Text": "雷姆非常非常高興！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_28.motion3.json",
+          "Sound": "sounds/Rem_Tap_28.wav",
+          "Text": "有一點悔恨呢．．．。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_29.motion3.json",
+          "Sound": "sounds/Rem_Tap_29.wav",
+          "Text": "都是雷姆的錯。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_30.motion3.json",
+          "Sound": "sounds/Rem_Tap_30.wav",
+          "Text": "喝啊！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_31.motion3.json",
+          "Sound": "sounds/Rem_Tap_31.wav",
+          "Text": "—嘿！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_32.motion3.json",
+          "Sound": "sounds/Rem_Tap_32.wav",
+          "Text": "雷姆不會輸的！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_33.motion3.json",
+          "Sound": "sounds/Rem_Tap_33.wav",
+          "Text": "雷姆會保護你！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_34.motion3.json",
+          "Sound": "sounds/Rem_Tap_34.wav",
+          "Text": "請不要逞強喔？",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_35.motion3.json",
+          "Sound": "sounds/Rem_Tap_35.wav",
+          "Text": "這也是女僕的工作。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_36.motion3.json",
+          "Sound": "sounds/Rem_Tap_36.wav",
+          "Text": "雷姆想保護重要的人！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_37.motion3.json",
+          "Sound": "sounds/Rem_Tap_37.wav",
+          "Text": "嗚啊！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_38.motion3.json",
+          "Sound": "sounds/Rem_Tap_38.wav",
+          "Text": "非常抱歉我就到這裡為止了。",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_39.motion3.json",
+          "Sound": "sounds/Rem_Tap_39.wav",
+          "Text": "準備好了！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_40.motion3.json",
+          "Sound": "sounds/Rem_Tap_40.wav",
+          "Text": "我還可以繼續戰鬥！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_41.motion3.json",
+          "Sound": "sounds/Rem_Tap_41.wav",
+          "Text": "討厭雷姆了嗎？",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_42.motion3.json",
+          "Sound": "sounds/Rem_Tap_42.wav",
+          "Text": "輪到雷姆上場了呢。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_43.motion3.json",
+          "Sound": "sounds/Rem_Tap_43.wav",
+          "Text": "希望教你做菜？是沒有關係，但是雷姆很嚴厲喔？",
+          "TextDuration": 7000,
+          "MotionDuration": 7000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_44.motion3.json",
+          "Sound": "sounds/Rem_Tap_44.wav",
+          "Text": "請安心吧，雷姆會待在這裡喔。",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_45.motion3.json",
+          "Sound": "sounds/Rem_Tap_45.wav",
+          "Text": "雖然不知道是否有所幫助，雷姆願意獻上自己的微薄之力！",
+          "TextDuration": 5000,
+          "MotionDuration": 5000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_46.motion3.json",
+          "Sound": "sounds/Rem_Tap_46.wav",
+          "Text": "好的！只要是為了昴的話！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_47.motion3.json",
+          "Sound": "sounds/Rem_Tap_47.wav",
+          "Text": "各種家事雷姆都很擅長，有什麼命令的話請儘管吩咐。",
+          "TextDuration": 5000,
+          "MotionDuration": 5000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_48.motion3.json",
+          "Sound": "sounds/Rem_Tap_48.wav",
+          "Text": "昴是個非常棒的人。",
+          "TextDuration": 4000,
+          "MotionDuration": 4000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_49.motion3.json",
+          "Sound": "sounds/Rem_Tap_49.wav",
+          "Text": "姊姊也請多多指教。",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        },
+        {
+          "File": "motions/Rem_Tap_50.motion3.json",
+          "Sound": "sounds/Rem_Tap_50.wav",
+          "Text": "このすば！",
+          "TextDuration": 3000,
+          "MotionDuration": 3000,
+          "Interruptable": true
+        }
+      ]
+    }
+  },
+  "Controllers": {
+    "ParamHit": {},
+    "ParamLoop": {},
+    "KeyTrigger": {},
+    "ParamTrigger": {},
+    "AreaTrigger": {},
+    "HandTrigger": {},
+    "EyeBlink": {
+      "MinInterval": 500,
+      "MaxInterval": 6000,
+      "Enabled": true
+    },
+    "LipSync": {
+      "Gain": 5.0,
+      "Enabled": true
+    },
+    "MouseTracking": {
+      "SmoothTime": 0.15,
+      "Enabled": true
+    },
+    "AutoBreath": {
+      "Enabled": true
+    },
+    "ExtraMotion": {
+      "Enabled": true
+    },
+    "Accelerometer": {
+      "Enabled": true
+    },
+    "Microphone": {},
+    "Transform": {},
+    "FaceTracking": {
+      "Enabled": true
+    },
+    "HandTracking": {},
+    "ParamValue": {},
+    "PartOpacity": {},
+    "ArtmeshOpacity": {},
+    "ArtmeshColor": {},
+    "ArtmeshCulling": {
+      "DefaultMode": 0
+    },
+    "IntimacySystem": {}
+  },
+  "Options": {
+    "ScaleFactor": 0.0005,
+    "TexFixed": true
+  }
+}

@@ -1,9 +1,13 @@
 # Changelog
 
+### 2023-07-14
+* 移除鸡肋的番剧列表功能
+* 用回之前的鼠标追踪
+* 修复角色移到桌面左边缘图像消失的问题
+
 ### 2023-05-31
 * 微调UI
 * 系统托盘中的设置选项现在不需要退出才保存
-* 最近在学校机房测试重现了[#12](https://github.com/Arkueid/Live2DMascot/issues/12)的情况，不过近期没有时间解决，可能是OpenGL的问题，唯一出现的报错在shader编译阶段(LAppDelegate.cpp)。我的OpenGL版本是4.6。进一步排除问题，可以下载https://github.com/murcherful/Live2D_Displyer的程序，对比运行情况。
 * 近期停更
 
 ### 2023-4-30

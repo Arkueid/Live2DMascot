@@ -1,8 +1,5 @@
 *.rar
 x86/chat/*
 x64/chat/*
-Resources/llny
-Resources/nn
 */*.rar
 */voice
-CubismSdkForNative-4-r.5.1

@@ -3,8 +3,8 @@
 	{
 		"LastPos" : 
 		{
-			"X" : 786,
-			"Y" : 0
+			"X" : -245,
+			"Y" : 391
 		}
 	},
 	"ChatAPI" : 
@@ -59,7 +59,7 @@
 		"CharacterX" : 0.0,
 		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
-		"ModelDir" : "D:/forDesktop/Live2D Desktop Mascot/Resources",
+		"ModelDir" : "../Resources",
 		"ModelName" : "Hiyori",
 		"MotionInterval" : 5.0
 	},
@@ -73,10 +73,10 @@
 		"NoSound" : false,
 		"RepairModeOn" : true,
 		"ShowBackground" : false,
-		"ShowBgmList" : false,
+		"ShowBgmList" : true,
 		"ShowText" : true,
 		"SoundVolume" : 0.029999999999999999,
-		"StayOnTop" : false,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,

@@ -143,6 +143,11 @@
 					"File" : "motions/Hiyori_m10.motion3.json",
 					"Sound" : "sounds/tapbody2.wav",
 					"Text" : "啊哈哈哈哈哈哈，好痒啊！！！"
+				},
+				{
+					"File" : "motions/EMT_Tap_0.motion3.json",
+					"Sound" : "",
+					"Text" : "wwww"
 				}
 			],
 			"TapHead" : 

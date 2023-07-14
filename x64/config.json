@@ -55,9 +55,11 @@
 	},
 	"ModelSettings" : 
 	{
+		"CharacterX" : 0.0,
+		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "LSS",
+		"ModelName" : "Hiyori",
 		"MotionInterval" : 5.0
 	},
 	"UserSettings" : 
