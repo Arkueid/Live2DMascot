@@ -9,7 +9,7 @@
 - [ ] 适用Unity的Live2D模型可以加载但可能出现图层错误（穿模？）
 - [ ] Cubism 2.0 及以前版本的模型（.moc，.mnt）无法加载
 - [ ] 背景透明问题[#12](https://github.com/Arkueid/DesktopLive2D/issues/12) 
-- [ ]<del>在历史记录中显示语音识别的结果 [#5](https://github.com/Arkueid/DesktopLive2D/issues/5) </del>
+- [ ] <del>在历史记录中显示语音识别的结果 [#5](https://github.com/Arkueid/DesktopLive2D/issues/5) </del>
 #### 关于背景透明的问题[#12](https://github.com/Arkueid/DesktopLive2D/issues/12) 
 
 目前成功解决的一个案例如下：
