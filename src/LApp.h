@@ -68,6 +68,9 @@ namespace LAppConfig {
 	extern string _BaiduSpeechClientSecret;
 	extern string _CustomVoiceChatRoute;
 	extern bool _CustomVoiceChatOn;
+
+	extern float _CharacterX;
+	extern float _CharacterY;
 };
 
 class LApp

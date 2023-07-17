@@ -84,6 +84,10 @@ class AppSettings : public QWidget
 	QGridLayout* grid;
 	QWidget* _parent;
 	QPushButton* repairModeControl;
+	QLabel* lbl_characterX;
+	QLineEdit* characterX;
+	QLabel* lbl_characterY;
+	QLineEdit* characterY;
 public:
 	AppSettings(QWidget* p);
 	~AppSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]AppSettings destroyed\n"); }

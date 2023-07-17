@@ -71,8 +71,8 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		int mY = QCursor::pos().y();
 		QSize screen = LApp::GetInstance()->GetApp()->desktop()->size();
 		// 视线计算的x，y，用于drag(x, y)
-		float dragX = mX / 1.0f / x() * width()/ 2.0f;
-		float dragY = mY / 1.0f / y() * height()/2.0f;
+		float dragX = mX - x();  //简单粗暴，就这样吧T_T，更不动了
+		float dragY = mY - y();
 		// 鼠标点击的x，y，用于HitTest(x, y)
 		float clickX = mX - this->x();
 		float clickY = mY - this->y();
@@ -226,11 +226,6 @@ void GLWidget::Release()
 		_dialog->Release();
 		_dialog->deleteLater();
 	}
-	if (_bgmlist)
-	{
-		_bgmlist->Release();
-		_bgmlist->deleteLater();
-	}
 	if (_cvWidget)
 	{
 		_cvWidget->Release();
@@ -329,27 +324,12 @@ void GLWidget::setShowTextOnTriggered()
 	}
 }
 
-void GLWidget::setShowBgmListOnTriggered()
-{
-	if (!act_setShowBgmList->isChecked())
-	{
-		setShowBgmList(false);
-		act_setShowBgmList->setChecked(false);
-	}
-	else
-	{
-		setShowBgmList(true);
-		act_setShowBgmList->setChecked(true);
-	}
-}
-
 void GLWidget::Run()
 {
 	srand((unsigned)time(NULL));
 	trayIcon->show();
 	show();
 	_dialog->raise();
-	setShowBgmList(LAppConfig::_ShowBgmList);
 }
 
 //加载配置文件
@@ -390,10 +370,6 @@ void GLWidget::setupUI()
 	act_setShowText->setCheckable(true);
 	act_setShowText->setChecked(LAppConfig::_ShowText);
 
-	act_setShowBgmList = new QAction(QString::fromLocal8Bit("追番列表"));
-	act_setShowBgmList->setCheckable(true);
-	act_setShowBgmList->setChecked(LAppConfig::_ShowBgmList);
-
 	act_showSettings = new QAction(QString::fromLocal8Bit("设置"));
 
 	act_setShowBackground = new QAction(QString::fromLocal8Bit("显示背景"));
@@ -416,33 +392,36 @@ void GLWidget::setupUI()
 	connect(act_stayOnTop, SIGNAL(triggered()), SLOT(stayOnTopOnTriggered()));
 	connect(act_setNoSound, SIGNAL(triggered()), SLOT(setNoSoundOnTriggered()));
 	connect(act_setShowText, SIGNAL(triggered()), SLOT(setShowTextOnTriggered()));
-	connect(act_setShowBgmList, SIGNAL(triggered()), SLOT(setShowBgmListOnTriggered()));
 	connect(act_showSettings, SIGNAL(triggered()), SLOT(showSettingsOnTriggered()));
 	connect(act_setShowBackground, SIGNAL(triggered()), SLOT(setShowBackgroundOnTriggered()));
 	connect(act_setTransparentBackground, SIGNAL(triggered()), SLOT(setTransparentBackgroundOnTriggered()));
 	connect(act_setTransparentCharacter, SIGNAL(triggered()), SLOT(setTransparentCharacterOnTriggered()));
 
 
-	rightMenu->addActions({ act_setShowBgmList, act_keepMouseTrack, act_setTransparentBackground, act_setTransparentCharacter, act_setShowBackground, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_showSettings});
+	rightMenu->addActions({ act_keepMouseTrack, act_setTransparentBackground, act_setTransparentCharacter, act_setShowBackground, act_keepQuiet, act_stayOnTop, act_setNoSound, act_setShowText, act_hide, act_showSettings});
 	rightMenu->addSeparator();
 	rightMenu->addAction(act_quit);
 	rightMenu->setFixedWidth(120);
 	rightMenu->setStyleSheet("QMenu { background-color: white; padding-top: 8px; padding-bottom: 8px; border: 1px solid rgb(214, 214, 214); padding: 4px; color: black;} QMenu::item::selected{background-color: rgba(50, 150, 240, 200); color: white;} QMenu::item {padding: 0 0 0 20px; margin-left: 4px; margin-right: 4px;color: rgb(90, 90, 90);} QMenu::indicator{width: 13px;} QMenu::item:checked, QMenu::item:unchecked{padding-left: 7;}");
 
+	for (const QAction* action : rightMenu->actions()) {
+		connect(action, &QAction::triggered, this, &GLWidget::saveConfig);
+	}
+
 	_dialog = new Dialog();
 
-	_bgmlist = new BgmListView();
+	//_bgmlist = new BgmListView();
 
 	_cvWidget = new ConversationWidget();
 
 	_control = new ControlWidget();
 
-	_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
+	//_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
 
-	QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
-	if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
+	//QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
+	/*if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
 	else if (LAppConfig::_BgmListLastPosX <= 0) _bgmlist->move(0, LAppConfig::_BgmListLastPosY);
-	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 5) _bgmlist->move(screen->width() - 5, LAppConfig::_BgmListLastPosY);
+	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 5) _bgmlist->move(screen->width() - 5, LAppConfig::_BgmListLastPosY);*/
 }
 
 void GLWidget::LoadConfig()
@@ -469,17 +448,12 @@ void GLWidget::LoadConfig()
 	currentTimerIndex = startTimer(1000 / LAppConfig::_FPS);
 }
 
-#pragma region 保存配置文件
 void GLWidget::saveConfig()
 {
+#ifdef CONSOLE_FLAG
+	printf("[APP]config saved: %s\n", LAppConfig::_ConfigPath);
+#endif
 	LApp::GetInstance()->SaveConfig();
-}
-#pragma endregion
-
-void GLWidget::setShowBgmList(bool on)
-{
-	LAppConfig::_ShowBgmList = on;
-	_bgmlist->setVisible(on);
 }
 
 void GLWidget::showSettingsOnTriggered()

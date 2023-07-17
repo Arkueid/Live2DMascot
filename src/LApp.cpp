@@ -28,6 +28,8 @@ namespace LAppConfig {
     string _ModelName;
     float _MotionInterval;
     float _LipSyncMagnification;
+    float _CharacterX;  //角色在OepnGL坐标系中绘制的X坐标
+    float _CharacterY;  //角色在OpenGL坐标系中绘制的Y坐标
 
     //用户设置
     string _AppName;
@@ -132,7 +134,7 @@ void LApp::Initialize(int argc, char* argv[])
         });
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("gbk"));
     _win = new GLWidget();
-    BgmListUtils::CheckUpdate();
+    //BgmListUtils::CheckUpdate();
     HolidayUtils::CheckUpdate();
     LoadConfig();
     VoiceInputUtils::CheckUpdate();
@@ -183,16 +185,14 @@ void LApp::LoadConfig() {
     }
 
     LAppConfig::_MotionInterval = !config["ModelSettings"]["MotionInterval"].isNull() ? config["ModelSettings"]["MotionInterval"].asInt() : 5;
-    LAppConfig::_LipSyncMagnification = !config["ModelSettings"]["LipSyncMagnification"].isNull() ? config["ModelSettings"]["LipSyncMagnification"].asFloat() : 1.1;
-
+    LAppConfig::_LipSyncMagnification = !config["ModelSettings"]["LipSyncMagnification"].isNull() ? config["ModelSettings"]["LipSyncMagnification"].asFloat() : 1.1f;
+    LAppConfig::_CharacterX = !config["ModelSettings"]["CharacterX"].isNull() ? config["ModelSettings"]["CharacterX"].asFloat() : 0.0f;
+    LAppConfig::_CharacterY = !config["ModelSettings"]["CharacterY"].isNull() ? config["ModelSettings"]["CharacterY"].asFloat() : 0.0f;
 
     LAppConfig::_WindowWidth = !config["WindowSettings"]["Width"].isNull() ? config["WindowSettings"]["Width"].asInt() : 500;
     LAppConfig::_WindowHeight = !config["WindowSettings"]["Height"].isNull() ? config["WindowSettings"]["Height"].asInt() : 700;
-    LAppConfig::_LastPosX = !config["WindowSettings"]["LastPos"]["X"].isNull() ? config["WindowSettings"]["LastPos"]["X"].asInt() : 0;
-    LAppConfig::_LastPosY = !config["WindowSettings"]["LastPos"]["Y"].isNull() ? config["WindowSettings"]["LastPos"]["Y"].asInt() : 0;
-
-    LAppConfig::_BgmListLastPosX = !config["BangumiView"]["LastPos"]["X"].isNull() ? config["BangumiView"]["LastPos"]["X"].asInt() : 500;
-    LAppConfig::_BgmListLastPosY = !config["BangumiView"]["LastPos"]["Y"].isNull() ? config["BangumiView"]["LastPos"]["Y"].asInt() : 0;
+    LAppConfig::_LastPosX = !config["WindowSettings"]["LastPos"]["X"].isNull() ? config["WindowSettings"]["LastPos"]["X"].asInt() : 1; // 
+    LAppConfig::_LastPosY = !config["WindowSettings"]["LastPos"]["Y"].isNull() ? config["WindowSettings"]["LastPos"]["Y"].asInt() : 1;
 
     LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? config["UserSettings"]["UserName"].asCString() : "User0721";
     LAppConfig::_FPS = !config["UserSettings"]["FPS"].isNull() ? config["UserSettings"]["FPS"].asInt() : 48;
@@ -276,6 +276,8 @@ void LApp::SaveConfig()
     config["ModelSettings"]["ModelName"] = LAppConfig::_ModelName;
     config["ModelSettings"]["MotionInterval"] = LAppConfig::_MotionInterval;
     config["ModelSettings"]["LipSyncMagnification"] = LAppConfig::_LipSyncMagnification;
+    config["ModelSettings"]["CharacterX"] = LAppConfig::_CharacterX;
+    config["ModelSettings"]["CharacterY"] = LAppConfig::_CharacterY;
 
     config["UserSettings"]["FPS"] = LAppConfig::_FPS;
     config["UserSettings"]["TextFadeOutTime"] = LAppConfig::_TextFadeOutTime;
@@ -290,12 +292,8 @@ void LApp::SaveConfig()
     config["UserSettings"]["StayOnTop"] = LAppConfig::_StayOnTop;
     config["UserSettings"]["NoSound"] = LAppConfig::_NoSound;
     config["UserSettings"]["ShowText"] = LAppConfig::_ShowText;
-    config["UserSettings"]["ShowBgmList"] = LAppConfig::_ShowBgmList;
     config["UserSettings"]["SoundVolume"] = LAppConfig::_SoundVolume;
     config["UserSettings"]["RepairModeOn"] = LAppConfig::_RepairModeOn;
-
-    config["BangumiView"]["LastPos"]["X"] = LApp::GetInstance()->GetWindow()->GetBgmListView()->x();
-    config["BangumiView"]["LastPos"]["Y"] = LApp::GetInstance()->GetWindow()->GetBgmListView()->y();
 
     config["Dialog"]["FontSize"] = LAppConfig::_DialogFontSize;
     config["Dialog"]["FontFamily"] = LAppConfig::_DialogFontFamily;

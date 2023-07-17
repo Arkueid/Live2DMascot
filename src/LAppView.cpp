@@ -16,6 +16,7 @@
 #include "TouchManager.hpp"
 #include "LAppSprite.hpp"
 #include "LAppModel.hpp"
+#include "LApp.h"
 
 using namespace std;
 using namespace LAppDefine;
@@ -98,7 +99,6 @@ void LAppView::Initialize()
 void LAppView::Render()
 {
     LAppLive2DManager* Live2DManager = LAppLive2DManager::GetInstance();
-
     Live2DManager->SetViewMatrix(_viewMatrix);
 
     // Cubism更新・描画
@@ -170,7 +170,6 @@ void LAppView::PreModelDraw(LAppModel& refModel)
 {
     // 別のレンダリングターゲットへ向けて描画する場合の使用するフレームバッファ
     Csm::Rendering::CubismOffscreenFrame_OpenGLES2* useTarget = NULL;
-
     if (_renderTarget != SelectTarget_None)
     {// 別のレンダリングターゲットへ向けて描画する場合
 
@@ -233,4 +232,3 @@ void LAppView::SetRenderTargetClearColor(float r, float g, float b)
     _clearColor[1] = g;
     _clearColor[2] = b;
 }
-

@@ -70,14 +70,14 @@
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
-		"RepairModeOn" : false,
+		"RepairModeOn" : true,
 		"ShowBackground" : false,
 		"ShowBgmList" : true,
 		"ShowText" : true,
 		"SoundVolume" : 1.0,
 		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
-		"TransparentBackground" : false,
+		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
 		"UserName" : "ArcueidBrunestud"
 	},
@@ -95,8 +95,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1222,
-			"Y" : 319
+			"X" : 1280,
+			"Y" : 494
 		},
 		"Width" : 300
 	}

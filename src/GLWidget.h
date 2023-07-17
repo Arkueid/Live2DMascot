@@ -24,13 +24,13 @@ private:
 	QAction* act_stayOnTop = NULL; //窗口置顶
 	QAction* act_setNoSound = NULL;  //静音
 	QAction* act_setShowText = NULL;  //显示文本
-	QAction* act_setShowBgmList = NULL;  //显示追番列表
+	//QAction* act_setShowBgmList = NULL;  //显示追番列表
 	QAction* act_showSettings = NULL; //显示设置窗口
 	QAction* act_setShowBackground = NULL;  //显示背景
 	QAction* act_setTransparentBackground = NULL; //背景穿透
 	QAction* act_setTransparentCharacter = NULL;  //人物穿透
 	Dialog* _dialog = NULL;  //文本框
-	BgmListView* _bgmlist = NULL;  //追番列表
+	//BgmListView* _bgmlist = NULL;  //追番列表
 	ConversationWidget* _cvWidget = NULL;  //聊天输入框
 	ControlWidget* _control = NULL;  //设置
 	bool _LastShowText;
@@ -49,7 +49,7 @@ public:
 	void Release();
 	void Run();
 	Dialog* GetDialog() { return _dialog; }
-	BgmListView* GetBgmListView() { return _bgmlist; }
+	//BgmListView* GetBgmListView() { return _bgmlist; }
 	void LoadConfig();
 protected:
 	void initializeGL();
@@ -58,7 +58,7 @@ protected:
 	void timerEvent(QTimerEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
 	void keepMouseTrack(bool on);
-	void setShowBgmList(bool on);
+	//void setShowBgmList(bool on);
 	int mouseX;
 	int mouseY;
 	int currentTimerIndex;
@@ -72,7 +72,7 @@ private slots:
 	void stayOnTopOnTriggered();
 	void setNoSoundOnTriggered();
 	void setShowTextOnTriggered();
-	void setShowBgmListOnTriggered();
+	//void setShowBgmListOnTriggered();
 	void showSettingsOnTriggered();
 	void setShowBackgroundOnTriggered();
 	void setTransparentBackgroundOnTriggered();

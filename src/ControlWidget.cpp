@@ -17,6 +17,7 @@
 #include <QtWidgets/qheaderview.h>
 #include <QtWidgets/qmessagebox.h>
 #include <QtWidgets/qlistview.h>
+#include <QtGui/qfontdatabase.h>
 
 using namespace LAppConfig;
 
@@ -179,10 +180,13 @@ AppSettings::AppSettings(QWidget* p)
 	lbl_windowWidth = new QLabel(QString::fromLocal8Bit("窗口宽度"));
 	lbl_windowHeight = new QLabel(QString::fromLocal8Bit("窗口高度"));
 	lbl_modelDir = new QLabel(QString::fromLocal8Bit("模型路径"));
+	lbl_characterX = new QLabel(QString::fromLocal8Bit("角色X"));
+	lbl_characterY = new QLabel(QString::fromLocal8Bit("角色Y"));
 	appName = new QLineEdit();
 	username = new QLineEdit();
 	iconPath = new QLineEdit();
 	fps = new QLineEdit();
+	fps->setMaximumWidth(50);
 	windowWidth = new QLineEdit();
 	windowHeight = new QLineEdit();
 	modelDir = new QLineEdit();
@@ -193,8 +197,9 @@ AppSettings::AppSettings(QWidget* p)
 	volumeSlider->setMinimum(0);
 	volumeSlider->setOrientation(Qt::Horizontal);
 	volumeSlider->setPageStep(1);
-
-	lbl_repairMode = new QLabel(QString::fromLocal8Bit("修复模式"));
+	volumeSlider->setMaximumWidth(200);
+	volumeSlider->setMinimumWidth(150);
+	lbl_repairMode = new QLabel(QString::fromLocal8Bit("动作修复"));
 	repairModeControl = new QPushButton();
 	repairModeControl->setCheckable(true);
 	repairModeControl->setObjectName("repairModeControl");
@@ -203,6 +208,12 @@ AppSettings::AppSettings(QWidget* p)
 	lipSync = new QLineEdit();
 	QRegExpValidator* v3 = new QRegExpValidator(QRegExp("^[0-9]{1,2}\\.[0-9]{1}$"));
 	lipSync->setValidator(v3);
+
+	characterX = new QLineEdit();
+	characterY = new QLineEdit();
+	const QValidator* v5 = new QRegExpValidator(QRegExp("^[\\-]?[0-9]{1,2}\\.[0-9]{1,2}$"));
+	characterX->setValidator(v5);
+	characterY->setValidator(v5);
 
 	lbl_motioninterval = new QLabel(QString::fromLocal8Bit("动作频率"));
 	motionInterval = new QLineEdit();
@@ -242,40 +253,88 @@ AppSettings::AppSettings(QWidget* p)
 
 	repairModeControl->setFixedWidth(50);
 
-	grid->addWidget(lbl_appName, 0, 0, 0);
-	grid->addWidget(appName, 0, 1, 1, 4, 0);
-	grid->addWidget(lbl_username, 0, 5, 0);
-	grid->addWidget(username, 0, 6, 1, 4, 0);
-	grid->addWidget(lbl_iconPath, 2, 0, 0);
-	grid->addWidget(iconPath, 2, 1, 1, 8, 0);
-	grid->addWidget(openFile, 2, 9, 0);
-	grid->addWidget(lbl_modelDir, 3, 0, 1, 1, 0);
-	grid->addWidget(modelDir, 3, 1, 1, 8, 0);
-	grid->addWidget(chooseDir, 3, 9, 1, 1, 0);
-	grid->addWidget(lbl_lipsync, 4, 0, 1, 1, 0);
-	grid->addWidget(lipSync, 4, 1, 1, 1, 0);
-	grid->addWidget(lbl_motioninterval, 4, 2, 1, 1, 0);
-	grid->addWidget(motionInterval, 4, 3, 1, 1, 0);
-	grid->addWidget(lbl_FPS, 4, 4, 0);
-	grid->addWidget(fps, 4, 5, 1, 1, 0);
-	grid->addWidget(lbl_windowWidth, 4, 6, 1, 1, 0);
-	grid->addWidget(windowWidth, 4, 7, 1, 1, 0);
-	grid->addWidget(lbl_windowHeight, 4, 8, 1, 1, 0);
-	grid->addWidget(windowHeight, 4, 9, 1, 1, 0);
-	grid->addWidget(lbl_dialogMaxWidth, 6, 0, 1, 2);
-	grid->addWidget(dialogMaxWidth, 6, 2, 1, 1);
-	grid->addWidget(lbl_dialogYOffset, 6, 3, 1, 2);
-	grid->addWidget(dialogYOffset, 6, 5, 1, 1);
-	grid->addWidget(lbl_dialogFontSize, 6, 6, 1, 2);
-	grid->addWidget(dialogFontSize, 6, 8, 1, 1);
-	grid->addWidget(lbl_volume, 7, 0, 1, 1);
-	grid->addWidget(volumeSlider, 7, 1, 1, 2);
-	grid->addWidget(lbl_sliderVal, 7, 3, 1, 1);
-	grid->addWidget(lbl_repairMode, 7, 4, 1, 1);
-	grid->addWidget(repairModeControl, 7, 5, 1, 1);
-	grid->addWidget(apply, 8, 8, 1, 1, 0);
-	grid->addWidget(reset, 8, 9, 1, 1, 0);
-	setLayout(grid);
+	QVBoxLayout* vbox = new QVBoxLayout();
+
+	QHBoxLayout* line1 = new QHBoxLayout();
+	line1->addWidget(lbl_appName);
+	line1->addWidget(appName);
+	line1->addWidget(lbl_username);
+	line1->addWidget(username);
+	vbox->addLayout(line1);
+
+	QHBoxLayout* line2 = new QHBoxLayout();
+	line2->addWidget(lbl_iconPath);
+	line2->addWidget(iconPath);
+	line2->addWidget(openFile);
+	vbox->addLayout(line2);
+
+	QHBoxLayout* line3 = new QHBoxLayout();
+	line3->addWidget(lbl_modelDir);
+	line3->addWidget(modelDir);
+	line3->addWidget(chooseDir);
+	vbox->addLayout(line3);
+
+	QHBoxLayout* line4 = new QHBoxLayout();
+	line4->addWidget(lbl_lipsync);
+	line4->addWidget(lipSync);
+	line4->addWidget(lbl_motioninterval);
+	line4->addWidget(motionInterval);
+	line4->addWidget(lbl_FPS);
+	line4->addWidget(fps);
+	line4->addWidget(lbl_windowWidth);
+	line4->addWidget(windowWidth);
+	line4->addWidget(lbl_windowHeight);
+	line4->addWidget(windowHeight);
+	line4->addStretch();
+	vbox->addLayout(line4);
+
+	QHBoxLayout* line5 = new QHBoxLayout();
+	line5->addWidget(lbl_dialogMaxWidth);
+	line5->addWidget(dialogMaxWidth);
+	line5->addStretch();
+	line5->addWidget(lbl_dialogYOffset);
+	line5->addWidget(dialogYOffset);
+	line5->addStretch();
+	line5->addWidget(lbl_dialogFontSize);
+	line5->addWidget(dialogFontSize);
+	line5->addStretch();
+	vbox->addLayout(line5);
+
+	QHBoxLayout* line6 = new QHBoxLayout();
+	line6->addWidget(lbl_characterX);
+	line6->addWidget(characterX);
+	line6->addWidget(lbl_characterY);
+	line6->addWidget(characterY);
+	line6->addStretch();
+	vbox->addLayout(line6);
+
+	QHBoxLayout* line7 = new QHBoxLayout();
+	line7->addWidget(lbl_volume);
+	line7->addWidget(volumeSlider);
+	line7->addWidget(lbl_sliderVal);
+	line7->addStretch(1);
+	line7->addWidget(lbl_repairMode);
+	line7->addWidget(repairModeControl);
+	line7->addStretch(6);
+	vbox->addLayout(line7);
+
+	QHBoxLayout* line8 = new QHBoxLayout();
+	line8->addStretch(8);
+	line8->addWidget(apply);
+	line8->addWidget(reset);
+	vbox->addLayout(line8);
+	setLayout(vbox);
+
+/*
+
+	grid->addWidget(lbl_volume, 8, 0, 1, 1);
+	grid->addWidget(volumeSlider, 8, 1, 1, 2);
+	grid->addWidget(lbl_sliderVal, 8, 3, 1, 1);
+	grid->addWidget(lbl_repairMode, 8, 4, 1, 1);
+	grid->addWidget(repairModeControl, 8, 5, 1, 1);
+	grid->addWidget(apply, 9, 8, 1, 1, 0);
+	grid->addWidget(reset, 9, 9, 1, 1, 0);*/
+	//setLayout(grid);
 	
 
 	connect(openFile, SIGNAL(clicked()), SLOT(OpenFile()));
@@ -294,10 +353,7 @@ void AppSettings::OpenFile()
 }
 
 void AppSettings::SetRepairMode() {
-	if (repairModeControl->isChecked()) {
-		repairModeControl->setText("On");
-	}
-	else repairModeControl->setText("Off");
+	
 }
 
 void AppSettings::SetVolume() {
@@ -326,6 +382,9 @@ void AppSettings::Apply()
 	_DialogMaxWidth = dialogMaxWidth->text().toInt() == 0 ? _DialogMaxWidth : dialogMaxWidth->text().toInt();
 	_DialogYOffset = dialogYOffset->text().isEmpty() ? _DialogYOffset : dialogYOffset->text().toInt();
 	_SoundVolume = volumeSlider->value() / 100.0;
+	_CharacterX = characterX->text().isEmpty() ? _CharacterX : characterX->text().toFloat();
+	_CharacterY = characterY->text().isEmpty() ? _CharacterY : characterY->text().toFloat();
+
 	_RepairModeOn = repairModeControl->isChecked();
 	LApp::GetInstance()->GetWindow()->GetDialog()->LoadConfig();
 	LApp::GetInstance()->GetWindow()->LoadConfig();
@@ -367,14 +426,22 @@ void AppSettings::LoadConfig()
 	dialogFontSize->setText(to_string(_DialogFontSize).c_str());
 	lbl_sliderVal->setText(to_string((int)(LAppConfig::_SoundVolume * 100)).append("%").c_str());
 	volumeSlider->setValue((int)(LAppConfig::_SoundVolume * 100));
-	repairModeControl->setText(_RepairModeOn ? "On" : "Off");
 	repairModeControl->setChecked(_RepairModeOn);
-	stringstream ss1;
-	ss1 << _MotionInterval;
-	motionInterval->setText(ss1.str().c_str());
-	stringstream ss2;
-	ss2 << _LipSyncMagnification;
-	lipSync->setText(ss2.str().c_str());
+	stringstream ss;
+	ss << _MotionInterval;
+	motionInterval->setText(ss.str().c_str());
+	ss.clear();
+	ss.str("");
+	ss << _LipSyncMagnification;
+	lipSync->setText(ss.str().c_str());
+	ss.clear();
+	ss.str("");
+	ss << _CharacterX;
+	characterX->setText(ss.str().c_str());
+	ss.clear();
+	ss.str("");
+	ss << _CharacterY;
+	characterY->setText(ss.str().c_str());
 }
 
 void AppSettings::Release()
@@ -1014,39 +1081,45 @@ ControlWidget::ControlWidget()
 	addTab(_appSettings, QString::fromLocal8Bit("用户设置"));
 	addTab(_modelSettings, QString::fromLocal8Bit("模型设置"));
 	addTab(_chatSettings, QString::fromLocal8Bit("ChatAPI"));
-	setStyleSheet("QTabBar::tab{font-family: 黑体; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
+
+	QFontDatabase::addApplicationFont("Resources/PingFang-Medium.ttf");
+
+	setStyleSheet("QTabBar::tab{font-family: PingFang SC Medium; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
 		"QTabBar::tab:selected{background-color: rgb(30, 30, 30); color: rgba(255, 255, 255, 180); }"
 		"QTabBar{background-color: rgb(37, 37, 38);}"
 		"QTabWidget::pane{border: none; background-color: rgb(30, 30, 30); color: white}"
 		"QTabWidget{background-color: rgb(37, 37, 38)}"
 	);
-	_appSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: 黑体;}"
+	_appSettings->setStyleSheet(
+		"QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: PingFang SC Medium;}"
 		"QLabel{background: transparent; color: rgba(255, 255, 255, 200); font: 15px}"
 		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
-		"QPushButton{width: 100px; font-family: 黑体; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(190, 235, 255); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton{width: 100px; font-family: PingFang SC Medium; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(235, 235, 235); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 
 		"QSlider{background: transparent}"
 		"QSlider::sub-page:horizontal {background: rgb(80, 150, 255); margin-top: 8px; margin-bottom: 8px}"
-		"QSlider::handle:horizontal {background: rgb(193, 204, 208); border: 1px solid rgb(193, 204, 208); width: 5px; height: 5px; border-radius: 2px; margin-top: 6px; margin-bottom: 6px; padding: 0;}"
-		"QPushButton#repairModeControl{ background: rgba(70, 172, 255, 150);; color: rgb(180, 180, 180); font-weight: bold; border: 1px solid}"
-		"QPushButton#repairModeControl:checked{background-color: rgba(70, 172, 255, 190); color: white; border: 1px solid lightblue}"
+		"QSlider::groove:horizontal {background: rgb(193, 204, 208); border: 1px solid rgb(30, 30, 30); border-radius: 2px; margin-top: 6px; margin-bottom: 6px; padding: 0;}"
+		"QSlider::handle:horizontal {margin-top: -3px; margin-bottom: -3px; width: 16px; height: 10px; border-radius: 7px; background-color: rgb(255, 255, 255); }"
+
+		"QPushButton#repairModeControl{background-color: transparent; border-image: url(./Resources/circle-left.png); width: 50px; height: 50px; border-radius: 0; padding: 0; margin: 0 }"
+		"QPushButton#repairModeControl:checked{border-image: url(./Resources/circle-right.png)}"
 	);
 	_chatSettings->setStyleSheet(
-		"QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: 黑体;}"
+		"QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: PingFang SC Medium;}"
 		"QLabel{background: transparent; color: rgba(255, 255, 255, 200); font: 15px}"
 		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QLineEdit::!enabled{background-color: rgba(60, 60, 60, 100); color: grey; border: 1px solid rgba(80, 80, 80, 100)}"
-		"QPushButton{width: 100px;font-family: 黑体; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(190, 235, 255); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton{width: 100px;font-family: PingFang SC Medium; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(235, 235, 235); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
-		"QCheckBox{font: 13.5px;  font-family: 黑体; color: rgba(255, 255, 255, 200);background: transparent;}"
+		"QCheckBox{font: 13.5px;  font-family: PingFang SC Medium; color: rgba(255, 255, 255, 200);background: transparent;}"
 	);
-	_modelSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: 黑体}"
+	_modelSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: PingFang SC Medium}"
 		"QLabel{background: transparent; color: rgba(255 ,255, 255, 200); font: 15px}"
 		"QTreeWidget::item{height: 30px; color: rgba(255, 255, 255, 200)}"
-		"QTreeWidget{outline: none; border: none; color: rgba(255, 255, 255, 245); background-color: rgb(50, 50, 50); font-family: 黑体}"
+		"QTreeWidget{outline: none; border: none; color: rgba(255, 255, 255, 245); background-color: rgb(50, 50, 50); font-family: PingFang SC Medium}"
 		"QTreeWidget::item:selected:active{background-color: rgba(50, 120, 170, 180); color: rgba(255, 255, 255, 245); border: 1px solid rgb(50, 120, 240)}"
 		"QTreeWidget::item:selected:!active{background-color: rgba(50, 120, 170, 90); color: rgba(255, 255, 255, 245); border: 1px solid rgb(50, 120, 240)}"
 		"QTreeWidget::item:hover{background-color: rgb(50, 50, 50); border: none}"
@@ -1054,7 +1127,7 @@ ControlWidget::ControlWidget()
 		"QTextEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
-		"QPushButton{width: 100px; font-family: 黑体; font: 12px; font-weight: 300; border-radius: 7px; font-family: MaoTi; color: rgb(190, 235, 255); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton{width: 100px; font-family: 黑体; font: 12px; font-weight: 300; border-radius: 7px; font-family: MaoTi; color: rgb(235, 235, 235); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
 		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
 		"QComboBox{height: 30px; padding: 1px 18px 1px 3px;}"
 	);

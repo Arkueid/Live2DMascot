@@ -62,6 +62,13 @@ bool LAppDelegate::Initialize(GLWidget* window)
         }
         return GL_FALSE;
     }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GL_TRUE);
+
     _window = window;
     if (_window == NULL)
     {
@@ -72,10 +79,12 @@ bool LAppDelegate::Initialize(GLWidget* window)
         glfwTerminate();
         return GL_FALSE;
     }
+    cout << "OpenGL Version: " << glfwGetVersionString() << endl;
 
     // Windowのコンテキストをカレントに設定
     _window->makeCurrent();
     glfwSwapInterval(1);
+   
 
     if (glewInit() != GLEW_OK) {
         if (DebugLogEnable)
@@ -87,9 +96,9 @@ bool LAppDelegate::Initialize(GLWidget* window)
     }
 
     //テクスチャサンプリング設定
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
     //透過設定
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -103,6 +112,7 @@ bool LAppDelegate::Initialize(GLWidget* window)
 
     // Cubism SDK の初期化
     InitializeCubism();
+
     return GL_TRUE;
 }
 
@@ -250,6 +260,14 @@ GLuint LAppDelegate::CreateShader()
 
     return programId;
 }
+#include <fstream>
+
+void writeLog(const char* log) {
+    printf("Shader compile log: %s\n", log);
+    ofstream f("desktop-live2d.error.log");
+    f << log;
+    f.close();
+}
 
 bool LAppDelegate::CheckShader(GLuint shaderId)
 {
@@ -261,6 +279,7 @@ bool LAppDelegate::CheckShader(GLuint shaderId)
         GLchar* log = reinterpret_cast<GLchar*>(CSM_MALLOC(logLength));
         glGetShaderInfoLog(shaderId, logLength, &logLength, log);
         CubismLogError("Shader compile log: %s", log);
+        writeLog(log);
         CSM_FREE(log);
     }
 
@@ -300,7 +319,8 @@ void LAppDelegate::update()
 
     // 画面の初期化
     glClearColor(0.0f, 0.0f, 0.0f, (LAppConfig::_ShowBackground && LAppConfig::_MouseOn) ? 0.2f : 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearStencil(0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glClearDepth(1.0);
 
 

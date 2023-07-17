@@ -856,7 +856,8 @@ void LAppModel::Draw(CubismMatrix44& matrix)
     matrix.MultiplyByMatrix(_modelMatrix);
 
     GetRenderer<Rendering::CubismRenderer_OpenGLES2>()->SetMvpMatrix(&matrix);
-
+    //开启正片叠底，要在Live2dTextureManager启用相应设置
+    GetRenderer<Rendering::CubismRenderer>()->IsPremultipliedAlpha(true);
     DoDraw();
 }
 /**

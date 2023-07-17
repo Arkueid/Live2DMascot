@@ -118,6 +118,8 @@ void LAppLive2DManager::OnUpdate() const
 {
     int width = LAppDelegate::GetInstance()->GetWindow()->width();
     int height = LAppDelegate::GetInstance()->GetWindow()->height();
+    width = width <= 0 ? 1 : width;  // 等于0角色消失，具体原因暂时没找到（懒
+    height = height <= 0 ? 1 : height; 
 
     csmUint32 modelCount = _models.GetSize();
     for (csmUint32 i = 0; i < modelCount; ++i)
@@ -130,7 +132,7 @@ void LAppLive2DManager::OnUpdate() const
             LAppPal::PrintLog("Failed to model->GetModel().");
             continue;
         }
-
+        model->GetModelMatrix()->Translate(LAppConfig::_CharacterX, LAppConfig::_CharacterY);
         if (model->GetModel()->GetCanvasWidth() > 1.0f && width < height)
         {
             // 横に長いモデルを縦長ウィンドウに表示する際モデルの横サイズでscaleを算出する
@@ -141,16 +143,16 @@ void LAppLive2DManager::OnUpdate() const
         {
             projection.Scale(static_cast<float>(height) / static_cast<float>(width), 1.0f);
         }
-
         // 必要があればここで乗算
         if (_viewMatrix != NULL)
         {
             projection.MultiplyByMatrix(_viewMatrix);
+            
         }
 
         // モデル1体描画前コール
         LAppDelegate::GetInstance()->GetView()->PreModelDraw(*model);
-
+        
         model->Update();
         model->Draw(projection);///< 参照渡しなのでprojectionは変質する
 
@@ -182,7 +184,7 @@ void LAppLive2DManager::ChangeModel(const char* modelPath, const char* modelName
         LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_ViewFrameBuffer;
 #elif defined(USE_MODEL_RENDER_TARGET)
         // 各LAppModelの持つターゲットに描画を行う場合、こちらを選択
-        LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_ModelFrameBuffer;
+        //LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_ModelFrameBuffer;
 #else
         // デフォルトのメインフレームバッファへレンダリングする(通常)
         LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_None;
@@ -198,8 +200,9 @@ void LAppLive2DManager::ChangeModel(const char* modelPath, const char* modelName
         LAppDelegate::GetInstance()->GetView()->SwitchRenderingTarget(useRenderTarget);
 
         // 別レンダリング先を選択した際の背景クリア色
-        float clearColor[3] = { 1.0f, 1.0f, 1.0f };
+        float clearColor[3] = { 0.0f, 0.0f, 0.0f };
         LAppDelegate::GetInstance()->GetView()->SetRenderTargetClearColor(clearColor[0], clearColor[1], clearColor[2]);
+
     }
 }
 
