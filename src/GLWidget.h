@@ -1,5 +1,4 @@
 #pragma once
-#include "BgmListView.h"
 #include "ChatWidget.h"
 #include "ControlWidget.h"
 #include "Dialog.h" 
@@ -9,6 +8,7 @@
 #include <QtWidgets/qaction.h>
 #include <QtWidgets/qmenu.h>
 #include "LAppDefine.hpp"
+#include "PieMenu.h"
 using namespace std;
 
 class GLWidget : public QOpenGLWidget
@@ -33,6 +33,7 @@ private:
 	//BgmListView* _bgmlist = NULL;  //追番列表
 	ConversationWidget* _cvWidget = NULL;  //聊天输入框
 	ControlWidget* _control = NULL;  //设置
+	PieMenu* _pieMenu = NULL;  // 扇形菜单
 	bool _LastShowText;
 	bool _LastNoSound;
 	bool _transparent = false;  //窗体透过
@@ -59,8 +60,8 @@ protected:
 	void mouseDoubleClickEvent(QMouseEvent* e);
 	void keepMouseTrack(bool on);
 	//void setShowBgmList(bool on);
-	int mouseX;
-	int mouseY;
+	int lastX;
+	int lastY;
 	int currentTimerIndex;
 	int runFor = 0;
 private slots:
@@ -72,12 +73,11 @@ private slots:
 	void stayOnTopOnTriggered();
 	void setNoSoundOnTriggered();
 	void setShowTextOnTriggered();
-	//void setShowBgmListOnTriggered();
 	void showSettingsOnTriggered();
 	void setShowBackgroundOnTriggered();
 	void setTransparentBackgroundOnTriggered();
 	void setTransparentCharacterOnTriggered();
-
+	void pieMenuOnClicked(uint8_t btni);
 };
 
 

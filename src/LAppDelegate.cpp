@@ -183,12 +183,12 @@ void LAppDelegate::OnMouseCallBack(Qt::MouseButton button, int action)
         return;
     }
 
-    if (1 == action)
+    if (1 == action)  // 鼠标点击
     {
         _captured = true;
         _view->OnTouchesBegan(_mouseX, _mouseY);
     }
-    else if (GLFW_RELEASE == action)
+    else if (0 == action)  // 鼠标释放
     {
         if (_captured)
         {

@@ -7,7 +7,6 @@
 #include "AudioUtils.h"
 #include <string.h>
 
-#pragma region ChatHistoryViewItem
 ChatHistoryItemView::ChatHistoryItemView(const char* character, const char* text, const char* soundPath) {
 	
 	this->character = new QLabel(QString::fromLocal8Bit("¡¾").append(character).append(QString::fromLocal8Bit("¡¿")).toUtf8());
@@ -51,10 +50,7 @@ ChatHistoryItemView::ChatHistoryItemView(const char* character, const char* text
 ChatHistoryItemView::~ChatHistoryItemView() {
 
 }
-#pragma endregion
 
-
-#pragma region ChatHistoryView
 ChatHistoryView::ChatHistoryView() {
 	setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
 	setAttribute(Qt::WA_TranslucentBackground);
@@ -89,66 +85,21 @@ ChatHistoryView::~ChatHistoryView() {
 
 void ChatHistoryView::mousePressEvent(QMouseEvent* e)
 {
-	if (e->button() == Qt::RightButton)
-	{
-		_mouseX = e->pos().x();
-		_mouseY = e->pos().y();
-	}
+	_mouseX = e->pos().x();
+	_mouseY = e->pos().y();
 }
 
 void ChatHistoryView::mouseMoveEvent(QMouseEvent* e)
 {
-	if (e->buttons() == Qt::RightButton)
+	if (e->buttons() == Qt::LeftButton)
 	{
-		move(x() + e->pos().x() - _mouseX, y() + e->pos().y() - _mouseY);
+		move(QCursor::pos().x() - _mouseX, QCursor::pos().y() - _mouseY);
 	}
 }
 
-void ChatHistoryView::enterEvent(QEvent* e)
-{
-	_currentAnimation->stop();
-	QDesktopWidget* screen = QApplication::desktop();
-	if (this->y() <= 0)
-	{
-		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(x(), 0, width(), height()));
-		_currentAnimation->start();
-	}
-	else if (this->x() + this->width() >= screen->size().width())
-	{
-		_currentAnimation->setStartValue(QRect(screen->width() - 5, y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(screen->width() - width(), y(), width(), height()));
-		_currentAnimation->start();
-	}
-	else if (this->x() <= 0)
-	{
-		_currentAnimation->setStartValue(QRect(-width() + 5, y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(0, y(), width(), height()));
-		_currentAnimation->start();
-	}
-}
-
-void ChatHistoryView::leaveEvent(QEvent* e)
-{
-	_currentAnimation->stop();
-	QDesktopWidget* screen = QApplication::desktop();
-	if (this->y() <= 0)
-	{
-		_currentAnimation->setStartValue(QRect(x(), 0, width(), height()));
-		_currentAnimation->setEndValue(QRect(x(), -height() + 5, width(), height()));
-		_currentAnimation->start();
-	}
-	else if (this->x() + this->width() >= screen->size().width())
-	{
-		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(screen->width() - 5, y(), width(), height()));
-		_currentAnimation->start();
-	}
-	else if (this->x() <= 0)
-	{
-		_currentAnimation->setStartValue(QRect(x(), y(), width(), height()));
-		_currentAnimation->setEndValue(QRect(-width() + 5, y(), width(), height()));
-		_currentAnimation->start();
+void ChatHistoryView::mouseDoubleClickEvent(QMouseEvent* e) {
+	if (e->button() == Qt::LeftButton) {
+		hide();
 	}
 }
 
@@ -170,5 +121,4 @@ void ChatHistoryView::Insert(const char* character, const char* text, const char
 	view->setItemWidget(item, itemView);
 	view->setCurrentRow(view->count() - 1);
 }
-#pragma endregion
 

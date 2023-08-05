@@ -85,13 +85,14 @@ void Dialog::paintEvent(QPaintEvent* e)
 	int boxWidth = _fontMetrics->width(_text) > LAppConfig::_DialogMaxWidth ? LAppConfig::_DialogMaxWidth : _fontMetrics->width(_text);
 	boxWidth += (2 * _xBorder);
 	int boxHeight = (_fontMetrics->width(_text) / LAppConfig::_DialogMaxWidth + 1) * (_fontMetrics->descent() + _fontMetrics->leading() + _fontMetrics->ascent()) + 2 * _yBorder;
-	resize(boxWidth, boxHeight);
+	resize(boxWidth+20, boxHeight+20);
 	AttachToCharacter();
 	QPainter painter(this);
 	QPainterPath path;
-	path.addRect(0, 0, boxWidth, boxHeight);
-	painter.fillPath(path, QColor(LAppConfig::_DialogBackgroundColor.c_str()));
+	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+	path.addRoundRect(10, 10, boxWidth, boxHeight, 1);
+	painter.fillPath(path, Qt::black);
 	painter.setFont(_font);
-	painter.setPen(LAppConfig::_DialogFontColor.c_str());
-	painter.drawText(_xBorder, _yBorder, boxWidth - 2 * _xBorder, boxHeight - 2*_yBorder, Qt::TextWordWrap, _text);
+	painter.setPen(Qt::white);
+	painter.drawText(10+_xBorder, 10+_yBorder, boxWidth - 2 * _xBorder, boxHeight - 2 * _yBorder, Qt::TextWordWrap, _text);
 }

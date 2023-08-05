@@ -30,11 +30,10 @@ public:
 	ChatHistoryView();
 	~ChatHistoryView();
 	void Insert(const char* character, const char* text, const char* soundPath);
-	void enterEvent(QEvent* e);
-	void leaveEvent(QEvent* e);
 	void paintEvent(QPaintEvent* e);
 	void mousePressEvent(QMouseEvent* e);
 	void mouseMoveEvent(QMouseEvent* e);
+	void mouseDoubleClickEvent(QMouseEvent* e);
 private:
 	QListWidget* view;  //the area showing chat history
 	QPropertyAnimation* _currentAnimation;

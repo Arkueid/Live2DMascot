@@ -60,7 +60,7 @@
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
 		"ModelName" : "Hiyori",
-		"MotionInterval" : 5.0
+		"MotionInterval" : 10.0
 	},
 	"UserSettings" : 
 	{
@@ -95,8 +95,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1280,
-			"Y" : 494
+			"X" : 951,
+			"Y" : 343
 		},
 		"Width" : 300
 	}

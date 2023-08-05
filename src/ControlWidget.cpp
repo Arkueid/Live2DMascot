@@ -246,7 +246,7 @@ AppSettings::AppSettings(QWidget* p)
 
 	openFile = new QPushButton(QString::fromLocal8Bit("打开"));
 	chooseDir = new QPushButton(QString::fromLocal8Bit("打开"));
-	apply = new QPushButton(QString::fromLocal8Bit("应用"));
+	apply = new QPushButton(QString::fromLocal8Bit("保存"));
 	reset = new QPushButton(QString::fromLocal8Bit("重置"));
 
 	grid = new QGridLayout();
@@ -325,18 +325,6 @@ AppSettings::AppSettings(QWidget* p)
 	vbox->addLayout(line8);
 	setLayout(vbox);
 
-/*
-
-	grid->addWidget(lbl_volume, 8, 0, 1, 1);
-	grid->addWidget(volumeSlider, 8, 1, 1, 2);
-	grid->addWidget(lbl_sliderVal, 8, 3, 1, 1);
-	grid->addWidget(lbl_repairMode, 8, 4, 1, 1);
-	grid->addWidget(repairModeControl, 8, 5, 1, 1);
-	grid->addWidget(apply, 9, 8, 1, 1, 0);
-	grid->addWidget(reset, 9, 9, 1, 1, 0);*/
-	//setLayout(grid);
-	
-
 	connect(openFile, SIGNAL(clicked()), SLOT(OpenFile()));
 	connect(chooseDir, SIGNAL(clicked()), SLOT(OpenSourceDir()));
 	connect(volumeSlider, SIGNAL(valueChanged(int)), SLOT(SetVolume()));
@@ -353,7 +341,7 @@ void AppSettings::OpenFile()
 }
 
 void AppSettings::SetRepairMode() {
-	
+	_RepairModeOn = repairModeControl->isChecked();
 }
 
 void AppSettings::SetVolume() {
@@ -522,6 +510,7 @@ ModelSettings::ModelSettings(QWidget* p)
 	_motionGroups->setStyleSheet(
 		QString(
 			"QTreeWidget::branch::open:has-children{border-image: url(").append(_ModelDir.c_str()).append("/open.png); }"
+			"QTreeWidget::branch:hover{color: white}"
 			"QScrollBar::handle:vertical{background: #AAA;}"
 			"QScrollBar::handle:vertical:hover{background: #888;}"
 			"QScrollBar:vertical{width: 8px;background: #DDD;border: none}"

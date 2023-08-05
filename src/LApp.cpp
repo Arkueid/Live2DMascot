@@ -213,8 +213,8 @@ void LApp::LoadConfig() {
 
     LAppConfig::_DialogFontSize = !config["Dialog"]["FontSize"].isNull() ? config["Dialog"]["FontSize"].asInt() : 10;
     LAppConfig::_DialogFontFamily = !config["Dialog"]["FontFamily"].isNull() ? config["Dialog"]["FontFamily"].asCString() : "Comic Sans MS";
-    LAppConfig::_DialogFontColor = !config["Dialog"]["FontColor"].isNull() ? config["Dialog"]["FontColor"].asCString() : "white";
-    LAppConfig::_DialogBackgroundColor = !config["Dialog"]["BackgroundColor"].isNull() ? config["Dialog"]["BackgroundColor"].asCString() : "rgba(0, 0, 0, 200)";
+    //LAppConfig::_DialogFontColor = !config["Dialog"]["FontColor"].isNull() ? config["Dialog"]["FontColor"].asCString() : "white"; 
+    //LAppConfig::_DialogBackgroundColor = !config["Dialog"]["BackgroundColor"].isNull() ? config["Dialog"]["BackgroundColor"].asCString() : "rgba(0, 0, 0, 200)";
     LAppConfig::_DialogYOffset = !config["Dialog"]["YOffset"].isNull() ? config["Dialog"]["YOffset"].asInt() : -10;
     LAppConfig::_DialogMaxWidth = !config["Dialog"]["MaxWidth"].isNull() ? config["Dialog"]["MaxWidth"].asInt() : 370;
     LAppConfig::_DialogXPadding = !config["Dialog"]["XPadding"].isNull() ? config["Dialog"]["XPadding"].asInt() : 10;
@@ -297,8 +297,8 @@ void LApp::SaveConfig()
 
     config["Dialog"]["FontSize"] = LAppConfig::_DialogFontSize;
     config["Dialog"]["FontFamily"] = LAppConfig::_DialogFontFamily;
-    config["Dialog"]["FontColor"] = LAppConfig::_DialogFontColor;
-    config["Dialog"]["BackgroundColor"] = LAppConfig::_DialogBackgroundColor;
+    //config["Dialog"]["FontColor"] = LAppConfig::_DialogFontColor;
+    //config["Dialog"]["BackgroundColor"] = LAppConfig::_DialogBackgroundColor;
     config["Dialog"]["YOffset"] = LAppConfig::_DialogYOffset;
     config["Dialog"]["MaxWdith"] = LAppConfig::_DialogMaxWidth;
     config["Dialog"]["XPadding"] = LAppConfig::_DialogXPadding;

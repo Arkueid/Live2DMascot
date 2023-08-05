@@ -138,9 +138,9 @@ void ConversationWidget::mousePressEvent(QMouseEvent* e)
 
 void ConversationWidget::mouseMoveEvent(QMouseEvent* e)
 {
-	if (e->buttons() == Qt::RightButton)
+	if (e->buttons() == Qt::LeftButton)
 	{
-		move(x() + e->pos().x() - mouseX, y() + e->pos().y() - mouseY);
+		move(QCursor::pos().x() - mouseX, QCursor::pos().y() - mouseY);
 	}
 }
 

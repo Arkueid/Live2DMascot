@@ -39,8 +39,8 @@ GLWidget::GLWidget()
 	//鼠标显示可交互
 	setCursor(QCursor(Qt::PointingHandCursor));
 	//记录鼠标位置属性
-	mouseX = 0;
-	mouseY = 0;
+	lastX = 0;
+	lastY = 0;
 
 	currentTimerIndex = -1;
 	_LastShowText = true;
@@ -127,35 +127,39 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 void GLWidget::mousePressEvent(QMouseEvent* e)
 {
+
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->button(), 1);
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
-
-	mouseX = e->pos().x();
-	mouseY = e->pos().y();
+	lastX = e->pos().x();  // mouse's relative coordinate to the character win
+	lastY = e->pos().y();
 	_dialog->raise();
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent* e)
 {
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y()); //解除鼠标追踪后仍可以拖动视线
-	if (e->buttons() == Qt::RightButton)
+	if (e->buttons() == Qt::LeftButton)
 	{
-		move(x() + e->pos().x() - mouseX, y() + e->pos().y() - mouseY);
+		// mouse's absolute coordinate - mouse's relative coordinate = character win's absolute coordinate
+		move(QCursor::pos().x() - lastX, QCursor::pos().y() - lastY);
 		_dialog->AttachToCharacter();
 	}
 }
 
 void GLWidget::mouseDoubleClickEvent(QMouseEvent* e)
 {
-	if (e->button() == Qt::RightButton) {
+	if (e->button() == Qt::LeftButton) {
 		_cvWidget->getInput();
 	}
 }
 
 void GLWidget::mouseReleaseEvent(QMouseEvent* e)
-{
+{  
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->button(), 0);
 	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y());
+	if (e->button() == Qt::RightButton) {
+		_pieMenu->pop(this);
+	}
 }
 
 void GLWidget::keepMouseTrack(bool on)
@@ -407,21 +411,32 @@ void GLWidget::setupUI()
 	for (const QAction* action : rightMenu->actions()) {
 		connect(action, &QAction::triggered, this, &GLWidget::saveConfig);
 	}
-
+	 
 	_dialog = new Dialog();
-
-	//_bgmlist = new BgmListView();
 
 	_cvWidget = new ConversationWidget();
 
 	_control = new ControlWidget();
 
-	//_bgmlist->move(LAppConfig::_BgmListLastPosX, LAppConfig::_BgmListLastPosY);
+	_pieMenu = new PieMenu();
 
-	//QDesktopWidget* screen = LApp::GetInstance()->GetApp()->desktop();
-	/*if (LAppConfig::_BgmListLastPosY <= 0) _bgmlist->move(LAppConfig::_BgmListLastPosX, 0);
-	else if (LAppConfig::_BgmListLastPosX <= 0) _bgmlist->move(0, LAppConfig::_BgmListLastPosY);
-	else if (LAppConfig::_BgmListLastPosX >= screen->width() - 5) _bgmlist->move(screen->width() - 5, LAppConfig::_BgmListLastPosY);*/
+	_pieMenu->setPieButtonIconSize(32);
+
+	_pieMenu->setAlternateColors(true);
+
+	_pieMenu->setButtonIcon(0, QString::fromStdString(LAppConfig::_ModelDir).append("/chat.png"));
+
+	_pieMenu->setButtonIcon(1, QString::fromStdString(LAppConfig::_ModelDir).append("/settings.png"));
+
+	_pieMenu->setButtonIcon(2, QString::fromStdString(LAppConfig::_ModelDir).append("/quit.png"));
+
+	_pieMenu->setButtonIcon(3, QString::fromStdString(LAppConfig::_ModelDir).append("/hide.png"));
+
+	_pieMenu->setCloseButtonIcon(QIcon(QString::fromStdString(LAppConfig::_ModelDir).append("/close.png")));
+
+	_pieMenu->setPinButtonIcon(QIcon(QString::fromStdString(LAppConfig::_ModelDir).append("/pin.png")));
+
+	connect(_pieMenu, SIGNAL(buttonClicked(uint8_t)), SLOT(pieMenuOnClicked(uint8_t)));
 }
 
 void GLWidget::LoadConfig()
@@ -497,5 +512,25 @@ void GLWidget::setTransparentCharacterOnTriggered()
 	else {
 		LAppConfig::_TransparentCharacter = true;
 		act_setTransparentCharacter->setChecked(true);
+	}
+}
+
+void GLWidget::pieMenuOnClicked(uint8_t btni) {
+	switch (btni)
+	{
+	case 0:
+		_cvWidget->getInput();
+		break;
+	case 1:
+		_control->Pop();
+		break;
+	case 2:
+		this->quitOnTriggered();
+		break;
+	case 3:
+		this->hideOnTriggered();
+		break;
+	default:
+		break;
 	}
 }
