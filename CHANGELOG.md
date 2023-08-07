@@ -9,6 +9,9 @@
 * 源代码由 GBK 更改为 UTF-8
 * 自定义文本聊天和语音聊天统一用 json 格式进行传输，请求类型为 POST，参见[自定义聊天服务器模板](dev-server/dev-server.py)
 
+***add***
+* 添加随机播放内置文本，数据源一言：https://github.com/hitokoto-osc/sentences-bundle
+
 ***fix***
 * 历史记录中播放音频无效
 * 自定义语音聊天开启后再次启动程序开启无效

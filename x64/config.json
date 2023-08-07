@@ -14,7 +14,7 @@
 		{
 			"CustomVoiceChat" : false,
 			"HostPort" : "http://127.0.0.1:5000",
-			"On" : true,
+			"On" : false,
 			"ReadTimeOut" : 10,
 			"Route" : "/text",
 			"VoiceChatOn" : true,
@@ -96,8 +96,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 553,
-			"Y" : 407
+			"X" : 1224,
+			"Y" : 467
 		},
 		"Width" : 300
 	}

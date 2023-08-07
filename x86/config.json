@@ -17,6 +17,7 @@
 			"On" : false,
 			"ReadTimeOut" : 10,
 			"Route" : "/chat",
+			"VoiceChatOn" : false,
 			"VoiceChatRoute" : "/voice"
 		},
 		"Mlyai" : 
