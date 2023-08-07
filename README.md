@@ -32,7 +32,7 @@ Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://ww
 
 * ### 自定义聊天服务器接口（可在设置页面更改）
   
-	详细见[server模板](https://github.com/Arkueid/Live2DMascot/blob/develop/testserver/server.py)
+	详细见[自定义聊天服务器模板](dev-server/dev-server.py)
 
 	动作组 **Chat**，调用茉莉云或者自定义聊天接口时触发的动作。
 
