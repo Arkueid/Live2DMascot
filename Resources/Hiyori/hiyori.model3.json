@@ -12,7 +12,7 @@
 					"FadeOutTime" : 0.5,
 					"File" : "motions/Hiyori_m03.motion3.json",
 					"Sound" : "sounds/Hiyori.jp.13.wav",
-					"Text" : "下午好！怎么样，怎么样，有好好午睡吗？1"
+					"Text" : "下午好！怎么样，怎么样，有好好午睡吗？"
 				},
 				{
 					"FadeInTime" : 0.5,

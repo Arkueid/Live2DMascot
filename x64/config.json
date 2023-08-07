@@ -13,11 +13,12 @@
 		"CustomChatServer" : 
 		{
 			"CustomVoiceChat" : false,
-			"HostPort" : "",
-			"On" : false,
+			"HostPort" : "http://127.0.0.1:5000",
+			"On" : true,
 			"ReadTimeOut" : 10,
-			"Route" : "",
-			"VoiceChatRoute" : ""
+			"Route" : "/text",
+			"VoiceChatOn" : true,
+			"VoiceChatRoute" : "/voice"
 		},
 		"Mlyai" : 
 		{
@@ -75,7 +76,7 @@
 		"ShowBgmList" : true,
 		"ShowText" : true,
 		"SoundVolume" : 1.0,
-		"StayOnTop" : false,
+		"StayOnTop" : true,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
@@ -95,8 +96,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 951,
-			"Y" : 343
+			"X" : 553,
+			"Y" : 407
 		},
 		"Width" : 300
 	}
