@@ -4,7 +4,6 @@
 #include <QtCore/qdir.h>
 
 
-
 using namespace std;
 using namespace httplib;
 
@@ -13,66 +12,13 @@ void Log(const char* handler, const char* msg)
 	if (LAppDefine::DebugLogEnable) printf("[APP]%s: %s\n", handler, msg);
 }
 
-namespace BgmListUtils {
-
-	string _BgmListJsonPath = "bgmlist.json";  //∑¨æÁ¡–±Ì¬∑æ∂
-
-	//∏˘æ›µ±«∞œµÕ≥ ±º‰≈–∂œ «∑Ò”¶∏√∏¸–¬
-	bool ShouldUpdate()
-	{
-		time_t t;
-		time(&t);
-		struct tm* now = localtime(&t);
-		int weeks[7] = { 6, 0, 1, 2, 3, 4, 5};
-		_BgmListJsonPath = string("bangumi.").append(to_string(now->tm_year + 1900)).append(to_string(now->tm_yday - weeks[now->tm_wday])).append(".json");
-		if (_access(_BgmListJsonPath.c_str(), 0)==-1) return true;
-		return false;
-	}
-
-	bool UpdateBgmList()
-	{
-		Client cli("https://api.bgm.tv");
-		Json::Reader reader;
-		Json::Value json;
-		Result rsp = cli.Get("/calendar");
-		if (rsp.error() != Error::Success) return false;
-		reader.parse(rsp.value().body, json);
-		cli.stop();
-		ofstream ofs(_BgmListJsonPath);
-		ofs << json;
-		ofs.close();
-		return true;
-	}
-
-	void CheckUpdate()
-	{
-		if (ShouldUpdate())
-		{
-			try {
-				Log("[BgmList]Update", "’˝‘⁄¿≠»°∑¨æÁ¡–±Ì...");
-				bool ret = UpdateBgmList();
-				if (ret)
-					Log("[BgmList]Update", string("∑¨æÁ¡–±Ì∏¸–¬ÕÍ±œ: ").append(_BgmListJsonPath).c_str());
-				else Log("[BgmList]Update", "∑¨æÁ¡–±Ì∏¸–¬ ß∞‹!");
-			}
-			catch (...)
-			{
-				Log("[BgmList]Exception", "ŒﬁÕ¯¬Á¡¨Ω”£¨∏¸–¬“—»°œ˚!");
-			}
-		}
-		else {
-			Log("[BgmList]Update", "∑¨æÁ¡–±Ì“— «◊Ó–¬£¨Œﬁ–Ë∏¸–¬£°");
-		}
-	}
-}
-
 namespace HolidayUtils
 {
 	string _HolidayJsonPath = "year.json";
 	const bool _DebugLogEnable = true;
 	bool GetHolidayJson()
 	{
-		Log("[Holiday]Update", "’˝‘⁄¿≠»°Ω⁄»’¡–±Ì...");
+		Log("[Holiday]Update", "ËäÇÊó•ÂàóË°®Êõ¥Êñ∞‰∏≠...");
 		Client cli("https://timor.tech");
 		Json::Value json;
 		Json::Reader reader;
@@ -103,16 +49,16 @@ namespace HolidayUtils
 			try {
 				bool ret = GetHolidayJson();
 				if (ret)
-					Log("[Holiday]Update", string("Ω⁄»’¡–±Ì∏¸–¬ÕÍ±œ: ").append(_HolidayJsonPath).c_str());
-				else Log("[Holiday]Exception", "Ω⁄»’¡–±Ì∏¸–¬ ß∞‹!");
+					Log("[Holiday]Update", string("ÂàóË°®Â∑≤Êõ¥Êñ∞: ").append(_HolidayJsonPath).c_str());
+				else Log("[Holiday]Exception", "Ëé∑ÂèñÂ§±Ë¥•!");
 			}
 			catch (...)
 			{
-				Log("[Holiday]Exception", "ŒﬁÕ¯¬Á¡¨Ω”£¨∏¸–¬“—»°œ˚!");
+				Log("[Holiday]Exception", "ÁΩëÁªúÈîôËØØ!");
 			}
 		}
 		else {
-			Log("[Holiday]Update", "Ω⁄»’¡–±Ì“— «◊Ó–¬£¨Œﬁ–Ë∏¸–¬£°");
+			Log("[Holiday]Update", "Â∑≤ÊòØÊúÄÊñ∞");
 		}
 	}
 
@@ -135,7 +81,6 @@ namespace HolidayUtils
 
 namespace ChatAPI {
 
-	//‹‘¿Ú‘∆api
 	void AskMlyai(const string& msg, string& resText)
 	{
 		Client cli("https://api.mlyai.com");
@@ -146,14 +91,14 @@ namespace ChatAPI {
 		try {
 			Result res = cli.Post("/reply", { {"Api-Key", LAppConfig::_ApiKey}, {"Api-Secret", LAppConfig::_ApiSecret} }, data.toStyledString().c_str(), "application/json; charset=UTF-8");
 			if (res.error() != Error::Success) {
-				resText = QString::fromLocal8Bit("Õ¯¬Á¡¨Ω””–ŒÛ≈∂~").toStdString();
+				resText = QString("‰ªÄ‰πàÈÉΩÊ≤°ËØ¥~").toStdString();
 				return;
 			}
 			Json::Reader reader;
 			Json::Value json;
 			reader.parse(res.value().body, json);
 			QTextCodec* codec = QTextCodec::codecForName("gbk");
-			Log("[ChatAI]Response Msg", codec->fromUnicode(json["message"].asCString()));
+			Log("[ChatAI]Response Msg", json["message"].asCString());
 			if (strcmp(json["code"].asCString(), "00000") == 0)
 				resText = QString::fromUtf8(json["data"][0]["content"].asCString()).toStdString();
 			else {
@@ -162,65 +107,71 @@ namespace ChatAPI {
 		}
 		catch (...)
 		{
-			resText = QString::fromLocal8Bit("Õ¯¬Á¡¨Ω””–ŒÛ≈∂~").toStdString();
+			resText = QString("‰ªÄ‰πàÈÉΩÊ≤°ËØ¥~").toStdString();
 		}
 	}
 
-	//◊‘∂®“Â¡ƒÃÏ∑˛ŒÒ∆˜Ω”ø⁄
+	//Ëá™ÂÆö‰πâËÅäÂ§©
 	void Chat(const string& text, string& resText, string& soundPath)
 	{
 		Client cli(LAppConfig::_CustomChatServerHostPort);
-		Headers headers = {
-			{"User-Agent", "DesktopLive2D/0.3.0(cpp; cpp-httplib; OpenSSL)"},
-			{"Accept-Charset", "UTF-8"},
-			{"Accept", "audio/wav"}
+		
+		httplib::Headers headers = {
+			{"User-Agent", "DesktopLive2D/(cpp; cpp-httplib; OpenSSL)"},
+			{"Accept", "application/json"}
 		};
-		Params params = {
-			{"Text", text}
-		};
-		string body;
-		//◊Ó≥§¡¨Ω” ±º‰
+
+		Json::Value json;
+		json["Text"] = text;
+		//ÊúÄÈïøËøûÊé•Êó∂Èó¥
 		cli.set_connection_timeout(LAppConfig::_CustomChatServerReadTimeOut);
-		//◊Ó≥§µ»¥˝œÏ”¶ ±º‰
+		//ÊúÄÈïøÁ≠âÂæÖÊó∂Èó¥
 		cli.set_read_timeout(LAppConfig::_CustomChatServerReadTimeOut);
 		try {
-			auto res = cli.Get(
-				LAppConfig::_CustomChatServerRoute, params, headers,
-				[&body](const char* data, size_t data_length)->bool
-				{
-					body.append(data, data_length);
-					return true;
-				}
+			Result rsp = cli.Post(
+				LAppConfig::_CustomChatServerRoute, headers,
+				json.toStyledString(), "application/json"
 			);
-			if (res.error() != Error::Success)
+			if (rsp.error() != Error::Success)
 			{
-				Log("[ChatApi]Exception", "«Î«Û ß∞‹!");
-				resText = QString::fromLocal8Bit("Œﬁ∑®¡¨Ω”µΩ∑˛ŒÒ∆˜!").toStdString();
+				Log("[ChatApi]Exception", "Ëé∑ÂèñÂ§±Ë¥•!");
+				resText = QString("Ëé∑ÂèñÂ§±Ë¥•!").toStdString();
 				soundPath.clear();
 				return;
-			};
-			QString filename = QDateTime::currentDateTime().toString("yyyyMMddhhmmss").append(".wav");
-			soundPath = QString::fromUtf8(LAppConfig::_ChatSavePath.c_str()).append("/").append(filename).toLocal8Bit().constData();
-			if (!body.empty())
-			{
-				ofstream ofs(soundPath.c_str(), ios::binary);
-				ofs << body;
-				ofs.close();
 			}
-			else {
+
+			Json::Value res;
+			Json::Reader reader;
+			reader.parse(rsp.value().body, res);
+
+			if (res["Text"].isNull()) {
+				resText = QString("‰ªÄ‰πàÈÉΩÊ≤°ËØ¥~").toUtf8().constData();
+			}
+			else resText = res["Text"].asCString();
+
+			if (res["Sound"].isNull()) {
 				soundPath.clear();
 			}
-			resText = res.value().get_header_value("Text");
+			else {
+				QString filename = QDateTime::currentDateTime().toString("yyyyMMddhhmmss").append(".wav");
+				soundPath = QString::fromUtf8(LAppConfig::_ChatSavePath.c_str()).append("/").append(filename).toLocal8Bit().constData();
+				ofstream ofs(soundPath.c_str(), ios::binary);
+				if (ofs.is_open()) {
+					ofs << QByteArray::fromBase64(res["Sound"].asCString()).toStdString();
+					ofs.close();
+				}
+				ofs.close();
+			}
 		}
 		catch (...)
 		{
-			resText = QString::fromLocal8Bit("Õ¯¬Á¡¨Ω”¥ÌŒÛ£¨«ÎºÏ≤ÈÕ¯¬Á◊¥øˆ!").toStdString();
+			resText = QString("Ëé∑ÂèñÂ§±Ë¥•ÔºåËØ∑Ê£ÄÊü•ÁΩëÁªú!").toStdString();
 			soundPath.clear();
 		}
 		
 	}
 
-	void VoiceChat(const char* filePath, string& text, string& soundPath) {
+	void VoiceChat(const char* filePath, string& asr, string& text, string& soundPath) {
 		QFile voiceFile;
 		voiceFile.setFileName(filePath);
 		voiceFile.open(QIODevice::ReadOnly);
@@ -230,7 +181,7 @@ namespace ChatAPI {
 #ifdef CONSOLE_FLAG
 			printf("[VoiceInput]File opening error: %s\n", filePath);
 #endif // CONSOLE_FLAG
-			text = QString::fromLocal8Bit("ƒ„Àµ…∂?").toUtf8().constData();
+			text = QString("Ê≤°Âê¨Âà∞~Ê≤°Âê¨Âà∞~").toUtf8().constData();
 			soundPath = "";
 			return;
 		}
@@ -239,7 +190,7 @@ namespace ChatAPI {
 		json["Voice"] = bytes.toBase64().toStdString();
 
 		httplib::Headers headers = {
-			{"User-Agent", "DesktopLive2D/0.3.0(cpp; cpp-httplib; OpenSSL)"},
+			{"User-Agent", "DesktopLive2D/(cpp; cpp-httplib; OpenSSL)"},
 			{"Accept", "application/json"}
 		};
 		Client client(LAppConfig::_CustomChatServerHostPort);
@@ -253,7 +204,7 @@ namespace ChatAPI {
 #ifdef CONSOLE_FLAG
 			printf("[VoiceInput]Resopnse receiving error\n");
 #endif // CONSOLE_FLAG
-			text = QString::fromLocal8Bit("√ª”– ’µΩªÿ∏¥~").toUtf8().constData();
+			text = QString("‰ªÄ‰πàÈÉΩÊ≤°ËØ¥~").toUtf8().constData();
 			soundPath = "";
 			return;
 		}
@@ -263,10 +214,19 @@ namespace ChatAPI {
 		Json::Value res;
 		Json::Reader reader;
 		reader.parse(rsp.value().body, res);
-		printf("%s\n", res.toStyledString().c_str());
+		if (res["ASR"].isNull()) {
+			asr = QString("ËØÜÂà´Â§±Ë¥•~").toUtf8().toStdString();
+		}
+		else {
+			asr = res["ASR"].asCString();
+#ifdef CONSOLE_FLAG
+			printf("[VoiceInput]ASR result: %s\n", asr.c_str());
+#endif // CONSOLE_FLAG
+		}
 		if (res["Text"].isNull()) {
-			text = QString::fromLocal8Bit(" ≤√¥“≤√ªÃ˝µΩ~").toUtf8().constData();
-		}else text = res["Text"].asCString();
+			text = QString("‰ªÄ‰πàÈÉΩÊ≤°ËØ¥~").toUtf8().toStdString();
+		}
+		else text = res["Text"].asCString();
 		if (!res["Sound"].isNull()) {
 			QString filename = QDateTime::currentDateTime().toString("yyyyMMddhhmmss").append(".wav");
 			soundPath = QString::fromUtf8(LAppConfig::_ChatSavePath.c_str()).append("/").append(filename).toLocal8Bit().constData();
@@ -284,7 +244,7 @@ namespace ChatAPI {
 
 
 /**
-* @brief VoiceInputUtils ”Ô“Ù ‰»Î
+* @brief VoiceInputUtils 
 */
 namespace {
 	//token
@@ -368,7 +328,7 @@ bool VoiceInputUtils::HasRecord() {
 }
 
 /**
-* @brief ∑¢ÀÕ¬º“ÙŒƒº˛µΩ”Ô“Ù ∂±∑˛ŒÒ∆˜
+* @brief ËØ≠Èü≥Ê£ÄÊµã
 */
 const char* VoiceInputUtils::DetectSpeech(const char* filePath) {
 #ifdef CONSOLE_FLAG
@@ -402,7 +362,7 @@ const char* VoiceInputUtils::DetectSpeech(const char* filePath) {
 #ifdef CONSOLE_FLAG
 		printf("[VoiceInput]Response receiving error\n");
 #endif // CONSOLE_FLAG
-		return QString::fromLocal8Bit("Œﬁ∑®Ω”»Î∞Ÿ∂»”Ô“Ù ∂±∑˛ŒÒ").toUtf8().constData();
+		return QString("Ëé∑ÂèñÂ§±Ë¥•ÔºåËØ∑Ê£ÄÊü•ÁΩëÁªú~").toUtf8().constData();
 	}
 	Json::Value res;
 	Json::Reader reader;
@@ -413,16 +373,16 @@ const char* VoiceInputUtils::DetectSpeech(const char* filePath) {
 		printf("[VoiceInput]Response: %s", rsp.value().body.c_str());
 #endif // CONSOLE_FLAG
 
-		return QString::fromLocal8Bit("”Ô“Ù ∂± ß∞‹").toUtf8().constData();
+		return QString("ËØ≠Èü≥ËØÜÂà´ÈîôËØØ~").toUtf8().constData();
 	}
 #ifdef CONSOLE_FLAG
-	printf("[VoiceInput]Speech recognition (%llds): %s\n", time(0) - start, QString::fromUtf8(res["result"][0].asCString()).toLocal8Bit().constData());
+	printf("[VoiceInput]Speech recognition (%llds): %s\n", time(0) - start, QString::fromUtf8(res["result"][0].asCString()).toStdString().c_str());
 #endif // CONSOLE_FLAG
 	return res["result"][0].asCString();
 }
 
 /**
-* @brief ∑¢ÀÕÕ¯¬Á«Î«ÛªÒ»°token
+* @brief Êõ¥Êñ∞token
 */
 void VoiceInputUtils::GetToken() {
 	httplib::Client client("https://aip.baidubce.com");
@@ -473,7 +433,7 @@ void VoiceInputUtils::GetToken() {
 
 
 /**
-* @brief ºÏ≤È «∑Ò–Ë“™∏¸–¬token
+* @brief Ê£ÄÊü•tokenÊòØÂê¶ÈúÄË¶ÅÊõ¥Êñ∞
 */
 bool VoiceInputUtils::ShouldUpdateToken() {
 	std::ifstream ifs("baidu.speech.token.json");
@@ -491,7 +451,7 @@ bool VoiceInputUtils::ShouldUpdateToken() {
 }
 
 /**
-* @brief ºÏ≤‚±æµÿtoken «∑Òπ˝∆⁄£¨π˝∆⁄æÕ∏¸–¬
+* @brief Ê£ÄÊü•Âπ∂Êõ¥Êñ∞
 */
 void VoiceInputUtils::CheckUpdate() {
 	if (ShouldUpdateToken())
@@ -507,7 +467,7 @@ void VoiceInputUtils::CheckUpdate() {
 
 
 /**
-* @brief ∂¡»°±æµÿ¥¢¥Êµƒ∞Ÿ∂»”Ô“Ù ∂±token
+* @brief Ëé∑ÂèñÊú¨Âú∞token
 */
 void VoiceInputUtils::GetLocalToken() {
 	std::ifstream ifs("baidu.speech.token.json");

@@ -11,6 +11,5 @@ int main(int argc, char* argv[])
 {
     LApp::GetInstance()->Initialize(argc, argv);
     LApp::GetInstance()->Run();
-
     return 0;
 }

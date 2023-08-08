@@ -1,6 +1,3 @@
-/*╫ги╚нд╠╬©Р
-*/
-
 #include "dialog.h"
 #include "LApp.h"
 #include <QtCore/qtextcodec.h>

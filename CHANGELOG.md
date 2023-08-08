@@ -1,5 +1,12 @@
 # Changelog
 
+### 2023-08-08
+***changes***
+* 设置窗口使用 Material 风格，组件来自：https://github.com/laserpants/qt-material-widgets
+
+***fix***
+* 修复模式的开启与关闭无法保存
+
 ### 2023-08-07
 ***changes***
 * 聊天记录使用 sqlite 储存

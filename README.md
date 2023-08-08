@@ -1,21 +1,13 @@
 # Live2D Desktop Mascot   
 
 ## [更新内容](CHANGELOG.md)
-### 2023-08-07
+### 2023-08-08
 ***changes***
-* 聊天记录使用 sqlite 储存
-* 重新启动应用会加载当天的所有聊天记录
-* 聊天记录现在可以以天为单位在历史记录窗口查询
-* 拆分 UI 资源和模型资源文件夹，现在 UI 资源固定放置在 assets 文件夹下
-* 源代码由 GBK 更改为 UTF-8
-* 自定义文本聊天和语音聊天统一用 json 格式进行传输，请求类型为 POST，参见[自定义聊天服务器模板](dev-server/dev-server.py)
-
-***add***
-* 添加随机播放内置文本，数据源一言：https://github.com/hitokoto-osc/sentences-bundle
+* 设置窗口使用 Material 风格，组件来自：https://github.com/laserpants/qt-material-widgets
 
 ***fix***
-* 历史记录中播放音频无效
-* 自定义语音聊天开启后再次启动程序开启无效
+* 修复模式的开启与关闭无法保存
+* 源码改为 UTF-8 后导致含中文路径的模型资源加载崩溃，打开设置页面崩溃( v0.3.5 存在该问题)
 
 ## 预览  
 
@@ -25,14 +17,11 @@
 
 ![预览3](sample_images/preview3.png)
 
-Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://www.bilibili.com/video/BV1KU4y1x7ep)  
-
-
 ## 功能 
 
 * ### 自定义聊天服务器接口（可在设置页面更改）
   
-	详细见[自定义聊天服务器模板](dev-server/dev-server.py)
+	参考：[自定义聊天服务器模板](dev-server/dev-server.py)
 
 	动作组 **Chat**，调用茉莉云或者自定义聊天接口时触发的动作。
 
@@ -41,7 +30,7 @@ Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://ww
 * ### 自定义动作组与点击触发位置  
 
 
-  参考 https://github.com/murcherful/Live2D_Displyer
+  参考：https://github.com/murcherful/Live2D_Displyer
 
 
 ## 注意事项
@@ -75,12 +64,18 @@ Live2D 模型: [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://ww
 * [Qt5](https://www.qt.io/download-qt-installer?hsCtaTracking=99d9dd4f-5681-48d2-b096-470725510d34%7C074ddad0-fdef-4e53-8aa8-5e8a876d6ab4)  
 * [jsoncpp]  
 * [cpp-httplib] + [openssl](https://slproweb.com/products/Win32OpenSSL.html)  
-* 模型的语音借助[ACGTTS]生成  
-* live2d模型来自:  
-	* 碧蓝航线  
-	* Cubism官方   
-	* [再看一眼就会爆炸！波奇酱免费模型2.0](https://www.bilibili.com/video/BV1PY411k7Kj)  
-	* [【虚拟主播模型】 宁宁vup化！](https://www.bilibili.com/video/BV1s7411d7y9)
+* [qt-material-widgets](https://github.com/laserpants/qt-material-widgets)
+* [piemenu-qt](https://github.com/SimonBuxx/piemenu-qt)
+* Hiyori，nn 的语音借助 [ACGTTS] 生成  
+* Live2D 模型来源:  
+	* xuefeng_3 -> 碧蓝航线  
+	* Hiyori，Mao -> Cubism 官方   
+	* 波奇酱2.0 -> [再看一眼就会爆炸！波奇酱免费模型2.0](https://www.bilibili.com/video/BV1PY411k7Kj)  
+	* nn -> [【虚拟主播模型】 宁宁vup化！](https://www.bilibili.com/video/BV1s7411d7y9)
+	* 爱 -> [传说级爱抖露点击就送【星野爱免费l2d】](https://www.bilibili.com/video/BV1g24y1F73e)
+	* 星野爱，Hoshino_Ai -> [【星野爱免费live2d模型】重生之我在B站做虚拟爱抖露！星野爱永存！爱门！](https://www.bilibili.com/video/BV1Us4y1c7P4)
+	* LSS -> [魔女之旅伊蕾娜：番剧画风live2d 活的！](https://www.bilibili.com/video/BV1KU4y1x7ep)  
+
 * 
 	以Cubism官方Native SDK为模板，结合以下两篇文章进行的修改：  
 	https://zhuanlan.zhihu.com/p/126276925  

@@ -1,4 +1,4 @@
-/*ÉèÖÃ´°¿Ú
+/*è®¾ç½®çª—å£
 */
 
 #include "LAppModel.hpp"
@@ -19,6 +19,9 @@
 #include <QtWidgets/qlistview.h>
 #include <QtGui/qfontdatabase.h>
 
+#include <qtmaterialslider.h>
+#include <qtmaterialdialog.h>
+
 using namespace LAppConfig;
 
 
@@ -28,7 +31,7 @@ namespace {
 
 Tip::Tip()
 {
-	resize(100, 40); //Ô¤ÉèÖµ£¬²»ÉèÖÃµÚÒ»´ÎÏÔÊ¾Ê±²»¾ÓÖĞ
+	resize(100, 40); //é¢„è®¾å€¼ï¼Œä¸è®¾ç½®ç¬¬ä¸€æ¬¡æ˜¾ç¤ºæ—¶ä¸å±…ä¸­
 	setAttribute(Qt::WA_TransparentForMouseEvents);
 	setWindowFlags(Qt::ToolTip | Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
 	anime = new QPropertyAnimation(this, "windowOpacity");
@@ -59,11 +62,13 @@ void Tip::Release()
 }
 void Tip::paintEvent(QPaintEvent* e)
 {
-	resize(strlen(text) * 7 + 30, 40);
+	QFontMetrics _fontMetrics(QFont(""));
+	int boxWidth = _fontMetrics.width(QString(text));
+	resize(boxWidth+10, 40);
 	QPainter painter(this);
-	painter.fillRect(0, 0, width(), 40, QColor(0, 0, 0, 180));
+	painter.fillRect(0, 0, boxWidth+10, 40, QColor(0, 0, 0, 180));
 	painter.setPen(Qt::white);
-	painter.drawText(15, 25, QString::fromLocal8Bit(text).toStdString().c_str());
+	painter.drawText(10, 25, QString(text).toStdString().c_str());
 }
 void Tip::Pop(QWidget* p, const char* text)
 {
@@ -83,14 +88,14 @@ Tip* Tip::GetInstance()
 
 void getDirNames(string path, vector<string>& files)
 {
-	//ÎÄ¼ş¾ä±ú
+	//æ–‡ä»¶å¥æŸ„
 #ifdef WIN64_FLAG
 	__int64		hFile = 0;
 #else
 	long		hFile = 0;
 #endif // WIN64_FLAG
 
-	//ÎÄ¼şĞÅÏ¢
+	//æ–‡ä»¶ä¿¡æ¯
 #ifdef WIN64_FLAG
 	struct		__finddata64_t fileinfo;
 #else
@@ -133,7 +138,7 @@ void getDirNames(string path, vector<string>& files)
 
 void getFileNames(string path, vector<string>& files)
 {
-	//ÎÄ¼ş¾ä±ú
+	//æ–‡ä»¶å¥æŸ„
 #ifdef WIN64_FLAG
 	__int64		hFile = 0;
 	struct		__finddata64_t fileinfo;
@@ -142,7 +147,7 @@ void getFileNames(string path, vector<string>& files)
 	struct		_finddata_t fileinfo;
 #endif // WIN64_FLAG
 
-	//ÎÄ¼şĞÅÏ¢
+	//æ–‡ä»¶ä¿¡æ¯
 	string p;
 	if (
 #ifdef WIN64_FLAG
@@ -173,51 +178,105 @@ void getFileNames(string path, vector<string>& files)
 AppSettings::AppSettings(QWidget* p)
 {
 	_parent = p;
-	lbl_appName = new QLabel(QString::fromLocal8Bit("Ó¦ÓÃÃû³Æ"));
-	lbl_username = new QLabel(QString::fromLocal8Bit("ÓÃ»§Ãû³Æ"));
-	lbl_iconPath = new QLabel(QString::fromLocal8Bit("ÍĞÅÌÍ¼±ê"));
-	lbl_FPS = new QLabel("FPS");
-	lbl_windowWidth = new QLabel(QString::fromLocal8Bit("´°¿Ú¿í¶È"));
-	lbl_windowHeight = new QLabel(QString::fromLocal8Bit("´°¿Ú¸ß¶È"));
-	lbl_modelDir = new QLabel(QString::fromLocal8Bit("Ä£ĞÍÂ·¾¶"));
-	lbl_characterX = new QLabel(QString::fromLocal8Bit("½ÇÉ«X"));
-	lbl_characterY = new QLabel(QString::fromLocal8Bit("½ÇÉ«Y"));
-	appName = new QLineEdit();
-	username = new QLineEdit();
-	iconPath = new QLineEdit();
-	fps = new QLineEdit();
+
+	appName = new QtMaterialTextField();
+	appName->setLabel("åº”ç”¨åç§°");
+	appName->setLabelFontSize(8);
+	appName->setInkColor(QColor(50, 120, 200));
+	appName->setInputLineColor(QColor(80, 80, 80));
+
+	username = new QtMaterialTextField();
+	username->setLabel("ç”¨æˆ·åç§°");
+	username->setLabelFontSize(8);
+	username->setInkColor(QColor(50, 120, 200));
+	username->setInputLineColor(QColor(80, 80, 80));
+
+	iconPath = new QtMaterialTextField();
+	iconPath->setLabel("å›¾æ ‡è·¯å¾„");
+	iconPath->setLabelFontSize(8);
+	iconPath->setInkColor(QColor(50, 120, 200));
+	iconPath->setInputLineColor(QColor(80, 80, 80));
+
+	fps = new QtMaterialTextField();
+	fps->setLabel("FPS");
+	fps->setLabelFontSize(8);
 	fps->setMaximumWidth(50);
-	windowWidth = new QLineEdit();
-	windowHeight = new QLineEdit();
-	modelDir = new QLineEdit();
-	lbl_volume = new QLabel(QString::fromLocal8Bit("ÒôÁ¿"));
+	fps->setInkColor(QColor(50, 120, 200));
+	fps->setInputLineColor(QColor(80, 80, 80));
+
+
+	windowWidth = new QtMaterialTextField();
+	windowWidth->setLabel("æ¡Œå® å®½åº¦");
+	windowWidth->setLabelFontSize(8);
+	windowWidth->setInkColor(QColor(50, 120, 200));
+	windowWidth->setInputLineColor(QColor(80, 80, 80));
+
+
+	windowHeight = new QtMaterialTextField();
+	windowHeight->setLabel("æ¡Œå® é«˜åº¦");
+	windowHeight->setLabelFontSize(8);
+	windowHeight->setInkColor(QColor(50, 120, 200));
+	windowHeight->setInputLineColor(QColor(80, 80, 80));
+
+
+	modelDir = new QtMaterialTextField();
+	modelDir->setLabel("æ¨¡å‹è·¯å¾„");
+	modelDir->setLabelFontSize(8);
+	modelDir->setInkColor(QColor(50, 120, 200));
+	modelDir->setInputLineColor(QColor(80, 80, 80));
+
+	lbl_volume = new QLabel(QString("éŸ³é‡"));
+	lbl_volume->setStyleSheet("color: rgb(191, 191, 191)");
 	lbl_sliderVal = new QLabel();
-	volumeSlider = new QSlider();
+	lbl_sliderVal->setStyleSheet("color: rgb(191, 191, 191)");
+	volumeSlider = new QtMaterialSlider();
 	volumeSlider->setMaximum(100);
 	volumeSlider->setMinimum(0);
 	volumeSlider->setOrientation(Qt::Horizontal);
 	volumeSlider->setPageStep(1);
-	volumeSlider->setMaximumWidth(200);
-	volumeSlider->setMinimumWidth(150);
-	lbl_repairMode = new QLabel(QString::fromLocal8Bit("¶¯×÷ĞŞ¸´"));
-	repairModeControl = new QPushButton();
+	volumeSlider->setFixedWidth(200);
+	volumeSlider->setThumbColor(QColor(50, 120, 200));
+	lbl_repairMode = new QLabel(QString("åŠ¨ä½œä¿®å¤"));
+	lbl_repairMode->setStyleSheet("color: rgb(191, 191, 191)");
+	repairModeControl = new QtMaterialToggle();
 	repairModeControl->setCheckable(true);
-	repairModeControl->setObjectName("repairModeControl");
+	repairModeControl->setActiveColor(QColor(50, 120, 200));
 
-	lbl_lipsync = new QLabel(QString::fromLocal8Bit("¿ÚĞÍÍ¬²½"));
-	lipSync = new QLineEdit();
+	lipSync = new QtMaterialTextField();
+	
 	QRegExpValidator* v3 = new QRegExpValidator(QRegExp("^[0-9]{1,2}\\.[0-9]{1}$"));
 	lipSync->setValidator(v3);
+	lipSync->setLabel("å£å‹åŒæ­¥");
+	lipSync->setLabelFontSize(8);
+	lipSync->setInkColor(QColor(50, 120, 200));
+	lipSync->setInputLineColor(QColor(80, 80, 80));
 
-	characterX = new QLineEdit();
-	characterY = new QLineEdit();
+
+	characterX = new QtMaterialTextField();
+	characterX->setLabel("è§’è‰²ç»˜åˆ¶ X åæ ‡");
+	characterX->setLabelFontSize(8);
+	characterX->setInkColor(QColor(50, 120, 200));
+	characterX->setInputLineColor(QColor(80, 80, 80));
+
+
+	characterY = new QtMaterialTextField();
+	characterY->setLabel("è§’è‰²ç»˜åˆ¶ Y åæ ‡");
+	characterY->setLabelFontSize(8);
+	characterY->setInkColor(QColor(50, 120, 200));
+	characterY->setInputLineColor(QColor(80, 80, 80));
+
+
 	const QValidator* v5 = new QRegExpValidator(QRegExp("^[\\-]?[0-9]{1,2}\\.[0-9]{1,2}$"));
 	characterX->setValidator(v5);
 	characterY->setValidator(v5);
 
-	lbl_motioninterval = new QLabel(QString::fromLocal8Bit("¶¯×÷ÆµÂÊ"));
-	motionInterval = new QLineEdit();
+	motionInterval = new QtMaterialTextField();
 	motionInterval->setValidator(v3);
+	motionInterval->setLabel("åŠ¨ä½œé¢‘ç‡");
+	motionInterval->setLabelFontSize(8);
+	motionInterval->setInkColor(QColor(50, 120, 200));
+	motionInterval->setInputLineColor(QColor(80, 80, 80));
+
 
 	windowWidth->setFixedWidth(50);
 	windowHeight->setFixedWidth(50);
@@ -227,14 +286,24 @@ AppSettings::AppSettings(QWidget* p)
 	const QValidator* v2 = new QRegExpValidator(QRegExp("[0-9]{1,4}"));
 	const QValidator* v4 = new QRegExpValidator(QRegExp("[\\-]?[0-9]{1,4}"));
 
-	lbl_dialogMaxWidth = new QLabel(QString::fromLocal8Bit("¶Ô»°¿ò¿í¶ÈÏŞÖÆ"));
-	dialogMaxWidth = new QLineEdit();
+	dialogMaxWidth = new QtMaterialTextField();
+	dialogMaxWidth->setLabel("å¯¹è¯æ¡†å®½åº¦é™åˆ¶");
+	dialogMaxWidth->setLabelFontSize(8);
+	dialogMaxWidth->setInkColor(QColor(50, 120, 200));
+	dialogMaxWidth->setInputLineColor(QColor(80, 80, 80));
 
-	lbl_dialogFontSize = new QLabel(QString::fromLocal8Bit("¶Ô»°¿ò×ÖÌå´óĞ¡"));
-	dialogFontSize = new QLineEdit();
+	dialogFontSize = new QtMaterialTextField();
+	dialogFontSize->setLabel("å¯¹è¯æ¡†å­—ä½“å¤§å°");
+	dialogFontSize->setLabelFontSize(8);
+	dialogFontSize->setInkColor(QColor(50, 120, 200));
+	dialogFontSize->setInputLineColor(QColor(80, 80, 80));
 
-	lbl_dialogYOffset = new QLabel(QString::fromLocal8Bit("¶Ô»°¿ò´¹Ö±Î»ÖÃ"));
-	dialogYOffset = new QLineEdit();
+	dialogYOffset = new QtMaterialTextField();
+	dialogYOffset->setLabel("å¯¹è¯æ¡†å‚ç›´åç§»");
+	dialogYOffset->setLabelFontSize(8);
+	dialogYOffset->setInkColor(QColor(50, 120, 200));
+	dialogYOffset->setInputLineColor(QColor(80, 80, 80));
+
 
 	dialogYOffset->setValidator(v4);
 	dialogFontSize->setValidator(v);
@@ -244,66 +313,67 @@ AppSettings::AppSettings(QWidget* p)
 	windowWidth->setValidator(v2);
 	windowHeight->setValidator(v2);
 
-	openFile = new QPushButton(QString::fromLocal8Bit("´ò¿ª"));
-	chooseDir = new QPushButton(QString::fromLocal8Bit("´ò¿ª"));
-	apply = new QPushButton(QString::fromLocal8Bit("±£´æ"));
-	reset = new QPushButton(QString::fromLocal8Bit("ÖØÖÃ"));
-
-	grid = new QGridLayout();
-
-	repairModeControl->setFixedWidth(50);
+	openFile = new QtMaterialRaisedButton();
+	openFile->setText("æ‰“å¼€");
+	openFile->setOverlayColor(Qt::white);
+	openFile->setForegroundColor(QColor(244, 244, 244));
+	openFile->setBackgroundColor(QColor(50, 120, 200));
+	openFile->setFixedHeight(25);
+	chooseDir = new QtMaterialRaisedButton();
+	chooseDir->setText("æ‰“å¼€");
+	chooseDir->setOverlayColor(Qt::white);
+	chooseDir->setForegroundColor(QColor(244, 244, 244));
+	chooseDir->setBackgroundColor(QColor(50, 120, 200));
+	chooseDir->setFixedHeight(25);
+	apply = new QtMaterialRaisedButton();
+	apply->setText("ä¿å­˜");
+	apply->setOverlayColor(Qt::white);
+	apply->setForegroundColor(QColor(244, 244, 244));
+	apply->setBackgroundColor(QColor(50, 120, 200));
+	apply->setFixedHeight(30);
+	apply->setFixedWidth(120);
+	reset = new QtMaterialRaisedButton();
+	reset->setText("é‡ç½®");
+	reset->setOverlayColor(Qt::white);
+	reset->setForegroundColor(QColor(244, 244, 244));
+	reset->setBackgroundColor(QColor(50, 120, 200));
+	reset->setFixedHeight(30);
+	reset->setFixedWidth(120);
 
 	QVBoxLayout* vbox = new QVBoxLayout();
 
 	QHBoxLayout* line1 = new QHBoxLayout();
-	line1->addWidget(lbl_appName);
 	line1->addWidget(appName);
-	line1->addWidget(lbl_username);
 	line1->addWidget(username);
 	vbox->addLayout(line1);
 
 	QHBoxLayout* line2 = new QHBoxLayout();
-	line2->addWidget(lbl_iconPath);
 	line2->addWidget(iconPath);
 	line2->addWidget(openFile);
 	vbox->addLayout(line2);
 
 	QHBoxLayout* line3 = new QHBoxLayout();
-	line3->addWidget(lbl_modelDir);
 	line3->addWidget(modelDir);
 	line3->addWidget(chooseDir);
 	vbox->addLayout(line3);
 
 	QHBoxLayout* line4 = new QHBoxLayout();
-	line4->addWidget(lbl_lipsync);
 	line4->addWidget(lipSync);
-	line4->addWidget(lbl_motioninterval);
 	line4->addWidget(motionInterval);
-	line4->addWidget(lbl_FPS);
 	line4->addWidget(fps);
-	line4->addWidget(lbl_windowWidth);
 	line4->addWidget(windowWidth);
-	line4->addWidget(lbl_windowHeight);
 	line4->addWidget(windowHeight);
 	line4->addStretch();
 	vbox->addLayout(line4);
 
 	QHBoxLayout* line5 = new QHBoxLayout();
-	line5->addWidget(lbl_dialogMaxWidth);
 	line5->addWidget(dialogMaxWidth);
-	line5->addStretch();
-	line5->addWidget(lbl_dialogYOffset);
 	line5->addWidget(dialogYOffset);
-	line5->addStretch();
-	line5->addWidget(lbl_dialogFontSize);
 	line5->addWidget(dialogFontSize);
-	line5->addStretch();
 	vbox->addLayout(line5);
 
 	QHBoxLayout* line6 = new QHBoxLayout();
-	line6->addWidget(lbl_characterX);
 	line6->addWidget(characterX);
-	line6->addWidget(lbl_characterY);
 	line6->addWidget(characterY);
 	line6->addStretch();
 	vbox->addLayout(line6);
@@ -335,13 +405,13 @@ AppSettings::AppSettings(QWidget* p)
 
 void AppSettings::OpenFile()
 {
-	QString path = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit("Ñ¡ÔñÍ¼±êÂ·¾¶"), iconPath->text(), "Image File(*.jpg *.png);;");
+	QString path = QFileDialog::getOpenFileName(this, QString("é€‰æ‹©å›¾æ ‡è·¯å¾„"), iconPath->text(), "Image File(*.jpg *.png);;");
 	if (!path.isEmpty())
 	iconPath->setText(path);
 }
 
 void AppSettings::SetRepairMode() {
-	_RepairModeOn = repairModeControl->isChecked();
+	// do nothing
 }
 
 void AppSettings::SetVolume() {
@@ -350,7 +420,7 @@ void AppSettings::SetVolume() {
 
 void AppSettings::OpenSourceDir()
 {
-	QString path = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit("Ñ¡Ôñ×ÊÔ´ÎÄ¼ş¼Ğ"), modelDir->text());
+	QString path = QFileDialog::getExistingDirectory(this, QString("é€‰æ‹©èµ„æºæ–‡ä»¶å¤¹"), modelDir->text());
 	if (!path.isEmpty())
 		modelDir->setText(path);
 }
@@ -382,15 +452,15 @@ void AppSettings::Apply()
 	try {
 		if (p) {			
 			p->_modelSettings->LoadConfig();
-			Log("ModelDir changed", modelDir->text().toLocal8Bit());
+			Log("ModelDir changed", modelDir->text().toStdString().c_str());
 		}
 		else Log("AppSettings", "cast failed");
 		LApp::GetInstance()->SaveConfig();
-		Tip::GetInstance()->Pop(_parent, "±£´æ³É¹¦!");
+		Tip::GetInstance()->Pop(_parent, "ä¿å­˜æˆåŠŸ!");
 	}
 	catch (exception e)
 	{
-		Tip::GetInstance()->Pop(_parent, "×ÊÔ´Â·¾¶ÓĞÎó!");
+		Tip::GetInstance()->Pop(_parent, "èµ„æºè·¯å¾„æœ‰è¯¯!");
 		LApp::GetInstance()->LoadConfig();
 		LoadConfig();
 		p->_modelSettings->LoadConfig();
@@ -441,34 +511,86 @@ ModelSettings::ModelSettings(QWidget* p)
 {
 	_parent = p;
 	model = new QComboBox();
-	lbl_model = new QLabel(QString::fromLocal8Bit("Ñ¡ÔñÄ£ĞÍ"));
+	lbl_model = new QLabel(QString("é€‰æ‹©æ¨¡å‹"));
 	_motionGroups = new QTreeWidget();
 
-	_motionGroups->setHeaderLabel(QString::fromLocal8Bit("¶¯×÷×é"));
-	apply = new QPushButton(QString::fromLocal8Bit("±£´æ"));
-	reset = new QPushButton(QString::fromLocal8Bit("ÖØÖÃ"));
+	_motionGroups->setHeaderLabel(QString("åŠ¨ä½œç»„"));
+	apply = new QtMaterialRaisedButton(QString("ä¿å­˜"));
+	apply->setOverlayColor(Qt::white);
+	apply->setForegroundColor(QColor(244, 244, 244));
+	apply->setBackgroundColor(QColor(50, 120, 200));
+	apply->setFixedHeight(30);
+
+	reset = new QtMaterialRaisedButton(QString("é‡ç½®"));
+	reset->setOverlayColor(Qt::white);
+	reset->setForegroundColor(QColor(244, 244, 244));
+	reset->setBackgroundColor(QColor(50, 120, 200));
+	reset->setFixedHeight(30);
 
 	motionJsonPath = new QComboBox();
 	motionSoundPath = new QComboBox();
 	motionText = new MyText();
 
-	lbl_motionJsonPath = new QLabel(QString::fromLocal8Bit("¶¯×÷Â·¾¶"));
+	lbl_motionJsonPath = new QLabel(QString("åŠ¨ä½œè·¯å¾„"));
 	lbl_motionJsonPath->setAlignment(Qt::AlignRight|Qt::AlignCenter);
-	lbl_motionSoundPath = new QLabel(QString::fromLocal8Bit("ÓïÒô"));
+	lbl_motionSoundPath = new QLabel(QString("è¯­éŸ³"));
 	lbl_motionSoundPath->setAlignment(Qt::AlignRight|Qt::AlignCenter);
-	lbl_motionText = new QLabel(QString::fromLocal8Bit("ÎÄ±¾"));
+	lbl_motionText = new QLabel(QString("æ–‡æœ¬"));
 	lbl_motionText->setAlignment(Qt::AlignTop|Qt::AlignRight);
-	motionGroup = new QLineEdit();
-	addGroup = new QPushButton(QString::fromLocal8Bit("ĞÂ½¨¶¯×÷×é"));
-	deleteGroup = new QPushButton(QString::fromLocal8Bit("É¾³ı¶¯×÷×é"));
-	lbl_motionGroup = new QLabel(QString::fromLocal8Bit("µ±Ç°¶¯×÷×é"));
-	addMotion = new QPushButton(QString::fromLocal8Bit("Ìí¼Ó¶¯×÷"));
-	deleteMotion = new QPushButton(QString::fromLocal8Bit("É¾³ı¶¯×÷"));
-	changeModel = new QPushButton(QString::fromLocal8Bit("¸üĞÂÄ£ĞÍ"));
-	updateGroupName = new QPushButton(QString::fromLocal8Bit("ĞŞ¸Ä¶¯×÷×éÃû³Æ"));
+	motionGroup = new QtMaterialTextField();
+	motionGroup->setLabelFontSize(8);
+	motionGroup->setInkColor(QColor(50, 120, 200));
+	motionGroup->setInputLineColor(QColor(80, 80, 80));
+
+	addGroup = new QtMaterialRaisedButton();
+	addGroup->setText("æ–°å»ºåŠ¨ä½œç»„");
+	addGroup->setOverlayColor(Qt::white);
+	addGroup->setForegroundColor(QColor(244, 244, 244));
+	addGroup->setBackgroundColor(QColor(50, 120, 200));
+	addGroup->setFixedHeight(25);
+
+	deleteGroup = new QtMaterialRaisedButton();
+	deleteGroup->setText("åˆ é™¤åŠ¨ä½œç»„");
+	deleteGroup->setOverlayColor(Qt::white);
+	deleteGroup->setForegroundColor(QColor(244, 244, 244));
+	deleteGroup->setBackgroundColor(QColor(50, 120, 200));
+	deleteGroup->setFixedHeight(25);
+
+	lbl_motionGroup = new QLabel(QString("å½“å‰åŠ¨ä½œç»„"));
+
+	addMotion = new QtMaterialRaisedButton();
+	addMotion->setText("æ·»åŠ åŠ¨ä½œ");
+	addMotion->setOverlayColor(Qt::white);
+	addMotion->setForegroundColor(QColor(244, 244, 244));
+	addMotion->setBackgroundColor(QColor(50, 120, 200));
+	addMotion->setFixedHeight(25);
+	addMotion->setFixedWidth(80);
+
+	deleteMotion = new QtMaterialRaisedButton();
+	deleteMotion->setText("åˆ é™¤åŠ¨ä½œ");
+	deleteMotion->setOverlayColor(Qt::white);
+	deleteMotion->setForegroundColor(QColor(244, 244, 244));
+	deleteMotion->setBackgroundColor(QColor(50, 120, 200));
+	deleteMotion->setFixedHeight(25);
+	deleteMotion->setFixedWidth(80);
+
+	changeModel = new QtMaterialRaisedButton();
+	changeModel->setText("åˆ‡æ¢");
+	changeModel->setOverlayColor(Qt::white);
+	changeModel->setForegroundColor(QColor(244, 244, 244));
+	changeModel->setBackgroundColor(QColor(50, 120, 200));
+	changeModel->setFixedHeight(25);
+
+	updateGroupName = new QtMaterialRaisedButton();
+	updateGroupName->setText("ä¿®æ”¹åŠ¨ä½œç»„åç§°");
+	updateGroupName->setOverlayColor(Qt::white);
+	updateGroupName->setForegroundColor(QColor(244, 244, 244));
+	updateGroupName->setBackgroundColor(QColor(50, 120, 200));
+	updateGroupName->setFixedHeight(25);
 	
 	connect(apply, SIGNAL(clicked()), SLOT(Apply()));
 	connect(reset, SIGNAL(clicked()), SLOT(Reset()));
+
 	grid = new QGridLayout();
 	grid->addWidget(lbl_model, 0, 0, 0);
 	grid->addWidget(model, 0, 1, 0);
@@ -491,8 +613,6 @@ ModelSettings::ModelSettings(QWidget* p)
 	grid->addWidget(reset, 5, 4, 0);
 	setLayout(grid);
 
-	deleteMotion->setFixedWidth(120);
-
 	connect(_motionGroups, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(ShowMotionInfo(QTreeWidgetItem*, int)));
 	connect(_motionGroups, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), SLOT(StartMotion(QTreeWidgetItem*, int)));
 	connect(addMotion, SIGNAL(clicked()), SLOT(AddMotion()));
@@ -508,16 +628,22 @@ ModelSettings::ModelSettings(QWidget* p)
 	connect(changeModel, SIGNAL(clicked()), SLOT(UpdateModel()));
 	_motionGroups->setObjectName("motionGroups");
 	_motionGroups->setStyleSheet(
-		QString(
-			"QTreeWidget::branch::open:has-children{border-image: url(").append(_ModelDir.c_str()).append("/open.png); }"
-			"QTreeWidget::branch:hover{color: white}"
+			"QTreeWidget::branch::open:hover:has-children{border-image: url(assets/open.png);}"
+			"QTreeWidget::branch::open:has-children{border-image: url(assets/open-default.png);}"
+			"QTreeWidget::branch::closed:has-children {border-image: url(assets/arrow-right-default.png)}"
+			"QTreeWidget::branch::closed:hover:has-children{border-image: url(assets/arrow-right.png)}"
 			"QScrollBar::handle:vertical{background: #AAA;}"
 			"QScrollBar::handle:vertical:hover{background: #888;}"
 			"QScrollBar:vertical{width: 8px;background: #DDD;border: none}"
-			"QHeaderView::section{background-color: rgb(50, 50, 50); color: rgba(255, 255, 255, 210); height: 30px; font-family: Î¢ÈíÑÅºÚ; border: none; padding-left: 10px}")
+			"QHeaderView::section{background-color: rgb(50, 50, 50); color: rgba(255, 255, 255, 210); height: 30px; font-family: PingFang SC Medium; border: none; padding-left: 10px;}"
+			"QTreeWidget::item:selected {font-weight: 800; border: none }"
 		);
-	const char* styleSheet = ("QComboBox QAbstractItemView {color: rgba(255, 255, 255, 210); outline: none; background: rgb(100, 100, 100)}"
+	const char* styleSheet = ("QComboBox QAbstractItemView {outline: none; background: rgb(80, 80, 80); border: 2px solid rgb(80, 80, 80); }"
+		"QComboBox QAbstractItemView::item {height: 25px; color: rgba(255, 255, 255, 210);}"
+		"QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {border: none; background-color: rgba(80, 150, 244, 200)}"
 		"QComboBox{selection-background-color: rgb(50, 50, 50); padding-left: 5px}"
+		"QComboBox::drop-down{ border-image: url(assets/open-default.png); width: 30px; height: 30px }"
+		"QComboBox::drop-down:hover{ border-image: url(assets/open.png); width: 30px; height: 30px }"
 		"QScrollBar::vertical{width: 10px; background: #d0d2d4}"
 		"QScrollBar::handle:vertical{background: rgb(160, 160, 160)}"
 		);
@@ -531,6 +657,7 @@ ModelSettings::ModelSettings(QWidget* p)
 	motionSoundPath->setView(new QListView());
 
 	motionText->setStyleSheet(
+		"QTextEdit {color: rgba(255, 255, 255, 180)}"
 		"QScrollBar::handle:vertical{background: #AAA;}"
 		"QScrollBar::handle:vertical:hover{background: #888;}"
 		"QScrollBar:vertical{width: 8px;background: #DDD;border: none}"
@@ -544,10 +671,10 @@ void ModelSettings::Release()
 
 void ModelSettings::Apply()
 {
-	if (QMessageBox::question(_parent, QString::fromLocal8Bit("±£´æÅäÖÃ"), QString::fromLocal8Bit("ÊÇ·ñ±£´æÅäÖÃ?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+	if (QMessageBox::question(_parent, QString("ä¿å­˜é…ç½®"), QString("æ˜¯å¦ä¿å­˜é…ç½®?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 	{
-		//ÖĞÎÄÖ§³Ö
-		const char* path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(_ModelName).append(".model3.json").c_str()).toLocal8Bit();
+		//ä¸­æ–‡æ”¯æŒ
+		const char* path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(_ModelName).append(".model3.json").c_str()).toStdString().c_str();
 
 		Log("Save ModelJson", path);
 		ofstream ofs(path);
@@ -555,7 +682,7 @@ void ModelSettings::Apply()
 		ofs.close();
 		LoadConfig();
 		LAppLive2DManager::GetInstance()->ChangeModel(_ModelDir.c_str(), _ModelName.c_str());
-		Tip::GetInstance()->Pop(_parent, "²Ù×÷³É¹¦!");
+		Tip::GetInstance()->Pop(_parent, "æ“ä½œæˆåŠŸ!");
 	}
 	
 }
@@ -574,52 +701,52 @@ void ModelSettings::LoadConfig()
 	motionGroup->clear();
 	int i;
 	int size;
-	const char* path;
+	string path;
 	vector<std::string> _files;
 	bool flag = false;
-	path = QString::fromUtf8(_ModelDir.c_str()).toLocal8Bit().constData();
-	Log("Load ModelDir", path);
+	path = QString::fromUtf8(_ModelDir.c_str()).toStdString().c_str();
+	Log("Load ModelDir", path.c_str());
 	getDirNames(path, _files);
 	size = _files.size();
 	model->clear();
 	for (i = 0; i < size; i++)
 	{
-		if (strcmp(_ModelName.c_str(), QString::fromLocal8Bit(_files[i].c_str()).toStdString().c_str()) == 0) flag = true;
-		model->addItem(QString::fromLocal8Bit(_files[i].c_str()));
+		if (strcmp(_ModelName.c_str(), QString(_files[i].c_str()).toStdString().c_str()) == 0) flag = true;
+		model->addItem(QString(_files[i].c_str()));
 	}
 	_ModelName = flag ? _ModelName : model->itemText(0).toUtf8().constData();
 	model->setCurrentText(_ModelName.c_str());
 	motionJsonPath->clear();
 	_files.clear();
 
-	path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append("motions").c_str()).toLocal8Bit().constData();
-	Log("Load MotionJsonDir", path);
+	path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append("motions").c_str()).toStdString();
+	Log("Load MotionJsonDir", path.c_str());
 
 	getFileNames(path, _files);
 	size = _files.size();
 	for (i = 0; i < size; i++)
 	{
-		motionJsonPath->addItem(QString::fromLocal8Bit(string("motions/").append(_files[i]).c_str()));
+		motionJsonPath->addItem(QString(string("motions/").append(_files[i]).c_str()));
 	}
 	motionSoundPath->clear();
 	motionJsonPath->addItem("");
 	motionJsonPath->setCurrentText("");
 	_files.clear();
 
-	path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append("sounds").c_str()).toLocal8Bit().constData();
-	Log("Load motionSoundDir", path);
+	path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append("sounds").c_str()).toStdString();
+	Log("Load motionSoundDir", path.c_str());
 	getFileNames(path, _files);
 	size = _files.size();
 	for (i = 0; i < size; i++)
 	{
-		motionSoundPath->addItem(QString::fromLocal8Bit(string("sounds/").append(_files[i]).c_str()));
+		motionSoundPath->addItem(QString(string("sounds/").append(_files[i]).c_str()));
 	}
 	motionSoundPath->addItem("");
 	motionSoundPath->setCurrentText("");
 
 
-	path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(_ModelName).append(".model3.json").c_str()).toLocal8Bit();
-	Log("Load ModelJson", path);
+	path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(_ModelName).append(".model3.json").c_str()).toStdString();
+	Log("Load ModelJson", path.c_str());
 
 	ifstream ifs(path);
 	ifs >> _modelJson;
@@ -655,19 +782,19 @@ void ModelSettings::BindMotion(const QString& x)
 	QTreeWidgetItem* cur = _motionGroups->currentItem();
 	if (cur != NULL && cur->parent() != NULL)
 	{
-		const char* path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(motionJsonPath->currentText().toStdString()).c_str()).toLocal8Bit();
+		const char* path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(motionJsonPath->currentText().toStdString()).c_str()).toStdString().c_str();
 		if (_access(path, 0) != -1)
 		{
 			_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["File"] = motionJsonPath->currentText().toStdString();
 			if (!motionJsonPath->currentText().isEmpty())
 			{
-				Tip::GetInstance()->Pop(_parent, "¶¯×÷ÒÑ¸ü»»!");
+				Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œå·²æ›´æ¢!");
 			}
 			else {
-				Tip::GetInstance()->Pop(_parent, "¶¯×÷ÒÑÇå¿Õ!");
+				Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œå·²æ¸…ç©º!");
 			}
 		}
-		else Tip::GetInstance()->Pop(_parent, "¶¯×÷ÎÄ¼ş²»´æÔÚ!");
+		else Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œæ–‡ä»¶ä¸å­˜åœ¨!");
 	}
 }
 
@@ -676,20 +803,20 @@ void ModelSettings::BindSound(const QString& x)
 	QTreeWidgetItem* cur = _motionGroups->currentItem();
 	if (cur != NULL && cur->parent() != NULL)
 	{
-		const char* path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(motionSoundPath->currentText().toLocal8Bit().constData()).c_str()).toLocal8Bit();
+		const char* path = QString::fromUtf8(string(_ModelDir).append("/").append(_ModelName).append("/").append(motionSoundPath->currentText().toStdString().c_str()).c_str()).toStdString().c_str();
 		if (_access(path, 0) != -1)
 		{
 			_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["Sound"] = motionSoundPath->currentText().toStdString();
 			if (!motionSoundPath->currentText().isEmpty())
 			{
-				Tip::GetInstance()->Pop(_parent, "ÓïÒôÒÑ¸ü»»!");
+				Tip::GetInstance()->Pop(_parent, "è¯­éŸ³å·²æ›´æ¢!");
 			}
 			else {
-				Tip::GetInstance()->Pop(_parent, "ÓïÒôÒÑÇå¿Õ!");
+				Tip::GetInstance()->Pop(_parent, "è¯­éŸ³å·²æ¸…ç©º!");
 			}
 		}
 		else {
-			Tip::GetInstance()->Pop(_parent, "ÒôÆµÎÄ¼ş²»´æÔÚ!");
+			Tip::GetInstance()->Pop(_parent, "éŸ³é¢‘æ–‡ä»¶ä¸å­˜åœ¨!");
 		}
 	}
 		
@@ -703,21 +830,21 @@ void ModelSettings::BindText()
 		_modelJson["FileReferences"]["Motions"][cur->parent()->text(0).toStdString()][cur->parent()->indexOfChild(cur)]["Text"] = motionText->toPlainText().toStdString();
 		if (!motionText->toPlainText().isEmpty())
 		{
-			Tip::GetInstance()->Pop(_parent, "ÎÄ±¾ÒÑĞŞ¸Ä!");
+			Tip::GetInstance()->Pop(_parent, "æ–‡æœ¬å·²ä¿®æ”¹!");
 		}
 		else {
-			Tip::GetInstance()->Pop(_parent, "ÎÄ±¾ÒÑÇå¿Õ!");
+			Tip::GetInstance()->Pop(_parent, "æ–‡æœ¬å·²æ¸…ç©º!");
 		}
 	}
 }
 
 void ModelSettings::AddMotion()
 {
-	if (_motionGroups->currentItem() == NULL)  //ÎŞÑ¡ÖĞ
+	if (_motionGroups->currentItem() == NULL)  //æ— é€‰ä¸­
 	{
-		Tip::GetInstance()->Pop(_parent, "Î´Ñ¡Ôñ¶¯×÷×é!");
+		Tip::GetInstance()->Pop(_parent, "æœªé€‰æ‹©åŠ¨ä½œç»„!");
 	}
-	else if (_motionGroups->currentItem()->parent() == NULL)  //Ñ¡ÖĞÕû¸ö¶¯×÷×é
+	else if (_motionGroups->currentItem()->parent() == NULL)  //é€‰ä¸­æ•´ä¸ªåŠ¨ä½œç»„
 	{
 		Json::Value motion;
 		motion["File"] = "";
@@ -729,9 +856,9 @@ void ModelSettings::AddMotion()
 		subItem->setText(0, QString(_motionGroups->currentItem()->text(0)).append("_").append(to_string(idx).c_str()));
 		subItem->setData(1, 0, idx);
 		_motionGroups->currentItem()->addChild(subItem);
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷ÒÑÌí¼Ó!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œå·²æ·»åŠ !");
 	}
-	else  //Ñ¡ÖĞ×Ó¶¯×÷ 
+	else  //é€‰ä¸­å­åŠ¨ä½œ 
 	{
 		QTreeWidgetItem* p = _motionGroups->currentItem()->parent();
 
@@ -746,21 +873,21 @@ void ModelSettings::AddMotion()
 		subItem->setText(0, QString(p->text(0)).append("_").append(to_string(idx).c_str()));
 		subItem->setData(1, 0, idx);
 		p->addChild(subItem);
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷ÒÑÌí¼Ó!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œå·²æ·»åŠ !");
 	}
 }
 
 void ModelSettings::DeleteMotion()
 {
-	if (_motionGroups->currentItem() == NULL)  //ÎŞÑ¡ÖĞ
+	if (_motionGroups->currentItem() == NULL)  //æ— é€‰ä¸­
 	{
-		Tip::GetInstance()->Pop(_parent, "Î´Ñ¡Ôñ¶¯×÷!");
+		Tip::GetInstance()->Pop(_parent, "æœªé€‰æ‹©åŠ¨ä½œ!");
 	}
-	else if (_motionGroups->currentItem()->parent() == NULL)  //Ñ¡ÖĞÕû¸ö¶¯×÷×é
+	else if (_motionGroups->currentItem()->parent() == NULL)  //é€‰ä¸­æ•´ä¸ªåŠ¨ä½œç»„
 	{
-		Tip::GetInstance()->Pop(_parent, "Î´Ñ¡Ôñ¶¯×÷!");
+		Tip::GetInstance()->Pop(_parent, "æœªé€‰æ‹©åŠ¨ä½œ!");
 	}
-	else  //Ñ¡ÖĞ×Ó¶¯×÷ 
+	else  //é€‰ä¸­å­åŠ¨ä½œ 
 	{
 		QTreeWidgetItem* p = _motionGroups->currentItem()->parent();
 		_modelJson["FileReferences"]["Motions"][p->text(0).toStdString()].removeIndex(p->indexOfChild(_motionGroups->currentItem()), NULL);
@@ -775,7 +902,7 @@ void ModelSettings::DeleteMotion()
 		motionJsonPath->setCurrentText("");
 		motionSoundPath->setCurrentText("");
 		motionText->clear();
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷ÒÑÉ¾³ı!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œå·²åˆ é™¤!");
 	}
 }
 
@@ -803,7 +930,7 @@ void ModelSettings::ShowMotionInfo(QTreeWidgetItem* w, int idx)
 void ModelSettings::AddGroup()
 {
 	if (motionGroup->text().isEmpty()) {
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÃû³Æ²»ÄÜÎª¿Õ!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„åç§°ä¸èƒ½ä¸ºç©º!");
 		return;
 	}
 	QList<QTreeWidgetItem*> x = _motionGroups->findItems(motionGroup->text(), Qt::MatchExactly, 0);
@@ -813,39 +940,39 @@ void ModelSettings::AddGroup()
 		topItem->setText(0, motionGroup->text());
 		_motionGroups->addTopLevelItem(topItem);
 		_modelJson["FileReferences"]["Motions"][motionGroup->text().toUtf8().toStdString()] = Json::Value(Json::arrayValue);
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÌí¼Ó³É¹¦!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„æ·»åŠ æˆåŠŸ!");
 	}
 	else {
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÒÑ´æÔÚ!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„å·²å­˜åœ¨!");
 	}
 }
 
 void ModelSettings::DeleteGroup()
 {
 	if (motionGroup->text().isEmpty()) {
-		Tip::GetInstance()->Pop(_parent, "Î´Ñ¡ÖĞ¶¯×÷×é!");
+		Tip::GetInstance()->Pop(_parent, "æœªé€‰ä¸­åŠ¨ä½œç»„!");
 		return;
 	}
 	QList<QTreeWidgetItem*> x = _motionGroups->findItems(motionGroup->text(), Qt::MatchExactly, 0);
 	if (x.count() == 1)
 	{
-		if (QMessageBox::question(_parent, QString::fromLocal8Bit("Ä£ĞÍÉèÖÃ"), QString::fromLocal8Bit("ÊÇ·ñÉ¾³ı¶¯×÷×é<br>").append("<b>").append(motionGroup->text()).append("</b>"),
+		if (QMessageBox::question(_parent, QString("æ¨¡å‹è®¾ç½®"), QString("æ˜¯å¦åˆ é™¤åŠ¨ä½œç»„<br>").append("<b>").append(motionGroup->text()).append("</b>"),
 			QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 		{
 			_modelJson["FileReferences"]["Motions"].removeMember(motionGroup->text().toUtf8().toStdString());
 			x.at(0)->takeChildren();
 			_motionGroups->takeTopLevelItem(_motionGroups->indexOfTopLevelItem(x.at(0)));
-			Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÒÑÉ¾³ı!");
+			Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„å·²åˆ é™¤!");
 			_motionGroups->clearFocus();
 			motionGroup->clear();
 		}
 	}
 	else if (x.count() == 0)
 	{
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×é²»´æÔÚ!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„ä¸å­˜åœ¨!");
 	}
 	else {
-		Tip::GetInstance()->Pop(_parent, "³öÏÖÎ´Öª´íÎó!");
+		Tip::GetInstance()->Pop(_parent, "å‡ºç°æœªçŸ¥é”™è¯¯!");
 	}
 }
 
@@ -853,32 +980,32 @@ void ModelSettings::UpdateGroupName()
 {
 	if (motionGroup->text().isEmpty()) 
 	{
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÃû³Æ²»ÄÜÎª¿Õ!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„åç§°ä¸èƒ½ä¸ºç©º!");
 	}
-	else if (_motionGroups->currentItem() == NULL)  //ÎŞÑ¡ÖĞ
+	else if (_motionGroups->currentItem() == NULL)  //æ— é€‰ä¸­
 	{
-		Tip::GetInstance()->Pop(_parent, "Î´Ñ¡ÖĞ¶¯×÷×é!");
+		Tip::GetInstance()->Pop(_parent, "æœªé€‰ä¸­åŠ¨ä½œç»„!");
 	}
 	else if (_motionGroups->findItems(motionGroup->text(), Qt::MatchExactly, 0).count() > 0)
 	{
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÃû³ÆÒÑ´æÔÚ!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„åç§°å·²å­˜åœ¨!");
 	}
-	else if (_motionGroups->currentItem()->parent() == NULL)  //Ñ¡ÖĞÕû¸ö¶¯×÷×é
+	else if (_motionGroups->currentItem()->parent() == NULL)  //é€‰ä¸­æ•´ä¸ªåŠ¨ä½œç»„
 	{
 		Json::Value group = _modelJson["FileReferences"]["Motions"][_motionGroups->currentItem()->text(0).toStdString()];
 		_modelJson["FileReferences"]["Motions"].removeMember(_motionGroups->currentItem()->text(0).toStdString());
 		_modelJson["FileReferences"]["Motions"][motionGroup->text().toStdString()] = group;
 		_motionGroups->currentItem()->setText(0, motionGroup->text());
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÃû³ÆÒÑĞŞ¸Ä!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„åç§°å·²ä¿®æ”¹!");
 	}
-	else  //Ñ¡ÖĞ×Ó¶¯×÷ 
+	else  //é€‰ä¸­å­åŠ¨ä½œ 
 	{
 		QTreeWidgetItem* p = _motionGroups->currentItem()->parent();
 		Json::Value group = _modelJson["FileReferences"]["Motions"][p->text(0).toStdString()];
 		_modelJson["FileReferences"]["Motions"].removeMember(p->text(0).toStdString());
 		_modelJson["FileReferences"]["Motions"][motionGroup->text().toStdString()] = group;
 		p->setText(0, motionGroup->text());
-		Tip::GetInstance()->Pop(_parent, "¶¯×÷×éÃû³ÆÒÑĞŞ¸Ä!");
+		Tip::GetInstance()->Pop(_parent, "åŠ¨ä½œç»„åç§°å·²ä¿®æ”¹!");
 	}
 }
 
@@ -904,35 +1031,74 @@ void ModelSettings::UpdateModel()
 	LAppLive2DManager::GetInstance()->ChangeModel(_ModelDir.c_str(), _ModelName.c_str());
 	LApp::GetInstance()->SaveConfig();
 	LoadConfig();
-	Tip::GetInstance()->Pop(_parent, "Ä£ĞÍÒÑ¸ü»»");
+	Tip::GetInstance()->Pop(_parent, "æ¨¡å‹å·²æ›´æ¢");
 }
 
 ChatSettings::ChatSettings(QWidget* p)
 {
 	_parent = p;
-	savePath = new QLineEdit();
-	apiKey = new QLineEdit();
-	apiSecret = new QLineEdit();
-	hostPort = new QLineEdit();
+	savePath = new QtMaterialTextField();
+	savePath->setInkColor(QColor(50, 120, 200));
+	savePath->setInputLineColor(QColor(80, 80, 80));
+
+	apiKey = new QtMaterialTextField();
+	apiKey->setInkColor(QColor(50, 120, 200));
+	apiKey->setInputLineColor(QColor(80, 80, 80));
+
+	apiSecret = new QtMaterialTextField();
+	apiSecret->setInkColor(QColor(50, 120, 200));
+	apiSecret->setInputLineColor(QColor(80, 80, 80));
+
+	hostPort = new QtMaterialTextField();
+	hostPort->setInkColor(QColor(50, 120, 200));
+	hostPort->setInputLineColor(QColor(80, 80, 80));
+
 	QRegExpValidator* v = new QRegExpValidator(QRegExp("[0-9]{1,4}"));
-	readTimeOut = new QLineEdit();
+	readTimeOut = new QtMaterialTextField();
 	readTimeOut->setValidator(v);
 	readTimeOut->setFixedWidth(100);
-	route = new QLineEdit();
-	voiceRoute = new QLineEdit();
-	lbl_apiKey = new QLabel(QString::fromLocal8Bit("ApiKey"));
-	lbl_apiSecret = new QLabel(QString::fromLocal8Bit("ApiKey"));
-	lbl_hostPort = new QLabel(QString::fromLocal8Bit("·şÎñÆ÷µØÖ·"));
-	lbl_route = new QLabel(QString::fromLocal8Bit("ÎÄ±¾´¦ÀíÂ·¾¶"));
-	lbl_readTimeOut = new QLabel(QString::fromLocal8Bit("×î³¤ÏìÓ¦Ê±¼ä"));
-	lbl_savePath = new QLabel(QString::fromLocal8Bit("ÁÄÌì±£´æÎ»ÖÃ"));
-	lbl_voiceRoute = new QLabel(QString::fromLocal8Bit("ÓïÒô´¦ÀíÂ·¾¶"));
-	apply = new QPushButton(QString::fromLocal8Bit("±£´æ"));
-	reset = new QPushButton(QString::fromLocal8Bit("ÖØÖÃ"));
-	chooseDir = new QPushButton(QString::fromLocal8Bit("´ò¿ª"));
-	MlyAI = new QCheckBox(QString::fromLocal8Bit("ÜÔÀòÔÆAPI"));
-	CustomChatServer = new QCheckBox(QString::fromLocal8Bit("×Ô¶¨ÒåÁÄÌì·şÎñÆ÷"));
-	CustomVoiceChat = new QCheckBox(QString::fromLocal8Bit("×Ô¶¨ÒåÓïÒô´¦ÀíÂ·¾¶"));
+	readTimeOut->setInkColor(QColor(50, 120, 200));
+	readTimeOut->setInputLineColor(QColor(80, 80, 80));
+
+	route = new QtMaterialTextField();
+	route->setInkColor(QColor(50, 120, 200));
+	route->setInputLineColor(QColor(80, 80, 80));
+
+	voiceRoute = new QtMaterialTextField();
+	voiceRoute->setInkColor(QColor(50, 120, 200));
+	voiceRoute->setInputLineColor(QColor(80, 80, 80));
+
+	lbl_apiKey = new QLabel(QString("ApiKey"));
+	lbl_apiSecret = new QLabel(QString("ApiKey"));
+	lbl_hostPort = new QLabel(QString("æœåŠ¡å™¨åœ°å€"));
+	lbl_route = new QLabel(QString("æ–‡æœ¬å¤„ç†è·¯å¾„"));
+	lbl_readTimeOut = new QLabel(QString("æœ€é•¿å“åº”æ—¶é—´"));
+	lbl_savePath = new QLabel(QString("èŠå¤©ä¿å­˜ä½ç½®"));
+	lbl_voiceRoute = new QLabel(QString("è¯­éŸ³å¤„ç†è·¯å¾„"));
+	apply = new QtMaterialRaisedButton(QString("ä¿å­˜"));
+	apply->setOverlayColor(Qt::white);
+	apply->setForegroundColor(QColor(244, 244, 244));
+	apply->setBackgroundColor(QColor(50, 120, 200));
+	apply->setFixedHeight(30);
+	apply->setFixedWidth(120);
+
+	reset = new QtMaterialRaisedButton(QString("é‡ç½®"));
+	reset->setOverlayColor(Qt::white);
+	reset->setForegroundColor(QColor(244, 244, 244));
+	reset->setBackgroundColor(QColor(50, 120, 200));
+	reset->setFixedHeight(30);
+	reset->setFixedWidth(120);
+
+	chooseDir = new QtMaterialRaisedButton(QString("æ‰“å¼€"));
+	chooseDir->setOverlayColor(Qt::white);
+	chooseDir->setForegroundColor(QColor(244, 244, 244));
+	chooseDir->setBackgroundColor(QColor(50, 120, 200));
+	chooseDir->setFixedHeight(30);
+	chooseDir->setFixedWidth(120);
+
+	MlyAI = new QCheckBox(QString("èŒ‰è‰äº‘API"));
+	CustomChatServer = new QCheckBox(QString("è‡ªå®šä¹‰èŠå¤©æœåŠ¡å™¨"));
+	CustomVoiceChat = new QCheckBox(QString("è‡ªå®šä¹‰è¯­éŸ³å¤„ç†è·¯å¾„"));
 
 	CustomVoiceChat->setStyleSheet(":disabled{color: grey}");
 
@@ -991,18 +1157,18 @@ void ChatSettings::Apply()
 	_CustomVoiceChatOn = CustomVoiceChat->isChecked();
 	_CustomVoiceChatRoute = voiceRoute->text().toUtf8().toStdString();
 	LApp::GetInstance()->SaveConfig();
-	Tip::GetInstance()->Pop(_parent, "±£´æ³É¹¦!");
+	Tip::GetInstance()->Pop(_parent, "ä¿å­˜æˆåŠŸ!");
 }
 
 void ChatSettings::Reset()
 {
 	LoadConfig();
-	Tip::GetInstance()->Pop(_parent, "ÒÑÖØÖÃ!");
+	Tip::GetInstance()->Pop(_parent, "å·²é‡ç½®!");
 }
 
 void ChatSettings::ChooseDir()
 {
-	QString dir = QFileDialog::getExistingDirectory(_parent, QString::fromLocal8Bit("ÁÄÌì±£´æÂ·¾¶"), ".");
+	QString dir = QFileDialog::getExistingDirectory(_parent, QString("èŠå¤©ä¿å­˜è·¯å¾„"), ".");
 	if (!dir.isEmpty()) savePath->setText(dir);
 }
 
@@ -1067,11 +1233,11 @@ ControlWidget::ControlWidget()
 	_appSettings = new AppSettings(this);
 	_modelSettings = new ModelSettings(this);
 	_chatSettings = new ChatSettings(this);
-	addTab(_appSettings, QString::fromLocal8Bit("ÓÃ»§ÉèÖÃ"));
-	addTab(_modelSettings, QString::fromLocal8Bit("Ä£ĞÍÉèÖÃ"));
-	addTab(_chatSettings, QString::fromLocal8Bit("ChatAPI"));
+	addTab(_appSettings, QString("ç”¨æˆ·è®¾ç½®"));
+	addTab(_modelSettings, QString("æ¨¡å‹è®¾ç½®"));
+	addTab(_chatSettings, QString("ChatAPI"));
 
-	QFontDatabase::addApplicationFont("Resources/PingFang-Medium.ttf");
+	QFontDatabase::addApplicationFont(QString::fromStdString(_AssetsDir).append("/PingFang-Medium.ttf"));
 
 	setStyleSheet("QTabBar::tab{font-family: PingFang SC Medium; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
 		"QTabBar::tab:selected{background-color: rgb(30, 30, 30); color: rgba(255, 255, 255, 180); }"
@@ -1080,25 +1246,18 @@ ControlWidget::ControlWidget()
 		"QTabWidget{background-color: rgb(37, 37, 38)}"
 	);
 	_appSettings->setStyleSheet(
+		QString(
 		"QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: PingFang SC Medium;}"
-		"QLabel{background: transparent; color: rgba(255, 255, 255, 200); font: 15px}"
-		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
+		"QLabel{background: transparent; color: rgba(255, 255, 255, 180); font: 12px}"
+		"QLineEdit{padding: 3px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
-		"QPushButton{width: 100px; font-family: PingFang SC Medium; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(235, 235, 235); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
-		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
-
-		"QSlider{background: transparent}"
-		"QSlider::sub-page:horizontal {background: rgb(80, 150, 255); margin-top: 8px; margin-bottom: 8px}"
-		"QSlider::groove:horizontal {background: rgb(193, 204, 208); border: 1px solid rgb(30, 30, 30); border-radius: 2px; margin-top: 6px; margin-bottom: 6px; padding: 0;}"
-		"QSlider::handle:horizontal {margin-top: -3px; margin-bottom: -3px; width: 16px; height: 10px; border-radius: 7px; background-color: rgb(255, 255, 255); }"
-
-		"QPushButton#repairModeControl{background-color: transparent; border-image: url(./Resources/circle-left.png); width: 50px; height: 50px; border-radius: 0; padding: 0; margin: 0 }"
-		"QPushButton#repairModeControl:checked{border-image: url(./Resources/circle-right.png)}"
+		"QPushButton{font-family: PingFang SC Medium; font: 12px; border-radius: 7px; font-weight: 300; margin:5px}"
+		)
 	);
 	_chatSettings->setStyleSheet(
 		"QWidget{color: rgba(255, 255, 255, 180);background-color: rgb(50, 50, 50); font-family: PingFang SC Medium;}"
-		"QLabel{background: transparent; color: rgba(255, 255, 255, 200); font: 15px}"
-		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
+		"QLabel{background: transparent; color: rgba(255, 255, 255, 180); font: 14px}"
+		"QLineEdit{padding: 3px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QLineEdit::!enabled{background-color: rgba(60, 60, 60, 100); color: grey; border: 1px solid rgba(80, 80, 80, 100)}"
 		"QPushButton{width: 100px;font-family: PingFang SC Medium; font: 12px; border-radius: 7px; font-weight: 300; color: rgb(235, 235, 235); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
@@ -1106,7 +1265,7 @@ ControlWidget::ControlWidget()
 		"QCheckBox{font: 13.5px;  font-family: PingFang SC Medium; color: rgba(255, 255, 255, 200);background: transparent;}"
 	);
 	_modelSettings->setStyleSheet("QWidget{color: rgba(255, 255, 255, 180); background-color: rgb(50, 50, 50); font-family: PingFang SC Medium}"
-		"QLabel{background: transparent; color: rgba(255 ,255, 255, 200); font: 15px}"
+		"QLabel{background: transparent; color: rgba(255 ,255, 255, 180); font: 12px}"
 		"QTreeWidget::item{height: 30px; color: rgba(255, 255, 255, 200)}"
 		"QTreeWidget{outline: none; border: none; color: rgba(255, 255, 255, 245); background-color: rgb(50, 50, 50); font-family: PingFang SC Medium}"
 		"QTreeWidget::item:selected:active{background-color: rgba(50, 120, 170, 180); color: rgba(255, 255, 255, 245); border: 1px solid rgb(50, 120, 240)}"
@@ -1116,8 +1275,7 @@ ControlWidget::ControlWidget()
 		"QTextEdit::focus{border: 1px solid rgb(50, 120, 200)}"
 		"QLineEdit{padding: 5px; color: rgb(191, 191, 191); font: 15px; border: 1px solid rgb(80, 80, 80); background-color: rgb(60, 60, 60);}"
 		"QLineEdit::focus{border: 1px solid rgb(50, 120, 200)}"
-		"QPushButton{width: 100px; font-family: ºÚÌå; font: 12px; font-weight: 300; border-radius: 7px; font-family: MaoTi; color: rgb(235, 235, 235); background-color: rgba(70, 172, 255, 190); border: none; padding-left: 7px; padding-right: 7px; padding-top: 7px; padding-bottom: 7px}"
-		"QPushButton:pressed{color: rgba(255, 255, 255, 100); background-color: rgba(50, 150, 235, 150); border: none; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 7px}"
+		"QPushButton{font-family: PingFang SC Medium; font: 12px; border-radius: 7px; font-weight: 300; margin:5px}"
 		"QComboBox{height: 30px; padding: 1px 18px 1px 3px;}"
 	);
 }

@@ -71,6 +71,8 @@ namespace LAppConfig {
 
 	extern float _CharacterX;
 	extern float _CharacterY;
+	
+	extern string _AssetsDir;
 };
 
 class LApp

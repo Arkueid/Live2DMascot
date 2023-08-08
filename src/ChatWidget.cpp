@@ -18,8 +18,7 @@
 #include <iostream>
 #include <thread>
 #include <QtCore/qtimer.h>
-
-
+#include "ChatHistoryDB.h"
 
 using namespace std;
 
@@ -40,7 +39,7 @@ ConversationWidget::ConversationWidget()
 
 	inputArea = new QLineEdit();
 	inputArea->setFont(_font);
-	inputArea->setPlaceholderText(QString::fromLocal8Bit("prompt..."));
+	inputArea->setPlaceholderText(QString("prompt..."));
 	inputArea->setStyleSheet(
 		QString("QLineEdit {background-color: rgba(0, 0, 0, 0); color: white; border: none;}")
 	);
@@ -55,13 +54,15 @@ ConversationWidget::ConversationWidget()
 	_Record = new QPushButton();
 	_History = new QPushButton();
 
-	_Record->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput_active.png)}"));
-	_Send->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/send.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/send_active.png)}"));
-	_History->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/history.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/history_active.png)}"));
+	_Record->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput_active.png)}"));
+	_Send->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/send.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/send_active.png)}"));
+	_History->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/history.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/history_active.png)}"));
 
 	_Send->setFixedSize(25, 25);
 	_Record->setFixedSize(30, 30);
 	_History->setFixedSize(26, 26);
+
+	historyView = new ChatHistoryView;
 
 	grid = new QGridLayout();
 	grid->addWidget(_Record, 0, 1, 1, 1);
@@ -69,7 +70,6 @@ ConversationWidget::ConversationWidget()
 	grid->addWidget(_Send, 0, 6, 1, 1);
 	grid->addWidget(_History, 0, 0, 1, 1);
 
-	historyView = new ChatHistoryView;
 
 	connect(_Record, SIGNAL(pressed()), SLOT(StartVoiceInput()));
 	connect(_Record, SIGNAL(released()), SLOT(StopVoiceInput()));
@@ -86,6 +86,7 @@ ConversationWidget::ConversationWidget()
 }
 
 void ConversationWidget::UpdateHistory(const char* chara, const char* text, const char* sound) {
+	historyView->Switch2Today();
 	historyView->Insert(
 		chara,
 		text,
@@ -115,7 +116,7 @@ void ConversationWidget::keyPressEvent(QKeyEvent* e) {
 	}
 	else if (e->key() == Qt::Key_Alt) {
 		_Record->setStyleSheet(
-			QString("border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput_active.png)")
+			QString("border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput_active.png)")
 		);
 		StartVoiceInput();
 	}
@@ -124,7 +125,7 @@ void ConversationWidget::keyPressEvent(QKeyEvent* e) {
 void ConversationWidget::keyReleaseEvent(QKeyEvent* e) {
 	if (e->key() == Qt::Key_Alt) {
 		_Record->setStyleSheet(
-			QString("border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/voiceInput.png)")
+			QString("border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput.png)")
 		);
 		StopVoiceInput();
 	}
@@ -151,14 +152,12 @@ void ConversationWidget::AttachToCharacter()
 	move(win->x() + (win->width() - width()) / 2, win->y() + (win->height() - height()) * 2 / 3);
 }
 
-//µ¯³ö
 void ConversationWidget::getInput()
 {
 	_msg.clear();
 	inputArea->clear();
 	AttachToCharacter();
 	show();
-	//µ÷³öÊäÈë¿ò¾ÍÄÜÊäÈë£¬²»ĞèÒªÊó±êµã»÷£¬ÓÃsetFocusºÃÏñ²»ĞĞ
 	inputArea->activateWindow();
 	inputArea->setFocus();
 }
@@ -167,19 +166,18 @@ void ConversationWidget::PopDialog(bool waitMode) {
 	else LApp::GetInstance()->GetWindow()->GetDialog()->Pop(text.c_str());
 }
 
-//´¦ÀíÁÄÌìÎÄ±¾·¢ËÍºÍ½ÓÊÕ
 void ConversationWidget::ProcessNetworkResponse(bool voice)
 {
 	inputArea->setPlaceholderText("waiting...");
 	LAppConfig::_WaitChatResponse = true;
 	GLWidget* win = LApp::GetInstance()->GetWindow();
 	string x = _msg.toUtf8();
+	string asr;
 	LApp::GetInstance()->GetWindow()->GetDialog()->moveToThread(LApp::GetInstance()->GetApp()->thread());
 	emit popDialogInThread(true);
-	emit textInputTriggered(LAppConfig::_UserName.c_str(), x.empty() ? "ÓïÒôÊäÈë" : x.c_str(), "");
 	if (LAppConfig::_CustomChatServerOn && voice)
 	{
-		ChatAPI::VoiceChat(string(LAppConfig::_ChatSavePath).append("/voice-input-temp.wav").c_str(), text, soundPath);
+		ChatAPI::VoiceChat(string(LAppConfig::_ChatSavePath).append("/voice-input-temp.wav").c_str(), asr, text, soundPath);
 	}
 	else {
 		if (LAppConfig::_CustomChatServerOn)
@@ -190,6 +188,7 @@ void ConversationWidget::ProcessNetworkResponse(bool voice)
 			ChatAPI::AskMlyai(x, text);
 		}
 	}
+	emit textInputTriggered((LAppConfig::_UserName.empty() ? "ç”¨æˆ·" : LAppConfig::_UserName.c_str()), voice ? asr.c_str() : x.c_str(), "");
 
 	QDir dir(LAppConfig::_ChatSavePath.c_str());
 	if (!dir.exists())
@@ -197,6 +196,8 @@ void ConversationWidget::ProcessNetworkResponse(bool voice)
 		dir.mkpath(".");
 	}
 	LAppLive2DManager::GetInstance()->GetModel(0)->Speak(text.c_str(), soundPath.c_str());
+
+#ifdef SAVE_CHAT_AS_HTML
 	QDateTime date = QDateTime::currentDateTime();
 	QFile f(string(LAppConfig::_ChatSavePath).append("/").append(date.toString("yyyy-MM-dd").toStdString()).append(".html").c_str());
 	f.open(QIODevice::Append);
@@ -212,14 +213,20 @@ void ConversationWidget::ProcessNetworkResponse(bool voice)
 		f.write(string("<audio controls><source src=\"").append(soundPath).append("\"></audio>").c_str());
 	f.write("</div>");
 	f.close();
+#else
+	ChatHistoryDB db(string(LAppConfig::_ChatSavePath).append("/chat_history.db").c_str());
+	db.InsertMsg((LAppConfig::_UserName.empty() ? "ç”¨æˆ·" : LAppConfig::_UserName.c_str()), voice ? asr.c_str() : x.c_str(), "");
+	db.InsertMsg((LAppConfig::_AppName.empty() ? "æ¡Œå® " : LAppConfig::_AppName.c_str()), text.c_str(), soundPath.c_str());
+	db.Close();
+#endif // SAVE_HTML
+
 	emit popDialogInThread(false);
-	emit textInputTriggered(LAppConfig::_AppName.c_str(), text.c_str(), soundPath.c_str());
+	emit textInputTriggered((LAppConfig::_AppName.empty() ? "æ¡Œå® " : LAppConfig::_AppName.c_str()), text.c_str(), soundPath.c_str());
 
 	LAppConfig::_WaitChatResponse = false;
 	inputArea->setPlaceholderText("prompt...");
 }
 
-//¼üÅÌÊäÈëÊÂ¼ş´¦Àí£¬²»º¬ÊäÈë·¨ÊäÈë
 void ConversationWidget::SendRequest()
 {
 	if (inputArea->text().isEmpty()) close();
@@ -231,9 +238,9 @@ void ConversationWidget::SendRequest()
 		inputArea->clear();
 		if (!LAppConfig::_WaitChatResponse) 
 		{
-			PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);   //Í£Ö¹µ±Ç°ÓïÒô
-			LAppLive2DManager::GetInstance()->GetModel(0)->StopLipSync();  //Í£Ö¹¿ÚĞÍÍ¬²½
-			std::thread(&ConversationWidget::ProcessNetworkResponse, this, false).detach();  //Æô¶¯Ïß³Ì·¢ËÍÁÄÌìÎÄ±¾
+			PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);   //æ’­æ”¾éŸ³é¢‘
+			LAppLive2DManager::GetInstance()->GetModel(0)->StopLipSync();  //åœæ­¢å£å‹åŒæ­¥
+			std::thread(&ConversationWidget::ProcessNetworkResponse, this, false).detach();  //æ˜¾ç¤ºç­‰å¾…ä¸­
 		}
 	}
 }

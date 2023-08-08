@@ -5,7 +5,7 @@
 #include <QtWidgets/qlayout.h>
 #include <QtWidgets/qframe.h>
 #include "LAppDefine.hpp"
-#include "ChatHisitroyView.h"
+#include "ChatHistoryView.h"
 
 
 class ConversationWidget : public QWidget

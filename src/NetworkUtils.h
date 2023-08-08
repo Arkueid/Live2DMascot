@@ -10,15 +10,6 @@
 #include <QtCore/qtextcodec.h>
 #include <QtCore/qdatetime.h>
 
-
-namespace BgmListUtils
-{
-	extern std::string _BgmListJsonPath;
-	bool ShouldUpdate();
-	bool UpdateBgmList();
-	void CheckUpdate();
-}
-
 namespace HolidayUtils
 {
 	bool GetHolidayJson();
@@ -30,13 +21,10 @@ namespace HolidayUtils
 namespace ChatAPI 
 {
 	void AskMlyai(const string& msg, string& resText);
-	void Chat(const string& text, string& resText, string& soundPath);  //自定义聊天
-	void VoiceChat(const char* filePath, string& text, string& soundPath);
+	void Chat(const string& text, string& resText, string& soundPath); 
+	void VoiceChat(const char* filePath, string& asr, string& text, string& soundPath);
 }
 
-/**
-* 语音输入，需要联网
-*/
 #include <QtMultimedia/qaudiorecorder.h>
 
 namespace {

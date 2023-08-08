@@ -1,5 +1,5 @@
 /**
-* ÓïÒô¿ØÖÆ£¬°üÀ¨²¥·Å£¬Í£Ö¹£¬ºÍµ÷ÕûÒôÁ¿´óĞ¡
+* è¯­éŸ³æ§åˆ¶ï¼ŒåŒ…æ‹¬æ’­æ”¾ï¼Œåœæ­¢ï¼Œå’Œè°ƒæ•´éŸ³é‡å¤§å°
 */
 
 #include "AudioUtils.h"
@@ -33,8 +33,8 @@ void AudioUtils::ReleaseWavBytes(char* bytes, const char* path) {
 }
 
 void AudioUtils::ResizeVolume(char* bytes, int bufSize, double vol) {
-	//¶ÁÈ¡pcmÊı¾İ³¤¶È
-	//pcmÊı¾İ³¤¶ÈÔÚµÚ40¸öbyteÖÁµÚ44¸öbyte
+	//è¯»å–pcmæ•°æ®é•¿åº¦
+	//pcmæ•°æ®é•¿åº¦åœ¨ç¬¬40ä¸ªbyteè‡³ç¬¬44ä¸ªbyte
 	int pcmLength;
 	char str[5];
 	if (DebugLogEnable) {
@@ -53,7 +53,7 @@ void AudioUtils::ResizeVolume(char* bytes, int bufSize, double vol) {
 
 	//BitsPerSample
 	int BitsPerSample = *(short*)(bytes + 34);
-	//²»ÊÇ16Î»²ÉÑùÂÊ
+	//ä¸æ˜¯16ä½é‡‡æ ·ç‡
 	if (BitsPerSample != 16) {
 		if (DebugLogEnable)
 			printf("[AudioUtils]Unhandled BitsPerSample: %d\n", BitsPerSample);
@@ -73,7 +73,7 @@ void AudioUtils::ResizeVolume(char* bytes, int bufSize, double vol) {
 		type = 0;
 	}
 	else if (strcmp(str, "LIST") == 0) {
-		// ¸ñÊ½×ª»»Èí¼ş´¦Àí¹ı
+		// æ ¼å¼è½¬æ¢è½¯ä»¶å¤„ç†è¿‡
 		// 36~40 LIST
 		// 44~52 INFOISFT
 		// 56~60 Lavf
@@ -88,23 +88,23 @@ void AudioUtils::ResizeVolume(char* bytes, int bufSize, double vol) {
 			printf("[APP][Audio]Unknown SubChunk2ID: %s\n", str);
 		return;
 	}
-	//pcmÊı¾İÔÚÏÂ±ê44µ½pcmLength-1ÏÂ±ê´¦Ö®¼ä
+	//pcmæ•°æ®åœ¨ä¸‹æ ‡44åˆ°pcmLength-1ä¸‹æ ‡å¤„ä¹‹é—´
 	for (int pcmPtr = offset; pcmPtr < pcmLength; pcmPtr ++) {
-		// pcmÊı¾İÖĞÁ½¸öbyte±íÊ¾Ò»¸öÕñ·ùÊı¾İ£¬¿ÉÒÔÓÃÒ»¸öshort´¢´æ
-		// makeword ½«¸ß°ËÎ»ºÍµÍ°ËÎ»bitºÏ³ÉÒ»¸öÕñ·ùÊı¾İ
+		// pcmæ•°æ®ä¸­ä¸¤ä¸ªbyteè¡¨ç¤ºä¸€ä¸ªæŒ¯å¹…æ•°æ®ï¼Œå¯ä»¥ç”¨ä¸€ä¸ªshortå‚¨å­˜
+		// makeword å°†é«˜å…«ä½å’Œä½å…«ä½bitåˆæˆä¸€ä¸ªæŒ¯å¹…æ•°æ®
 		wData = MAKEWORD(bytes[pcmPtr], bytes[pcmPtr + 1]);
-		// ÓÃlong int ´¢´æ·ÀÖ¹ÓëvolÏà³ËÒç³ö
+		// ç”¨long int å‚¨å­˜é˜²æ­¢ä¸volç›¸ä¹˜æº¢å‡º
 		dwData = wData;
 		dwData = dwData * vol;
 			
-		// ¿ØÖÆÒôÁ¿·¶Î§
+		// æ§åˆ¶éŸ³é‡èŒƒå›´
 		if (dwData < -0x8000) dwData = -0x8000;
 		else if (dwData > 0x7FFF) dwData = 0x7FFF;
-		// ½ØÈ¡dwDataµÄµÍ16Î»µÃµ½Ò»¸öÕñ·ùÊı¾İ
+		// æˆªå–dwDataçš„ä½16ä½å¾—åˆ°ä¸€ä¸ªæŒ¯å¹…æ•°æ®
 		wData = LOWORD(dwData);
-		// µÍ8Î»
+		// ä½8ä½
 		bytes[pcmPtr] = LOBYTE(wData);
-		// ¸ß8Î»
+		// é«˜8ä½
 		bytes[pcmPtr + 1] = HIBYTE(wData);
 	}
 }
@@ -118,8 +118,10 @@ bool AudioUtils::StartSound(const char* path, double vol, bool force) {
 	bool success;
 	long lrVolume = MAKELONG(INT16_MAX * vol, INT16_MAX * vol);
 	waveOutSetVolume(NULL, lrVolume);
-	if (DebugLogEnable)
+	if (DebugLogEnable) {
 		printf("[APP][Audio]Volume Set: %.2lf\n", vol);
+		printf("[APP][Audio]Play Sound: %s\n", path);
+	}
 	if (force)
 		success = PlaySound(path, NULL, SND_ASYNC | SND_NODEFAULT | SND_FILENAME);
 	else

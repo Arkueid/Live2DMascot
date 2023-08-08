@@ -16,6 +16,10 @@
 #include "LAppDefine.hpp"
 #include "json/json.h"
 
+#include <qtmaterialtextfield.h>
+#include <qtmaterialslider.h>
+#include <qtmaterialtoggle.h>
+#include <qtmaterialraisedbutton.h>
 
 class MyText : public QTextEdit {
 	Q_OBJECT
@@ -49,45 +53,45 @@ protected:
 class AppSettings : public QWidget
 {
 	Q_OBJECT
-	QLineEdit* appName;
-	QLineEdit* username;
-	QLineEdit* iconPath;
-	QLineEdit* fps;
-	QLineEdit* windowHeight;
-	QLineEdit* windowWidth;
-	QLineEdit* modelDir;
-	QLineEdit* motionInterval;
-	QLineEdit* lipSync;
-	QLabel* lbl_dialogMaxWidth;
-	QLineEdit* dialogMaxWidth;
-	QLabel* lbl_dialogFontSize;
-	QLineEdit* dialogFontSize;
-	QLabel* lbl_dialogYOffset;
-	QLineEdit* dialogYOffset;
-	QSlider* volumeSlider;
-	QLabel* lbl_motioninterval;
-	QLabel* lbl_lipsync;
-	QLabel* lbl_appName;
-	QLabel* lbl_username;
-	QLabel* lbl_iconPath;
-	QLabel* lbl_FPS;
-	QLabel* lbl_windowWidth;
-	QLabel* lbl_windowHeight;
-	QLabel* lbl_modelDir;
+	QtMaterialTextField* appName;
+	QtMaterialTextField* username;
+	QtMaterialTextField* iconPath;
+	QtMaterialTextField* fps;
+	QtMaterialTextField* windowHeight;
+	QtMaterialTextField* windowWidth;
+	QtMaterialTextField* modelDir;
+	QtMaterialTextField* motionInterval;
+	QtMaterialTextField* lipSync;
+	//QLabel* lbl_dialogMaxWidth;
+	QtMaterialTextField* dialogMaxWidth;
+	//QLabel* lbl_dialogFontSize;
+	QtMaterialTextField* dialogFontSize;
+	//QLabel* lbl_dialogYOffset;
+	QtMaterialTextField* dialogYOffset;
+	QtMaterialSlider* volumeSlider;
+	//QLabel* lbl_motioninterval;
+	//QLabel* lbl_lipsync;
+	//QLabel* lbl_appName;
+	//QLabel* lbl_username;
+	//QLabel* lbl_iconPath;
+	//QLabel* lbl_FPS;
+	//QLabel* lbl_windowWidth;
+	//QLabel* lbl_windowHeight;
+	//QLabel* lbl_modelDir;
 	QLabel* lbl_volume;
 	QLabel* lbl_sliderVal;
 	QLabel* lbl_repairMode;
-	QPushButton* openFile;
-	QPushButton* chooseDir;
-	QPushButton* apply;
-	QPushButton* reset;
-	QGridLayout* grid;
+	QtMaterialRaisedButton* openFile;
+	QtMaterialRaisedButton* chooseDir;
+	QtMaterialRaisedButton* apply;
+	QtMaterialRaisedButton* reset;
+	//QGridLayout* grid;
 	QWidget* _parent;
-	QPushButton* repairModeControl;
-	QLabel* lbl_characterX;
-	QLineEdit* characterX;
-	QLabel* lbl_characterY;
-	QLineEdit* characterY;
+	QtMaterialToggle* repairModeControl;
+	//QLabel* lbl_characterX;
+	QtMaterialTextField* characterX;
+	//QLabel* lbl_characterY;
+	QtMaterialTextField* characterY;
 public:
 	AppSettings(QWidget* p);
 	~AppSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]AppSettings destroyed\n"); }
@@ -109,28 +113,27 @@ class ModelSettings : public QWidget
 	QComboBox* model;
 	QLabel* lbl_model;
 	QTreeWidget* _motionGroups;
-	QPushButton* apply;
-	QPushButton* reset;
+	QtMaterialRaisedButton* apply;
+	QtMaterialRaisedButton* reset;
 	QGridLayout* grid;
 	Json::Value _modelJson;
 	QLabel* lbl_motionJsonPath;
 	QLabel* lbl_motionSoundPath;
 	QLabel* lbl_motionText;
 	QLabel* lbl_motionGroup;
-	QLineEdit* motionGroup;
+	QtMaterialTextField* motionGroup;
 	QComboBox* motionJsonPath;
 	QComboBox* motionSoundPath;
 	MyText* motionText;
-	QPushButton* addMotion;
-	QPushButton* deleteMotion;
-	QPushButton* changeModel;
-	QPushButton* addGroup;
-	QPushButton* deleteGroup;
-	QPushButton* updateGroupName;
+	QtMaterialRaisedButton* addMotion;
+	QtMaterialRaisedButton* deleteMotion;
+	QtMaterialRaisedButton* changeModel;
+	QtMaterialRaisedButton* addGroup;
+	QtMaterialRaisedButton* deleteGroup;
+	QtMaterialRaisedButton* updateGroupName;
 public:
 	ModelSettings(QWidget* p);
 	~ModelSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ModelSettings destroyed\n"); }
-
 	void LoadConfig();
 	void Release();
 private slots:
@@ -153,13 +156,13 @@ class ChatSettings : public QWidget
 {
 	Q_OBJECT
 private:
-	QLineEdit* savePath;
-	QLineEdit* apiKey;
-	QLineEdit* apiSecret;
-	QLineEdit* hostPort;
-	QLineEdit* readTimeOut;
-	QLineEdit* route;
-	QLineEdit* voiceRoute;
+	QtMaterialTextField* savePath;
+	QtMaterialTextField* apiKey;
+	QtMaterialTextField* apiSecret;
+	QtMaterialTextField* hostPort;
+	QtMaterialTextField* readTimeOut;
+	QtMaterialTextField* route;
+	QtMaterialTextField* voiceRoute;
 	QLabel* lbl_savePath;
 	QLabel* lbl_apiKey;
 	QLabel* lbl_apiSecret;
@@ -170,9 +173,9 @@ private:
 	QCheckBox* MlyAI;
 	QCheckBox* CustomChatServer;
 	QCheckBox* CustomVoiceChat;
-	QPushButton* chooseDir;
-	QPushButton* apply;
-	QPushButton* reset;
+	QtMaterialRaisedButton* chooseDir;
+	QtMaterialRaisedButton* apply;
+	QtMaterialRaisedButton* reset;
 	QGridLayout* grid;
 	QWidget* _parent;
 public:

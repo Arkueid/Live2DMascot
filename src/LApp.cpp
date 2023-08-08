@@ -15,23 +15,23 @@ using namespace std;
 using namespace LAppDefine;
 
 namespace LAppConfig {
-    const char* _ConfigPath;  //…Ë÷√ƒ¨»œ∂¡»°¬∑æ∂£¨≤ªø…∏¸∏ƒ
-    //¥∞ø⁄…Ë÷√
+    const char* _ConfigPath;  //ËÆæÁΩÆÈªòËÆ§ËØªÂèñË∑ØÂæÑÔºå‰∏çÂèØÊõ¥Êîπ
+    //Á™óÂè£ËÆæÁΩÆ
     int _WindowWidth;
     int _WindowHeight;
     int _LastPosX;
     int _LastPosY;
     int _FPS;
 
-    //ƒ£–Õ…Ë÷√
+    //Ê®°ÂûãËÆæÁΩÆ
     string _ModelDir;
     string _ModelName;
     float _MotionInterval;
     float _LipSyncMagnification;
-    float _CharacterX;  //Ω«…´‘⁄OepnGL◊¯±Íœµ÷–ªÊ÷∆µƒX◊¯±Í
-    float _CharacterY;  //Ω«…´‘⁄OpenGL◊¯±Íœµ÷–ªÊ÷∆µƒY◊¯±Í
+    float _CharacterX;  //ËßíËâ≤Âú®OepnGLÂùêÊ†áÁ≥ª‰∏≠ÁªòÂà∂ÁöÑXÂùêÊ†á
+    float _CharacterY;  //ËßíËâ≤Âú®OpenGLÂùêÊ†áÁ≥ª‰∏≠ÁªòÂà∂ÁöÑYÂùêÊ†á
 
-    //”√ªß…Ë÷√
+    //Áî®Êà∑ËÆæÁΩÆ
     string _AppName;
     string _UserName;
     string _IconPath;
@@ -49,14 +49,14 @@ namespace LAppConfig {
     bool _TransparentCharacter;
     double _SoundVolume;
     bool _RepairModeOn;
-    //ChatWidget…Ë÷√
+    //ChatWidgetËÆæÁΩÆ
     int _ChatWidgetFontSize;
     string _ChatWidgetFontFamily;
     string _ChatWidgetFontColor;
     string _ChatWidgetBackgroundColor;
     int _ChatWidgetWidth;
     int _ChatWidgetHeight;
-    //dialog…Ë÷√
+    //dialogËÆæÁΩÆ
     int _DialogFontSize;
     string _DialogFontFamily;
     string _DialogFontColor;
@@ -65,26 +65,27 @@ namespace LAppConfig {
     int _DialogMaxWidth;
     int _DialogXPadding;
     int _DialogYPadding;
-    //◊‘∂®“Â¡ƒÃÏΩ”ø⁄
+    //Ëá™ÂÆö‰πâËÅäÂ§©Êé•Âè£
     string _CustomChatServerHostPort;
     string _CustomChatServerRoute;
     bool _CustomChatServerOn;
     bool _CustomVoiceChatOn;
-    int _CustomChatServerReadTimeOut;  //µ»¥˝œÏ”¶µƒ◊Ó≥§ ±º‰
+    int _CustomChatServerReadTimeOut;  //Á≠âÂæÖÂìçÂ∫îÁöÑÊúÄÈïøÊó∂Èó¥
     string _CustomVoiceChatRoute;
-    //±£¥Ê¬∑æ∂
-    string _ChatSavePath;  //¡ƒÃÏ
-    //‹‘¿Ú‘∆api
+    //‰øùÂ≠òË∑ØÂæÑ
+    string _ChatSavePath;  //ËÅäÂ§©
+    //ËåâËéâ‰∫ëapi
     string _ApiKey;
     string _ApiSecret;
-    //À≤ ±◊¥Ã¨
+    //Áû¨Êó∂Áä∂ÊÄÅ
     bool _WaitChatResponse;
     bool _MouseOn;
 
-    //”Ô“Ù ‰»Î
+    //ËØ≠Èü≥ËæìÂÖ•
     string _BaiduSpeechClientId;  //client_id
     string _BaiduSpeechClientSecret;  //client_secret
 
+    string _AssetsDir;
 };
 
 namespace {
@@ -94,7 +95,7 @@ namespace {
 
 void LApp::Warning(const char* x)
 {
-    QMessageBox::warning(NULL, QString::fromLocal8Bit("æØ∏Ê"), QString::fromLocal8Bit(x));
+    QMessageBox::warning(NULL, QString("Ë≠¶Âëä"), QString(x));
 }
 
 
@@ -127,9 +128,9 @@ void LApp::Initialize(int argc, char* argv[])
 {
     _app = new QApplication(argc, argv);
     QObject::connect(_app, &QGuiApplication::commitDataRequest, [&](QSessionManager& manager) {
-        // πÿª˙°¢÷ÿ∆Ù°¢◊¢œ˙«∞ ±£¥Ê ˝æ›
-        // ¿˝»ÁWinœµÕ≥£¨”– ±πÿª˙ª∫¬˝£¨”√ªßª·µ„ª˜°∞«ø÷∆πÿª˙°±£¨œµÕ≥ª·÷±Ω”kill £”‡Ω¯≥Ã
-        // À˘“‘‘⁄µ√÷™œµÕ≥º¥Ω´πÿª˙µƒ ±∫Ú£¨±„”¶¡¢º¥±£¥Ê ˝æ›£¨“‘√‚±ªkill∂¯¥Ì ß ±ª˙
+        // ÂÖ≥Êú∫„ÄÅÈáçÂêØ„ÄÅÊ≥®ÈîÄÂâç ‰øùÂ≠òÊï∞ÊçÆ
+        // ‰æãÂ¶ÇWinÁ≥ªÁªüÔºåÊúâÊó∂ÂÖ≥Êú∫ÁºìÊÖ¢ÔºåÁî®Êà∑‰ºöÁÇπÂáª‚ÄúÂº∫Âà∂ÂÖ≥Êú∫‚ÄùÔºåÁ≥ªÁªü‰ºöÁõ¥Êé•killÂâ©‰ΩôËøõÁ®ã
+        // ÊâÄ‰ª•Âú®ÂæóÁü•Á≥ªÁªüÂç≥Â∞ÜÂÖ≥Êú∫ÁöÑÊó∂ÂÄôÔºå‰æøÂ∫îÁ´ãÂç≥‰øùÂ≠òÊï∞ÊçÆÔºå‰ª•ÂÖçË¢´killËÄåÈîôÂ§±Êó∂Êú∫
         LApp::SaveConfig();
         });
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("gbk"));
@@ -158,7 +159,7 @@ void LApp::LoadConfig() {
         }
         catch (...)
         {
-            LApp::Warning("Json≈‰÷√Œƒº˛∏Ò Ω”–ŒÛ£°");
+            LApp::Warning("JsonÈÖçÁΩÆÊñá‰ª∂Ê†ºÂºèÊúâËØØÔºÅ");
             file.close();
             LApp::GetInstance()->GetApp()->exit(-1);
         }
@@ -167,22 +168,26 @@ void LApp::LoadConfig() {
 
     LAppConfig::_ModelDir = !config["ModelSettings"]["ModelDir"].isNull() ? config["ModelSettings"]["ModelDir"].asCString() : "Resources";
 
-    const char* path = QString::fromUtf8(LAppConfig::_ModelDir.c_str()).toLocal8Bit();
-    Log("[CONFIG]Resource Dir", path);
-    if (_access(path, 0) != 0) {
-        LApp::Warning("◊ ‘¥Œƒº˛º–¬∑æ∂≤ª’˝»∑£°\n«Î–ﬁ∏ƒconfig.jsonŒƒº˛");
+    string path = QString::fromUtf8(LAppConfig::_ModelDir.c_str()).toStdString();
+    Log("[CONFIG]Resource Dir", path.c_str());
+    if (_access(path.c_str(), 0) != 0) {
+        LApp::Warning("ËµÑÊ∫êÊñá‰ª∂Â§πË∑ØÂæÑ‰∏çÊ≠£Á°ÆÔºÅ\nËØ∑‰øÆÊîπconfig.jsonÊñá‰ª∂");
         _app->exit();
         exit(0);
     }
+
     LAppConfig::_ModelName = !config["ModelSettings"]["ModelName"].isNull() ? QString::fromUtf8(config["ModelSettings"]["ModelName"].asCString()).toStdString() : "Hiyori";
     
-    path = QString::fromUtf8(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str()).toLocal8Bit();
-    if (_access(path, 0) != 0)
+    path = QString::fromUtf8(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str()).toStdString();
+    if (_access(path.c_str(), 0) != 0)
     {
-        LApp::Warning("ƒ£–ÕŒƒº˛≤ª¥Ê‘⁄£°\n«Î–ﬁ∏ƒconfig.jsonŒƒº˛");
+        LApp::Warning("Ê®°ÂûãÊñá‰ª∂‰∏çÂ≠òÂú®ÔºÅ\nËØ∑‰øÆÊîπconfig.jsonÊñá‰ª∂");
         _app->exit();
         exit(0);
     }
+
+    LAppConfig::_AssetsDir = "assets";
+    Log("[CONFIG]Assets Dir", LAppConfig::_AssetsDir.c_str());
 
     LAppConfig::_MotionInterval = !config["ModelSettings"]["MotionInterval"].isNull() ? config["ModelSettings"]["MotionInterval"].asInt() : 5;
     LAppConfig::_LipSyncMagnification = !config["ModelSettings"]["LipSyncMagnification"].isNull() ? config["ModelSettings"]["LipSyncMagnification"].asFloat() : 1.1f;
@@ -221,7 +226,7 @@ void LApp::LoadConfig() {
     LAppConfig::_DialogYPadding = !config["Dialog"]["YPadding"].isNull() ? config["Dialog"]["YPadding"].asInt() : 10;
 
     LAppConfig::_ChatWidgetFontSize = !config["ChatWidget"]["FontSize"].isNull() ? config["ChatWidget"]["FontSize"].asInt() : 14;
-    LAppConfig::_ChatWidgetFontFamily = !config["ChatWidget"]["FontFamily"].isNull() ? config["ChatWidget"]["FontFamily"].asCString() : QString::fromLocal8Bit("Œ¢»Ì—≈∫⁄").toUtf8().constData();
+    LAppConfig::_ChatWidgetFontFamily = !config["ChatWidget"]["FontFamily"].isNull() ? config["ChatWidget"]["FontFamily"].asCString() : QString::fromLocal8Bit("ÂæÆËΩØÈõÖÈªë").toUtf8().constData();
     LAppConfig::_ChatWidgetFontColor = !config["ChatWidget"]["FontColor"].isNull() ? config["ChatWidget"]["FontColor"].asCString() : "white";
     LAppConfig::_ChatWidgetBackgroundColor = !config["ChatWidget"]["BackgroundColor"].isNull() ? config["ChatWidget"]["BackgroundColor"].asCString() : "rgba(0, 0, 0, 180)";
     LAppConfig::_ChatWidgetWidth = !config["ChatWidget"]["Width"].isNull() ? config["ChatWidget"]["Width"].asInt() : 410;
@@ -235,6 +240,7 @@ void LApp::LoadConfig() {
     LAppConfig::_ChatSavePath = !config["ChatAPI"]["ChatSavePath"].isNull() ? config["ChatAPI"]["ChatSavePath"].asCString() : "chat";
     LAppConfig::_CustomChatServerReadTimeOut = !config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].isNull() ? config["ChatAPI"]["CustomChatServer"]["ReadTimeOut"].asInt() : 10;
     LAppConfig::_CustomVoiceChatRoute = !config["ChatAPI"]["CustomChatServer"]["VoiceChatRoute"].isNull() ? config["ChatAPI"]["CustomChatServer"]["VoiceChatRoute"].asCString() : "/voice";
+    LAppConfig::_CustomVoiceChatOn = !config["ChatAPI"]["CustomChatServer"]["VoiceChatOn"].isNull() ? config["ChatAPI"]["CustomChatServer"]["VoiceChatOn"].asBool() : false;
 
     LAppConfig::_BaiduSpeechClientId = !config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"].isNull() ? config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"].asCString() : "rCRHPGUaKuRDVZK0E3K1L143";
     LAppConfig::_BaiduSpeechClientSecret = !config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"].isNull() ? config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"].asCString() : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf";
@@ -319,6 +325,7 @@ void LApp::SaveConfig()
     config["ChatAPI"]["Mlyai"]["APISecret"] = LAppConfig::_ApiSecret;
     config["ChatAPI"]["ChatSavePath"] = LAppConfig::_ChatSavePath;
     config["ChatAPI"]["CustomChatServer"]["VoiceChatRoute"] = LAppConfig::_CustomVoiceChatRoute;
+    config["ChatAPI"]["CustomChatServer"]["VoiceChatOn"] = LAppConfig::_CustomVoiceChatOn;
 
     config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"] = LAppConfig::_BaiduSpeechClientId;
     config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"] = LAppConfig::_BaiduSpeechClientSecret;
@@ -327,7 +334,7 @@ void LApp::SaveConfig()
     ofstream ofs(LAppConfig::_ConfigPath);
     if (ofs.fail())
     {
-        LApp::Warning("≈‰÷√Œƒº˛±£¥Ê ß∞‹!");
+        LApp::Warning("ÈÖçÁΩÆÊñá‰ª∂‰øùÂ≠òÂ§±Ë¥•!");
         return;
     }
     ofs << config.toStyledString().c_str();

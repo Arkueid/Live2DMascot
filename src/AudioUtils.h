@@ -6,43 +6,43 @@
 
 namespace AudioUtils{
 	/** 
-	* @brief	¶ÁÈ¡.wavÎÄ¼ş
-	* @param	path	wavÎÄ¼şÂ·¾¶
-	* @param	size	wavÎÄ¼ş´óĞ¡
-	* @param	Log		»Øµ÷ÈÕÖ¾º¯Êı
+	* @brief	è¯»å–.wavæ–‡ä»¶
+	* @param	path	wavæ–‡ä»¶è·¯å¾„
+	* @param	size	wavæ–‡ä»¶å¤§å°
+	* @param	Log		å›è°ƒæ—¥å¿—å‡½æ•°
 	*/
 	char* LoadWavAsBytes(const char* path, int* size);
 
 	/**
-	* @brief	ÊÍ·Å´¢´æwavÊı¾İµÄÄÚ´æ
-	* @param	bytes	wavÊı¾İ´æ·ÅÊı×éÖ¸Õë
-	* @param	path	wavÎÄ¼şÂ·¾¶
-	* @param	Log		»Øµ÷ÈÕÖ¾º¯Êı
+	* @brief	é‡Šæ”¾å‚¨å­˜wavæ•°æ®çš„å†…å­˜
+	* @param	bytes	wavæ•°æ®å­˜æ”¾æ•°ç»„æŒ‡é’ˆ
+	* @param	path	wavæ–‡ä»¶è·¯å¾„
+	* @param	Log		å›è°ƒæ—¥å¿—å‡½æ•°
 	*/
 	void ReleaseWavBytes(char* bytes, const char* path = NULL);
 
 	/**
-	* @brief	µ÷ÕûwavÒôÆµÒôÁ¿
-	* @param	bytes	wavÊı×éÖ¸Õë
-	* @param	bufSize	Êı×é´óĞ¡
-	* @param	vol		ÒôÁ¿Ëõ·Å±¶Êı, 0-1Ö®¼ä¸¡µãÊı
+	* @brief	è°ƒæ•´wavéŸ³é¢‘éŸ³é‡
+	* @param	bytes	wavæ•°ç»„æŒ‡é’ˆ
+	* @param	bufSize	æ•°ç»„å¤§å°
+	* @param	vol		éŸ³é‡ç¼©æ”¾å€æ•°, 0-1ä¹‹é—´æµ®ç‚¹æ•°
 	*/
 	void ResizeVolume(char* bytes, int bufSize, double vol);
 
 	/**
-	* @brief	Í£Ö¹ÕıÔÚ²¥·ÅµÄÒôÆµ
+	* @brief	åœæ­¢æ­£åœ¨æ’­æ”¾çš„éŸ³é¢‘
 	*/
 	void StopSound();
 
 	/**
-	* @brief	²¥·ÅÒôÆµ
-	* @param	path	ÒôÆµÂ·¾¶£¬½öwav
-	* @param	vol		ÒôÁ¿Ëõ·Å±¶Êı, 0-1Ö®¼äµÄ¸¡µãÊı
+	* @brief	æ’­æ”¾éŸ³é¢‘
+	* @param	path	éŸ³é¢‘è·¯å¾„ï¼Œä»…wav
+	* @param	vol		éŸ³é‡ç¼©æ”¾å€æ•°, 0-1ä¹‹é—´çš„æµ®ç‚¹æ•°
 	*/
 	bool StartSound(const char* path, double vol, bool force = false);
 
 	/**
-	* @brief	ÊÇ·ñÓĞÉùÒôÔÚ²¥·Å
+	* @brief	æ˜¯å¦æœ‰å£°éŸ³åœ¨æ’­æ”¾
 	*/
 	bool IsSoundPlaying();
 }

@@ -165,7 +165,7 @@ void LAppLive2DManager::ChangeModel(const char* modelPath, const char* modelName
 {
     if (DebugLogEnable)
     {
-        LAppPal::PrintLog("[APP]model name: %s", QString::fromUtf8(modelName).toLocal8Bit().constData());
+        LAppPal::PrintLog("[APP]model name: %s", QString::fromUtf8(modelName).toStdString().c_str());
     }
     string dir = modelPath + string("/") + modelName + string("/");
     string modelJsonName =  modelName + string(".model3.json");

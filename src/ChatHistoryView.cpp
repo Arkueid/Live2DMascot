@@ -1,54 +1,60 @@
-#include "ChatHisitroyView.h"
+#include "ChatHistoryView.h"
 #include <QtWidgets/qdesktopwidget.h>
 #include <QtWidgets/qapplication.h>
 #include <QtGui/qpainter.h>
 #include <QtGui/qpainterpath.h>
 #include "LApp.h"
 #include "AudioUtils.h"
+#include "ChatHistoryDB.h"
+#include <QtCore/qdatetime.h>
 #include <string.h>
 
 ChatHistoryItemView::ChatHistoryItemView(const char* character, const char* text, const char* soundPath) {
 	
-	this->character = new QLabel(QString::fromLocal8Bit("¡¾").append(character).append(QString::fromLocal8Bit("¡¿")).toUtf8());
-	this->text = new QLabel(QString::fromLocal8Bit("¡¸").append(text).append(QString::fromLocal8Bit("¡¹")).toUtf8());
+	this->character = new QLabel(QString("ã€Œ ").append(character).append(QString(" ã€")).toUtf8());
+	this->text = new QLabel(QString("ã€Œ ").append(text).append(QString(" ã€")).toUtf8());
 	this->soundPath = soundPath;
 	
 	vbox = new QVBoxLayout;
 	hbox = new QHBoxLayout;
+	hbox->addStretch(0);
 
 	vbox->addWidget(this->character);
 	vbox->addWidget(this->text);
 	hbox->addLayout(vbox);
-	hbox->addStretch(0);
 
 	if (strlen(soundPath) != 0) {
-		this->play = new QPushButton();
+		this->play = new QPushButton(this);
 		this->play->setFixedSize(30, 30);
 		this->play->setStyleSheet(
-			QString("border-image: url(").append(LAppConfig::_ModelDir.c_str()).append("/play.png); ")
+			QString("border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/play.png); ")
 		);
-		hbox->addWidget(this->play);
+		//hbox->addWidget(this->play);
+		this->play->move(580, 20);
 		connect(
-			this->play, &QPushButton::clicked, [soundPath]() {
-				AudioUtils::StartSound(soundPath, LAppConfig::_SoundVolume, true);
-			}
+			this->play, SIGNAL(clicked()), SLOT(playOnClicked())
 		);
 	}
 	else {
 		this->play = nullptr;
 	}
+	hbox->addStretch(0);
+
 	setLayout(hbox);
 	setStyleSheet("QLabel{color: rgba(255, 255, 255, 220); font-size: 16px;}");
-	this->text->setStyleSheet("padding: 5px");
-	this->text->setFixedWidth(400);
 	this->text->setWordWrap(true);
+	this->text->setStyleSheet("padding: 5px");
+	this->text->setFixedWidth(500);
 
 	this->text->adjustSize();
 	adjustSize();
 }
 
 ChatHistoryItemView::~ChatHistoryItemView() {
+}
 
+void ChatHistoryItemView::playOnClicked() {
+	AudioUtils::StartSound(this->soundPath.c_str(), LAppConfig::_SoundVolume, true);
 }
 
 ChatHistoryView::ChatHistoryView() {
@@ -64,9 +70,25 @@ ChatHistoryView::ChatHistoryView() {
 
 	_currentAnimation = new QPropertyAnimation(this, "geometry");
 	_currentAnimation->setDuration(500);
+
+	_dateSelector = new QComboBox(this);
+
+	ChatHistoryDB db(string(LAppConfig::_ChatSavePath).append("/chat_history.db").c_str());
+	_dateSelector->addItems(QStringList::fromVector(db.GetDates()));
+	_dateSelector->move(520, 10);
+	db.Close();
+
+	connect(_dateSelector, SIGNAL(currentTextChanged(const QString&)), SLOT(selectDateOnTriggered()));
+
+	_dateSelector->setEditable(true);
+	_dateSelector->setCurrentIndex(0);
+	_dateSelector->setStyleSheet("QComboBox{height: 30px; padding: 1px 18px 1px 3px; }");
+	_dateSelector->setFixedWidth(120);
+	selectDateOnTriggered();
+
 	setFixedSize(700, 450);
 	view->setFixedSize(650, 400);
-	view->move(25, 25);
+	view->move(30, 30);
 	
 	view->setStyleSheet(
 		"QListWidget{background-color: rgba(0, 0, 0, 0); border: none}"
@@ -120,5 +142,23 @@ void ChatHistoryView::Insert(const char* character, const char* text, const char
 	item->setSizeHint(itemView->size());
 	view->setItemWidget(item, itemView);
 	view->setCurrentRow(view->count() - 1);
+}
+
+void ChatHistoryView::Switch2Today() {
+	if (_dateSelector->findText(QDate::currentDate().toString("yyyy-MM-dd")) == -1) {
+		_dateSelector->addItem(QDate::currentDate().toString("yyyy-MM-dd"));
+	}
+	if (_dateSelector->currentText().compare(QDate::currentDate().toString("yyyy-MM-dd")) != 0) {
+		_dateSelector->setCurrentText(QDate::currentDate().toString("yyyy-MM-dd"));
+	}
+}
+
+void ChatHistoryView::selectDateOnTriggered() {
+	view->clear();
+	ChatHistoryDB db(string(LAppConfig::_ChatSavePath).append("/chat_history.db").c_str());
+	vector<Msg> msg_ls = db.SelectByDate(_dateSelector->currentText().toStdString().c_str());
+	for (Msg& msg : msg_ls) {
+		Insert(msg.name.c_str(), msg.text.c_str(), msg.soundPath.c_str());
+	}
 }
 

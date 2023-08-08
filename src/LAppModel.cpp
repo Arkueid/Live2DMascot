@@ -24,6 +24,7 @@
 #include "LAppTextureManager.hpp"
 #include "LAppDelegate.hpp"
 #include "AudioUtils.h"
+#include "RandomTalk.h"
 #include "LApp.h"
 
 using namespace Live2D::Cubism::Framework;
@@ -89,13 +90,13 @@ void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
 
     if (_debugMode)
     {
-        LAppPal::PrintLog("[APP]load model setting: %s", QString::fromUtf8(fileName).toLocal8Bit().constData());
+        LAppPal::PrintLog("[APP]load model setting: %s", QString::fromUtf8(fileName).toStdString().c_str());
     }
 
     csmSizeInt size;
 
     //中文路径支持
-    const csmString path = QString::fromUtf8(dir).append(fileName).toLocal8Bit();
+    const csmString path = QString::fromUtf8(dir).append(fileName).toStdString().c_str();
 
     csmByte* buffer = CreateBuffer(path.GetRawString(), &size);
     ICubismModelSetting* setting = new CubismModelSettingJson(buffer, size);
@@ -133,7 +134,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         if (_debugMode)
         {
@@ -158,7 +159,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
             path = _modelHomeDir + path;
 
             //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+            path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
             buffer = CreateBuffer(path.GetRawString(), &size);
             ACubismMotion* motion = LoadExpression(buffer, size, name.GetRawString());
@@ -182,7 +183,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadPhysics(buffer, size);
@@ -197,7 +198,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadPose(buffer, size);
@@ -233,7 +234,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadUserData(buffer, size);
@@ -395,7 +396,7 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         {
             if (_debugMode)
             {
-                LAppPal::PrintLog("[APP]load motion without file: %s => [%s_%d] ", path.GetRawString(), QString::fromUtf8(group).toLocal8Bit().constData(), i);
+                LAppPal::PrintLog("[APP]load motion without file: %s => [%s_%d] ", path.GetRawString(), QString::fromUtf8(group).toStdString().c_str(), i);
             }
             continue;
         }
@@ -403,11 +404,11 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         if (_debugMode)
         {
-            LAppPal::PrintLog("[APP]load motion: %s => [%s_%d] ", path.GetRawString(), QString::fromUtf8(group).toLocal8Bit().constData(), i);
+            LAppPal::PrintLog("[APP]load motion: %s => [%s_%d] ", path.GetRawString(), QString::fromUtf8(group).toStdString().c_str(), i);
         }
 
         csmByte* buffer;
@@ -501,7 +502,8 @@ void LAppModel::Update()
     if (_motionManager->IsFinished() && LAppConfig::_MotionInterval != 0 && _frameCount / LAppConfig::_FPS >= LAppConfig::_MotionInterval)
     {
         // モーションの再生がない場合、待機モーションの中からランダムで再生する
-        StartRandomMotion(MotionGroupIdle, PriorityIdle);
+        // roll到偶数播放一言的数据
+        StartRandomMotion(rand() % 2 ? MotionGroupIdle : "Random", PriorityIdle);
         _frameCount = 0;
     }
     else
@@ -625,7 +627,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
             path = _modelHomeDir + path;
 
             //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+            path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
             csmByte* buffer;
             csmSizeInt size;
@@ -672,7 +674,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         path = _modelHomeDir + path;
 
         //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         if (!LAppConfig::_NoSound)
         {
@@ -753,7 +755,7 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
             path = _modelHomeDir + path;
 
             //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit();
+            path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
             csmByte* buffer;
             csmSizeInt size;
@@ -786,7 +788,7 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
     {
 
         //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
 
         if (!LAppConfig::_NoSound)
         {
@@ -819,8 +821,12 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
 
 CubismMotionQueueEntryHandle LAppModel::StartRandomMotion(const csmChar* group, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
 {
-    if (_modelSetting->GetMotionCount(group) == 0)
+    if (strcmp(group, "Random")==0) {
+        return Speak(RandomTalk::GetRandomSentence().c_str(), "");
+    }
+    else if (_modelSetting->GetMotionCount(group) == 0)
     {
+        
         return InvalidMotionQueueEntryHandleValue;
     }
     
@@ -949,7 +955,7 @@ void LAppModel::SetupTextures()
         texturePath = _modelHomeDir + texturePath;
 
         //中文支持
-        texturePath = QString::fromUtf8(texturePath.GetRawString()).toLocal8Bit();
+        texturePath = QString::fromUtf8(texturePath.GetRawString()).toStdString().c_str();
 
         LAppTextureManager::TextureInfo* texture = LAppDelegate::GetInstance()->GetTextureManager()->CreateTextureFromPngFile(texturePath.GetRawString());
         const csmInt32 glTextueNumber = texture->id;

@@ -32,13 +32,13 @@ using namespace std;
 
 GLWidget::GLWidget() 
 {
-	//´°ÌåÍ¸Ã÷ÉèÖÃ£¬×Ó´°¿Ú
+	//çª—ä½“é€æ˜è®¾ç½®ï¼Œå­çª—å£
 	setWindowFlags(Qt::FramelessWindowHint|Qt::Tool);
 	setAttribute(Qt::WA_TranslucentBackground, true);
 
-	//Êó±êÏÔÊ¾¿É½»»¥
+	//é¼ æ ‡æ˜¾ç¤ºå¯äº¤äº’
 	setCursor(QCursor(Qt::PointingHandCursor));
-	//¼ÇÂ¼Êó±êÎ»ÖÃÊôĞÔ
+	//è®°å½•é¼ æ ‡ä½ç½®å±æ€§
 	lastX = 0;
 	lastY = 0;
 
@@ -70,10 +70,10 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		int mX = QCursor::pos().x();
 		int mY = QCursor::pos().y();
 		QSize screen = LApp::GetInstance()->GetApp()->desktop()->size();
-		// ÊÓÏß¼ÆËãµÄx£¬y£¬ÓÃÓÚdrag(x, y)
-		float dragX = mX - x();  //¼òµ¥´Ö±©£¬¾ÍÕâÑù°ÉT_T£¬¸ü²»¶¯ÁË
+		// è§†çº¿è®¡ç®—çš„xï¼Œyï¼Œç”¨äºdrag(x, y)
+		float dragX = mX - x();  //ç®€å•ç²—æš´ï¼Œå°±è¿™æ ·å§T_Tï¼Œæ›´ä¸åŠ¨äº†
 		float dragY = mY - y();
-		// Êó±êµã»÷µÄx£¬y£¬ÓÃÓÚHitTest(x, y)
+		// é¼ æ ‡ç‚¹å‡»çš„xï¼Œyï¼Œç”¨äºHitTest(x, y)
 		float clickX = mX - this->x();
 		float clickY = mY - this->y();
 		LAppDelegate::GetInstance()->GetView()->TransformCoordinate(&dragX, &dragY);
@@ -137,7 +137,7 @@ void GLWidget::mousePressEvent(QMouseEvent* e)
 
 void GLWidget::mouseMoveEvent(QMouseEvent* e)
 {
-	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y()); //½â³ıÊó±ê×·×ÙºóÈÔ¿ÉÒÔÍÏ¶¯ÊÓÏß
+	LAppDelegate::GetInstance()->OnMouseCallBack(e->localPos().x(), e->localPos().y()); //è§£é™¤é¼ æ ‡è¿½è¸ªåä»å¯ä»¥æ‹–åŠ¨è§†çº¿
 	if (e->buttons() == Qt::LeftButton)
 	{
 		// mouse's absolute coordinate - mouse's relative coordinate = character win's absolute coordinate
@@ -175,8 +175,8 @@ void GLWidget::trayIconOnActivated(QSystemTrayIcon::ActivationReason reason)
 {
 	if (reason == QSystemTrayIcon::DoubleClick)
 	{
-		act_hide->setText(QString::fromLocal8Bit("Òş²Ø"));
-		// ´°¿ÚÒÆ¶¯×î¶¥¶Ë
+		act_hide->setText(QString("éšè—"));
+		// çª—å£ç§»åŠ¨æœ€é¡¶ç«¯
 		this->setWindowFlag(Qt::WindowStaysOnTopHint, true);
 		setVisible(true);
 		this->setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
@@ -239,15 +239,15 @@ void GLWidget::Release()
 
 void GLWidget::hideOnTriggered()
 {
-	if (act_hide->text() == QString::fromLocal8Bit("Òş²Ø"))
+	if (act_hide->text() == QString("éšè—"))
 	{
 		this->setVisible(false);
-		act_hide->setText(QString::fromLocal8Bit("ÏÔÊ¾"));
+		act_hide->setText(QString("æ˜¾ç¤º"));
 	}
 	else 
 	{
 		this->setVisible(true);
-		act_hide->setText(QString::fromLocal8Bit("Òş²Ø"));
+		act_hide->setText(QString("éšè—"));
 	}
 }
 void GLWidget::keepMouseTrackOnTriggered()
@@ -336,59 +336,59 @@ void GLWidget::Run()
 	_dialog->raise();
 }
 
-//¼ÓÔØÅäÖÃÎÄ¼ş
+//åŠ è½½é…ç½®æ–‡ä»¶
 void GLWidget::setupUI()
 {
 	move(LAppConfig::_LastPosX, LAppConfig::_LastPosY);
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
-	//¼ÓÔØÏµÍ³ÍĞÅÌ
+	//åŠ è½½ç³»ç»Ÿæ‰˜ç›˜
 	this->trayIcon = new QSystemTrayIcon(this);
 	
 	LoadConfig();
 
 	connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconOnActivated(QSystemTrayIcon::ActivationReason)));
 
-	//ÓÒ¼ü²Ëµ¥
+	//å³é”®èœå•
 	rightMenu = new QMenu(this);
-	act_quit = new QAction(QString::fromLocal8Bit("ÍË³ö"));
+	act_quit = new QAction(QString("é€€å‡º"));
 
-	act_hide = new QAction(QString::fromLocal8Bit("Òş²Ø"));
+	act_hide = new QAction(QString("éšè—"));
 
-	act_keepMouseTrack = new QAction(QString::fromLocal8Bit("Êó±ê×·×Ù"));
+	act_keepMouseTrack = new QAction(QString("é¼ æ ‡è¿½è¸ª"));
 	act_keepMouseTrack->setCheckable(true);
 	act_keepMouseTrack->setChecked(LAppConfig::_MouseTrack);
 
-	act_keepQuiet = new QAction(QString::fromLocal8Bit("Ãâ´òÈÅ"));
+	act_keepQuiet = new QAction(QString("å…æ‰“æ‰°"));
 	act_keepQuiet->setCheckable(true);
 	act_keepQuiet->setChecked(LAppConfig::_KeepQuiet);
 
-	act_stayOnTop = new QAction(QString::fromLocal8Bit("ÖÃ¶¥ÏÔÊ¾"));
+	act_stayOnTop = new QAction(QString("ç½®é¡¶æ˜¾ç¤º"));
 	act_stayOnTop->setCheckable(true);
 	act_stayOnTop->setChecked(LAppConfig::_StayOnTop);
 
-	act_setNoSound = new QAction(QString::fromLocal8Bit("¾²Òô"));
+	act_setNoSound = new QAction(QString("é™éŸ³"));
 	act_setNoSound->setCheckable(true);
 	act_setNoSound->setChecked(LAppConfig::_NoSound);
 
-	act_setShowText = new QAction(QString::fromLocal8Bit("ÎÄ±¾ÏÔÊ¾"));
+	act_setShowText = new QAction(QString("æ–‡æœ¬æ˜¾ç¤º"));
 	act_setShowText->setCheckable(true);
 	act_setShowText->setChecked(LAppConfig::_ShowText);
 
-	act_showSettings = new QAction(QString::fromLocal8Bit("ÉèÖÃ"));
+	act_showSettings = new QAction(QString("è®¾ç½®"));
 
-	act_setShowBackground = new QAction(QString::fromLocal8Bit("ÏÔÊ¾±³¾°"));
+	act_setShowBackground = new QAction(QString("æ˜¾ç¤ºèƒŒæ™¯"));
 	act_setShowBackground->setCheckable(true);
 	act_setShowBackground->setChecked(LAppConfig::_ShowBackground);
 
-	act_setTransparentBackground = new QAction(QString::fromLocal8Bit("±³¾°´©Í¸"));
+	act_setTransparentBackground = new QAction(QString("èƒŒæ™¯ç©¿é€"));
 	act_setTransparentBackground->setCheckable(true);
 	act_setTransparentBackground->setChecked(LAppConfig::_TransparentBackground);
 
-	act_setTransparentCharacter = new QAction(QString::fromLocal8Bit("·ÀÕÚµ²"));
+	act_setTransparentCharacter = new QAction(QString("é˜²é®æŒ¡"));
 	act_setTransparentCharacter->setCheckable(true);
 	act_setTransparentCharacter->setChecked(LAppConfig::_TransparentCharacter);
 
-	//ÓÒ¼ü²Ëµ¥ĞÅºÅ
+	//å³é”®èœå•ä¿¡å·
 	connect(act_quit, SIGNAL(triggered()), SLOT(quitOnTriggered()));
 	connect(act_hide, SIGNAL(triggered()), SLOT(hideOnTriggered()));
 	connect(act_keepMouseTrack, SIGNAL(triggered()), SLOT(keepMouseTrackOnTriggered()));
@@ -424,17 +424,17 @@ void GLWidget::setupUI()
 
 	_pieMenu->setAlternateColors(true);
 
-	_pieMenu->setButtonIcon(0, QString::fromStdString(LAppConfig::_ModelDir).append("/chat.png"));
+	_pieMenu->setButtonIcon(0, QString::fromStdString(LAppConfig::_AssetsDir).append("/chat.png"));
 
-	_pieMenu->setButtonIcon(1, QString::fromStdString(LAppConfig::_ModelDir).append("/settings.png"));
+	_pieMenu->setButtonIcon(1, QString::fromStdString(LAppConfig::_AssetsDir).append("/settings.png"));
 
-	_pieMenu->setButtonIcon(2, QString::fromStdString(LAppConfig::_ModelDir).append("/quit.png"));
+	_pieMenu->setButtonIcon(2, QString::fromStdString(LAppConfig::_AssetsDir).append("/quit.png"));
 
-	_pieMenu->setButtonIcon(3, QString::fromStdString(LAppConfig::_ModelDir).append("/hide.png"));
+	_pieMenu->setButtonIcon(3, QString::fromStdString(LAppConfig::_AssetsDir).append("/hide.png"));
 
-	_pieMenu->setCloseButtonIcon(QIcon(QString::fromStdString(LAppConfig::_ModelDir).append("/close.png")));
+	_pieMenu->setCloseButtonIcon(QIcon(QString::fromStdString(LAppConfig::_AssetsDir).append("/close.png")));
 
-	_pieMenu->setPinButtonIcon(QIcon(QString::fromStdString(LAppConfig::_ModelDir).append("/pin.png")));
+	_pieMenu->setPinButtonIcon(QIcon(QString::fromStdString(LAppConfig::_AssetsDir).append("/pin.png")));
 
 	connect(_pieMenu, SIGNAL(buttonClicked(uint8_t)), SLOT(pieMenuOnClicked(uint8_t)));
 }
@@ -442,8 +442,8 @@ void GLWidget::setupUI()
 void GLWidget::LoadConfig()
 {
 	resize(LAppConfig::_WindowWidth, LAppConfig::_WindowHeight);
-	//¼ÓÔØÍ¼±ê
-	if (_access(QString::fromUtf8(LAppConfig::_IconPath.c_str()).toLocal8Bit().constData(), 0) == -1)
+	//åŠ è½½å›¾æ ‡
+	if (_access(QString::fromUtf8(LAppConfig::_IconPath.c_str()).toStdString().c_str(), 0) == -1)
 	{
 		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon));
 	}
@@ -452,10 +452,10 @@ void GLWidget::LoadConfig()
 		trayIcon->setIcon(QIcon(QString::fromUtf8(LAppConfig::_IconPath.c_str())));
 	}
 
-	//ÉèÖÃÓ¦ÓÃÃû³Æ
+	//è®¾ç½®åº”ç”¨åç§°
 	trayIcon->setToolTip(QString::fromUtf8(LAppConfig::_AppName.c_str()));
 
-	//ÖØÉèÖÃfps
+	//é‡è®¾ç½®fps
 	if (currentTimerIndex != -1)
 	{
 		killTimer(currentTimerIndex);

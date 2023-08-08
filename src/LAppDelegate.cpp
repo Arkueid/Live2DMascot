@@ -79,7 +79,6 @@ bool LAppDelegate::Initialize(GLWidget* window)
         glfwTerminate();
         return GL_FALSE;
     }
-    cout << "OpenGL Version: " << glfwGetVersionString() << endl;
 
     // Windowのコンテキストをカレントに設定
     _window->makeCurrent();

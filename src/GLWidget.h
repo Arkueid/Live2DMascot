@@ -15,28 +15,28 @@ class GLWidget : public QOpenGLWidget
 {
 	Q_OBJECT
 private:
-	QSystemTrayIcon* trayIcon = NULL;  //ÏµÍ³ÍĞÅÌ
-	QMenu* rightMenu = NULL;  //ÓÒ¼ü²Ëµ¥
-	QAction* act_quit = NULL;  //¹Ø±Õ
-	QAction* act_hide = NULL;  //Òş²Ø
-	QAction* act_keepQuiet = NULL;  //Ãâ´òÈÅÄ£Ê½
-	QAction* act_keepMouseTrack = NULL;  //Êó±ê×·×Ù
-	QAction* act_stayOnTop = NULL; //´°¿ÚÖÃ¶¥
-	QAction* act_setNoSound = NULL;  //¾²Òô
-	QAction* act_setShowText = NULL;  //ÏÔÊ¾ÎÄ±¾
-	//QAction* act_setShowBgmList = NULL;  //ÏÔÊ¾×··¬ÁĞ±í
-	QAction* act_showSettings = NULL; //ÏÔÊ¾ÉèÖÃ´°¿Ú
-	QAction* act_setShowBackground = NULL;  //ÏÔÊ¾±³¾°
-	QAction* act_setTransparentBackground = NULL; //±³¾°´©Í¸
-	QAction* act_setTransparentCharacter = NULL;  //ÈËÎï´©Í¸
-	Dialog* _dialog = NULL;  //ÎÄ±¾¿ò
-	//BgmListView* _bgmlist = NULL;  //×··¬ÁĞ±í
-	ConversationWidget* _cvWidget = NULL;  //ÁÄÌìÊäÈë¿ò
-	ControlWidget* _control = NULL;  //ÉèÖÃ
-	PieMenu* _pieMenu = NULL;  // ÉÈĞÎ²Ëµ¥
+	QSystemTrayIcon* trayIcon = NULL;  //ç³»ç»Ÿæ‰˜ç›˜
+	QMenu* rightMenu = NULL;  //å³é”®èœå•
+	QAction* act_quit = NULL;  //å…³é—­
+	QAction* act_hide = NULL;  //éšè—
+	QAction* act_keepQuiet = NULL;  //å…æ‰“æ‰°æ¨¡å¼
+	QAction* act_keepMouseTrack = NULL;  //é¼ æ ‡è¿½è¸ª
+	QAction* act_stayOnTop = NULL; //çª—å£ç½®é¡¶
+	QAction* act_setNoSound = NULL;  //é™éŸ³
+	QAction* act_setShowText = NULL;  //æ˜¾ç¤ºæ–‡æœ¬
+	//QAction* act_setShowBgmList = NULL;  //æ˜¾ç¤ºè¿½ç•ªåˆ—è¡¨
+	QAction* act_showSettings = NULL; //æ˜¾ç¤ºè®¾ç½®çª—å£
+	QAction* act_setShowBackground = NULL;  //æ˜¾ç¤ºèƒŒæ™¯
+	QAction* act_setTransparentBackground = NULL; //èƒŒæ™¯ç©¿é€
+	QAction* act_setTransparentCharacter = NULL;  //äººç‰©ç©¿é€
+	Dialog* _dialog = NULL;  //æ–‡æœ¬æ¡†
+	//BgmListView* _bgmlist = NULL;  //è¿½ç•ªåˆ—è¡¨
+	ConversationWidget* _cvWidget = NULL;  //èŠå¤©è¾“å…¥æ¡†
+	ControlWidget* _control = NULL;  //è®¾ç½®
+	PieMenu* _pieMenu = NULL;  // æ‰‡å½¢èœå•
 	bool _LastShowText;
 	bool _LastNoSound;
-	bool _transparent = false;  //´°ÌåÍ¸¹ı
+	bool _transparent = false;  //çª—ä½“é€è¿‡
 	bool _drawBackground = false;
 public:
 	GLWidget();
