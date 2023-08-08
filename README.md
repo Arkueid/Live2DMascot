@@ -86,3 +86,7 @@
 [Cubism Live2D SDK for Native]:https://www.live2d.com/download/cubism-sdk/
 
 [ACGTTS]:https://github.com/chinoll/ACGTTS  
+
+## 交流群  
+
+![交流群](https://img.shields.io/badge/QQ群-526310830-blue.svg)
