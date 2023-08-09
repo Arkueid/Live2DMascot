@@ -1,14 +1,5 @@
 # Live2D Desktop Mascot   
 
-## [更新内容](CHANGELOG.md)
-### 2023-08-08
-***changes***
-* 设置窗口使用 Material 风格，组件来自：https://github.com/laserpants/qt-material-widgets
-
-***fix***
-* 修复模式的开启与关闭无法保存
-* 源码改为 UTF-8 后导致含中文路径的模型资源加载崩溃，打开设置页面崩溃( v0.3.5 存在该问题)
-
 ## 预览  
 
 ![预览1](sample_images/preview1.png)
@@ -16,6 +7,15 @@
 ![预览2](sample_images/preview2.png)
 
 ![预览3](sample_images/preview3.png)
+
+
+## [更新内容](CHANGELOG.md)
+### 2023-08-09
+***change***
+* 现在可以从聊天记录中复制聊天内容
+
+***fix***
+* 聊天时角色的回答动作会被 Idle 动作组的动作打断
 
 ## 功能 
 
