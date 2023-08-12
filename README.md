@@ -8,6 +8,8 @@
 
 ![预览3](sample_images/preview3.png)
 
+![预览3](sample_images/plugin-demo2.png)
+
 
 ## [更新内容](CHANGELOG.md)
 ### 2023-08-12
@@ -93,6 +95,7 @@
 * [cpp-httplib] + [openssl](https://slproweb.com/products/Win32OpenSSL.html)  
 * [qt-material-widgets](https://github.com/laserpants/qt-material-widgets)
 * [piemenu-qt](https://github.com/SimonBuxx/piemenu-qt)
+* [sqlite](https://www.sqlite.org/download.html)
 * Hiyori，nn 的语音借助 [ACGTTS] 生成  
 * Live2D 模型来源:  
 	* xuefeng_3 -> 碧蓝航线  
