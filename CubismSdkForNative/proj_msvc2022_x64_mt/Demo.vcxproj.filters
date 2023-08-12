@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\src\LApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppAllocator.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppDefine.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppDelegate.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppLive2DManager.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppModel.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppPal.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppTextureManager.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppView.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LAppWavFileHandler.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TouchManager.hpp">
+      <Filter>Header Files\live2d</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\json\json.h">
+      <Filter>Header Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\json\json-forwards.h">
+      <Filter>Header Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\NetworkUtils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AudioUtils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RandomTalk.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\sqlite3.h">
+      <Filter>Header Files\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ChatHistoryDB.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ChatHistoryView.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ChatWidget.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ControlWidget.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Dialog.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLWidget.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PieMenu.h">
+      <Filter>Header Files\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PluginManager.h">
+      <Filter>Header Files\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ILAppModel.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IGLWidget.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IChatHistoryView.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IControlWidget.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IChatWidget.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IDialog.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IPieMenu.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IAppSettings.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IModelSettings.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IPluginSettings.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IChatSettings.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\IPlugin.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{80FF7F26-6E3C-3AED-ADAB-59763C3D3761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E32DA231-988E-31C1-8A2F-76B22758895B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\live2d">
+      <UniqueIdentifier>{ffef2e42-cfec-454f-9c0f-6e2fb3c8599a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win">
+      <UniqueIdentifier>{9b83133a-5544-4637-a079-ac3a3a639d5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\live2d">
+      <UniqueIdentifier>{2e5b3ba5-746a-4a37-805c-65bafba90c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\win">
+      <UniqueIdentifier>{5510ddd6-3c2b-4d2a-8dba-cee00e62af44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\json">
+      <UniqueIdentifier>{00f70c58-4bce-4352-b925-279baf32c187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{5c3b74a2-147b-4d75-bdf9-86e6184d3782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{809fb972-3ee7-4e26-8c63-e3dbb069762b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\json">
+      <UniqueIdentifier>{a170678d-a568-4458-831c-ed1e4bb827ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sqlite">
+      <UniqueIdentifier>{54d6a0b1-523a-49e9-9a2d-7202cd7ad582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sqlite">
+      <UniqueIdentifier>{6ce90c7b-aef2-4c3d-bd31-1a866e4b3f8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\meta">
+      <UniqueIdentifier>{f348a673-95ad-4741-9f80-d9b7dcffdd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\plugin">
+      <UniqueIdentifier>{2f118647-1253-49e5-b937-251b08b57f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\plugin">
+      <UniqueIdentifier>{abcce581-1c2c-4c2f-8d71-de69d076d6c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\interface">
+      <UniqueIdentifier>{f7e74e34-2fcf-4933-a94f-83e822d23372}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppAllocator.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppDefine.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppDelegate.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppLive2DManager.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppModel.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppPal.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppTextureManager.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppView.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LAppWavFileHandler.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TouchManager.cpp">
+      <Filter>Source Files\live2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ChatWidget.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ControlWidget.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Dialog.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GLWidget.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\NetworkUtils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioUtils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ChatHistoryView.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\jsoncpp.cpp">
+      <Filter>Source Files\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PieMenu.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RandomTalk.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ChatHistoryDB.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sqlite3.c">
+      <Filter>Source Files\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_ChatHistoryView.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_ChatWidget.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_ControlWidget.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_Dialog.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_GLWidget.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\moc_PieMenu.cpp">
+      <Filter>Source Files\meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AppSettings.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ModelSettings.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ChatSettings.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PluginSettings.cpp">
+      <Filter>Source Files\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ILApp.h">
+      <Filter>Header Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PluginManager.cpp">
+      <Filter>Source Files\plugin</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

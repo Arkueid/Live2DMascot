@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Console|Win32">
+      <Configuration>Release Console</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{74C02DF4-0835-32A7-B8DA-B0FA68F8C154}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>Win32</Platform>
+    <ProjectName>Framework</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\build\proj_msvc2022_x86_mt\Framework\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Framework.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Framework</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\build\proj_msvc2022_x86_mt\Framework\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">..\lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Framework.dir\Release\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">Framework.dir\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Framework</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">Framework</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\Framework\src;..\..\Core\include;..\..\thirdParty\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR="Release";CONSOLE_FLAG</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CSM_TARGET_WIN_GL;GLEW_STATIC;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\src;D:\Live2D\CubismSdkForNative-4-r.5.1\Framework\..\Core\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Samples\OpenGL\thirdParty\glew\include;D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\..\..\..\..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Live2D\CubismSdkForNative-4-r.5.1\Samples\OpenGL\Demo\proj.win.cmake\build\proj_msvc2022_x86_mt\glew\glew_s.vcxproj">
+      <Project>{0BEC1CB1-1926-35A2-B513-CA50EB3C76BC}</Project>
+      <Name>glew_s</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Framework\src\CubismCdiJson.cpp" />
+    <ClCompile Include="..\..\Framework\src\CubismDefaultParameterId.cpp" />
+    <ClCompile Include="..\..\Framework\src\CubismFramework.cpp" />
+    <ClCompile Include="..\..\Framework\src\CubismModelSettingJson.cpp" />
+    <ClCompile Include="..\..\Framework\src\Effect\CubismBreath.cpp" />
+    <ClCompile Include="..\..\Framework\src\Effect\CubismEyeBlink.cpp" />
+    <ClCompile Include="..\..\Framework\src\Effect\CubismPose.cpp" />
+    <ClCompile Include="..\..\Framework\src\Id\CubismId.cpp" />
+    <ClCompile Include="..\..\Framework\src\Id\CubismIdManager.cpp" />
+    <ClCompile Include="..\..\Framework\src\Math\CubismMath.cpp" />
+    <ClCompile Include="..\..\Framework\src\Math\CubismMatrix44.cpp" />
+    <ClCompile Include="..\..\Framework\src\Math\CubismModelMatrix.cpp" />
+    <ClCompile Include="..\..\Framework\src\Math\CubismTargetPoint.cpp" />
+    <ClCompile Include="..\..\Framework\src\Math\CubismVector2.cpp" />
+    <ClCompile Include="..\..\Framework\src\Math\CubismViewMatrix.cpp" />
+    <ClCompile Include="..\..\Framework\src\Model\CubismMoc.cpp" />
+    <ClCompile Include="..\..\Framework\src\Model\CubismModel.cpp" />
+    <ClCompile Include="..\..\Framework\src\Model\CubismModelUserData.cpp" />
+    <ClCompile Include="..\..\Framework\src\Model\CubismModelUserDataJson.cpp" />
+    <ClCompile Include="..\..\Framework\src\Model\CubismUserModel.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\ACubismMotion.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\CubismExpressionMotion.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\CubismMotion.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\CubismMotionJson.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\CubismMotionManager.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\CubismMotionQueueEntry.cpp" />
+    <ClCompile Include="..\..\Framework\src\Motion\CubismMotionQueueManager.cpp" />
+    <ClCompile Include="..\..\Framework\src\Physics\CubismPhysics.cpp" />
+    <ClCompile Include="..\..\Framework\src\Physics\CubismPhysicsJson.cpp" />
+    <ClCompile Include="..\..\Framework\src\Rendering\CubismRenderer.cpp" />
+    <ClCompile Include="..\..\Framework\src\Rendering\OpenGL\CubismOffscreenSurface_OpenGLES2.cpp" />
+    <ClCompile Include="..\..\Framework\src\Rendering\OpenGL\CubismRenderer_OpenGLES2.cpp" />
+    <ClCompile Include="..\..\Framework\src\Type\csmRectF.cpp" />
+    <ClCompile Include="..\..\Framework\src\Type\csmString.cpp" />
+    <ClCompile Include="..\..\Framework\src\Utils\CubismDebug.cpp" />
+    <ClCompile Include="..\..\Framework\src\Utils\CubismJson.cpp" />
+    <ClCompile Include="..\..\Framework\src\Utils\CubismString.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Framework\src\CubismCdiJson.hpp" />
+    <ClInclude Include="..\..\Framework\src\CubismDefaultParameterId.hpp" />
+    <ClInclude Include="..\..\Framework\src\CubismFramework.hpp" />
+    <ClInclude Include="..\..\Framework\src\CubismFrameworkConfig.hpp" />
+    <ClInclude Include="..\..\Framework\src\CubismJsonHolder.hpp" />
+    <ClInclude Include="..\..\Framework\src\CubismModelSettingJson.hpp" />
+    <ClInclude Include="..\..\Framework\src\Effect\CubismBreath.hpp" />
+    <ClInclude Include="..\..\Framework\src\Effect\CubismEyeBlink.hpp" />
+    <ClInclude Include="..\..\Framework\src\Effect\CubismPose.hpp" />
+    <ClInclude Include="..\..\Framework\src\ICubismAllocator.hpp" />
+    <ClInclude Include="..\..\Framework\src\ICubismModelSetting.hpp" />
+    <ClInclude Include="..\..\Framework\src\Id\CubismId.hpp" />
+    <ClInclude Include="..\..\Framework\src\Id\CubismIdManager.hpp" />
+    <ClInclude Include="..\..\Framework\src\Live2DCubismCore.hpp" />
+    <ClInclude Include="..\..\Framework\src\Math\CubismMath.hpp" />
+    <ClInclude Include="..\..\Framework\src\Math\CubismMatrix44.hpp" />
+    <ClInclude Include="..\..\Framework\src\Math\CubismModelMatrix.hpp" />
+    <ClInclude Include="..\..\Framework\src\Math\CubismTargetPoint.hpp" />
+    <ClInclude Include="..\..\Framework\src\Math\CubismVector2.hpp" />
+    <ClInclude Include="..\..\Framework\src\Math\CubismViewMatrix.hpp" />
+    <ClInclude Include="..\..\Framework\src\Model\CubismMoc.hpp" />
+    <ClInclude Include="..\..\Framework\src\Model\CubismModel.hpp" />
+    <ClInclude Include="..\..\Framework\src\Model\CubismModelUserData.hpp" />
+    <ClInclude Include="..\..\Framework\src\Model\CubismModelUserDataJson.hpp" />
+    <ClInclude Include="..\..\Framework\src\Model\CubismUserModel.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\ACubismMotion.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismExpressionMotion.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismMotion.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismMotionInternal.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismMotionJson.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismMotionManager.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismMotionQueueEntry.hpp" />
+    <ClInclude Include="..\..\Framework\src\Motion\CubismMotionQueueManager.hpp" />
+    <ClInclude Include="..\..\Framework\src\Physics\CubismPhysics.hpp" />
+    <ClInclude Include="..\..\Framework\src\Physics\CubismPhysicsInternal.hpp" />
+    <ClInclude Include="..\..\Framework\src\Physics\CubismPhysicsJson.hpp" />
+    <ClInclude Include="..\..\Framework\src\Rendering\CubismRenderer.hpp" />
+    <ClInclude Include="..\..\Framework\src\Rendering\OpenGL\CubismOffscreenSurface_OpenGLES2.hpp" />
+    <ClInclude Include="..\..\Framework\src\Rendering\OpenGL\CubismRenderer_OpenGLES2.hpp" />
+    <ClInclude Include="..\..\Framework\src\Type\csmMap.hpp" />
+    <ClInclude Include="..\..\Framework\src\Type\csmRectF.hpp" />
+    <ClInclude Include="..\..\Framework\src\Type\csmString.hpp" />
+    <ClInclude Include="..\..\Framework\src\Type\csmVector.hpp" />
+    <ClInclude Include="..\..\Framework\src\Type\CubismBasicType.hpp" />
+    <ClInclude Include="..\..\Framework\src\Utils\CubismDebug.hpp" />
+    <ClInclude Include="..\..\Framework\src\Utils\CubismJson.hpp" />
+    <ClInclude Include="..\..\Framework\src\Utils\CubismString.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

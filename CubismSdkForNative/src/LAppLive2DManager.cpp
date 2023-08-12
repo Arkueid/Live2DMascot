@@ -1,0 +1,219 @@
+﻿/**
+ * Copyright(c) Live2D Inc. All rights reserved.
+ *
+ * Use of this source code is governed by the Live2D Open Software license
+ * that can be found at https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
+ */
+
+#include "LAppLive2DManager.hpp"
+#include <string>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <Rendering/CubismRenderer.hpp>
+#include "LAppPal.hpp"
+#include "LAppDefine.hpp"
+#include "LAppDelegate.hpp"
+#include "LAppModel.hpp"
+#include "LAppView.hpp"
+#include "LApp.h"
+
+using namespace Csm;
+using namespace LAppDefine;
+using namespace std;
+
+namespace {
+    LAppLive2DManager* s_instance = NULL;
+
+    void FinishedMotion(ACubismMotion* self)
+    {
+        if (DebugLogEnable)
+        LAppPal::PrintLog("Motion Finished: %x", self);
+    }
+}
+
+LAppLive2DManager* LAppLive2DManager::GetInstance()
+{
+    if (s_instance == NULL)
+    {
+        s_instance = new LAppLive2DManager();
+    }
+
+    return s_instance;
+}
+
+void LAppLive2DManager::ReleaseInstance()
+{
+    if (s_instance != NULL)
+    {
+        delete s_instance;
+    }
+
+    s_instance = NULL;
+}
+
+LAppLive2DManager::LAppLive2DManager()
+    : _viewMatrix(NULL)
+    , _sceneIndex(0)
+{
+    _viewMatrix = new CubismMatrix44();
+    ChangeModel(LAppConfig::_ModelDir.c_str(), LAppConfig::_ModelName.c_str());
+}
+
+LAppLive2DManager::~LAppLive2DManager()
+{
+    ReleaseAllModel();
+}
+
+void LAppLive2DManager::ReleaseAllModel()
+{
+    for (csmUint32 i = 0; i < _models.GetSize(); i++)
+    {
+        delete _models[i];
+    }
+
+    _models.Clear();
+}
+
+LAppModel* LAppLive2DManager::GetModel(csmUint32 no) const
+{
+    if (no < _models.GetSize())
+    {
+        return _models[no];
+    }
+
+    return NULL;
+}
+
+void LAppLive2DManager::OnDrag(csmFloat32 x, csmFloat32 y) const
+{
+    for (csmUint32 i = 0; i < _models.GetSize(); i++)
+    {
+        LAppModel* model = GetModel(i);
+
+        model->SetDragging(x, y);
+    }
+}
+
+void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
+{
+    if (DebugLogEnable)
+    {
+        LAppPal::PrintLog("[APP]tap point: {x:%.2f y:%.2f}", x, y);
+    }
+    csmString hitArea;
+    for (csmUint32 i = 0; i < _models.GetSize(); i++)
+    {
+        hitArea = _models[i]->HitTest(x, y);
+        if (strlen(hitArea.GetRawString()) != 0)
+        {
+            if (DebugLogEnable) LAppPal::PrintLog("[APP]hit area: [%s]", hitArea.GetRawString());
+            if (strcmp(hitArea.GetRawString(), "TapHead") == 0) _models[i]->SetRandomExpression();
+            _models[i]->StartRandomMotion(hitArea.GetRawString(), PriorityForce, NULL);
+            return;
+        }
+    }
+}
+
+void LAppLive2DManager::OnUpdate() const
+{
+    int width = LAppDelegate::GetInstance()->GetWindow()->width();
+    int height = LAppDelegate::GetInstance()->GetWindow()->height();
+    width = width <= 0 ? 1 : width;  // 等于0角色消失，具体原因暂时没找到（懒
+    height = height <= 0 ? 1 : height; 
+
+    csmUint32 modelCount = _models.GetSize();
+    for (csmUint32 i = 0; i < modelCount; ++i)
+    {
+        CubismMatrix44 projection;
+        LAppModel* model = GetModel(i);
+
+        if (model->GetModel() == NULL)
+        {
+            LAppPal::PrintLog("Failed to model->GetModel().");
+            continue;
+        }
+        model->GetModelMatrix()->Translate(LAppConfig::_CharacterX, LAppConfig::_CharacterY);
+        if (model->GetModel()->GetCanvasWidth() > 1.0f && width < height)
+        {
+            // 横に長いモデルを縦長ウィンドウに表示する際モデルの横サイズでscaleを算出する
+            model->GetModelMatrix()->SetWidth(2.0f);
+            projection.Scale(1.0f, static_cast<float>(width) / static_cast<float>(height));
+        }
+        else
+        {
+            projection.Scale(static_cast<float>(height) / static_cast<float>(width), 1.0f);
+        }
+        // 必要があればここで乗算
+        if (_viewMatrix != NULL)
+        {
+            projection.MultiplyByMatrix(_viewMatrix);
+            
+        }
+
+        // モデル1体描画前コール
+        LAppDelegate::GetInstance()->GetView()->PreModelDraw(*model);
+        
+        model->Update();
+        model->Draw(projection);///< 参照渡しなのでprojectionは変質する
+
+        // モデル1体描画後コール
+        LAppDelegate::GetInstance()->GetView()->PostModelDraw(*model);
+    }
+}
+
+void LAppLive2DManager::ChangeModel(const char* modelPath, const char* modelName)
+{
+    if (DebugLogEnable)
+    {
+        LAppPal::PrintLog("[APP]model name: %s", QString::fromUtf8(modelName).toLocal8Bit().constData());
+    }
+    string dir = modelPath + string("/") + modelName + string("/");
+    string modelJsonName =  modelName + string(".model3.json");
+    ReleaseAllModel();
+    _models.PushBack(new LAppModel());
+    _models[0]->LoadAssets(dir.c_str(), modelJsonName.c_str());
+
+    /*
+     * モデル半透明表示を行うサンプルを提示する。
+     * ここでUSE_RENDER_TARGET、USE_MODEL_RENDER_TARGETが定義されている場合
+     * 別のレンダリングターゲットにモデルを描画し、描画結果をテクスチャとして別のスプライトに張り付ける。
+     */
+    {
+#if defined(USE_RENDER_TARGET)
+        // LAppViewの持つターゲットに描画を行う場合、こちらを選択
+        LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_ViewFrameBuffer;
+#elif defined(USE_MODEL_RENDER_TARGET)
+        // 各LAppModelの持つターゲットに描画を行う場合、こちらを選択
+        //LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_ModelFrameBuffer;
+#else
+        // デフォルトのメインフレームバッファへレンダリングする(通常)
+        LAppView::SelectTarget useRenderTarget = LAppView::SelectTarget_None;
+#endif
+
+#if defined(USE_RENDER_TARGET) || defined(USE_MODEL_RENDER_TARGET)
+        // モデル個別にαを付けるサンプルとして、もう1体モデルを作成し、少し位置をずらす
+        _models.PushBack(new LAppModel());
+        _models[1]->LoadAssets(modelPath.c_str(), modelJsonName.c_str());
+        _models[1]->GetModelMatrix()->TranslateX(0.2f);
+#endif
+
+        LAppDelegate::GetInstance()->GetView()->SwitchRenderingTarget(useRenderTarget);
+
+        // 別レンダリング先を選択した際の背景クリア色
+        float clearColor[3] = { 0.0f, 0.0f, 0.0f };
+        LAppDelegate::GetInstance()->GetView()->SetRenderTargetClearColor(clearColor[0], clearColor[1], clearColor[2]);
+
+    }
+}
+
+csmUint32 LAppLive2DManager::GetModelNum() const
+{
+    return _models.GetSize();
+}
+
+void LAppLive2DManager::SetViewMatrix(CubismMatrix44* m)
+{
+    for (int i = 0; i < 16; i++) {
+        _viewMatrix->GetArray()[i] = m->GetArray()[i];
+    }
+}

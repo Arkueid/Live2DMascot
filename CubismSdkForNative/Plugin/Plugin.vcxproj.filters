@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\interface">
+      <UniqueIdentifier>{d6f08e70-47b4-4b7a-bb7e-399f38b44233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{48068442-2fbb-42f8-bead-9cbd7417c82d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="plugin.json">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Greeting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IAppSettings.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IChatHistoryView.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IChatSettings.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IChatWidget.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IControlWidget.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IDialog.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IGLWidget.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILApp.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ILAppModel.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IModelSettings.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPieMenu.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPlugin.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\IPluginSettings.h">
+      <Filter>头文件\interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Greeting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="moc_Greeting.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
