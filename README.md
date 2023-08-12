@@ -10,12 +10,39 @@
 
 
 ## [更新内容](CHANGELOG.md)
-### 2023-08-09
-***change***
-* 现在可以从聊天记录中复制聊天内容
+### 2023-08-12
+***add***
+* 插件系统
+	* 可以依照给出的接口类编写 ***QT插件***，编译为动态库 ***.dll**，放在桌宠目录下的 plugins 中，即可被扫描读取 (目前没有设计安全检测，详细见 ***develop*** 分支的 ***Greeting*** 插件样例)  
+	
+		```
+		live2d-x86.exe
+		live2d-x86-debug.exe
+		plugins
+			|----Greeting
+			|		|----Greeting.dll
+			|
+			|----Plugin2
+			|		|----Plugin2.dll
+			|		|----customResourceDir // 插件所需的资源文件夹
+			|		|----Dir2
+			|		...
+			|
+			|----Plugin3
+			...
+		```
+
+		插件可以实现在 ***托盘右键菜单*** 和 ***设置窗口*** 添加 ***选项*** / ***页面***，可以添加自定义的窗口和自定义功能（自定义功能后续会逐步拆解原项目实现更灵活的操作）
+
+		![示例](sample_images/plugin-demo1.png)
+
+		![示例](sample_images/plugin-demo2.png)
+
+		![示例](sample_images/plugin-demo3.png)
 
 ***fix***
-* 聊天时角色的回答动作会被 Idle 动作组的动作打断
+* 修复系统默认编码为 GBK 时加载包含中文的路径导致程序崩溃和 debug 输出乱码。现在在Windows 区域设置是否中勾选 Unicode UTF-8 不会对中文路径造成影响。
+* 修复首次加载聊天功能时由于没有 chat 文件夹导致 sqlite 数据库文件创建报错。 
 
 ## 功能 
 

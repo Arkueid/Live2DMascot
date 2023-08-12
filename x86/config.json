@@ -38,7 +38,7 @@
 	{
 		"BackgroundColor" : "rgba(0, 0, 0, 180)",
 		"FontColor" : "white",
-		"FontFamily" : "黑体",
+		"FontFamily" : "\u9ed1\u4f53",
 		"FontSize" : 12,
 		"Height" : 200,
 		"Width" : 410
@@ -47,7 +47,7 @@
 	{
 		"BackgroundColor" : "rgba(0, 0, 0, 200)",
 		"FontColor" : "white",
-		"FontFamily" : "黑体",
+		"FontFamily" : "\u9ed1\u4f53",
 		"FontSize" : 12,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
@@ -68,7 +68,7 @@
 	{
 		"AppName" : "Elaina",
 		"FPS" : 48,
-		"IconPath" : "D:/forDesktop/Live2D Desktop Mascot/Resources/爱/hoshinoai.png",
+		"IconPath" : "D:/forDesktop/Live2D Desktop Mascot/Resources/\u7231/hoshinoai.png",
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
