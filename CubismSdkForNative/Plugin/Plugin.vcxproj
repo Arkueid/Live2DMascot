@@ -144,7 +144,7 @@ COPY /Y $(ProjectDir)$(OutDir)$(ProjectName).dll $(ProjectDir)..\proj_msvc2022_x
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;QT_NO_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\thirdParty\Qt-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\thirdParty\json;..\thirdParty\Qt-x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
@@ -180,9 +180,11 @@ COPY /Y $(ProjectDir)$(OutDir)$(ProjectName).dll $(ProjectDir)..\proj_msvc2022_x
     <ClInclude Include="interface\IPieMenu.h" />
     <ClInclude Include="interface\IPlugin.h" />
     <ClInclude Include="interface\IPluginSettings.h" />
+    <ClInclude Include="json\json.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Greeting.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="moc_Greeting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

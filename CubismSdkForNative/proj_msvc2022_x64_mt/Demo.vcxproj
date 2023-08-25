@@ -464,7 +464,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\src\IPieMenu.h" />
     <ClInclude Include="..\src\IPlugin.h" />
     <ClInclude Include="..\src\IPluginSettings.h" />
-    <ClInclude Include="..\src\json\json-forwards.h" />
     <ClInclude Include="..\src\json\json.h" />
     <ClInclude Include="..\src\LApp.h" />
     <ClInclude Include="..\src\LAppAllocator.hpp" />

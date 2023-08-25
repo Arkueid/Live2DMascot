@@ -30,7 +30,7 @@ Plugin::~Plugin()
     }
 }
 
-IPlugin* Plugin::GetInstance()
+void Plugin::GetInstance()
 {
     if (!loader->isLoaded()) 
     {
@@ -39,12 +39,11 @@ IPlugin* Plugin::GetInstance()
 #ifdef CONSOLE_FLAG
             printf("[QPluginLoader]: %s\n", loader->errorString().toLocal8Bit().constData());
 #endif // CONSOLE_FLAG
-            return NULL;
+            return;
         }
     }
     if (!_instance) _instance = qobject_cast<IPlugin*>(loader->instance());
     _instance->Initialize(LApp::GetInstance());
-    return _instance;
 }
 
 const QString& Plugin::GetUUID()
@@ -54,19 +53,47 @@ const QString& Plugin::GetUUID()
 
 void Plugin::Activate()
 {
+    if (!_instance) {
+        GetInstance();
+    }
     _instance->Activate();
     activated = true;
+    LAppConfig::_Plugins[ID().toStdString()] = true;
+    view->UpdateText();
 }
 
 void Plugin::Deactivate()
 {
+    if (!_instance) return;
     _instance->Deactivate();
     activated = false;
+    LAppConfig::_Plugins[ID().toStdString()] = false;
+    view->UpdateText();
 }
 
 bool Plugin::IsActivated()
 {
     return activated;
+}
+
+void Plugin::OnLaunch()
+{
+    if (_instance) _instance->OnLaunch();
+}
+
+void Plugin::OnShutdown()
+{
+    if (_instance) _instance->OnShutdown();
+}
+
+void Plugin::OnScheduledTask()
+{
+    if (_instance) _instance->OnScheduledTask();
+}
+
+void Plugin::BindItemView(PluginItemView* view)
+{
+    this->view = view;
 }
 
 QString Plugin::Name()
@@ -87,7 +114,7 @@ QString Plugin::Author()
     return metaData["author"].toString();
 }
 
-QString Plugin::PluginID()
+QString Plugin::ID()
 {
     QJsonObject& metaData = loader->metaData()["MetaData"].toObject();
     return metaData["id"].toString();
@@ -122,19 +149,14 @@ void PluginManager::Release()
 Plugin* PluginManager::Register(const char* filePath)
 {
     Plugin* plugin = new Plugin(filePath);
-    plugins.insert(plugin->GetUUID(), plugin);
+    plugins.insert(plugin->ID(), plugin);
     return plugin;
 }
 
 void PluginManager::Activate(QString plugin_id)
 {
     Plugin* p = plugins.value(plugin_id); 
-    if (!p->GetInstance()) {
-#ifdef CONSOLE_FLAG
-        printf("[Plugin]: failed to get instance.\n");
-#endif // CONSOLE_FLAG
-        return;
-    }
+    p->GetInstance();
     p->Activate();
 }
 
@@ -146,4 +168,9 @@ const Plugin* PluginManager::GetPlugin(QString plugin_id)
 void PluginManager::Deactivate(QString plugin_id)
 {
     plugins.value(plugin_id)->Deactivate();
+}
+
+QHash<QString, Plugin*>& PluginManager::GetPlugins()
+{
+    return this->plugins;
 }

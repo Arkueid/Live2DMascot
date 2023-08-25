@@ -3,6 +3,8 @@
 #include <QtWidgets/qtabwidget.h>
 #include <QtWidgets/qlabel.h>
 
+static ILApp* _iapp = NULL;
+
 void Greeting::OnLaunch()
 {
     //启动时问候语
@@ -27,18 +29,42 @@ void Greeting::OnLaunch()
     else {
         group = "Midnight";
     }
-    _app->GetModel()->StartRandomMotion(group, 3, NULL);
+    _app->GetModel()->StartRandomMotion(group, 3);
+    printf("OnLaunch finished\n");
+}
+
+void Greeting::OnScheduledTask()
+{
+    if (frameCount / _app->_FPS() > 10)
+    {
+    	_app->GetModel()->StartRandomMotion("LongSittingTip", 3);
+    	frameCount = 0;
+    } 
+    else frameCount++;
+}
+
+void OnFinishMotionCallBack(IMotion* self) {
+    _iapp->ReleaseHold();
+}
+
+#include "interface/IDialog.h"
+void Greeting::OnShutdown()
+{
+    _app->Hold();
+    _app->GetModel()->Speak("再见~", "", OnFinishMotionCallBack);
 }
 
 void Greeting::Initialize(ILApp* app)
 {
     _app = app;
+    _iapp = app;
 }
 
 Greeting::Greeting()
 {
     _app = NULL;
     tabIndex = -1;
+    frameCount = 0;
 }
 
 Greeting::~Greeting()

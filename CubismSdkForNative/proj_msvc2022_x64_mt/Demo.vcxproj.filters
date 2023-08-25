@@ -34,12 +34,6 @@
     <ClInclude Include="..\src\TouchManager.hpp">
       <Filter>Header Files\live2d</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\json\json.h">
-      <Filter>Header Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\json\json-forwards.h">
-      <Filter>Header Files\json</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\NetworkUtils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -112,6 +106,9 @@
     <ClInclude Include="..\src\IPlugin.h">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\json\json.h">
+      <Filter>Header Files\json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -131,9 +128,6 @@
     </Filter>
     <Filter Include="Header Files\win">
       <UniqueIdentifier>{5510ddd6-3c2b-4d2a-8dba-cee00e62af44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\json">
-      <UniqueIdentifier>{00f70c58-4bce-4352-b925-279baf32c187}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{5c3b74a2-147b-4d75-bdf9-86e6184d3782}</UniqueIdentifier>
@@ -161,6 +155,9 @@
     </Filter>
     <Filter Include="Header Files\interface">
       <UniqueIdentifier>{f7e74e34-2fcf-4933-a94f-83e822d23372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\json">
+      <UniqueIdentifier>{6bd49720-eaa7-4d59-bd95-b3cc67bfaffa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

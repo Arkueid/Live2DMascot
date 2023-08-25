@@ -301,8 +301,6 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
     //else {
     //    group = "Midnight";
     //}
-    //StartRandomMotion(group, PriorityForce);
-
     _updating = false;
     _initialized = true;
 }
@@ -822,16 +820,15 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
 CubismMotionQueueEntryHandle LAppModel::StartRandomMotion(const char* group, signed int priority, void (*onFinishedMotionHandler)(IMotion* self))
 {
     if (strcmp(group, "Random")==0) {
+
         return Speak(RandomTalk::GetRandomSentence().c_str(), "");
     }
     else if (_modelSetting->GetMotionCount(group) == 0)
     {
-        
         return InvalidMotionQueueEntryHandleValue;
     }
-    
-    csmInt32 no = rand() % _modelSetting->GetMotionCount(group);
 
+    csmInt32 no = rand() % _modelSetting->GetMotionCount(group);
     return StartMotion(group, no, priority, onFinishedMotionHandler);
 }
 

@@ -12,11 +12,14 @@
 #include "NetworkUtils.h"
 #include "LAppLive2DManager.hpp"
 #include <QtCore/qtimer.h>
+#include "PluginManager.h"
 using namespace std;
 using namespace LAppDefine;
 
 namespace LAppConfig {
     string _ConfigPath;
+
+    Json::Value _Plugins;
 
     // 窗口设置
     int _WindowWidth;
@@ -106,6 +109,7 @@ LApp::LApp()
 {
     _app = NULL;
     _win = NULL;
+    _holding = 0;
 }
 
 LApp* LApp::GetInstance()
@@ -134,7 +138,22 @@ IGLWidget* LApp::GetGLWidget()
 
 ILAppModel* LApp::GetModel()
 {
-    return (ILAppModel*)LAppLive2DManager::GetInstance()->GetModel(0);
+    return LAppLive2DManager::GetInstance()->GetModel(0);
+}
+
+void LApp::Hold()
+{
+    _holding++;
+}
+
+void LApp::ReleaseHold()
+{
+    _holding--;
+}
+
+int LApp::Holding()
+{
+    return _holding;
 }
 
 
@@ -261,12 +280,24 @@ void LApp::LoadConfig() {
     LAppConfig::_BaiduSpeechClientId = !config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"].isNull() ? config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"].asCString() : "rCRHPGUaKuRDVZK0E3K1L143";
     LAppConfig::_BaiduSpeechClientSecret = !config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"].isNull() ? config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"].asCString() : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf";
 
+    LAppConfig::_Plugins = config["Plugins"];
+
     Log("[CONFIG]Load", "Finished");
 }
 
 void LApp::Run()
 {
     _win->Run();
+
+    QHash<QString, Plugin*>& plg = PluginManager::GetInstance()->GetPlugins();
+    for (QString& key : plg.keys()) {
+        Plugin* p = plg.value(key);
+        if (!LAppConfig::_Plugins[key.toStdString()].isNull()
+            && LAppConfig::_Plugins[key.toStdString()].asBool()) {
+            p->Activate();
+            p->OnLaunch();
+        }
+    }
 
     _app->exec();
 
@@ -345,6 +376,7 @@ void LApp::SaveConfig()
     config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"] = LAppConfig::_BaiduSpeechClientId;
     config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"] = LAppConfig::_BaiduSpeechClientSecret;
 
+    config["Plugins"] = LAppConfig::_Plugins;
 
     ofstream ofs(QString::fromStdString(LAppConfig::_ConfigPath).toLocal8Bit().constData());
     if (ofs.fail())

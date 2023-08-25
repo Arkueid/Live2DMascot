@@ -31,7 +31,7 @@ class LAppModel : public Csm::CubismUserModel, public ILAppModel
 public:
     int _frameCount = 0;
     bool IsMotionFinished();
-    CubismMotionQueueEntryHandle Speak(const char* text, const char* soundPath, void (*onFinishedMotionHandler)(IMotion* self) = NULL);
+    void* Speak(const char* text, const char* soundPath, void (*onFinishedMotionHandler)(IMotion* self) = NULL);
     /**
      * @brief コンストラクタ
      */
@@ -77,7 +77,7 @@ public:
      * @param[in]   onFinishedMotionHandler     モーション再生終了時に呼び出されるコールバック関数。NULLの場合、呼び出されない。
      * @return                                  開始したモーションの識別番号を返す。個別のモーションが終了したか否かを判定するIsFinished()の引数で使用する。開始できない時は「-1」
      */
-    CubismMotionQueueEntryHandle StartMotion(const char* group, signed int no, signed int priority, void (*onFinishedMotionHandler)(IMotion* self) = NULL);
+    void* StartMotion(const char* group, signed int no, signed int priority, void (*onFinishedMotionHandler)(IMotion* self) = NULL);
 
     /**
      * @brief   ランダムに選ばれたモーションの再生を開始する。
@@ -87,7 +87,7 @@ public:
      * @param[in]   onFinishedMotionHandler     モーション再生終了時に呼び出されるコールバック関数。NULLの場合、呼び出されない。
      * @return                                  開始したモーションの識別番号を返す。個別のモーションが終了したか否かを判定するIsFinished()の引数で使用する。開始できない時は「-1」
      */
-    CubismMotionQueueEntryHandle StartRandomMotion(const char* group, signed int priority, void (*onFinishedMotionHandler)(IMotion* self) = NULL);
+    void* StartRandomMotion(const char* group, signed int priority, void (*onFinishedMotionHandler)(IMotion* self) = NULL);
 
     /**
      * @brief   引数で指定した表情モーションをセットする

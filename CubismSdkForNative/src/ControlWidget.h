@@ -21,7 +21,6 @@
 #include <qtmaterialslider.h>
 #include <qtmaterialtoggle.h>
 #include <qtmaterialraisedbutton.h>
-#include "PluginImpl.h"
 #include "IControlWidget.h"
 #include "IAppSettings.h"
 #include "IChatSettings.h"
@@ -196,6 +195,7 @@ public:
 	QPushButton* btn_load;
 	QString info;
 	PluginItemView(Plugin* plugin);
+	void UpdateText();
 private slots:
 	void on_btn_load_clicked();
 };

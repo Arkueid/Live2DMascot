@@ -84,7 +84,7 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		if (LAppConfig::_MouseOn)
 		{
 			if (!LAppConfig::_KeepQuiet && (!LAppConfig::_TransparentBackground ||  
-				strlen(LAppLive2DManager::GetInstance()->GetModel(0)->HitTest(clickX, clickY).GetRawString()) != 0
+				strlen(((LAppModel*)LAppLive2DManager::GetInstance()->GetModel(0))->HitTest(clickX, clickY).GetRawString()) != 0
 					)
 				)
 			{
@@ -116,12 +116,20 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 	}
 
-	if (runFor / LAppConfig::_FPS > 3600)
-	{
-		LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce);
-		runFor = 0;
+	// 运行计时器
+	//if (runFor / LAppConfig::_FPS > 3600)
+	//{
+	//	LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce);
+	//	runFor = 0;
+	//}
+	//runFor++;
+
+	QHash<QString, Plugin*>& plg = PluginManager::GetInstance()->GetPlugins();
+	for (QString& key : plg.keys()) {
+		Plugin* p = plg.value(key);
+		if (p->IsActivated()) p->OnScheduledTask();
 	}
-	runFor++;
+
 	update();
 }
 
@@ -203,9 +211,23 @@ void GLWidget::showRightMenu()
 
 void GLWidget::quitOnTriggered()
 {
-	Release();
-	deleteLater();
-	LApp::GetInstance()->Release();
+	QHash<QString, Plugin*>& plg = PluginManager::GetInstance()->GetPlugins();
+	for (QString& key : plg.keys()) {
+		Plugin* p = plg.value(key);
+		if (p->IsActivated()) {
+			p->OnShutdown();
+		}
+	}
+	QThread::create([=]() {
+		while (LApp::GetInstance()->Holding()>0)
+		{
+#ifdef CONSOLE_FLAG
+			printf("[APP]Holding: %d\n", LApp::GetInstance()->Holding());
+#endif // CONSOLE_FLAG
+			Sleep(1000);
+		}
+		Quit();
+	})->start();
 }
 
 void GLWidget::Release()
@@ -350,7 +372,7 @@ void GLWidget::SetupUI()
 
 	//右键菜单
 	rightMenu = new QMenu(this);
-	act_quit = new QAction(QString("退出"));
+	act_quit = new QAction(QString("强制退出"));
 
 	act_hide = new QAction(QString("隐藏"));
 
@@ -437,6 +459,13 @@ void GLWidget::SetupUI()
 	_pieMenu->setPinButtonIcon(QIcon(QString::fromStdString(LAppConfig::_AssetsDir).append("/pin.png")));
 
 	connect(_pieMenu, SIGNAL(buttonClicked(uint8_t)), SLOT(pieMenuOnClicked(uint8_t)));
+}
+
+void GLWidget::Quit()
+{
+	Release();
+	deleteLater();
+	LApp::GetInstance()->Release();
 }
 
 IDialog* GLWidget::GetDialog()

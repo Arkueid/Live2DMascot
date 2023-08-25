@@ -2,6 +2,6 @@
   "name": "Greeting",
   "author": "Arkueid",
   "version": "1.0.0",
-  "id": "com.arkueid.greeting/1.0.0",
+  "id": "com.arkueid.live2dmascot.greeting/1.0.0",
   "desc": "程序启动时根据时间说出相应的问候语，根据运行时长给出相应问候语。"
 }

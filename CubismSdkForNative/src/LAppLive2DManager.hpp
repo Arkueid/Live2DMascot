@@ -11,6 +11,7 @@
 #include <Math/CubismMatrix44.hpp>
 #include <Type/csmVector.hpp>
 
+class ILAppModel;
 class LAppModel;
 
 /**
@@ -44,7 +45,7 @@ public:
     * @param[in]   no  モデルリストのインデックス値
     * @return      モデルのインスタンスを返す。インデックス値が範囲外の場合はNULLを返す。
     */
-    LAppModel* GetModel(Csm::csmUint32 no) const;
+    ILAppModel* GetModel(Csm::csmUint32 no) const;
 
     /**
     * @brief   現在のシーンで保持しているすべてのモデルを解放する

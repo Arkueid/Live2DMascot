@@ -9,7 +9,7 @@ PluginItemView::PluginItemView(Plugin* plugin)
 	QString Version = plugin->Version();
 	QString Author = plugin->Author();
 	QString Desc = plugin->Desc();
-	QString PluginID = plugin->PluginID();
+	QString PluginID = plugin->ID();
 	info.clear();
 	info.append(Name).append("<br>")
 		.append("版本: ").append(Version).append("<br>")
@@ -33,16 +33,14 @@ PluginItemView::PluginItemView(Plugin* plugin)
 	setFixedSize(290, 60);
 }
 
+void PluginItemView::UpdateText()
+{
+	btn_load->setText(plugin->IsActivated() ? "禁用" : "启用");
+}
+
 void PluginItemView::on_btn_load_clicked() {
-	if (!plugin->GetInstance()) {
-#ifdef CONSOLE_FLAG
-		printf("[Plugin]: failed to get instance.\n");
-#endif // CONSOLE_FLAG
-		return;
-	}
 	if (plugin->IsActivated()) plugin->Deactivate();
 	else plugin->Activate();
-	btn_load->setText(plugin->IsActivated() ? "禁用" : "启用");
 }
 
 
@@ -100,6 +98,7 @@ void PluginSettings::on_plugin_item_clicked(const QModelIndex& idx) {
 void PluginSettings::AddPlugin(Plugin* plugin) {
 	QListWidgetItem* item = new QListWidgetItem;
 	PluginItemView* view = new PluginItemView(plugin);
+	plugin->BindItemView(view);
 	pluginList->addItem(item);
 	item->setSizeHint(view->size());
 	pluginList->setItemWidget(item, view);

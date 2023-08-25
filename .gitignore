@@ -1,6 +1,6 @@
-CubismSdkForNative-4-r.5.1/proj_msvc2022_x64_mt/.vs
-CubismSdkForNative-4-r.5.1/proj_msvc2022_x86_mt/.vs
-CubismSdkForNative-4-r.5.1/proj_msvc2022_x64_mt/bin/Demo/Release/Resources
-CubismSdkForNative-4-r.5.1/proj_msvc2022_x86_mt/bin/Demo/Release/Resources
-CubismSdkForNative-4-r.5.1/proj_msvc2022_x64_mt/bin/Demo/Release/chat
-CubismSdkForNative-4-r.5.1/proj_msvc2022_x86_mt/bin/Demo/Release/chat
+**/.vs
+**/**.dir
+**/**/**.dir
+**/bin/Resources
+**/bin/assets
+**/bin/chat

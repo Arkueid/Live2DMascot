@@ -6,6 +6,8 @@
 #include <QtWidgets/qlistwidget.h>
 #include <QtCore/qhash.h>
 
+class PluginItemView;
+
 class PluginManager;
 
 namespace {
@@ -15,22 +17,28 @@ namespace {
 class Plugin 
 {
 private:
+	friend PluginManager;
 	IPlugin* _instance;
 	QPluginLoader* loader;
+	PluginItemView* view;
 	QString UUID;
 	bool activated;
+	void GetInstance();
 public:
 	Plugin(const char* filePath);
 	~Plugin();
-	IPlugin* GetInstance();
 	const QString& GetUUID();
 	void Activate();
 	void Deactivate();
 	bool IsActivated();
+	void OnLaunch();
+	void OnShutdown();
+	void OnScheduledTask();
+	void BindItemView(PluginItemView* view);
 	QString Name();
 	QString Version();
 	QString Author();
-	QString PluginID();
+	QString ID();
 	QString Desc();
 };
 
@@ -46,4 +54,5 @@ public:
 	void Activate(QString plugin_id);
 	const Plugin* GetPlugin(QString plugin_id);
 	void Deactivate(QString plugin_id);
+	QHash<QString, Plugin*>& GetPlugins();
 };

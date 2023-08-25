@@ -19,6 +19,9 @@
     <Filter Include="Generated Files">
       <UniqueIdentifier>{48068442-2fbb-42f8-bead-9cbd7417c82d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\json">
+      <UniqueIdentifier>{26eaae68-3bad-4c85-a26d-e3f5e0e72543}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="plugin.json">
@@ -68,6 +71,9 @@
     <ClInclude Include="interface\IPluginSettings.h">
       <Filter>头文件\interface</Filter>
     </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>头文件\json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Greeting.cpp">
@@ -75,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="moc_Greeting.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@ class Greeting : public QObject, public IPlugin {
 private:
 	ILApp* _app;
 	int tabIndex;
+	int frameCount;
 public:
 	Greeting();
 	~Greeting();
@@ -17,7 +18,11 @@ public:
 
 	void Deactivate();
 
-	void OnLaunch();
-
 	void Initialize(ILApp* app);
+
+	void OnLaunch();
+	
+	void OnScheduledTask();
+
+	void OnShutdown();
 };

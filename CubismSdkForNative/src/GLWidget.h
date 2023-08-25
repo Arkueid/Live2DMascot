@@ -49,7 +49,7 @@ public:
 	void Run();
 	void LoadConfig();
 	void SetupUI();
-
+	void Quit();
 	IDialog* GetDialog();
 
 	QOpenGLWidget* GetSelf();
