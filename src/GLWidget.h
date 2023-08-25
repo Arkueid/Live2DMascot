@@ -9,9 +9,10 @@
 #include <QtWidgets/qmenu.h>
 #include "LAppDefine.hpp"
 #include "PieMenu.h"
+#include "IGLWidget.h"
 using namespace std;
 
-class GLWidget : public QOpenGLWidget
+class GLWidget : public QOpenGLWidget, public IGLWidget
 {
 	Q_OBJECT
 private:
@@ -24,46 +25,56 @@ private:
 	QAction* act_stayOnTop = NULL; //窗口置顶
 	QAction* act_setNoSound = NULL;  //静音
 	QAction* act_setShowText = NULL;  //显示文本
-	//QAction* act_setShowBgmList = NULL;  //显示追番列表
 	QAction* act_showSettings = NULL; //显示设置窗口
 	QAction* act_setShowBackground = NULL;  //显示背景
 	QAction* act_setTransparentBackground = NULL; //背景穿透
 	QAction* act_setTransparentCharacter = NULL;  //人物穿透
 	Dialog* _dialog = NULL;  //文本框
-	//BgmListView* _bgmlist = NULL;  //追番列表
-	ConversationWidget* _cvWidget = NULL;  //聊天输入框
+	ChatWidget* _cvWidget = NULL;  //聊天输入框
 	ControlWidget* _control = NULL;  //设置
 	PieMenu* _pieMenu = NULL;  // 扇形菜单
 	bool _LastShowText;
 	bool _LastNoSound;
 	bool _transparent = false;  //窗体透过
 	bool _drawBackground = false;
+	int lastX;
+	int lastY;
+	int currentTimerIndex;
+	int runFor = 0;
 public:
 	GLWidget();
 	~GLWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]GLWdiget destroyed\n"); }
-	void mousePressEvent(QMouseEvent* e);
-	void mouseReleaseEvent(QMouseEvent* e);
-	void mouseMoveEvent(QMouseEvent* e);
-	void showRightMenu();
-	void setupUI();
-	void saveConfig();
+	void SaveConfig();
 	void Release();
 	void Run();
-	Dialog* GetDialog() { return _dialog; }
-	//BgmListView* GetBgmListView() { return _bgmlist; }
 	void LoadConfig();
+	void SetupUI();
+	void Quit();
+	IDialog* GetDialog();
+
+	QOpenGLWidget* GetSelf();
+
+	IControlWidget* GetControlWidget();
+
+	IPieMenu* GetPieMenu();
+
+	IChatWidget* GetConversationWidget();
+
+	QMenu* GetTrayMenu();
+
+	QSystemTrayIcon* GetTray();
+
 protected:
+	void showRightMenu();
 	void initializeGL();
 	void resizeGL(int w, int h);
 	void paintGL();
 	void timerEvent(QTimerEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
 	void keepMouseTrack(bool on);
-	//void setShowBgmList(bool on);
-	int lastX;
-	int lastY;
-	int currentTimerIndex;
-	int runFor = 0;
+	void mousePressEvent(QMouseEvent* e);
+	void mouseReleaseEvent(QMouseEvent* e);
+	void mouseMoveEvent(QMouseEvent* e);
 private slots:
 	void trayIconOnActivated(QSystemTrayIcon::ActivationReason reason);
 	void quitOnTriggered();

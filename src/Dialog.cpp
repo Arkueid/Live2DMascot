@@ -24,10 +24,14 @@ Dialog::Dialog()
 	hide();
 }
 
+QWidget* Dialog::GetSelf() {
+	return this;
+}
+
 void Dialog::Pop(const char* text)
 {
 	hide();
-	_text = QString::fromStdString(text).toUtf8();
+	_text = QString::fromStdString(text);
 	animation->stop();
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
 	animation->setDuration(LAppConfig::_TextFadeOutTime * 1000);

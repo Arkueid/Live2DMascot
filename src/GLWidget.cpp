@@ -84,7 +84,7 @@ void GLWidget::timerEvent(QTimerEvent* e)
 		if (LAppConfig::_MouseOn)
 		{
 			if (!LAppConfig::_KeepQuiet && (!LAppConfig::_TransparentBackground ||  
-				strlen(LAppLive2DManager::GetInstance()->GetModel(0)->HitTest(clickX, clickY).GetRawString()) != 0
+				strlen(((LAppModel*)LAppLive2DManager::GetInstance()->GetModel(0))->HitTest(clickX, clickY).GetRawString()) != 0
 					)
 				)
 			{
@@ -116,12 +116,20 @@ void GLWidget::timerEvent(QTimerEvent* e)
 
 	}
 
-	if (runFor / LAppConfig::_FPS > 3600)
-	{
-		LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce);
-		runFor = 0;
+	// 运行计时器
+	//if (runFor / LAppConfig::_FPS > 3600)
+	//{
+	//	LAppLive2DManager::GetInstance()->GetModel(0)->StartRandomMotion("LongSittingTip", PriorityForce);
+	//	runFor = 0;
+	//}
+	//runFor++;
+
+	QHash<QString, Plugin*>& plg = PluginManager::GetInstance()->GetPlugins();
+	for (QString& key : plg.keys()) {
+		Plugin* p = plg.value(key);
+		if (p->IsActivated()) p->OnScheduledTask();
 	}
-	runFor++;
+
 	update();
 }
 
@@ -149,7 +157,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent* e)
 void GLWidget::mouseDoubleClickEvent(QMouseEvent* e)
 {
 	if (e->button() == Qt::LeftButton) {
-		_cvWidget->getInput();
+		_cvWidget->GetInput();
 	}
 }
 
@@ -203,15 +211,29 @@ void GLWidget::showRightMenu()
 
 void GLWidget::quitOnTriggered()
 {
-	Release();
-	deleteLater();
-	LApp::GetInstance()->Release();
+	QHash<QString, Plugin*>& plg = PluginManager::GetInstance()->GetPlugins();
+	for (QString& key : plg.keys()) {
+		Plugin* p = plg.value(key);
+		if (p->IsActivated()) {
+			p->OnShutdown();
+		}
+	}
+	QThread::create([=]() {
+		while (LApp::GetInstance()->Holding()>0)
+		{
+#ifdef CONSOLE_FLAG
+			printf("[APP]Holding: %d\n", LApp::GetInstance()->Holding());
+#endif // CONSOLE_FLAG
+			Sleep(1000);
+		}
+		Quit();
+	})->start();
 }
 
 void GLWidget::Release()
 {
 	close();
-	saveConfig();
+	SaveConfig();
 	killTimer(currentTimerIndex);
 	trayIcon->hide();
 	trayIcon->deleteLater();
@@ -337,7 +359,7 @@ void GLWidget::Run()
 }
 
 //加载配置文件
-void GLWidget::setupUI()
+void GLWidget::SetupUI()
 {
 	move(LAppConfig::_LastPosX, LAppConfig::_LastPosY);
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
@@ -350,7 +372,7 @@ void GLWidget::setupUI()
 
 	//右键菜单
 	rightMenu = new QMenu(this);
-	act_quit = new QAction(QString("退出"));
+	act_quit = new QAction(QString("强制退出"));
 
 	act_hide = new QAction(QString("隐藏"));
 
@@ -409,12 +431,12 @@ void GLWidget::setupUI()
 	rightMenu->setStyleSheet("QMenu { background-color: white; padding-top: 8px; padding-bottom: 8px; border: 1px solid rgb(214, 214, 214); padding: 4px; color: black;} QMenu::item::selected{background-color: rgba(50, 150, 240, 200); color: white;} QMenu::item {padding: 0 0 0 20px; margin-left: 4px; margin-right: 4px;color: rgb(90, 90, 90);} QMenu::indicator{width: 13px;} QMenu::item:checked, QMenu::item:unchecked{padding-left: 7;}");
 
 	for (const QAction* action : rightMenu->actions()) {
-		connect(action, &QAction::triggered, this, &GLWidget::saveConfig);
+		connect(action, &QAction::triggered, this, &GLWidget::SaveConfig);
 	}
 	 
 	_dialog = new Dialog();
 
-	_cvWidget = new ConversationWidget();
+	_cvWidget = new ChatWidget();
 
 	_control = new ControlWidget();
 
@@ -439,11 +461,54 @@ void GLWidget::setupUI()
 	connect(_pieMenu, SIGNAL(buttonClicked(uint8_t)), SLOT(pieMenuOnClicked(uint8_t)));
 }
 
+void GLWidget::Quit()
+{
+	Release();
+	deleteLater();
+	LApp::GetInstance()->Release();
+}
+
+IDialog* GLWidget::GetDialog()
+{
+	return _dialog;
+}
+
+QOpenGLWidget* GLWidget::GetSelf()
+{
+	return this;
+}
+
+IControlWidget* GLWidget::GetControlWidget()
+{
+	return _control;
+}
+
+IPieMenu* GLWidget::GetPieMenu()
+{
+	return _pieMenu;
+}
+
+IChatWidget* GLWidget::GetConversationWidget()
+{
+	return _cvWidget;
+}
+
+QMenu* GLWidget::GetTrayMenu()
+{
+	return rightMenu;
+}
+
+QSystemTrayIcon* GLWidget::GetTray()
+{
+	return trayIcon;
+}
+
+
 void GLWidget::LoadConfig()
 {
 	resize(LAppConfig::_WindowWidth, LAppConfig::_WindowHeight);
 	//加载图标
-	if (_access(QString::fromUtf8(LAppConfig::_IconPath.c_str()).toStdString().c_str(), 0) == -1)
+	if (_access(QString::fromUtf8(LAppConfig::_IconPath.c_str()).toLocal8Bit().constData(), 0) == -1)
 	{
 		trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon));
 	}
@@ -463,10 +528,10 @@ void GLWidget::LoadConfig()
 	currentTimerIndex = startTimer(1000 / LAppConfig::_FPS);
 }
 
-void GLWidget::saveConfig()
+void GLWidget::SaveConfig()
 {
 #ifdef CONSOLE_FLAG
-	printf("[APP]config saved: %s\n", LAppConfig::_ConfigPath);
+	printf("[APP]config saved: %s\n", LAppConfig::_ConfigPath.c_str());
 #endif
 	LApp::GetInstance()->SaveConfig();
 }
@@ -519,7 +584,7 @@ void GLWidget::pieMenuOnClicked(uint8_t btni) {
 	switch (btni)
 	{
 	case 0:
-		_cvWidget->getInput();
+		_cvWidget->GetInput();
 		break;
 	case 1:
 		_control->Pop();

@@ -9,6 +9,7 @@
 #include <vector>
 #include <QtCore/qtextcodec.h>
 #include <QtCore/qdatetime.h>
+#include <QtMultimedia/qaudiorecorder.h>
 
 namespace HolidayUtils
 {
@@ -24,8 +25,6 @@ namespace ChatAPI
 	void Chat(const string& text, string& resText, string& soundPath); 
 	void VoiceChat(const char* filePath, string& asr, string& text, string& soundPath);
 }
-
-#include <QtMultimedia/qaudiorecorder.h>
 
 namespace {
 	QAudioRecorder* audioRecorder = nullptr;

@@ -74,7 +74,7 @@ void LAppLive2DManager::ReleaseAllModel()
     _models.Clear();
 }
 
-LAppModel* LAppLive2DManager::GetModel(csmUint32 no) const
+ILAppModel* LAppLive2DManager::GetModel(csmUint32 no) const
 {
     if (no < _models.GetSize())
     {
@@ -88,7 +88,7 @@ void LAppLive2DManager::OnDrag(csmFloat32 x, csmFloat32 y) const
 {
     for (csmUint32 i = 0; i < _models.GetSize(); i++)
     {
-        LAppModel* model = GetModel(i);
+        LAppModel* model = (LAppModel*)GetModel(i);
 
         model->SetDragging(x, y);
     }
@@ -125,7 +125,7 @@ void LAppLive2DManager::OnUpdate() const
     for (csmUint32 i = 0; i < modelCount; ++i)
     {
         CubismMatrix44 projection;
-        LAppModel* model = GetModel(i);
+        LAppModel* model = (LAppModel*)GetModel(i);
 
         if (model->GetModel() == NULL)
         {
@@ -165,7 +165,7 @@ void LAppLive2DManager::ChangeModel(const char* modelPath, const char* modelName
 {
     if (DebugLogEnable)
     {
-        LAppPal::PrintLog("[APP]model name: %s", QString::fromUtf8(modelName).toStdString().c_str());
+        LAppPal::PrintLog("[APP]model name: %s", QString::fromUtf8(modelName).toLocal8Bit().constData());
     }
     string dir = modelPath + string("/") + modelName + string("/");
     string modelJsonName =  modelName + string(".model3.json");

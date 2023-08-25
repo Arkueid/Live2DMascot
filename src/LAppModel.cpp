@@ -26,6 +26,7 @@
 #include "AudioUtils.h"
 #include "RandomTalk.h"
 #include "LApp.h"
+#include "IDialog.h"
 
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Framework::DefaultParameterId;
@@ -90,13 +91,13 @@ void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
 
     if (_debugMode)
     {
-        LAppPal::PrintLog("[APP]load model setting: %s", QString::fromUtf8(fileName).toStdString().c_str());
+        LAppPal::PrintLog("[APP]load model setting: %s", QString::fromUtf8(fileName).toLocal8Bit().constData());
     }
 
     csmSizeInt size;
 
     //中文路径支持
-    const csmString path = QString::fromUtf8(dir).append(fileName).toStdString().c_str();
+    const csmString path = QString::fromUtf8(dir).append(fileName).toLocal8Bit().constData();
 
     csmByte* buffer = CreateBuffer(path.GetRawString(), &size);
     ICubismModelSetting* setting = new CubismModelSettingJson(buffer, size);
@@ -134,11 +135,11 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         if (_debugMode)
         {
-            LAppPal::PrintLog("[APP]create model: %s", setting->GetModelFileName());
+            LAppPal::PrintLog("[APP]create model: %s", QString(setting->GetModelFileName()).toLocal8Bit().constData());
         }
 
         buffer = CreateBuffer(path.GetRawString(), &size);
@@ -159,7 +160,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
             path = _modelHomeDir + path;
 
             //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
             buffer = CreateBuffer(path.GetRawString(), &size);
             ACubismMotion* motion = LoadExpression(buffer, size, name.GetRawString());
@@ -183,7 +184,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadPhysics(buffer, size);
@@ -198,7 +199,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadPose(buffer, size);
@@ -234,7 +235,7 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         buffer = CreateBuffer(path.GetRawString(), &size);
         LoadUserData(buffer, size);
@@ -280,28 +281,26 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
 
     _motionManager->StopAllMotions();
     
-    //启动时问候语
-    const char* greeting = NULL;
-    const char* group = NULL;
-    time_t tick = time(0);
-    struct tm* now = localtime(&tick);
-    
-    if (now->tm_hour > 4 && now->tm_hour < 12)
-    {
-        group = "Morning";
-    }
-    else if (now->tm_hour < 18)
-    {
-        group = "Afternoon";
-    }
-    else if (now->tm_hour < 21) {
-        group = "Evening";
-    }
-    else {
-        group = "Midnight";
-    }
-    StartRandomMotion(group, PriorityForce);
-
+    ////启动时问候语
+    //const char* greeting = NULL;
+    //const char* group = NULL;
+    //time_t tick = time(0);
+    //struct tm* now = localtime(&tick);
+    //
+    //if (now->tm_hour > 4 && now->tm_hour < 12)
+    //{
+    //    group = "Morning";
+    //}
+    //else if (now->tm_hour < 18)
+    //{
+    //    group = "Afternoon";
+    //}
+    //else if (now->tm_hour < 21) {
+    //    group = "Evening";
+    //}
+    //else {
+    //    group = "Midnight";
+    //}
     _updating = false;
     _initialized = true;
 }
@@ -404,7 +403,7 @@ void LAppModel::PreloadMotionGroup(const csmChar* group)
         path = _modelHomeDir + path;
 
         //中文支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         if (_debugMode)
         {
@@ -587,7 +586,7 @@ void LAppModel::Update()
 * @param    priority    优先级
 * @param    onFinishedMotionHandler 回调函数
 */
-CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt32 no, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
+CubismMotionQueueEntryHandle LAppModel::StartMotion(const char* group, signed int no, signed int priority, void (*onFinishedMotionHandler)(IMotion* self))
 {
     if (priority == PriorityForce)
     {
@@ -627,7 +626,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
             path = _modelHomeDir + path;
 
             //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
             csmByte* buffer;
             csmSizeInt size;
@@ -635,7 +634,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
             if (LAppConfig::_RepairModeOn)
                 RepairMotion(path.GetRawString());
             buffer = CreateBuffer(path.GetRawString(), &size);
-            motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, onFinishedMotionHandler));
+            motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, NULL));
             csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, no);
             if (fadeTime >= 0.0f)
             {
@@ -654,7 +653,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
     }
     else
     {
-        motion->SetFinishedMotionHandler(onFinishedMotionHandler);
+        motion->SetFinishedMotionHandler((ACubismMotion::FinishedMotionCallback)onFinishedMotionHandler);
     }
 
     if (LAppConfig::_WaitChatResponse) return NULL;
@@ -674,7 +673,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
         path = _modelHomeDir + path;
 
         //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         if (!LAppConfig::_NoSound)
         {
@@ -733,7 +732,7 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt
 * @param    txt         文本
 * @param    soundPath   语音路径
 */
-CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* soundPath)
+CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* soundPath, void (*onFinishedMotionHandler)(IMotion* self))
 {
     _motionManager->SetReservePriority(PriorityForce);
 
@@ -755,7 +754,7 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
             path = _modelHomeDir + path;
 
             //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
             csmByte* buffer;
             csmSizeInt size;
@@ -779,7 +778,7 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
     }
     else
     {
-        motion->SetFinishedMotionHandler(NULL);
+        motion->SetFinishedMotionHandler((ACubismMotion::FinishedMotionCallback)onFinishedMotionHandler);
     }
 
     //voice
@@ -788,7 +787,7 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
     {
 
         //中文路径支持
-        path = QString::fromUtf8(path.GetRawString()).toStdString().c_str();
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
 
         if (!LAppConfig::_NoSound)
         {
@@ -815,23 +814,21 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
         LAppPal::PrintLog("[APP]start motion: [%s_%d]", "Chat", no);
     }
 
-    _frameCount = 0;
     return  _motionManager->StartMotionPriority(motion, autoDelete, PriorityForce);
 }
 
-CubismMotionQueueEntryHandle LAppModel::StartRandomMotion(const csmChar* group, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
+CubismMotionQueueEntryHandle LAppModel::StartRandomMotion(const char* group, signed int priority, void (*onFinishedMotionHandler)(IMotion* self))
 {
     if (strcmp(group, "Random")==0) {
+
         return Speak(RandomTalk::GetRandomSentence().c_str(), "");
     }
     else if (_modelSetting->GetMotionCount(group) == 0)
     {
-        
         return InvalidMotionQueueEntryHandleValue;
     }
-    
-    csmInt32 no = rand() % _modelSetting->GetMotionCount(group);
 
+    csmInt32 no = rand() % _modelSetting->GetMotionCount(group);
     return StartMotion(group, no, priority, onFinishedMotionHandler);
 }
 
@@ -955,7 +952,7 @@ void LAppModel::SetupTextures()
         texturePath = _modelHomeDir + texturePath;
 
         //中文支持
-        texturePath = QString::fromUtf8(texturePath.GetRawString()).toStdString().c_str();
+        texturePath = QString::fromUtf8(texturePath.GetRawString()).toLocal8Bit().constData();
 
         LAppTextureManager::TextureInfo* texture = LAppDelegate::GetInstance()->GetTextureManager()->CreateTextureFromPngFile(texturePath.GetRawString());
         const csmInt32 glTextueNumber = texture->id;
@@ -982,7 +979,7 @@ Csm::Rendering::CubismOffscreenFrame_OpenGLES2& LAppModel::GetRenderBuffer()
     return _renderBuffer;
 }
 
-bool LAppModel::isFinished()
+bool LAppModel::IsMotionFinished()
 {
     return _motionManager->IsFinished();
 }

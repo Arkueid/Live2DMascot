@@ -11,39 +11,39 @@
 #include <string>
 
 /**
-* @brief ¥×¥é¥Ã¥È¥Õ¥©©`¥àÒÀ´æ™CÄÜ¤ò³éÏó»¯¤¹¤ë Cubism Platform Abstraction Layer.
+* @brief ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ä¾å­˜æ©Ÿèƒ½ã‚’æŠ½è±¡åŒ–ã™ã‚‹ Cubism Platform Abstraction Layer.
 *
-* ¥Õ¥¡¥¤¥ëÕi¤ßŞz¤ß¤ä•r¿ÌÈ¡µÃµÈ¤Î¥×¥é¥Ã¥È¥Õ¥©©`¥à¤ËÒÀ´æ¤¹¤ëévÊı¤ò¤Ş¤È¤á¤ë
+* ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚„æ™‚åˆ»å–å¾—ç­‰ã®ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã«ä¾å­˜ã™ã‚‹é–¢æ•°ã‚’ã¾ã¨ã‚ã‚‹
 *
 */
 class LAppPal
 {
 public:
     /**
-    * @brief ¥Õ¥¡¥¤¥ë¤ò¥Ğ¥¤¥È¥Ç©`¥¿¤È¤·¤ÆÕi¤ßŞz¤à
+    * @brief ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦èª­ã¿è¾¼ã‚€
     *
-    * ¥Õ¥¡¥¤¥ë¤ò¥Ğ¥¤¥È¥Ç©`¥¿¤È¤·¤ÆÕi¤ßŞz¤à
+    * ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿ã¨ã—ã¦èª­ã¿è¾¼ã‚€
     *
-    * @param[in]   filePath    Õi¤ßŞz¤ßŒÏó¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹
-    * @param[out]  outSize     ¥Õ¥¡¥¤¥ë¥µ¥¤¥º
-    * @return                  ¥Ğ¥¤¥È¥Ç©`¥¿
+    * @param[in]   filePath    èª­ã¿è¾¼ã¿å¯¾è±¡ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹
+    * @param[out]  outSize     ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
+    * @return                  ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿
     */
     static Csm::csmByte* LoadFileAsBytes(const std::string filePath, Csm::csmSizeInt* outSize);
 
 
     /**
-    * @brief ¥Ğ¥¤¥È¥Ç©`¥¿¤ò½â·Å¤¹¤ë
+    * @brief ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿ã‚’è§£æ”¾ã™ã‚‹
     *
-    * ¥Ğ¥¤¥È¥Ç©`¥¿¤ò½â·Å¤¹¤ë
+    * ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿ã‚’è§£æ”¾ã™ã‚‹
     *
-    * @param[in]   byteData    ½â·Å¤·¤¿¤¤¥Ğ¥¤¥È¥Ç©`¥¿
+    * @param[in]   byteData    è§£æ”¾ã—ãŸã„ãƒã‚¤ãƒˆãƒ‡ãƒ¼ã‚¿
     */
     static void ReleaseBytes(Csm::csmByte* byteData);
 
     /**
-    * @biref   ¥Ç¥ë¥¿•rég£¨Ç°»Ø¥Õ¥ì©`¥à¤È¤Î²î·Ö£©¤òÈ¡µÃ¤¹¤ë
+    * @biref   ãƒ‡ãƒ«ã‚¿æ™‚é–“ï¼ˆå‰å›ãƒ•ãƒ¬ãƒ¼ãƒ ã¨ã®å·®åˆ†ï¼‰ã‚’å–å¾—ã™ã‚‹
     *
-    * @return  ¥Ç¥ë¥¿•rég[ms]
+    * @return  ãƒ‡ãƒ«ã‚¿æ™‚é–“[ms]
     *
     */
     static Csm::csmFloat32 GetDeltaTime();
@@ -51,22 +51,22 @@ public:
     static void UpdateTime();
 
     /**
-    * @brief ¥í¥°¤ò³öÁ¦¤¹¤ë
+    * @brief ãƒ­ã‚°ã‚’å‡ºåŠ›ã™ã‚‹
     *
-    * ¥í¥°¤ò³öÁ¦¤¹¤ë
+    * ãƒ­ã‚°ã‚’å‡ºåŠ›ã™ã‚‹
     *
-    * @param[in]   format  •øÊ½¸¶ÎÄ×ÖÁĞ
-    * @param[in]   ...     (¿É‰äéLÒıÊı)ÎÄ×ÖÁĞ
+    * @param[in]   format  æ›¸å¼ä»˜æ–‡å­—åˆ—
+    * @param[in]   ...     (å¯å¤‰é•·å¼•æ•°)æ–‡å­—åˆ—
     *
     */
     static void PrintLog(const Csm::csmChar* format, ...);
 
     /**
-    * @brief ¥á¥Ã¥»©`¥¸¤ò³öÁ¦¤¹¤ë
+    * @brief ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›ã™ã‚‹
     *
-    * ¥á¥Ã¥»©`¥¸¤ò³öÁ¦¤¹¤ë
+    * ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›ã™ã‚‹
     *
-    * @param[in]   message  ÎÄ×ÖÁĞ
+    * @param[in]   message  æ–‡å­—åˆ—
     *
     */
     static void PrintMessage(const Csm::csmChar* message);

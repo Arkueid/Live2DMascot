@@ -15,16 +15,17 @@
 
 #ifndef PIEMENU_H
 #define PIEMENU_H
-
+#include "IPieMenu.h"
 #include <QtWidgets/QWidget>
 #include <QtGui/QPainterPath>
 #include <QtGui/QIcon>
 
 /// \brief A simple pie menu widget for Qt
-class PieMenu : public QWidget
+class PieMenu : public QWidget, public IPieMenu
 {
     Q_OBJECT
 public:
+    QWidget* GetSelf() { return this; }
     /// \brief Constructor of the PieMenu widget
     /// \param parent: Pointer to the parent widget
     explicit PieMenu(QWidget *parent = nullptr);

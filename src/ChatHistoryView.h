@@ -8,12 +8,14 @@
 #include <QtWidgets/qlabel.h>
 #include <QtWidgets/qboxlayout.h>
 #include <QtWidgets/qcombobox.h>
+#include "IChatHistoryView.h"
 
 #include <Windows.h>
 using namespace std;
 
 
-class ChatHistoryItemView : public QFrame {
+class ChatHistoryItemView : public QFrame
+{
 	Q_OBJECT;
 public:
 	ChatHistoryItemView(const char* character, const char* text, const char* soundPath);
@@ -29,7 +31,7 @@ private slots:
 	void playOnClicked();
 };
 
-class ChatHistoryView : public QWidget
+class ChatHistoryView : public QWidget, public IChatHistoryView
 {
 	Q_OBJECT;
 public:
@@ -49,4 +51,6 @@ private:
 	int _mouseY;
 private slots:
 	void selectDateOnTriggered();
+signals:
+	void closed();
 };

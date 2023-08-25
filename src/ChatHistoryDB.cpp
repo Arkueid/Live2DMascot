@@ -1,9 +1,15 @@
 #include "ChatHistoryDB.h"
 #include <iostream>
 #include <string.h>
+#include <QtCore/qdir.h>
 using namespace std;
 
 ChatHistoryDB::ChatHistoryDB(const char* db_path) {
+	QDir dir("chat");
+	if (!dir.exists()) 
+	{
+		dir.mkpath(".");
+	}
 	if (0 != sqlite3_open(db_path, &m_db)) {
 		m_db = NULL;
 	}
@@ -11,17 +17,16 @@ ChatHistoryDB::ChatHistoryDB(const char* db_path) {
 }
 
 void ChatHistoryDB::create_chat_history() {
-	char* errmsg = NULL;
 	if (SQLITE_OK != sqlite3_exec(m_db, "create table if not exists chat_history("
 		"id integer primary key autoincrement,"
 		"name text,"
 		"text text,"
 		"soundPath text,"
 		"ct text);",
-		NULL, NULL, &errmsg) )
+		NULL, NULL, NULL) )
 	{
 #ifdef CONSOLE_FLAG
-		cerr << "[ChatHistoryDB]:" << errmsg << endl;
+		cerr << "[ChatHistoryDB]:" << sqlite3_errmsg(m_db) << endl;
 #endif // CONSOLE_FLAG
 	}
 }

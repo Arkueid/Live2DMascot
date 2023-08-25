@@ -63,9 +63,13 @@
 		"ModelName" : "Hiyori",
 		"MotionInterval" : 10.0
 	},
+	"Plugins" : 
+	{
+		"com.arkueid.greeting/1.0.0" : true
+	},
 	"UserSettings" : 
 	{
-		"AppName" : "0d00",
+		"AppName" : "Kouko(C-3PO)",
 		"FPS" : 48,
 		"IconPath" : "../Resources/nn/ico_nn.png",
 		"KeepQuiet" : false,
@@ -96,8 +100,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 839,
-			"Y" : 236
+			"X" : 1093,
+			"Y" : 254
 		},
 		"Width" : 400
 	}

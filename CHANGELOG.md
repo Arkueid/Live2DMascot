@@ -1,5 +1,40 @@
 # Changelog
 
+### 2023-08-25
+***add***  
+
+1. 插件生命周期  
+
+	```cpp
+	class IPlugin
+	{
+	public:
+		~IPlugin() = default;
+
+		virtual void Activate() = 0;  // 关闭插件时调用
+
+		virtual void Deactivate() = 0;  // 开启插件时调用
+
+		virtual void Initialize(ILApp* app) = 0;  // 插件示例化后，初次使用前应该先初始化
+
+		virtual void OnLaunch() = 0;  // 程序启动时调用
+
+		virtual void OnScheduledTask() = 0;  // 周期性任务，每帧调用一次
+
+		virtual void OnShutdown() = 0;  // 程序关闭时调用
+	};
+	```
+2. 插件状态管理  
+
+	插件开启状态保存在 config.json 中:  
+
+	```json
+	"Plugins" : 
+	{
+		"com.arkueid.greeting/1.0.0" : true
+	},
+	```
+	
 ### 2023-08-12
 ***add***
 * 插件系统

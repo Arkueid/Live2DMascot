@@ -9,7 +9,7 @@ using namespace httplib;
 
 void Log(const char* handler, const char* msg)
 {
-	if (LAppDefine::DebugLogEnable) printf("[APP]%s: %s\n", handler, msg);
+	if (LAppDefine::DebugLogEnable) printf("[APP]%s: %s\n", QString(handler).toLocal8Bit().constData(), QString(msg).toLocal8Bit().constData());
 }
 
 namespace HolidayUtils

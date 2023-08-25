@@ -6,19 +6,28 @@
 #include <QtWidgets/qframe.h>
 #include "LAppDefine.hpp"
 #include "ChatHistoryView.h"
+#include "IChatWidget.h"
 
 
-class ConversationWidget : public QWidget
+class ChatWidget : public QWidget, public IChatWidget
 {
 	Q_OBJECT
 public:
-	ConversationWidget();
-	~ConversationWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ConversationWidget destroyed\n"); }
-	void getInput();
+	ChatWidget();
+	~ChatWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ConversationWidget destroyed\n"); }
+	QWidget* GetSelf();
+	void GetInput();
 	void AttachToCharacter();
 	void Release();
 	void ProcessNetworkResponse(bool voice=false);
 	void ProcessBaiduVoiceInput();
+	IChatHistoryView* GetChatHistoryView() { return historyView; }
+	QPushButton* GetSendButton() { return _Send; }
+	QPushButton* GetRecordButton() { return _Record; }
+	QPushButton* GetHistoryButton() { return _History; }
+	QGridLayout* GetMainLayout() { return grid; }
+	QLineEdit* GetLineEdit() { return inputArea; }
+	QFrame* GetFrame() { return _frame; }
 protected:
 	void mouseMoveEvent(QMouseEvent* e);
 	void mousePressEvent(QMouseEvent* e);
@@ -31,6 +40,7 @@ private slots:
 	void ShowHistory();
 	void UpdateHistory(const char* chara, const char* text, const char* sound);
 	void PopDialog(bool waitMode);
+	void CloseHistory();
 private:
 	QFont _font;
 	QString _msg;

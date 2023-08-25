@@ -15,11 +15,18 @@
 #include <vector>
 #include "LAppDefine.hpp"
 #include "json/json.h"
-
+#include <QtWidgets/qlistwidget.h>
+#include <QtWidgets/qtextbrowser.h>
 #include <qtmaterialtextfield.h>
 #include <qtmaterialslider.h>
 #include <qtmaterialtoggle.h>
 #include <qtmaterialraisedbutton.h>
+#include "IControlWidget.h"
+#include "IAppSettings.h"
+#include "IChatSettings.h"
+#include "IModelSettings.h"
+#include "IPluginSettings.h"
+#include "PluginManager.h"
 
 class MyText : public QTextEdit {
 	Q_OBJECT
@@ -50,7 +57,7 @@ protected:
 };
 
 
-class AppSettings : public QWidget
+class AppSettings : public QWidget, public IAppSettings
 {
 	Q_OBJECT
 	QtMaterialTextField* appName;
@@ -62,22 +69,10 @@ class AppSettings : public QWidget
 	QtMaterialTextField* modelDir;
 	QtMaterialTextField* motionInterval;
 	QtMaterialTextField* lipSync;
-	//QLabel* lbl_dialogMaxWidth;
 	QtMaterialTextField* dialogMaxWidth;
-	//QLabel* lbl_dialogFontSize;
 	QtMaterialTextField* dialogFontSize;
-	//QLabel* lbl_dialogYOffset;
 	QtMaterialTextField* dialogYOffset;
 	QtMaterialSlider* volumeSlider;
-	//QLabel* lbl_motioninterval;
-	//QLabel* lbl_lipsync;
-	//QLabel* lbl_appName;
-	//QLabel* lbl_username;
-	//QLabel* lbl_iconPath;
-	//QLabel* lbl_FPS;
-	//QLabel* lbl_windowWidth;
-	//QLabel* lbl_windowHeight;
-	//QLabel* lbl_modelDir;
 	QLabel* lbl_volume;
 	QLabel* lbl_sliderVal;
 	QLabel* lbl_repairMode;
@@ -85,12 +80,9 @@ class AppSettings : public QWidget
 	QtMaterialRaisedButton* chooseDir;
 	QtMaterialRaisedButton* apply;
 	QtMaterialRaisedButton* reset;
-	//QGridLayout* grid;
 	QWidget* _parent;
 	QtMaterialToggle* repairModeControl;
-	//QLabel* lbl_characterX;
 	QtMaterialTextField* characterX;
-	//QLabel* lbl_characterY;
 	QtMaterialTextField* characterY;
 public:
 	AppSettings(QWidget* p);
@@ -103,10 +95,9 @@ private slots:
 	void Reset();
 	void OpenSourceDir();
 	void SetVolume();
-	void SetRepairMode();
 };
 
-class ModelSettings : public QWidget
+class ModelSettings : public QWidget, public IModelSettings
 {
 	Q_OBJECT
 	QWidget* _parent;
@@ -135,6 +126,7 @@ public:
 	ModelSettings(QWidget* p);
 	~ModelSettings() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ModelSettings destroyed\n"); }
 	void LoadConfig();
+	QWidget* GetSelf() { return this; }
 	void Release();
 private slots:
 	void Reset();
@@ -152,7 +144,7 @@ private slots:
 	void UpdateGroupName();
 };
 
-class ChatSettings : public QWidget
+class ChatSettings : public QWidget, public IChatSettings
 {
 	Q_OBJECT
 private:
@@ -194,16 +186,53 @@ private slots:
 	void CustomVoiceChatChecked();
 };
 
-class ControlWidget : public QTabWidget
+class PluginItemView : public QWidget
+{
+	Q_OBJECT
+private:
+	Plugin* plugin;
+public:
+	QPushButton* btn_load;
+	QString info;
+	PluginItemView(Plugin* plugin);
+	void UpdateText();
+private slots:
+	void on_btn_load_clicked();
+};
+
+class PluginSettings : public QWidget, public IPluginSettings
+{
+	Q_OBJECT
+private:
+	QListWidget* pluginList;
+	QTextBrowser* pluginInfo;
+	QLabel* pluginNum;
+public:
+	PluginSettings();
+	~PluginSettings();
+	void AddPlugin(Plugin* plugin);
+	void ScanFolder(const char* filePath);
+protected:
+	void setupUI();
+private slots:
+	void on_plugin_item_clicked(const QModelIndex&);
+};
+
+class ControlWidget : public QTabWidget, public IControlWidget
 {
 private:
 	AppSettings* _appSettings;
 	ModelSettings* _modelSettings;
 	ChatSettings* _chatSettings;
+	PluginSettings* _pluginSettings;
 public:
-	friend class AppSettings;
 	ControlWidget();
 	~ControlWidget() { if (LAppDefine::DebugLogEnable) printf("[APP][WIN]ControlWidget destroyed\n"); }
+	QTabWidget* GetSelf() { return this; }
+	IAppSettings* GetAppSettings() { return _appSettings; }
+	IModelSettings* GetModelSettings() { return _modelSettings; }
+	IChatSettings* GetChatSettings() { return _chatSettings; }
+	IPluginSettings* GetPluginSettings() { return _pluginSettings; }
 	void Release();
 	void Pop();
 };

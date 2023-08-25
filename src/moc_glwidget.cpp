@@ -156,6 +156,8 @@ void *GLWidget::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_GLWidget.stringdata0))
         return static_cast<void*>(this);
+    if (!strcmp(_clname, "IGLWidget"))
+        return static_cast< IGLWidget*>(this);
     return QOpenGLWidget::qt_metacast(_clname);
 }
 

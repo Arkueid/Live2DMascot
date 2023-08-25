@@ -10,28 +10,33 @@
 #include "LAppPal.hpp"
 #include "json/json.h"
 #include "NetworkUtils.h"
+#include "LAppLive2DManager.hpp"
 #include <QtCore/qtimer.h>
+#include "PluginManager.h"
 using namespace std;
 using namespace LAppDefine;
 
 namespace LAppConfig {
-    const char* _ConfigPath;  //设置默认读取路径，不可更改
-    //窗口设置
+    string _ConfigPath;
+
+    Json::Value _Plugins;
+
+    // 窗口设置
     int _WindowWidth;
     int _WindowHeight;
     int _LastPosX;
     int _LastPosY;
     int _FPS;
 
-    //模型设置
+    // 模型设置
     string _ModelDir;
     string _ModelName;
     float _MotionInterval;
     float _LipSyncMagnification;
-    float _CharacterX;  //角色在OepnGL坐标系中绘制的X坐标
-    float _CharacterY;  //角色在OpenGL坐标系中绘制的Y坐标
+    float _CharacterX;  // 角色在OepnGL坐标系中绘制的X坐标
+    float _CharacterY;  // 角色在OpenGL坐标系中绘制的Y坐标
 
-    //用户设置
+    // 用户设置
     string _AppName;
     string _UserName;
     string _IconPath;
@@ -49,14 +54,16 @@ namespace LAppConfig {
     bool _TransparentCharacter;
     double _SoundVolume;
     bool _RepairModeOn;
-    //ChatWidget设置
+
+    // ChatWidget设置
     int _ChatWidgetFontSize;
     string _ChatWidgetFontFamily;
     string _ChatWidgetFontColor;
     string _ChatWidgetBackgroundColor;
     int _ChatWidgetWidth;
     int _ChatWidgetHeight;
-    //dialog设置
+
+    // dialog设置
     int _DialogFontSize;
     string _DialogFontFamily;
     string _DialogFontColor;
@@ -65,32 +72,31 @@ namespace LAppConfig {
     int _DialogMaxWidth;
     int _DialogXPadding;
     int _DialogYPadding;
-    //自定义聊天接口
+
+    // 自定义聊天接口
     string _CustomChatServerHostPort;
     string _CustomChatServerRoute;
     bool _CustomChatServerOn;
     bool _CustomVoiceChatOn;
-    int _CustomChatServerReadTimeOut;  //等待响应的最长时间
+    int _CustomChatServerReadTimeOut;  // 等待响应的最长时间
     string _CustomVoiceChatRoute;
-    //保存路径
-    string _ChatSavePath;  //聊天
-    //茉莉云api
+    // 保存路径
+    string _ChatSavePath;  // 聊天
+    // 茉莉云api
     string _ApiKey;
     string _ApiSecret;
-    //瞬时状态
+
+    // 瞬时状态
     bool _WaitChatResponse;
     bool _MouseOn;
 
-    //语音输入
-    string _BaiduSpeechClientId;  //client_id
-    string _BaiduSpeechClientSecret;  //client_secret
+    // 语音输入
+    string _BaiduSpeechClientId;  // client_id
+    string _BaiduSpeechClientSecret;  // client_secret
 
+    // 资源路径
     string _AssetsDir;
 };
-
-namespace {
-    LApp* _instance = NULL;
-}
 
 
 void LApp::Warning(const char* x)
@@ -103,15 +109,16 @@ LApp::LApp()
 {
     _app = NULL;
     _win = NULL;
+    _holding = 0;
 }
 
 LApp* LApp::GetInstance()
 {
-	if (!_instance)
+	if (!_lapp_instance)
 	{
-		_instance = new LApp();
+		_lapp_instance = new LApp();
 	}
-    return _instance;
+    return _lapp_instance;
 }
 
 QApplication* LApp::GetApp()
@@ -124,31 +131,60 @@ GLWidget* LApp::GetWindow()
     return _win;
 }
 
+IGLWidget* LApp::GetGLWidget()
+{
+    return _win;
+}
+
+ILAppModel* LApp::GetModel()
+{
+    return LAppLive2DManager::GetInstance()->GetModel(0);
+}
+
+void LApp::Hold()
+{
+    _holding++;
+}
+
+void LApp::ReleaseHold()
+{
+    _holding--;
+}
+
+int LApp::Holding()
+{
+    return _holding;
+}
+
+
 void LApp::Initialize(int argc, char* argv[])
 {
     _app = new QApplication(argc, argv);
+
     QObject::connect(_app, &QGuiApplication::commitDataRequest, [&](QSessionManager& manager) {
         // 关机、重启、注销前 保存数据
         // 例如Win系统，有时关机缓慢，用户会点击“强制关机”，系统会直接kill剩余进程
         // 所以在得知系统即将关机的时候，便应立即保存数据，以免被kill而错失时机
         LApp::SaveConfig();
-        });
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("gbk"));
+    });
+
     _win = new GLWidget();
-    //BgmListUtils::CheckUpdate();
+
     HolidayUtils::CheckUpdate();
+
     LoadConfig();
+
     VoiceInputUtils::CheckUpdate();
-    _win->setupUI();
+
+    _win->SetupUI();
 }
 
 void LApp::LoadConfig() {
-    char* testConfigPath = "config.json";
+    const char* testConfigPath = "config.json";
     LAppConfig::_ConfigPath = testConfigPath;
-    if (DebugLogEnable)
-    {
-        Log("[CONFIG]Path", testConfigPath);
-    }
+
+    Log("[CONFIG]Path", testConfigPath);
+
     ifstream file;
     file.open(testConfigPath);
     Json::Value config;
@@ -162,28 +198,29 @@ void LApp::LoadConfig() {
             LApp::Warning("Json配置文件格式有误！");
             file.close();
             LApp::GetInstance()->GetApp()->exit(-1);
+            exit(1);
         }
     }
     file.close();
 
     LAppConfig::_ModelDir = !config["ModelSettings"]["ModelDir"].isNull() ? config["ModelSettings"]["ModelDir"].asCString() : "Resources";
 
-    string path = QString::fromUtf8(LAppConfig::_ModelDir.c_str()).toStdString();
+    string path = QString::fromUtf8(LAppConfig::_ModelDir.c_str()).toLocal8Bit().constData();
     Log("[CONFIG]Resource Dir", path.c_str());
     if (_access(path.c_str(), 0) != 0) {
         LApp::Warning("资源文件夹路径不正确！\n请修改config.json文件");
         _app->exit();
-        exit(0);
+        exit(1);  // 直接退出程序
     }
 
     LAppConfig::_ModelName = !config["ModelSettings"]["ModelName"].isNull() ? QString::fromUtf8(config["ModelSettings"]["ModelName"].asCString()).toStdString() : "Hiyori";
     
-    path = QString::fromUtf8(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str()).toStdString();
+    path = QString::fromUtf8(string(LAppConfig::_ModelDir).append("/").append(LAppConfig::_ModelName).c_str()).toLocal8Bit().constData();
     if (_access(path.c_str(), 0) != 0)
     {
         LApp::Warning("模型文件不存在！\n请修改config.json文件");
         _app->exit();
-        exit(0);
+        exit(1);  // 直接退出程序
     }
 
     LAppConfig::_AssetsDir = "assets";
@@ -196,7 +233,7 @@ void LApp::LoadConfig() {
 
     LAppConfig::_WindowWidth = !config["WindowSettings"]["Width"].isNull() ? config["WindowSettings"]["Width"].asInt() : 500;
     LAppConfig::_WindowHeight = !config["WindowSettings"]["Height"].isNull() ? config["WindowSettings"]["Height"].asInt() : 700;
-    LAppConfig::_LastPosX = !config["WindowSettings"]["LastPos"]["X"].isNull() ? config["WindowSettings"]["LastPos"]["X"].asInt() : 1; // 
+    LAppConfig::_LastPosX = !config["WindowSettings"]["LastPos"]["X"].isNull() ? config["WindowSettings"]["LastPos"]["X"].asInt() : 1; 
     LAppConfig::_LastPosY = !config["WindowSettings"]["LastPos"]["Y"].isNull() ? config["WindowSettings"]["LastPos"]["Y"].asInt() : 1;
 
     LAppConfig::_UserName = !config["UserSettings"]["UserName"].isNull() ? config["UserSettings"]["UserName"].asCString() : "User0721";
@@ -218,8 +255,6 @@ void LApp::LoadConfig() {
 
     LAppConfig::_DialogFontSize = !config["Dialog"]["FontSize"].isNull() ? config["Dialog"]["FontSize"].asInt() : 10;
     LAppConfig::_DialogFontFamily = !config["Dialog"]["FontFamily"].isNull() ? config["Dialog"]["FontFamily"].asCString() : "Comic Sans MS";
-    //LAppConfig::_DialogFontColor = !config["Dialog"]["FontColor"].isNull() ? config["Dialog"]["FontColor"].asCString() : "white"; 
-    //LAppConfig::_DialogBackgroundColor = !config["Dialog"]["BackgroundColor"].isNull() ? config["Dialog"]["BackgroundColor"].asCString() : "rgba(0, 0, 0, 200)";
     LAppConfig::_DialogYOffset = !config["Dialog"]["YOffset"].isNull() ? config["Dialog"]["YOffset"].asInt() : -10;
     LAppConfig::_DialogMaxWidth = !config["Dialog"]["MaxWidth"].isNull() ? config["Dialog"]["MaxWidth"].asInt() : 370;
     LAppConfig::_DialogXPadding = !config["Dialog"]["XPadding"].isNull() ? config["Dialog"]["XPadding"].asInt() : 10;
@@ -245,16 +280,28 @@ void LApp::LoadConfig() {
     LAppConfig::_BaiduSpeechClientId = !config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"].isNull() ? config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"].asCString() : "rCRHPGUaKuRDVZK0E3K1L143";
     LAppConfig::_BaiduSpeechClientSecret = !config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"].isNull() ? config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"].asCString() : "GlbSiXxtBhArWukSHLeVnADyApZMrjGf";
 
-    if (LAppDefine::DebugLogEnable)
-        Log("[CONFIG]Load", "Finished");
+    LAppConfig::_Plugins = config["Plugins"];
+
+    Log("[CONFIG]Load", "Finished");
 }
 
 void LApp::Run()
 {
     _win->Run();
+
+    QHash<QString, Plugin*>& plg = PluginManager::GetInstance()->GetPlugins();
+    for (QString& key : plg.keys()) {
+        Plugin* p = plg.value(key);
+        if (!LAppConfig::_Plugins[key.toStdString()].isNull()
+            && LAppConfig::_Plugins[key.toStdString()].asBool()) {
+            p->Activate();
+            p->OnLaunch();
+        }
+    }
+
     _app->exec();
-    if (LAppDefine::DebugLogEnable)
-        Log("Exit", "Success");
+
+    Log("Exit", "Success");
 }
 
 void LApp::Release()
@@ -267,12 +314,13 @@ void LApp::Release()
 void LApp::SaveConfig()
 {
     Json::Value config;
-    ifstream ifs(LAppConfig::_ConfigPath);
+    ifstream ifs(QString::fromStdString(LAppConfig::_ConfigPath).toLocal8Bit().constData());
     if (!ifs.fail())
     {
         ifs >> config;
     }
     ifs.close();
+
     config["WindowSettings"]["Width"] = _win->width();
     config["WindowSettings"]["Height"] = _win->height();
     config["WindowSettings"]["LastPos"]["X"] = _win->x();
@@ -303,8 +351,6 @@ void LApp::SaveConfig()
 
     config["Dialog"]["FontSize"] = LAppConfig::_DialogFontSize;
     config["Dialog"]["FontFamily"] = LAppConfig::_DialogFontFamily;
-    //config["Dialog"]["FontColor"] = LAppConfig::_DialogFontColor;
-    //config["Dialog"]["BackgroundColor"] = LAppConfig::_DialogBackgroundColor;
     config["Dialog"]["YOffset"] = LAppConfig::_DialogYOffset;
     config["Dialog"]["MaxWdith"] = LAppConfig::_DialogMaxWidth;
     config["Dialog"]["XPadding"] = LAppConfig::_DialogXPadding;
@@ -330,8 +376,9 @@ void LApp::SaveConfig()
     config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientId"] = LAppConfig::_BaiduSpeechClientId;
     config["ChatAPI"]["VoiceInput"]["BaiduSpeech"]["ClientSecret"] = LAppConfig::_BaiduSpeechClientSecret;
 
+    config["Plugins"] = LAppConfig::_Plugins;
 
-    ofstream ofs(LAppConfig::_ConfigPath);
+    ofstream ofs(QString::fromStdString(LAppConfig::_ConfigPath).toLocal8Bit().constData());
     if (ofs.fail())
     {
         LApp::Warning("配置文件保存失败!");

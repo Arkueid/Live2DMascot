@@ -5,30 +5,6 @@
 #include <sys/stat.h>
 
 namespace AudioUtils{
-	/** 
-	* @brief	读取.wav文件
-	* @param	path	wav文件路径
-	* @param	size	wav文件大小
-	* @param	Log		回调日志函数
-	*/
-	char* LoadWavAsBytes(const char* path, int* size);
-
-	/**
-	* @brief	释放储存wav数据的内存
-	* @param	bytes	wav数据存放数组指针
-	* @param	path	wav文件路径
-	* @param	Log		回调日志函数
-	*/
-	void ReleaseWavBytes(char* bytes, const char* path = NULL);
-
-	/**
-	* @brief	调整wav音频音量
-	* @param	bytes	wav数组指针
-	* @param	bufSize	数组大小
-	* @param	vol		音量缩放倍数, 0-1之间浮点数
-	*/
-	void ResizeVolume(char* bytes, int bufSize, double vol);
-
 	/**
 	* @brief	停止正在播放的音频
 	*/

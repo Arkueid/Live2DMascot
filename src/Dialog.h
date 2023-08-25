@@ -3,9 +3,11 @@
 #include <QtWidgets/qtextbrowser.h>
 #include <QtCore/qpropertyanimation.h>
 #include "LAppDefine.hpp"
+#include "IDialog.h"
 
-class Dialog : public QWidget
+class Dialog : public QWidget, public IDialog
 {
+	Q_OBJECT
 protected:
 	void mouseReleaseEvent(QMouseEvent* e);
 public:
@@ -17,6 +19,7 @@ public:
 	void WaitChatResponse();
 	void paintEvent(QPaintEvent* e);
 	void LoadConfig();
+	QWidget* GetSelf();
 private:
 	QPropertyAnimation* animation;
 	int _xBorder;

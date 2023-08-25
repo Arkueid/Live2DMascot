@@ -22,7 +22,7 @@
 
 using namespace std;
 
-ConversationWidget::ConversationWidget()
+ChatWidget::ChatWidget()
 {
 	
 	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
@@ -38,10 +38,11 @@ ConversationWidget::ConversationWidget()
 	_frame->setFixedSize(400, 50);
 
 	inputArea = new QLineEdit();
+
 	inputArea->setFont(_font);
 	inputArea->setPlaceholderText(QString("prompt..."));
 	inputArea->setStyleSheet(
-		QString("QLineEdit {background-color: rgba(0, 0, 0, 0); color: white; border: none;}")
+		QString("QLineEdit {background-color: transparent; color: white; border: none;} ")
 	);
 	_frame->setObjectName("ChatWidget");
 	_frame->setStyleSheet(
@@ -53,14 +54,15 @@ ConversationWidget::ConversationWidget()
 	_Send = new QPushButton();
 	_Record = new QPushButton();
 	_History = new QPushButton();
-
-	_Record->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput_active.png)}"));
-	_Send->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/send.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/send_active.png)}"));
-	_History->setStyleSheet(QString("QPushButton {border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/history.png); } QPushButton:pressed{border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/history_active.png)}"));
-
-	_Send->setFixedSize(25, 25);
+	_History->setCheckable(true);
+	_Record->setStyleSheet("QPushButton {border-image: url(assets/voiceInput.png); } QPushButton:pressed{border-image: url(assets/voiceInput_active.png)}");
+	_Send->setStyleSheet("QPushButton {border-image: url(assets/send.png); } QPushButton:pressed{border-image: url(assets/send_active.png)}");
+	_History->setStyleSheet(
+		"QPushButton {border-image: url(assets/history.png); } QPushButton:checked{border-image: url(assets/history_active.png)}"
+	);
+	_Send->setFixedSize(24, 24);
 	_Record->setFixedSize(30, 30);
-	_History->setFixedSize(26, 26);
+	_History->setFixedSize(22, 22);
 
 	historyView = new ChatHistoryView;
 
@@ -70,11 +72,11 @@ ConversationWidget::ConversationWidget()
 	grid->addWidget(_Send, 0, 6, 1, 1);
 	grid->addWidget(_History, 0, 0, 1, 1);
 
-
 	connect(_Record, SIGNAL(pressed()), SLOT(StartVoiceInput()));
 	connect(_Record, SIGNAL(released()), SLOT(StopVoiceInput()));
 	connect(_History, SIGNAL(clicked()), SLOT(ShowHistory()));
 	connect(this, SIGNAL(popDialogInThread(bool)), SLOT(PopDialog(bool)));
+	connect(historyView, SIGNAL(closed()), SLOT(CloseHistory()));
 
 	connect(this, SIGNAL(textInputTriggered(const char*, const char*, const char*)), this, SLOT(UpdateHistory(const char*, const char*, const char*)));
 
@@ -85,7 +87,11 @@ ConversationWidget::ConversationWidget()
 
 }
 
-void ConversationWidget::UpdateHistory(const char* chara, const char* text, const char* sound) {
+void ChatWidget::CloseHistory() {
+	_History->setChecked(false);
+}
+
+void ChatWidget::UpdateHistory(const char* chara, const char* text, const char* sound) {
 	historyView->Switch2Today();
 	historyView->Insert(
 		chara,
@@ -94,12 +100,12 @@ void ConversationWidget::UpdateHistory(const char* chara, const char* text, cons
 	);
 }
 
-void ConversationWidget::ShowHistory() {
+void ChatWidget::ShowHistory() {
 	historyView->setVisible(!historyView->isVisible());
 	historyView->move(x() + width() / 2 - historyView->width() / 2, y() - 5 - historyView->height());
 }
 
-void ConversationWidget::Release()
+void ChatWidget::Release()
 {
 	_Send->deleteLater();
 	grid->deleteLater();
@@ -107,7 +113,7 @@ void ConversationWidget::Release()
 	close();
 }
 
-void ConversationWidget::keyPressEvent(QKeyEvent* e) {
+void ChatWidget::keyPressEvent(QKeyEvent* e) {
 	if (e->key() == Qt::Key_Escape) {
 		close();
 	}
@@ -122,7 +128,7 @@ void ConversationWidget::keyPressEvent(QKeyEvent* e) {
 	}
 } 
 
-void ConversationWidget::keyReleaseEvent(QKeyEvent* e) {
+void ChatWidget::keyReleaseEvent(QKeyEvent* e) {
 	if (e->key() == Qt::Key_Alt) {
 		_Record->setStyleSheet(
 			QString("border-image: url(").append(LAppConfig::_AssetsDir.c_str()).append("/voiceInput.png)")
@@ -131,13 +137,13 @@ void ConversationWidget::keyReleaseEvent(QKeyEvent* e) {
 	}
 }
 
-void ConversationWidget::mousePressEvent(QMouseEvent* e)
+void ChatWidget::mousePressEvent(QMouseEvent* e)
 {
 	mouseX = e->pos().x();
 	mouseY = e->pos().y();
 }
 
-void ConversationWidget::mouseMoveEvent(QMouseEvent* e)
+void ChatWidget::mouseMoveEvent(QMouseEvent* e)
 {
 	if (e->buttons() == Qt::LeftButton)
 	{
@@ -146,13 +152,18 @@ void ConversationWidget::mouseMoveEvent(QMouseEvent* e)
 }
 
 //move chatinput to character
-void ConversationWidget::AttachToCharacter()
+void ChatWidget::AttachToCharacter()
 {
 	GLWidget* win = LApp::GetInstance()->GetWindow();
 	move(win->x() + (win->width() - width()) / 2, win->y() + (win->height() - height()) * 2 / 3);
 }
 
-void ConversationWidget::getInput()
+QWidget* ChatWidget::GetSelf()
+{
+	return this;
+}
+
+void ChatWidget::GetInput()
 {
 	_msg.clear();
 	inputArea->clear();
@@ -161,19 +172,19 @@ void ConversationWidget::getInput()
 	inputArea->activateWindow();
 	inputArea->setFocus();
 }
-void ConversationWidget::PopDialog(bool waitMode) {
+void ChatWidget::PopDialog(bool waitMode) {
 	if (waitMode) LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
 	else LApp::GetInstance()->GetWindow()->GetDialog()->Pop(text.c_str());
 }
 
-void ConversationWidget::ProcessNetworkResponse(bool voice)
+void ChatWidget::ProcessNetworkResponse(bool voice)
 {
 	inputArea->setPlaceholderText("waiting...");
 	LAppConfig::_WaitChatResponse = true;
 	GLWidget* win = LApp::GetInstance()->GetWindow();
 	string x = _msg.toUtf8();
 	string asr;
-	LApp::GetInstance()->GetWindow()->GetDialog()->moveToThread(LApp::GetInstance()->GetApp()->thread());
+	LApp::GetInstance()->GetWindow()->GetDialog()->GetSelf()->moveToThread(LApp::GetInstance()->GetApp()->thread());
 	emit popDialogInThread(true);
 	if (LAppConfig::_CustomChatServerOn && voice)
 	{
@@ -227,7 +238,7 @@ void ConversationWidget::ProcessNetworkResponse(bool voice)
 	inputArea->setPlaceholderText("prompt...");
 }
 
-void ConversationWidget::SendRequest()
+void ChatWidget::SendRequest()
 {
 	if (inputArea->text().isEmpty()) close();
 	if (LAppConfig::_WaitChatResponse) return;
@@ -240,12 +251,12 @@ void ConversationWidget::SendRequest()
 		{
 			PlaySound(NULL, NULL, SND_FILENAME | SND_ASYNC);   //播放音频
 			LAppLive2DManager::GetInstance()->GetModel(0)->StopLipSync();  //停止口型同步
-			std::thread(&ConversationWidget::ProcessNetworkResponse, this, false).detach();  //显示等待中
+			std::thread(&ChatWidget::ProcessNetworkResponse, this, false).detach();  //显示等待中
 		}
 	}
 }
 
-void ConversationWidget::ProcessBaiduVoiceInput() {
+void ChatWidget::ProcessBaiduVoiceInput() {
 	LAppConfig::_WaitChatResponse = true;
 	
 	_msg = VoiceInputUtils::DetectSpeech(string(LAppConfig::_ChatSavePath).append("/voice-input-temp.wav").c_str());
@@ -260,7 +271,7 @@ void ConversationWidget::ProcessBaiduVoiceInput() {
 }
 
 
-void ConversationWidget::StartVoiceInput() {
+void ChatWidget::StartVoiceInput() {
 	if (!VoiceInputUtils::IsAvailable()) return;
 	QThread* t = QThread::create(VoiceInputUtils::Record);
 	connect(t, &QThread::finished, [this]{
@@ -269,16 +280,16 @@ void ConversationWidget::StartVoiceInput() {
 #ifdef CONSOLE_FLAG
 			printf("[APP][ChatAPI]send to custom voice chat\n");
 #endif // CONSOLE_FLAG
-			std::thread(&ConversationWidget::ProcessNetworkResponse, this, true).detach();
+			std::thread(&ChatWidget::ProcessNetworkResponse, this, true).detach();
 		}
 		else {
-			std::thread(&ConversationWidget::ProcessBaiduVoiceInput, this).detach();
+			std::thread(&ChatWidget::ProcessBaiduVoiceInput, this).detach();
 		}
 	});
 	connect(t, SIGNAL(finished()), t, SLOT(deleteLater()));
 	t->start();
 }
 
-void ConversationWidget::StopVoiceInput() {
+void ChatWidget::StopVoiceInput() {
 	VoiceInputUtils::Stop();
 }

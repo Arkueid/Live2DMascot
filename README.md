@@ -12,35 +12,40 @@
 
 
 ## [更新内容](CHANGELOG.md)
-### 2023-08-12
-***add***
-* 插件系统
-	* 可以依照给出的接口类编写 ***QT插件***，编译为动态库 ***.dll**，放在桌宠目录下的 plugins 中，即可被扫描读取 (目前没有设计安全检测，详细见 ***develop*** 分支的 ***Greeting*** 插件样例)  
-	
-		```
-		live2d-x86.exe
-		live2d-x86-debug.exe
-		plugins
-			|----Greeting
-			|		|----Greeting.dll
-			|
-			|----Plugin2
-			|		|----Plugin2.dll
-			|		|----customResourceDir // 插件所需的资源文件夹
-			|		|----Dir2
-			|		...
-			|
-			|----Plugin3
-			...
-		```
+### 2023-08-25
+***add***  
 
-		插件可以实现在 ***托盘右键菜单*** 和 ***设置窗口*** 添加 ***选项*** / ***页面***，可以添加自定义的窗口和自定义功能（自定义功能后续会逐步拆解原项目实现更灵活的操作）
+1. 插件生命周期  
 
-		![示例](sample_images/plugin-demo1.png)
+	```cpp
+	class IPlugin
+	{
+	public:
+		~IPlugin() = default;
 
-		![示例](sample_images/plugin-demo2.png)
+		virtual void Activate() = 0;  // 关闭插件时调用
 
-		![示例](sample_images/plugin-demo3.png)
+		virtual void Deactivate() = 0;  // 开启插件时调用
+
+		virtual void Initialize(ILApp* app) = 0;  // 插件示例化后，初次使用前应该先初始化
+
+		virtual void OnLaunch() = 0;  // 程序启动时调用
+
+		virtual void OnScheduledTask() = 0;  // 周期性任务，每帧调用一次
+
+		virtual void OnShutdown() = 0;  // 程序关闭时调用
+	};
+	```
+2. 插件状态管理  
+
+	插件开启状态保存在 config.json 中 (插件ID必须唯一):  
+
+	```json
+	"Plugins" : 
+	{
+		"com.arkueid.greeting/1.0.0" : true
+	},
+	```
 
 ***fix***
 * 修复系统默认编码为 GBK 时加载包含中文的路径导致程序崩溃和 debug 输出乱码。现在在Windows 区域设置是否中勾选 Unicode UTF-8 不会对中文路径造成影响。
