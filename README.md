@@ -12,44 +12,14 @@
 
 
 ## [更新内容](CHANGELOG.md)
-### 2023-08-25
+### 2023-08-31
 ***add***  
+Hitokoto 插件，每隔 5s 播放一言中的文本（独立计时，有动作播放时停止计时），数据来自 [hitokoto-osc/sentences-bundle](https://github.com/hitokoto-osc/sentences-bundle)
 
-1. 插件生命周期  
-
-	```cpp
-	class IPlugin
-	{
-	public:
-		~IPlugin() = default;
-
-		virtual void Activate() = 0;  // 关闭插件时调用
-
-		virtual void Deactivate() = 0;  // 开启插件时调用
-
-		virtual void Initialize(ILApp* app) = 0;  // 插件示例化后，初次使用前应该先初始化
-
-		virtual void OnLaunch() = 0;  // 程序启动时调用
-
-		virtual void OnScheduledTask() = 0;  // 周期性任务，每帧调用一次
-
-		virtual void OnShutdown() = 0;  // 程序关闭时调用
-	};
-	```
-2. 插件状态管理  
-
-	插件开启状态保存在 config.json 中 (插件ID必须唯一):  
-
-	```json
-	"Plugins" : 
-	{
-		"com.arkueid.greeting/1.0.0" : true
-	},
-	```
-
-***fix***
-* 修复系统默认编码为 GBK 时加载包含中文的路径导致程序崩溃和 debug 输出乱码。现在在Windows 区域设置是否中勾选 Unicode UTF-8 不会对中文路径造成影响。
-* 修复首次加载聊天功能时由于没有 chat 文件夹导致 sqlite 数据库文件创建报错。 
+***fix***  
+1. 动作的结束判断现在以音频、文本、动画三者全部播放完毕为判断标准。动作播放间隔相应从动作完全播放完毕时为起点开始计时。
+2. 禁用多个插件时相应的设置页面无法关闭。
+3. 启用 Greeting 插件后程序无法正常退出。
 
 ## 功能 
 
