@@ -1,4 +1,6 @@
-# Live2D Desktop Mascot   
+# Live2D Desktop Mascot
+
+[Visual Studio 项目源文件](https://github.com/Arkueid/Live2DMascot/tree/develop)
 
 ## 预览  
 
