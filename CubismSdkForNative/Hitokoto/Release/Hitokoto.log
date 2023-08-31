@@ -1,0 +1,3 @@
+﻿    正在创建库 D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\proj_msvc2022_x86_mt\Release\Hitokoto.lib 和对象 D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\proj_msvc2022_x86_mt\Release\Hitokoto.exp
+MSVCRT.lib(exe_main.obj) : error LNK2001: 无法解析的外部符号 _main
+D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\proj_msvc2022_x86_mt\Release\Hitokoto.exe : fatal error LNK1120: 1 个无法解析的外部命令

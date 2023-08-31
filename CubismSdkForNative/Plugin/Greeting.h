@@ -1,6 +1,5 @@
 #pragma once
-#include "interface/IPlugin.h"
-
+#include "..\src\interface\IPlugin.h"
 
 class Greeting : public QObject, public IPlugin {
 	Q_OBJECT
@@ -8,7 +7,7 @@ class Greeting : public QObject, public IPlugin {
 	Q_INTERFACES(IPlugin)
 private:
 	ILApp* _app;
-	int tabIndex;
+	QWidget* _settings;
 	int frameCount;
 public:
 	Greeting();

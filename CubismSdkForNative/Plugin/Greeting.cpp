@@ -1,7 +1,8 @@
 #include "Greeting.h"
-#include "interface/IControlWidget.h"
+#include "../src/interface/IControlWidget.h"
 #include <QtWidgets/qtabwidget.h>
 #include <QtWidgets/qlabel.h>
+#include "../src/interface/ILAppModel.h"
 
 static ILApp* _iapp = NULL;
 
@@ -29,15 +30,14 @@ void Greeting::OnLaunch()
     else {
         group = "Midnight";
     }
-    _app->GetModel()->StartRandomMotion(group, 3);
-    printf("OnLaunch finished\n");
+    _app->GetModel()->StartRandomMotion(group, PriorityForce);
 }
 
 void Greeting::OnScheduledTask()
 {
-    if (frameCount / _app->_FPS() > 10)
+    if (frameCount / _app->_FPS() > 3600)
     {
-    	_app->GetModel()->StartRandomMotion("LongSittingTip", 3);
+    	_app->GetModel()->StartRandomMotion("LongSittingTip", PriorityForce);
     	frameCount = 0;
     } 
     else frameCount++;
@@ -47,11 +47,10 @@ void OnFinishMotionCallBack(IMotion* self) {
     _iapp->ReleaseHold();
 }
 
-#include "interface/IDialog.h"
 void Greeting::OnShutdown()
 {
-    _app->Hold();
     _app->GetModel()->Speak("再见~", "", OnFinishMotionCallBack);
+    _app->Hold();
 }
 
 void Greeting::Initialize(ILApp* app)
@@ -63,7 +62,7 @@ void Greeting::Initialize(ILApp* app)
 Greeting::Greeting()
 {
     _app = NULL;
-    tabIndex = -1;
+    _settings = NULL;
     frameCount = 0;
 }
 
@@ -73,15 +72,15 @@ Greeting::~Greeting()
 
 void Greeting::Activate()
 {
-    QWidget* w = new QWidget;
-    QLabel* lbl = new QLabel("Greeting 设置页面 (插件演示样例)", w);
+    _settings = new QWidget;
+    QLabel* lbl = new QLabel("Greeting 设置页面 (插件演示样例)", _settings);
     lbl->setStyleSheet("color: rgba(255, 255, 255, 200)");
     lbl->move(20, 20);
-    tabIndex = _app->GetGLWidget()->GetControlWidget()->GetSelf()->addTab(w, "Greeting");
+    _app->GetGLWidget()->GetControlWidget()->GetSelf()->addTab(_settings, "Greeting");
 }
 
 void Greeting::Deactivate()
 {
     QTabWidget* w = _app->GetGLWidget()->GetControlWidget()->GetSelf();
-    w->removeTab(tabIndex);
+    w->removeTab(w->indexOf(_settings));
 }

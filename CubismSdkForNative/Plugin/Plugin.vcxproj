@@ -166,25 +166,23 @@ COPY /Y $(ProjectDir)$(OutDir)$(ProjectName).dll $(ProjectDir)..\proj_msvc2022_x
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\interface\IAppSettings.h" />
+    <ClInclude Include="..\src\interface\IChatHistoryView.h" />
+    <ClInclude Include="..\src\interface\IChatSettings.h" />
+    <ClInclude Include="..\src\interface\IChatWidget.h" />
+    <ClInclude Include="..\src\interface\IControlWidget.h" />
+    <ClInclude Include="..\src\interface\IDialog.h" />
+    <ClInclude Include="..\src\interface\IGLWidget.h" />
+    <ClInclude Include="..\src\interface\ILApp.h" />
+    <ClInclude Include="..\src\interface\ILAppModel.h" />
+    <ClInclude Include="..\src\interface\IModelSettings.h" />
+    <ClInclude Include="..\src\interface\IPieMenu.h" />
+    <ClInclude Include="..\src\interface\IPlugin.h" />
+    <ClInclude Include="..\src\interface\IPluginSettings.h" />
     <ClInclude Include="Greeting.h" />
-    <ClInclude Include="interface\IAppSettings.h" />
-    <ClInclude Include="interface\IChatHistoryView.h" />
-    <ClInclude Include="interface\IChatSettings.h" />
-    <ClInclude Include="interface\IChatWidget.h" />
-    <ClInclude Include="interface\IControlWidget.h" />
-    <ClInclude Include="interface\IDialog.h" />
-    <ClInclude Include="interface\IGLWidget.h" />
-    <ClInclude Include="interface\ILApp.h" />
-    <ClInclude Include="interface\ILAppModel.h" />
-    <ClInclude Include="interface\IModelSettings.h" />
-    <ClInclude Include="interface\IPieMenu.h" />
-    <ClInclude Include="interface\IPlugin.h" />
-    <ClInclude Include="interface\IPluginSettings.h" />
-    <ClInclude Include="json\json.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Greeting.cpp" />
-    <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="moc_Greeting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

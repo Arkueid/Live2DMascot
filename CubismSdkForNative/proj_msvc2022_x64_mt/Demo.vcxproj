@@ -400,8 +400,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Message>
       </Message>
       <Command>setlocal
-"$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../Resources bin//Resources
+
+"$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../Resources bin/Resources
+
 "$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../assets bin/assets
+
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -424,105 +427,97 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Console|x64'">
+    <PostBuildEvent>
+      <Command>setlocal
+"$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../Resources bin//Resources
+"$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy_directory ../assets bin/assets
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\AudioUtils.h" />
-    <ClInclude Include="..\src\ChatHistoryDB.h" />
-    <ClInclude Include="..\src\ChatHistoryView.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">D:\cdk\qt\5.15.2\msvc2019\bin\moc.exe "%(FullPath)" -o "..\src\moc_%(Filename).cpp"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">..\src\moc_%(Filename).cpp;</Outputs>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">ClCompile</OutputItemType>
-    </ClInclude>
-    <ClInclude Include="..\src\ChatWidget.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">D:\cdk\qt\5.15.2\msvc2019\bin\moc.exe "%(FullPath)" -o "..\src\moc_%(Filename).cpp"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">..\src\moc_%(Filename).cpp</Outputs>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">ClCompile</OutputItemType>
-    </ClInclude>
-    <ClInclude Include="..\src\ControlWidget.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">D:\cdk\qt\5.15.2\msvc2019\bin\moc.exe "%(FullPath)" -o "..\src\moc_%(Filename).cpp"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">..\src\moc_%(Filename).cpp</Outputs>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">ClCompile</OutputItemType>
-    </ClInclude>
-    <ClInclude Include="..\src\Dialog.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">D:\cdk\qt\5.15.2\msvc2019\bin\moc.exe "%(FullPath)" -o "..\src\moc_%(Filename).cpp"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">..\src\moc_%(Filename).cpp</Outputs>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">ClCompile</OutputItemType>
-    </ClInclude>
-    <ClInclude Include="..\src\GLWidget.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">D:\cdk\qt\5.15.2\msvc2019\bin\moc.exe "%(FullPath)" -o "..\src\moc_%(Filename).cpp"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">..\src\moc_%(Filename).cpp</Outputs>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">ClCompile</OutputItemType>
-    </ClInclude>
-    <ClInclude Include="..\src\IAppSettings.h" />
-    <ClInclude Include="..\src\IChatHistoryView.h" />
-    <ClInclude Include="..\src\IChatSettings.h" />
-    <ClInclude Include="..\src\IControlWidget.h" />
-    <ClInclude Include="..\src\IChatWidget.h" />
-    <ClInclude Include="..\src\IDialog.h" />
-    <ClInclude Include="..\src\IGLWidget.h" />
-    <ClInclude Include="..\src\ILAppModel.h" />
-    <ClInclude Include="..\src\IModelSettings.h" />
-    <ClInclude Include="..\src\IPieMenu.h" />
-    <ClInclude Include="..\src\IPlugin.h" />
-    <ClInclude Include="..\src\IPluginSettings.h" />
+    <ClInclude Include="..\src\interface\IAppSettings.h" />
+    <ClInclude Include="..\src\interface\IChatHistoryView.h" />
+    <ClInclude Include="..\src\interface\IChatSettings.h" />
+    <ClInclude Include="..\src\interface\IChatWidget.h" />
+    <ClInclude Include="..\src\interface\IControlWidget.h" />
+    <ClInclude Include="..\src\interface\IDialog.h" />
+    <ClInclude Include="..\src\interface\IGLWidget.h" />
+    <ClInclude Include="..\src\interface\ILApp.h" />
+    <ClInclude Include="..\src\interface\ILAppModel.h" />
+    <ClInclude Include="..\src\interface\IModelSettings.h" />
+    <ClInclude Include="..\src\interface\IPieMenu.h" />
+    <ClInclude Include="..\src\interface\IPlugin.h" />
+    <ClInclude Include="..\src\interface\IPluginSettings.h" />
     <ClInclude Include="..\src\json\json.h" />
     <ClInclude Include="..\src\LApp.h" />
-    <ClInclude Include="..\src\LAppAllocator.hpp" />
-    <ClInclude Include="..\src\LAppDefine.hpp" />
-    <ClInclude Include="..\src\LAppDelegate.hpp" />
-    <ClInclude Include="..\src\LAppLive2DManager.hpp" />
-    <ClInclude Include="..\src\LAppModel.hpp" />
-    <ClInclude Include="..\src\LAppPal.hpp" />
-    <ClInclude Include="..\src\LAppTextureManager.hpp" />
-    <ClInclude Include="..\src\LAppView.hpp" />
-    <ClInclude Include="..\src\LAppWavFileHandler.hpp" />
-    <ClInclude Include="..\src\NetworkUtils.h" />
-    <ClInclude Include="..\src\PieMenu.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">D:\cdk\qt\5.15.2\msvc2019\bin\moc.exe "%(FullPath)" -o "..\src\moc_%(Filename).cpp"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">..\src\moc_%(Filename).cpp</Outputs>
-      <OutputItemType Condition="'$(Configuration)|$(Platform)'=='CRelease|x64'">ClCompile</OutputItemType>
-    </ClInclude>
-    <ClInclude Include="..\src\PluginManager.h" />
-    <ClInclude Include="..\src\RandomTalk.h" />
-    <ClInclude Include="..\src\sqlite3.h" />
-    <ClInclude Include="..\src\TouchManager.hpp" />
+    <ClInclude Include="..\src\live2d\LAppAllocator.hpp" />
+    <ClInclude Include="..\src\live2d\LAppDefine.hpp" />
+    <ClInclude Include="..\src\live2d\LAppDelegate.hpp" />
+    <ClInclude Include="..\src\live2d\LAppLive2DManager.hpp" />
+    <ClInclude Include="..\src\live2d\LAppModel.hpp" />
+    <ClInclude Include="..\src\live2d\LAppPal.hpp" />
+    <ClInclude Include="..\src\live2d\LAppSprite.hpp" />
+    <ClInclude Include="..\src\live2d\LAppTextureManager.hpp" />
+    <ClInclude Include="..\src\live2d\LAppView.hpp" />
+    <ClInclude Include="..\src\live2d\LAppWavFileHandler.hpp" />
+    <ClInclude Include="..\src\live2d\TouchManager.hpp" />
+    <ClInclude Include="..\src\plugin\PluginManager.h" />
+    <ClInclude Include="..\src\sqlite3\sqlite3.h" />
+    <ClInclude Include="..\src\utils\AudioUtils.h" />
+    <ClInclude Include="..\src\utils\ChatHistoryDB.h" />
+    <ClInclude Include="..\src\utils\NetworkUtils.h" />
+    <ClInclude Include="..\src\utils\RandomTalk.h" />
+    <ClInclude Include="..\src\win\ChatHistoryView.h" />
+    <ClInclude Include="..\src\win\ChatWidget.h" />
+    <ClInclude Include="..\src\win\ControlWidget.h" />
+    <ClInclude Include="..\src\win\Dialog.h" />
+    <ClInclude Include="..\src\win\GLWidget.h" />
+    <ClInclude Include="..\src\win\PieMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\AppSettings.cpp" />
-    <ClCompile Include="..\src\AudioUtils.cpp" />
-    <ClCompile Include="..\src\ChatHistoryDB.cpp" />
-    <ClCompile Include="..\src\ChatHistoryView.cpp" />
-    <ClCompile Include="..\src\ChatSettings.cpp" />
-    <ClCompile Include="..\src\ChatWidget.cpp" />
-    <ClCompile Include="..\src\ControlWidget.cpp" />
-    <ClCompile Include="..\src\Dialog.cpp" />
-    <ClCompile Include="..\src\GLWidget.cpp" />
-    <ClCompile Include="..\src\ILApp.h" />
-    <ClCompile Include="..\src\jsoncpp.cpp" />
+    <ClCompile Include="..\src\json\jsoncpp.cpp" />
     <ClCompile Include="..\src\LApp.cpp" />
-    <ClCompile Include="..\src\LAppAllocator.cpp" />
-    <ClCompile Include="..\src\LAppDefine.cpp" />
-    <ClCompile Include="..\src\LAppDelegate.cpp" />
-    <ClCompile Include="..\src\LAppLive2DManager.cpp" />
-    <ClCompile Include="..\src\LAppModel.cpp" />
-    <ClCompile Include="..\src\LAppPal.cpp" />
-    <ClCompile Include="..\src\LAppTextureManager.cpp" />
-    <ClCompile Include="..\src\LAppView.cpp" />
-    <ClCompile Include="..\src\LAppWavFileHandler.cpp" />
+    <ClCompile Include="..\src\live2d\LAppAllocator.cpp" />
+    <ClCompile Include="..\src\live2d\LAppDefine.cpp" />
+    <ClCompile Include="..\src\live2d\LAppDelegate.cpp" />
+    <ClCompile Include="..\src\live2d\LAppLive2DManager.cpp" />
+    <ClCompile Include="..\src\live2d\LAppModel.cpp" />
+    <ClCompile Include="..\src\live2d\LAppPal.cpp" />
+    <ClCompile Include="..\src\live2d\LAppSprite.cpp" />
+    <ClCompile Include="..\src\live2d\LAppTextureManager.cpp" />
+    <ClCompile Include="..\src\live2d\LAppView.cpp" />
+    <ClCompile Include="..\src\live2d\LAppWavFileHandler.cpp" />
+    <ClCompile Include="..\src\live2d\TouchManager.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\src\moc_ChatHistoryView.cpp" />
-    <ClCompile Include="..\src\moc_ChatWidget.cpp" />
-    <ClCompile Include="..\src\moc_ControlWidget.cpp" />
-    <ClCompile Include="..\src\moc_Dialog.cpp" />
-    <ClCompile Include="..\src\moc_GLWidget.cpp" />
-    <ClCompile Include="..\src\moc_PieMenu.cpp" />
-    <ClCompile Include="..\src\ModelSettings.cpp" />
-    <ClCompile Include="..\src\NetworkUtils.cpp" />
-    <ClCompile Include="..\src\PieMenu.cpp" />
-    <ClCompile Include="..\src\PluginManager.cpp" />
-    <ClCompile Include="..\src\PluginSettings.cpp" />
-    <ClCompile Include="..\src\RandomTalk.cpp" />
-    <ClCompile Include="..\src\sqlite3.c" />
-    <ClCompile Include="..\src\TouchManager.cpp" />
+    <ClCompile Include="..\src\meta\moc_ChatHistoryView.cpp" />
+    <ClCompile Include="..\src\meta\moc_ChatWidget.cpp" />
+    <ClCompile Include="..\src\meta\moc_ControlWidget.cpp" />
+    <ClCompile Include="..\src\meta\moc_Dialog.cpp" />
+    <ClCompile Include="..\src\meta\moc_GLWidget.cpp" />
+    <ClCompile Include="..\src\meta\moc_PieMenu.cpp" />
+    <ClCompile Include="..\src\plugin\PluginManager.cpp" />
+    <ClCompile Include="..\src\sqlite3\sqlite3.c" />
+    <ClCompile Include="..\src\utils\AudioUtils.cpp" />
+    <ClCompile Include="..\src\utils\ChatHistoryDB.cpp" />
+    <ClCompile Include="..\src\utils\NetworkUtils.cpp" />
+    <ClCompile Include="..\src\utils\RandomTalk.cpp" />
+    <ClCompile Include="..\src\win\AppSettings.cpp" />
+    <ClCompile Include="..\src\win\ChatHistoryView.cpp" />
+    <ClCompile Include="..\src\win\ChatSettings.cpp" />
+    <ClCompile Include="..\src\win\ChatWidget.cpp" />
+    <ClCompile Include="..\src\win\ControlWidget.cpp" />
+    <ClCompile Include="..\src\win\Dialog.cpp" />
+    <ClCompile Include="..\src\win\GLWidget.cpp" />
+    <ClCompile Include="..\src\win\ModelSettings.cpp" />
+    <ClCompile Include="..\src\win\PieMenu.cpp" />
+    <ClCompile Include="..\src\win\PluginSettings.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

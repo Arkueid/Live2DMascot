@@ -1,0 +1,7 @@
+{
+  "name": "Hitokoto",
+  "author": "Arkueid",
+  "version": "1.0.0",
+  "id": "com.arkueid.live2dmascot.hitokoto/1.0.0",
+  "desc": "随机播放一言数据，数据源<a href=\"https://github.com/hitokoto-osc/sentences-bundle\">一言</a>"
+}

@@ -4,15 +4,15 @@
 #include <lmcons.h>
 #include <io.h>
 #include <QtWidgets/qmessagebox.h>
-#include "LAppDelegate.hpp"
+#include "live2d/LAppDelegate.hpp"
 #include "LApp.h"
-#include "LAppDefine.hpp"
-#include "LAppPal.hpp"
+#include "live2d/LAppDefine.hpp"
+#include "live2d/LAppPal.hpp"
 #include "json/json.h"
-#include "NetworkUtils.h"
-#include "LAppLive2DManager.hpp"
+#include "utils/NetworkUtils.h"
+#include "live2d/LAppLive2DManager.hpp"
 #include <QtCore/qtimer.h>
-#include "PluginManager.h"
+#include "plugin/PluginManager.h"
 using namespace std;
 using namespace LAppDefine;
 

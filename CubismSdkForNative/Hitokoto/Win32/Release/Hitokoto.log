@@ -1,0 +1,11 @@
+﻿  Hitokoto.cpp
+  moc_Hitokoto.cpp
+    正在创建库 bin\Win32\Release\Hitokoto.lib 和对象 bin\Win32\Release\Hitokoto.exp
+  正在生成代码
+  50 of 103 functions (48.5%) were compiled, the rest were copied from previous compilation.
+    41 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  Hitokoto.vcxproj -> D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Hitokoto\bin\Win32\Release\Hitokoto.dll
+  A subdirectory or file D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Hitokoto\..\proj_msvc2022_x86_mt\bin\plugins\Hitokoto already exists.
+          1 file(s) copied.

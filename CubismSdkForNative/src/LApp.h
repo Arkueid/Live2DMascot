@@ -1,6 +1,6 @@
 #pragma once
-#include "ILApp.h"
-#include "GLWidget.h"
+#include "interface/ILApp.h"
+#include "win/GLWidget.h"
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qthread.h>
 
@@ -163,7 +163,7 @@ public:
 
 	string _AssetsDir() { return LAppConfig::_AssetsDir; }
 
-	Json::Value _Plugins() { return LAppConfig::_Plugins; }
+	string _Plugins() { return LAppConfig::_Plugins.toStyledString(); }
 };
 
 namespace {
