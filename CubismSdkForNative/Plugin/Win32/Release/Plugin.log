@@ -1,9 +1,10 @@
 ﻿  Greeting.cpp
+  moc_Greeting.cpp
     正在创建库 bin\Win32\Release\Greeting.lib 和对象 bin\Win32\Release\Greeting.exp
   正在生成代码
-  43 of 897 functions ( 4.8%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    20 functions had inline decision re-evaluated but remain unchanged
+  13 of 69 functions (18.8%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   Plugin.vcxproj -> D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Plugin\bin\Win32\Release\Greeting.dll
   A subdirectory or file D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Plugin\..\proj_msvc2022_x86_mt\bin\plugins\Greeting already exists.

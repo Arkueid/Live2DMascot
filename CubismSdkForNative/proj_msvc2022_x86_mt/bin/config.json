@@ -55,6 +55,7 @@
 	"Plugins" : 
 	{
 		"com.arkueid.greeting/1.0.0" : true,
+		"com.arkueid.live2dmascot.greeting/1.0.0" : true,
 		"com.arkueid.live2dmascot.hitokoto/1.0.0" : true
 	},
 	"UserSettings" : 

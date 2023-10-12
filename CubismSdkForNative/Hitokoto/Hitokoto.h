@@ -10,6 +10,7 @@ private:
 	ILApp* _app;
 	QWidget* _settings;
 	int frameCount;
+	bool isStart = false;
 public:
 	Hitokoto();
 	~Hitokoto();

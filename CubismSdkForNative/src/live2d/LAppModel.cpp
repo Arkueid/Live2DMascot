@@ -26,6 +26,7 @@
 #include "../utils/AudioUtils.h"
 #include "../LApp.h"
 #include "../interface/IDialog.h"
+#include "../win/Dialog.h"
 
 using namespace Live2D::Cubism::Framework;
 using namespace Live2D::Cubism::Framework::DefaultParameterId;
@@ -483,7 +484,10 @@ void LAppModel::Update()
         if (LAppConfig::_MotionInterval != 0 && _frameCount / LAppConfig::_FPS >= LAppConfig::_MotionInterval)
         {
             // モーションの再生がない場合、待機モーションの中からランダムで再生する
-            StartRandomMotion(MotionGroupIdle, PriorityIdle);
+            StartRandomMotion(MotionGroupIdle, PriorityIdle, [](IMotion* self){
+                Dialog* d = (Dialog*)LApp::GetInstance()->GetWindow()->GetDialog();
+                emit d->timeUp();
+            });
             _frameCount = 0;
         }
         else {
@@ -606,40 +610,39 @@ CubismMotionQueueEntryHandle LAppModel::StartMotion(const char* group, signed in
         csmString path = fileName;
 
 
-        if (strlen(path.GetRawString()) != 0)  //模型没有动作文件但是model3.json中定义了动作，如果动作路径为空则不读取，以此解除对动作文件的依赖
+        if (strlen(path.GetRawString()) == 0)  //模型没有动作文件但是model3.json中定义了动作，如果动作路径为空则不读取，以此解除对动作文件的依赖
         {
-            path = _modelHomeDir + path;
-
-            //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
-
-            csmByte* buffer;
-            csmSizeInt size;
-
-            if (LAppConfig::_RepairModeOn)
-                RepairMotion(path.GetRawString());
-            buffer = CreateBuffer(path.GetRawString(), &size);
-            motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, NULL));
-            csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue(group, no);
-            if (fadeTime >= 0.0f)
-            {
-                motion->SetFadeInTime(fadeTime);
-            }
-
-            fadeTime = _modelSetting->GetMotionFadeOutTimeValue(group, no);
-            if (fadeTime >= 0.0f)
-            {
-                motion->SetFadeOutTime(fadeTime);
-            }
-            autoDelete = true; // 終了時にメモリから削除
-
-            DeleteBuffer(buffer, path.GetRawString());
+            path = "assets/default.motion3.json";
         }
+        else path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
+        csmByte* buffer;
+        csmSizeInt size;
+        
+        if (LAppConfig::_RepairModeOn)
+            RepairMotion(path.GetRawString());
+        buffer = CreateBuffer(path.GetRawString(), &size);
+        motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, NULL));
+        csmFloat32 fadeTime = 10.0f;
+        if (fadeTime >= 0.0f)
+        {
+            motion->SetFadeInTime(fadeTime);
+        }
+
+        fadeTime = _modelSetting->GetMotionFadeOutTimeValue(group, no);
+        if (fadeTime >= 0.0f)
+        {
+            motion->SetFadeOutTime(fadeTime);
+        }
+        autoDelete = true; // 終了時にメモリから削除
+
+        DeleteBuffer(buffer, path.GetRawString());
     }
-    else
-    {
-        motion->SetFinishedMotionHandler((ACubismMotion::FinishedMotionCallback)onFinishedMotionHandler);
-    }
+
+    motion->SetFinishedMotionHandler((ACubismMotion::FinishedMotionCallback)onFinishedMotionHandler);
 
     if (LAppConfig::_WaitChatResponse) return NULL;
     if (_debugMode)
@@ -736,37 +739,37 @@ CubismMotionQueueEntryHandle LAppModel::Speak(const char* txt, const char* sound
     {
         csmString path = fileName;
 
-        if (strlen(path.GetRawString()) != 0)  //模型没有动作文件但是model3.json中定义了动作，如果动作路径为空则不读取，以此解除对动作文件的依赖
+        if (strlen(path.GetRawString()) == 0)  //模型没有动作文件但是model3.json中定义了动作，如果动作路径为空则不读取，以此解除对动作文件的依赖
         {
-            path = _modelHomeDir + path;
-
-            //中文支持
-            path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
-
-            csmByte* buffer;
-            csmSizeInt size;
-            buffer = CreateBuffer(path.GetRawString(), &size);
-            motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, NULL));
-            csmFloat32 fadeTime = _modelSetting->GetMotionFadeInTimeValue("Chat", no);
-            if (fadeTime >= 0.0f)
-            {
-                motion->SetFadeInTime(fadeTime);
-            }
-
-            fadeTime = _modelSetting->GetMotionFadeOutTimeValue("Chat", no);
-            if (fadeTime >= 0.0f)
-            {
-                motion->SetFadeOutTime(fadeTime);
-            }
-            autoDelete = true; // 終了時にメモリから削除
-
-            DeleteBuffer(buffer, path.GetRawString());
+            path = "assets/default.motion3.json";
         }
+        else path = _modelHomeDir + path;
+
+        //中文支持
+        path = QString::fromUtf8(path.GetRawString()).toLocal8Bit().constData();
+
+        csmByte* buffer;
+        csmSizeInt size;
+        buffer = CreateBuffer(path.GetRawString(), &size);
+        motion = static_cast<CubismMotion*>(LoadMotion(buffer, size, NULL, NULL));
+        csmFloat32 fadeTime = 10.0f;
+        if (fadeTime >= 0.0f)
+        {
+            motion->SetFadeInTime(fadeTime);
+        }
+
+        fadeTime = _modelSetting->GetMotionFadeOutTimeValue("Chat", no);
+        if (fadeTime >= 0.0f)
+        {
+            motion->SetFadeOutTime(fadeTime);
+        }
+        autoDelete = true; // 終了時にメモリから削除
+
+        DeleteBuffer(buffer, path.GetRawString());
     }
-    else
-    {
-        motion->SetFinishedMotionHandler((ACubismMotion::FinishedMotionCallback)onFinishedMotionHandler);
-    }
+    
+    motion->SetFinishedMotionHandler((ACubismMotion::FinishedMotionCallback)onFinishedMotionHandler);
+    
 
     //voice
     csmString path = soundPath;

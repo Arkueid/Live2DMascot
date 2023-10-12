@@ -14,10 +14,11 @@ Dialog::Dialog()
 	LoadConfig();
 	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
 	setAttribute(Qt::WA_TranslucentBackground); 
-	animation = new QPropertyAnimation(this, NULL);
+	animation = new QPropertyAnimation(this, "windowOpacity");
 	animation->setStartValue(1);
 	animation->setEndValue(0);
 	connect(animation, SIGNAL(finished()), this, SLOT(hide()));
+	connect(this, SIGNAL(timeUp()), this, SLOT(fadeOut()));
 	_xBorder = LAppConfig::_DialogXPadding;
 	_yBorder = LAppConfig::_DialogYPadding;
 	show();
@@ -33,11 +34,11 @@ void Dialog::Pop(const char* text)
 	hide();
 	_text = QString::fromStdString(text);
 	animation->stop();
+	setWindowOpacity(1);
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
-	animation->setDuration(LAppConfig::_TextFadeOutTime * 1000);
+	animation->setDuration(2000);
 	update();
 	setVisible(true);
-	animation->start();
 }
 
 void Dialog::LoadConfig()
@@ -54,8 +55,9 @@ void Dialog::LoadConfig()
 void Dialog::WaitChatResponse()
 {
 	hide();
-	_text = QString::fromUtf8("......");
 	animation->stop();
+	setWindowOpacity(1);
+	_text = QString::fromUtf8("......");
 	setWindowFlag(Qt::WindowStaysOnTopHint, LAppConfig::_StayOnTop);
 	update();
 	animation->setDuration(LAppConfig::_CustomChatServerReadTimeOut * 1000);
@@ -100,4 +102,13 @@ void Dialog::paintEvent(QPaintEvent* e)
 
 bool Dialog::IsVisible() {
 	return this->isVisible();
+}
+
+void Dialog::fadeOut() {
+	animation->stop();
+	animation->start();
+}
+
+void Dialog::TimeUp() {
+	emit timeUp();
 }

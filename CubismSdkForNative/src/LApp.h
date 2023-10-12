@@ -85,6 +85,7 @@ private:
 public:
 	LApp();
 	static LApp* GetInstance();
+	static ILApp* GetInstanceI();
 	void SaveConfig();
 	static void Warning(const char* x);
 	void Initialize(int argc, char* argv[]);

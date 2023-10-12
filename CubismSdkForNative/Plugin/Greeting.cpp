@@ -3,6 +3,8 @@
 #include <QtWidgets/qtabwidget.h>
 #include <QtWidgets/qlabel.h>
 #include "../src/interface/ILAppModel.h"
+#include "../src/interface/IDialog.h"
+#include <QtCore/qthread.h>
 
 static ILApp* _iapp = NULL;
 
@@ -30,27 +32,40 @@ void Greeting::OnLaunch()
     else {
         group = "Midnight";
     }
-    _app->GetModel()->StartRandomMotion(group, PriorityForce);
+    _app->GetModel()->StartRandomMotion(group, PriorityForce, [](IMotion* self) {
+        _iapp->GetGLWidget()->GetDialog()->TimeUp();
+    });
 }
 
 void Greeting::OnScheduledTask()
 {
+    if (shutDown) {
+        _app->ReleaseHold();
+        shutDown = false;
+    }
+
     if (frameCount / _app->_FPS() > 3600)
     {
-    	_app->GetModel()->StartRandomMotion("LongSittingTip", PriorityForce);
-    	frameCount = 0;
+    	    _app->GetModel()->StartRandomMotion("LongSittingTip", PriorityForce, [](IMotion* self) {
+                _iapp->GetGLWidget()->GetDialog()->TimeUp();
+            });
+    	    frameCount = 0;
     } 
     else frameCount++;
 }
 
 void OnFinishMotionCallBack(IMotion* self) {
     _iapp->ReleaseHold();
+    _iapp->GetGLWidget()->GetDialog()->TimeUp();
 }
 
 void Greeting::OnShutdown()
 {
-    _app->GetModel()->Speak("再见~", "", OnFinishMotionCallBack);
+    _app->GetModel()->Speak("再见~", "", [](IMotion* self) {
+        _iapp->GetGLWidget()->GetDialog()->TimeUp();
+        });
     _app->Hold();
+    shutDown = true;
 }
 
 void Greeting::Initialize(ILApp* app)

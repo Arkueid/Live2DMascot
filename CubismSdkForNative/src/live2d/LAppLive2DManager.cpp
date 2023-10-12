@@ -108,7 +108,7 @@ void LAppLive2DManager::OnTap(csmFloat32 x, csmFloat32 y)
         {
             if (DebugLogEnable) LAppPal::PrintLog("[APP]hit area: [%s]", hitArea.GetRawString());
             if (strcmp(hitArea.GetRawString(), "TapHead") == 0) _models[i]->SetRandomExpression();
-            _models[i]->StartRandomMotion(hitArea.GetRawString(), PriorityForce, NULL);
+            _models[i]->StartRandomMotion(hitArea.GetRawString(), PriorityForce);
             return;
         }
     }

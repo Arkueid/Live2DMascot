@@ -121,6 +121,11 @@ LApp* LApp::GetInstance()
     return _lapp_instance;
 }
 
+ILApp* LApp::GetInstanceI()
+{
+    return _lapp_instance;
+}
+
 QApplication* LApp::GetApp()
 {
     return _app;

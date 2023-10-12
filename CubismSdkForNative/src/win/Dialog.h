@@ -8,6 +8,8 @@
 class Dialog : public QWidget, public IDialog
 {
 	Q_OBJECT
+signals:
+	void timeUp();
 protected:
 	void mouseReleaseEvent(QMouseEvent* e);
 public:
@@ -19,6 +21,7 @@ public:
 	void WaitChatResponse();
 	void paintEvent(QPaintEvent* e);
 	bool IsVisible();
+	void TimeUp();
 	void LoadConfig();
 	QWidget* GetSelf();
 private:
@@ -28,4 +31,6 @@ private:
 	QString _text;
 	QFont _font;
 	QFontMetrics* _fontMetrics;
+private slots:
+	void fadeOut();
 };

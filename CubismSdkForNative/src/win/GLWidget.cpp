@@ -366,7 +366,7 @@ void GLWidget::SetupUI()
 
 	//右键菜单
 	rightMenu = new QMenu(this);
-	act_quit = new QAction(QString("强制退出"));
+	act_quit = new QAction(QString("退出"));
 
 	act_hide = new QAction(QString("隐藏"));
 
@@ -453,6 +453,7 @@ void GLWidget::SetupUI()
 	_pieMenu->setPinButtonIcon(QIcon(QString::fromStdString(LAppConfig::_AssetsDir).append("/pin.png")));
 
 	connect(_pieMenu, SIGNAL(buttonClicked(uint8_t)), SLOT(pieMenuOnClicked(uint8_t)));
+
 }
 
 void GLWidget::Quit()

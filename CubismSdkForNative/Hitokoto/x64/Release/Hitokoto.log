@@ -1,10 +1,12 @@
 ﻿  Hitokoto.cpp
+D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\src\interface\IPlugin.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\src\interface\IGLWidget.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
     正在创建库 bin\x64\Release\Hitokoto.lib 和对象 bin\x64\Release\Hitokoto.exp
   正在生成代码
-  1 of 103 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  3 of 105 functions ( 2.9%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   Hitokoto.vcxproj -> D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Hitokoto\bin\x64\Release\Hitokoto.dll
-  A subdirectory or file D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Hitokoto\..\proj_msvc2022_x64_mt\bin\plugins\Hitokoto\ already exists.
-          1 file(s) copied.
+  子目录或文件 D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Hitokoto\..\proj_msvc2022_x64_mt\bin\plugins\Hitokoto\ 已经存在。
+  已复制         1 个文件。

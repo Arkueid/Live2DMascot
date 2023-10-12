@@ -13,4 +13,5 @@ public:
 	virtual void paintEvent(QPaintEvent* e) = 0;
 	virtual void LoadConfig() = 0;
 	virtual bool IsVisible() = 0;
+	virtual void TimeUp() = 0;
 };

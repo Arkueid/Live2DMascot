@@ -542,7 +542,9 @@ void ModelSettings::StartMotion(QTreeWidgetItem* w, int idx)
 	{
 		string groupname = w->parent()->text(0).toUtf8();
 		int idx = w->data(1, 0).toInt();
-		LAppLive2DManager::GetInstance()->GetModel(0)->StartMotion(groupname.c_str(), idx, PriorityForce);
+		LAppLive2DManager::GetInstance()->GetModel(0)->StartMotion(groupname.c_str(), idx, PriorityForce, [](IMotion* self) {
+			LApp::GetInstance()->GetGLWidget()->GetDialog()->TimeUp();
+		});
 
 	}
 	else {

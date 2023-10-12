@@ -9,6 +9,7 @@ private:
 	ILApp* _app;
 	QWidget* _settings;
 	int frameCount;
+	bool shutDown = false;
 public:
 	Greeting();
 	~Greeting();

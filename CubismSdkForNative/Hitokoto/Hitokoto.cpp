@@ -1,13 +1,14 @@
 #include "Hitokoto.h"
-#include "..\src\interface\IControlWidget.h"
+#include "../src/interface/IControlWidget.h"
 #include <QtWidgets/qtabwidget.h>
 #include <QtWidgets/qlabel.h>
-#include "..\src\interface\ILAppModel.h"
+#include "../src/interface/ILAppModel.h"
 #include <QtCore/qdir.h>
 #include <fstream>
 #include <QtCore/qjsondocument.h>
 #include <QtCore/qjsonobject.h> 
 #include <QtCore/qjsonarray.h>
+#include "../src/interface/IDialog.h"
 
 static ILApp* _iapp = NULL;
 
@@ -53,7 +54,9 @@ void Hitokoto::OnScheduledTask()
     if (_app->GetModel()->IsMotionFinished()) {
         if (frameCount / _app->_FPS() > 5)
         {
-            _app->GetModel()->Speak(GetRandomSentence().toStdString().c_str(), "", NULL);
+            _app->GetModel()->Speak(GetRandomSentence().toStdString().c_str(), "", [](IMotion* self) {
+                _iapp->GetGLWidget()->GetDialog()->TimeUp();
+            });
             frameCount = 0;
         }
         else {

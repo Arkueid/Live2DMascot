@@ -1,10 +1,19 @@
 {
-	"Type": "Live2D Expression",
-	"Parameters": [
+	"Curves" : null,
+	"Meta" : 
+	{
+		"CurveCount" : 0,
+		"Repaired" : true,
+		"TotalPointCount" : 0,
+		"TotalSegmentCount" : 0
+	},
+	"Parameters" : 
+	[
 		{
-			"Id": "Param",
-			"Value": 1,
-			"Blend": "Add"
+			"Blend" : "Add",
+			"Id" : "Param",
+			"Value" : 1
 		}
-	]
+	],
+	"Type" : "Live2D Expression"
 }

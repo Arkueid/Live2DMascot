@@ -15,6 +15,8 @@ extern const int PriorityForce;
 
 class IMotion;
 
+
+
 class ILAppModel {
 public:
 	virtual CubismMotionQueueEntryHandle Speak(const char* text, const char* soundPath, void (*onFinishedMotionHandler)(IMotion* self) = NULL) = 0;

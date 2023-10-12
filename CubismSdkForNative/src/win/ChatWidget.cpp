@@ -174,7 +174,9 @@ void ChatWidget::GetInput()
 }
 void ChatWidget::PopDialog(bool waitMode) {
 	if (waitMode) LApp::GetInstance()->GetWindow()->GetDialog()->WaitChatResponse();
-	else LApp::GetInstance()->GetWindow()->GetDialog()->Pop(text.c_str());
+	else LApp::GetInstance()->GetModel()->Speak(text.c_str(), soundPath.c_str(), [](IMotion* self) {
+		LApp::GetInstance()->GetGLWidget()->GetDialog()->TimeUp();
+	});
 }
 
 void ChatWidget::ProcessNetworkResponse(bool voice)
