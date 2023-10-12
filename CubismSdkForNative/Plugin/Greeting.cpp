@@ -40,7 +40,14 @@ void Greeting::OnLaunch()
 void Greeting::OnScheduledTask()
 {
     if (shutDown) {
-        _app->ReleaseHold();
+        // 3秒后退出程序
+        QThread::create([=]() {
+            for (int i = 0; i < 3; i++)
+            {
+                Sleep(1000);
+            }
+            _app->ReleaseHold();
+            })->start();
         shutDown = false;
     }
 

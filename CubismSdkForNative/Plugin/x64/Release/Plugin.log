@@ -1,13 +1,10 @@
 ﻿  Greeting.cpp
 D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\src\interface\IPlugin.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\src\interface\IGLWidget.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  moc_Greeting.cpp
-D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\src\interface\IPlugin.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\src\interface\IGLWidget.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
     正在创建库 bin\x64\Release\Greeting.lib 和对象 bin\x64\Release\Greeting.exp
   正在生成代码
-  6 of 70 functions ( 8.6%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
+  2 of 833 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   Plugin.vcxproj -> D:\forDesktop\Live2DProject\Live2DMascot\CubismSdkForNative\Plugin\bin\x64\Release\Greeting.dll
