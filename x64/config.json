@@ -60,7 +60,7 @@
 		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "Hiyori",
+		"ModelName" : "nn",
 		"MotionInterval" : 10.0
 	},
 	"Plugins" : 
@@ -102,8 +102,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1514,
-			"Y" : 394
+			"X" : 778,
+			"Y" : 219
 		},
 		"Width" : 400
 	}
