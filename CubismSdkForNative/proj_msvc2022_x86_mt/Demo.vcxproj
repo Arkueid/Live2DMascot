@@ -146,7 +146,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\thirdParty\qt-material-design\include;..\thirdParty\OpenSSL-Win32\include;..\thirdParty\httplib;..\thirdParty\stb;..\Framework\src;..\thirdParty\glew\include;..\thirdParty\glfw\include;..\thirdParty\Qt\include;..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include"</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
@@ -205,7 +205,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Console|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\thirdParty\qt-material-design\include;..\thirdParty\stb;..\Framework\src;..\thirdParty\glew\include;..\thirdParty\glfw\include;..\thirdParty\httplib;..\thirdParty\Qt\include;..\thirdParty\OpenSSL-Win32\include;..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "../Core/include"</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "../Core/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>

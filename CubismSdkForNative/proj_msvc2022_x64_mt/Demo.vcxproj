@@ -368,7 +368,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Window|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\thirdParty\qt-material-design\include;..\thirdParty\OpenSSL-Win64\include;..\thirdParty\httplib;..\thirdParty\stb;..\Framework\src;..\thirdParty\glew\include;..\thirdParty\glfw\include;..\thirdParty\Qt-x64\include;..\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include"</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/Live2D/CubismSdkForNative-4-r.5.1/Samples/OpenGL/Demo/proj.win.cmake/../../../../Core/include" /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Async</ExceptionHandling>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
