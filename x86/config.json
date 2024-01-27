@@ -48,7 +48,7 @@
 		"BackgroundColor" : "rgba(0, 0, 0, 200)",
 		"FontColor" : "white",
 		"FontFamily" : "黑体",
-		"FontSize" : 10,
+		"FontSize" : 16,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
 		"YOffset" : -10,
@@ -61,7 +61,7 @@
 		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "Hiyori",
+		"ModelName" : "xuefeng_3",
 		"MotionInterval" : 5.0
 	},
 	"Plugins" : 
@@ -103,8 +103,8 @@
 		"Height" : 500,
 		"LastPos" : 
 		{
-			"X" : 1434,
-			"Y" : 494
+			"X" : 1546,
+			"Y" : 368
 		},
 		"Width" : 300
 	}
