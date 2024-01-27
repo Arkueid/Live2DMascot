@@ -60,8 +60,8 @@
 		"CharacterY" : 0.0,
 		"LipSyncMagnification" : 9.0,
 		"ModelDir" : "../Resources",
-		"ModelName" : "nn",
-		"MotionInterval" : 10.0
+		"ModelName" : "Hiyori",
+		"MotionInterval" : 30.0
 	},
 	"Plugins" : 
 	{
@@ -77,16 +77,16 @@
 		"KeepQuiet" : false,
 		"MouseTrack" : true,
 		"NoSound" : false,
-		"RepairModeOn" : true,
+		"RepairModeOn" : false,
 		"ShowBackground" : false,
 		"ShowBgmList" : true,
 		"ShowText" : true,
 		"SoundVolume" : 1.0,
-		"StayOnTop" : true,
+		"StayOnTop" : false,
 		"TextFadeOutTime" : 6,
 		"TransparentBackground" : true,
 		"TransparentCharacter" : false,
-		"UserName" : "ArcueidBrunestud"
+		"UserName" : "Arkueid"
 	},
 	"VoiceInput" : 
 	{
@@ -99,12 +99,12 @@
 	},
 	"WindowSettings" : 
 	{
-		"Height" : 500,
+		"Height" : 400,
 		"LastPos" : 
 		{
-			"X" : 778,
-			"Y" : 219
+			"X" : 1424,
+			"Y" : 510
 		},
-		"Width" : 400
+		"Width" : 350
 	}
 }

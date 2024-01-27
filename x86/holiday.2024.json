@@ -1,0 +1,299 @@
+{
+	"code" : 0,
+	"holiday" : 
+	{
+		"01-01" : 
+		{
+			"date" : "2024-01-01",
+			"holiday" : true,
+			"name" : "\u5143\u65e6",
+			"rest" : 1,
+			"wage" : 3
+		},
+		"02-04" : 
+		{
+			"after" : false,
+			"date" : "2024-02-04",
+			"holiday" : false,
+			"name" : "\u6625\u8282\u524d\u8865\u73ed",
+			"rest" : 6,
+			"target" : "\u6625\u8282",
+			"wage" : 1
+		},
+		"02-10" : 
+		{
+			"date" : "2024-02-10",
+			"holiday" : true,
+			"name" : "\u521d\u4e00",
+			"rest" : 12,
+			"wage" : 3
+		},
+		"02-11" : 
+		{
+			"date" : "2024-02-11",
+			"holiday" : true,
+			"name" : "\u521d\u4e8c",
+			"rest" : 1,
+			"wage" : 3
+		},
+		"02-12" : 
+		{
+			"date" : "2024-02-12",
+			"holiday" : true,
+			"name" : "\u521d\u4e09",
+			"wage" : 3
+		},
+		"02-13" : 
+		{
+			"date" : "2024-02-13",
+			"holiday" : true,
+			"name" : "\u521d\u56db",
+			"wage" : 2
+		},
+		"02-14" : 
+		{
+			"date" : "2024-02-14",
+			"holiday" : true,
+			"name" : "\u521d\u4e94",
+			"wage" : 2
+		},
+		"02-15" : 
+		{
+			"date" : "2024-02-15",
+			"holiday" : true,
+			"name" : "\u521d\u516d",
+			"wage" : 2
+		},
+		"02-16" : 
+		{
+			"date" : "2024-02-16",
+			"holiday" : true,
+			"name" : "\u521d\u4e03",
+			"wage" : 2
+		},
+		"02-17" : 
+		{
+			"date" : "2024-02-17",
+			"holiday" : true,
+			"name" : "\u521d\u516b",
+			"wage" : 2
+		},
+		"02-18" : 
+		{
+			"after" : true,
+			"date" : "2024-02-18",
+			"holiday" : false,
+			"name" : "\u6625\u8282\u540e\u8865\u73ed",
+			"target" : "\u6625\u8282",
+			"wage" : 1
+		},
+		"04-04" : 
+		{
+			"date" : "2024-04-04",
+			"holiday" : true,
+			"name" : "\u6e05\u660e\u8282",
+			"rest" : 46,
+			"wage" : 3
+		},
+		"04-05" : 
+		{
+			"date" : "2024-04-05",
+			"holiday" : true,
+			"name" : "\u6e05\u660e\u8282",
+			"wage" : 2
+		},
+		"04-06" : 
+		{
+			"date" : "2024-04-06",
+			"holiday" : true,
+			"name" : "\u6e05\u660e\u8282",
+			"wage" : 2
+		},
+		"04-07" : 
+		{
+			"after" : true,
+			"date" : "2024-04-07",
+			"holiday" : false,
+			"name" : "\u6e05\u660e\u8282\u540e\u8865\u73ed",
+			"target" : "\u6e05\u660e\u8282",
+			"wage" : 1
+		},
+		"04-28" : 
+		{
+			"after" : false,
+			"date" : "2024-04-28",
+			"holiday" : false,
+			"name" : "\u52b3\u52a8\u8282\u524d\u8865\u73ed",
+			"target" : "\u52b3\u52a8\u8282",
+			"wage" : 1
+		},
+		"05-01" : 
+		{
+			"date" : "2024-05-01",
+			"holiday" : true,
+			"name" : "\u52b3\u52a8\u8282",
+			"wage" : 3
+		},
+		"05-02" : 
+		{
+			"date" : "2024-05-02",
+			"holiday" : true,
+			"name" : "\u52b3\u52a8\u8282",
+			"rest" : 1,
+			"wage" : 2
+		},
+		"05-03" : 
+		{
+			"date" : "2024-05-03",
+			"holiday" : true,
+			"name" : "\u52b3\u52a8\u8282",
+			"wage" : 3
+		},
+		"05-04" : 
+		{
+			"date" : "2024-05-04",
+			"holiday" : true,
+			"name" : "\u52b3\u52a8\u8282",
+			"wage" : 3
+		},
+		"05-05" : 
+		{
+			"date" : "2024-05-05",
+			"holiday" : true,
+			"name" : "\u52b3\u52a8\u8282",
+			"wage" : 3
+		},
+		"05-11" : 
+		{
+			"after" : true,
+			"date" : "2024-05-11",
+			"holiday" : false,
+			"name" : "\u52b3\u52a8\u8282\u540e\u8865\u73ed",
+			"target" : "\u52b3\u52a8\u8282",
+			"wage" : 1
+		},
+		"06-08" : 
+		{
+			"date" : "2024-06-08",
+			"holiday" : true,
+			"name" : "\u7aef\u5348\u8282",
+			"wage" : 2
+		},
+		"06-09" : 
+		{
+			"date" : "2024-06-09",
+			"holiday" : true,
+			"name" : "\u7aef\u5348\u8282",
+			"wage" : 2
+		},
+		"06-10" : 
+		{
+			"date" : "2024-06-10",
+			"holiday" : true,
+			"name" : "\u7aef\u5348\u8282",
+			"wage" : 3
+		},
+		"09-14" : 
+		{
+			"after" : false,
+			"date" : "2024-09-14",
+			"holiday" : false,
+			"name" : "\u4e2d\u79cb\u8282\u524d\u8865\u73ed",
+			"rest" : 96,
+			"target" : "\u4e2d\u79cb\u8282",
+			"wage" : 1
+		},
+		"09-15" : 
+		{
+			"date" : "2024-09-15",
+			"holiday" : true,
+			"name" : "\u4e2d\u79cb\u8282",
+			"rest" : 97,
+			"wage" : 2
+		},
+		"09-16" : 
+		{
+			"date" : "2024-09-16",
+			"holiday" : true,
+			"name" : "\u4e2d\u79cb\u8282",
+			"wage" : 2
+		},
+		"09-17" : 
+		{
+			"date" : "2024-09-17",
+			"holiday" : true,
+			"name" : "\u4e2d\u79cb\u8282",
+			"wage" : 3
+		},
+		"09-29" : 
+		{
+			"after" : false,
+			"date" : "2024-09-29",
+			"holiday" : false,
+			"name" : "\u56fd\u5e86\u8282\u524d\u8865\u73ed",
+			"target" : "\u56fd\u5e86\u8282",
+			"wage" : 1
+		},
+		"10-01" : 
+		{
+			"date" : "2024-10-01",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"wage" : 3
+		},
+		"10-02" : 
+		{
+			"date" : "2024-10-02",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"rest" : 1,
+			"wage" : 3
+		},
+		"10-03" : 
+		{
+			"date" : "2024-10-03",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"wage" : 3
+		},
+		"10-04" : 
+		{
+			"date" : "2024-10-04",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"wage" : 2
+		},
+		"10-05" : 
+		{
+			"date" : "2024-10-05",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"wage" : 2
+		},
+		"10-06" : 
+		{
+			"date" : "2024-10-06",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"rest" : 1,
+			"wage" : 2
+		},
+		"10-07" : 
+		{
+			"date" : "2024-10-07",
+			"holiday" : true,
+			"name" : "\u56fd\u5e86\u8282",
+			"rest" : 1,
+			"wage" : 2
+		},
+		"10-12" : 
+		{
+			"after" : true,
+			"date" : "2024-10-12",
+			"holiday" : false,
+			"name" : "\u56fd\u5e86\u8282\u540e\u8865\u73ed",
+			"target" : "\u56fd\u5e86\u8282",
+			"wage" : 1
+		}
+	}
+}

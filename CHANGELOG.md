@@ -1,5 +1,17 @@
 # Changelog
 
+### 2024-1-27
+***fix***  
+1. 屏幕缩放比例过大导致界面变形
+2. 保存模型设置导致程序崩溃
+
+***add***  
+1. 添加对话框背景（assets文件夹下的bubble.png），可自行替换，命名为"bubble.png" 
+
+***注***
+* 自带的百度语音识别存在问题，后续可能解决该问题或改用sherpa（程序体积会增大）
+* 由于之前没有长远更新的打算，想到什么加什么，没有考虑代码的组织设计，现在有点难以维护，后续可能重构/弃坑了。
+
 ### 2023-08-31
 ***add***  
 Hitokoto 插件，每隔 5s 播放一言中的文本（独立计时，有动作播放时停止计时），数据来自 [hitokoto-osc/sentences-bundle](https://github.com/hitokoto-osc/sentences-bundle)
