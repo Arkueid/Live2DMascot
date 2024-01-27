@@ -43,9 +43,9 @@ ModelSettings::ModelSettings(QWidget* p)
 	lbl_motionText = new QLabel(QString("文本"));
 	lbl_motionText->setAlignment(Qt::AlignTop | Qt::AlignRight);
 	motionGroup = new QtMaterialTextField();
-	motionGroup->setLabelFontSize(8);
 	motionGroup->setInkColor(QColor(50, 120, 200));
 	motionGroup->setInputLineColor(QColor(80, 80, 80));
+	motionGroup->setFixedHeight(35);
 
 	addGroup = new QtMaterialRaisedButton();
 	addGroup->setText("新建动作组");
@@ -133,11 +133,12 @@ ModelSettings::ModelSettings(QWidget* p)
 	connect(changeModel, SIGNAL(clicked()), SLOT(UpdateModel()));
 	_motionGroups->setObjectName("motionGroups");
 	_motionGroups->setStyleSheet(
+		"QTreeWidget{font-size: 14px;}"
 		"QTreeWidget::branch::open:hover:has-children{border-image: url(assets/open.png);}"
 		"QTreeWidget::branch::open:has-children{border-image: url(assets/open-default.png);}"
 		"QTreeWidget::branch::closed:has-children {border-image: url(assets/arrow-right-default.png)}"
 		"QTreeWidget::branch::closed:hover:has-children{border-image: url(assets/arrow-right.png)}"
-		"QHeaderView::section{background-color: rgb(50, 50, 50); color: rgba(255, 255, 255, 210); height: 30px; font-family: PingFang SC Medium; border: none; padding-left: 10px;}"
+		"QHeaderView::section{background-color: rgb(50, 50, 50); color: rgba(255, 255, 255, 210); height: 30px; font-family: PingFang SC Medium; font-size: 14px; border: none; padding-left: 10px;}"
 		"QTreeWidget::item:selected {font-weight: 800; border: none }"
 	);
 
@@ -146,10 +147,11 @@ ModelSettings::ModelSettings(QWidget* p)
 	bar->setSliderColor(QColor(80, 150, 244));
 	_motionGroups->setVerticalScrollBar(bar);
 
-	const char* styleSheet = ("QComboBox QAbstractItemView {outline: none; background: rgb(80, 80, 80); border: 2px solid rgb(80, 80, 80); }"
+	const char* styleSheet = (
+		"QComboBox QAbstractItemView {font-size: 14px; outline: none; background: rgb(80, 80, 80); border: 2px solid rgb(80, 80, 80); }"
 		"QComboBox QAbstractItemView::item {height: 25px; color: rgba(255, 255, 255, 210);}"
 		"QComboBox QAbstractItemView::item:hover,QComboBox QAbstractItemView::item:focus {border: none; background-color: rgba(80, 150, 244, 200)}"
-		"QComboBox{selection-background-color: rgb(50, 50, 50); padding-left: 5px}"
+		"QComboBox{selection-background-color: rgb(50, 50, 50); padding-left: 5px; }"
 		"QComboBox::drop-down{ border-image: url(assets/open-default.png); width: 30px; height: 30px }"
 		"QComboBox::drop-down:hover{ border-image: url(assets/open.png); width: 30px; height: 30px }"
 		);
@@ -178,7 +180,6 @@ ModelSettings::ModelSettings(QWidget* p)
 
 	motionText->setStyleSheet(
 		"QTextEdit {color: rgba(255, 255, 255, 180)}"
-
 	);
 	bar = new QtMaterialScrollBar();
 	bar->setFixedWidth(10);

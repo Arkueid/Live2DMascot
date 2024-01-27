@@ -29,7 +29,7 @@
 	{
 		"BackgroundColor" : "rgba(0, 0, 0, 180)",
 		"FontColor" : "white",
-		"FontFamily" : "\u5fae\u8f6f\u96c5\u9ed1",
+		"FontFamily" : "微软雅黑",
 		"FontSize" : 14,
 		"Height" : 200,
 		"Width" : 410
@@ -37,7 +37,7 @@
 	"Dialog" : 
 	{
 		"FontFamily" : "Comic Sans MS",
-		"FontSize" : 10,
+		"FontSize" : 14,
 		"MaxWdith" : 370,
 		"XPadding" : 10,
 		"YOffset" : -10,

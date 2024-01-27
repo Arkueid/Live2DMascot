@@ -10,60 +10,60 @@ AppSettings::AppSettings(QWidget* p)
 
 	appName = new QtMaterialTextField();
 	appName->setLabel("应用名称");
-	appName->setLabelFontSize(8);
+	//appName->setLabelFontSize(8);
 	appName->setInkColor(QColor(50, 120, 200));
 	appName->setInputLineColor(QColor(80, 80, 80));
-	appName->setStyleSheet("font-size: 10pt;");
+	appName->setStyleSheet("font-size: 14px;");
 
 	username = new QtMaterialTextField();
 	username->setLabel("用户名称");
-	username->setLabelFontSize(8);
+	//username->setLabelFontSize(8);
 	username->setInkColor(QColor(50, 120, 200));
 	username->setInputLineColor(QColor(80, 80, 80));
-	username->setStyleSheet("font-size: 10pt;");
+	username->setStyleSheet("font-size: 14px;");
 
 
 	iconPath = new QtMaterialTextField();
 	iconPath->setLabel("图标路径");
-	iconPath->setLabelFontSize(8);
+	//iconPath->setLabelFontSize(8);
 	iconPath->setInkColor(QColor(50, 120, 200));
 	iconPath->setInputLineColor(QColor(80, 80, 80));
-	iconPath->setStyleSheet("font-size: 10pt;");
+	iconPath->setStyleSheet("font-size: 14px;");
 
 
 	fps = new QtMaterialTextField();
 	fps->setLabel("FPS");
-	fps->setLabelFontSize(8);
+	//fps->setLabelFontSize(8);
 	fps->setInkColor(QColor(50, 120, 200));
 	fps->setInputLineColor(QColor(80, 80, 80));
-	fps->setStyleSheet("font-size: 10pt;");
+	fps->setStyleSheet("font-size: 14px;");
 
 	windowWidth = new QtMaterialTextField();
 	windowWidth->setLabel("桌宠宽度");
-	windowWidth->setLabelFontSize(8);
+	//windowWidth->setLabelFontSize(8);
 	windowWidth->setInkColor(QColor(50, 120, 200));
 	windowWidth->setInputLineColor(QColor(80, 80, 80));
-	windowWidth->setStyleSheet("font-size: 10pt;");
+	windowWidth->setStyleSheet("font-size: 14px;");
 	windowWidth->setMaximumWidth(60);
 
 	windowHeight = new QtMaterialTextField();
 	windowHeight->setLabel("桌宠高度");
-	windowHeight->setLabelFontSize(8);
+	//windowHeight->setLabelFontSize(8);
 	windowHeight->setInkColor(QColor(50, 120, 200));
 	windowHeight->setInputLineColor(QColor(80, 80, 80));
-	windowHeight->setStyleSheet("font-size: 10pt;");
+	windowHeight->setStyleSheet("font-size: 14px;");
 
 	modelDir = new QtMaterialTextField();
 	modelDir->setLabel("模型路径");
-	modelDir->setLabelFontSize(8);
+	//modelDir->setLabelFontSize(8);
 	modelDir->setInkColor(QColor(50, 120, 200));
 	modelDir->setInputLineColor(QColor(80, 80, 80));
-	modelDir->setStyleSheet("font-size: 10pt;");
+	modelDir->setStyleSheet("font-size: 14px;");
 
 	lbl_volume = new QLabel(QString("音量"));
-	lbl_volume->setStyleSheet("color: rgb(191, 191, 191); font-size: 10pt;");
+	lbl_volume->setStyleSheet("color: rgb(191, 191, 191); font-size: 14px;");
 	lbl_sliderVal = new QLabel();
-	lbl_sliderVal->setStyleSheet("color: rgb(191, 191, 191); font-size: 10pt;");
+	lbl_sliderVal->setStyleSheet("color: rgb(191, 191, 191); font-size: 14px;");
 	volumeSlider = new QtMaterialSlider();
 	volumeSlider->setMaximum(100);
 	volumeSlider->setMinimum(0);
@@ -72,34 +72,35 @@ AppSettings::AppSettings(QWidget* p)
 	volumeSlider->setFixedWidth(200);
 	volumeSlider->setThumbColor(QColor(50, 120, 200));
 	lbl_repairMode = new QLabel(QString("动作修复"));
-	lbl_repairMode->setStyleSheet("color: rgb(191, 191, 191); font-size: 10pt;");
+	lbl_repairMode->setStyleSheet("color: rgb(191, 191, 191); font-size: 14px;");
 	repairModeControl = new QtMaterialToggle();
 	repairModeControl->setCheckable(true);
 	repairModeControl->setActiveColor(QColor(50, 120, 200));
+	repairModeControl->setFixedHeight(45);
 
 	lipSync = new QtMaterialTextField();
 
 	QRegExpValidator* v3 = new QRegExpValidator(QRegExp("^[0-9]{1,2}\\.[0-9]{1}$"));
 	lipSync->setValidator(v3);
 	lipSync->setLabel("口型同步");
-	lipSync->setLabelFontSize(8);
+	//lipSync->setLabelFontSize(8);
 	lipSync->setInkColor(QColor(50, 120, 200));
 	lipSync->setInputLineColor(QColor(80, 80, 80));
-	lipSync->setStyleSheet("font-size: 10pt;");
+	lipSync->setStyleSheet("font-size: 14px;");
 
 	characterX = new QtMaterialTextField();
 	characterX->setLabel("角色绘制 X 坐标");
-	characterX->setLabelFontSize(8);
+	//characterX->setLabelFontSize(8);
 	characterX->setInkColor(QColor(50, 120, 200));
 	characterX->setInputLineColor(QColor(80, 80, 80));
-	characterX->setStyleSheet("font-size: 10pt;");
+	characterX->setStyleSheet("font-size: 14px;");
 
 	characterY = new QtMaterialTextField();
 	characterY->setLabel("角色绘制 Y 坐标");
-	characterY->setLabelFontSize(8);
+	//characterY->setLabelFontSize(8);
 	characterY->setInkColor(QColor(50, 120, 200));
 	characterY->setInputLineColor(QColor(80, 80, 80));
-	characterY->setStyleSheet("font-size: 10pt;");
+	characterY->setStyleSheet("font-size: 14px;");
 
 	const QValidator* v5 = new QRegExpValidator(QRegExp("^[\\-]?[0-9]{1,2}\\.[0-9]{1,2}$"));
 	characterX->setValidator(v5);
@@ -108,10 +109,10 @@ AppSettings::AppSettings(QWidget* p)
 	motionInterval = new QtMaterialTextField();
 	motionInterval->setValidator(v3);
 	motionInterval->setLabel("动作频率");
-	motionInterval->setLabelFontSize(8);
+	//motionInterval->setLabelFontSize(8);
 	motionInterval->setInkColor(QColor(50, 120, 200));
 	motionInterval->setInputLineColor(QColor(80, 80, 80));
-	motionInterval->setStyleSheet("font-size: 10pt;");
+	motionInterval->setStyleSheet("font-size: 14px;");
 
 	fps->setFixedWidth(80);
 	windowWidth->setFixedWidth(80);
@@ -124,24 +125,24 @@ AppSettings::AppSettings(QWidget* p)
 
 	dialogMaxWidth = new QtMaterialTextField();
 	dialogMaxWidth->setLabel("对话框宽度限制");
-	dialogMaxWidth->setLabelFontSize(8);
+	//dialogMaxWidth->setLabelFontSize(8);
 	dialogMaxWidth->setInkColor(QColor(50, 120, 200));
 	dialogMaxWidth->setInputLineColor(QColor(80, 80, 80));
-	dialogMaxWidth->setStyleSheet("font-size: 10pt;");
+	dialogMaxWidth->setStyleSheet("font-size: 14px;");
 
 	dialogFontSize = new QtMaterialTextField();
 	dialogFontSize->setLabel("对话框字体大小");
-	dialogFontSize->setLabelFontSize(8);
+	////dialogFontSize->setLabelFontSize(8);
 	dialogFontSize->setInkColor(QColor(50, 120, 200));
 	dialogFontSize->setInputLineColor(QColor(80, 80, 80));
-	dialogFontSize->setStyleSheet("font-size: 10pt;");
+	dialogFontSize->setStyleSheet("font-size: 14px;");
 
 	dialogYOffset = new QtMaterialTextField();
 	dialogYOffset->setLabel("对话框垂直偏移");
-	dialogYOffset->setLabelFontSize(8);
+	//dialogYOffset->setLabelFontSize(8);
 	dialogYOffset->setInkColor(QColor(50, 120, 200));
 	dialogYOffset->setInputLineColor(QColor(80, 80, 80));
-	dialogYOffset->setStyleSheet("font-size: 10pt;");
+	dialogYOffset->setStyleSheet("font-size: 14px;");
 
 	dialogYOffset->setValidator(v4);
 	dialogFontSize->setValidator(v);
@@ -157,14 +158,14 @@ AppSettings::AppSettings(QWidget* p)
 	openFile->setForegroundColor(QColor(244, 244, 244));
 	openFile->setBackgroundColor(QColor(50, 120, 200));
 	openFile->setFixedHeight(25);
-	openFile->setStyleSheet("font-size: 10pt;");
+	openFile->setStyleSheet("font-size: 12px;");
 	chooseDir = new QtMaterialRaisedButton();
 	chooseDir->setText("打开");
 	chooseDir->setOverlayColor(Qt::white);
 	chooseDir->setForegroundColor(QColor(244, 244, 244));
 	chooseDir->setBackgroundColor(QColor(50, 120, 200));
 	chooseDir->setFixedHeight(25);
-	chooseDir->setStyleSheet("font-size: 10pt;");
+	chooseDir->setStyleSheet("font-size: 12px;");
 	apply = new QtMaterialRaisedButton();
 	apply->setText("保存");
 	apply->setOverlayColor(Qt::white);
@@ -172,7 +173,7 @@ AppSettings::AppSettings(QWidget* p)
 	apply->setBackgroundColor(QColor(50, 120, 200));
 	apply->setFixedHeight(30);
 	apply->setFixedWidth(120);
-	apply->setStyleSheet("font-size: 10pt;");
+	apply->setStyleSheet("font-size: 12px;");
 	reset = new QtMaterialRaisedButton();
 	reset->setText("重置");
 	reset->setOverlayColor(Qt::white);
@@ -180,7 +181,7 @@ AppSettings::AppSettings(QWidget* p)
 	reset->setBackgroundColor(QColor(50, 120, 200));
 	reset->setFixedHeight(30);
 	reset->setFixedWidth(120);
-	reset->setStyleSheet("font-size: 10pt;");
+	reset->setStyleSheet("font-size: 12px;");
 
 	QVBoxLayout* vbox = new QVBoxLayout();
 

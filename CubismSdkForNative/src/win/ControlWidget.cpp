@@ -102,7 +102,7 @@ ControlWidget::ControlWidget()
 
 	QFontDatabase::addApplicationFont(QString::fromStdString(_AssetsDir).append("/PingFang-Medium.ttf"));
 
-	setStyleSheet("QTabBar::tab{font-family: PingFang SC Medium; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
+	setStyleSheet("QTabBar::tab{font-size: 14px; font-family: PingFang SC Medium; width: 120px; height: 30px; background-color: rgb(50, 50, 50); color: rgba(180, 180, 180, 180); padding: 0; margin: 0} "
 		"QTabBar::tab:selected{background-color: rgb(30, 30, 30); color: rgba(255, 255, 255, 180); }"
 		"QTabBar{background-color: rgb(37, 37, 38);}"
 		"QTabWidget::pane{border: none; background-color: rgb(30, 30, 30); color: white}"

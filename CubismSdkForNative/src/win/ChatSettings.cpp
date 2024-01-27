@@ -71,8 +71,10 @@ ChatSettings::ChatSettings(QWidget* p)
 	MlyAI = new QCheckBox(QString("茉莉云API"));
 	CustomChatServer = new QCheckBox(QString("自定义聊天服务器"));
 	CustomVoiceChat = new QCheckBox(QString("自定义语音处理路径"));
-
-	CustomVoiceChat->setStyleSheet(":disabled{color: grey}");
+	
+	MlyAI->setStyleSheet("font-size: 14px");
+	CustomChatServer->setStyleSheet("font-size: 14px");
+	CustomVoiceChat->setStyleSheet("QCheckBox{font-size: 14px; }:disabled{color: grey; font-size: 14px}");
 
 	grid = new QGridLayout();
 

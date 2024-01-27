@@ -32,7 +32,7 @@ ChatWidget::ChatWidget()
 	setFixedSize(410, 50);
 
 	_font.setFamily(QString::fromUtf8(LAppConfig::_ChatWidgetFontFamily.c_str()));
-	_font.setPointSizeF(LAppConfig::_ChatWidgetFontSize);
+	_font.setPixelSize(LAppConfig::_ChatWidgetFontSize);
 	LAppConfig::_WaitChatResponse = false;
 	_frame = new QFrame(this);
 	_frame->setFixedSize(400, 50);

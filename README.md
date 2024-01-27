@@ -1,5 +1,7 @@
 # 工程项目
 
+实现思路：Live2D 是通过 OpenGL 实现绘制，只需要将 Live2D 绘制到 Qt 的 OpenGL 窗口上即可。剩下的就是编写 Qt 界面，和了解必要的 Live2D 知识。
+
 ## 编译
 ### 在vs_project文件夹下，包含x64和x86项目
 * 支持库已经打包在**vs_project\thirdParty**文件夹下，应该可以做到开箱即用（maybe）

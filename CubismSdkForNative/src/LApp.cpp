@@ -236,8 +236,8 @@ void LApp::LoadConfig() {
     LAppConfig::_CharacterX = !config["ModelSettings"]["CharacterX"].isNull() ? config["ModelSettings"]["CharacterX"].asFloat() : 0.0f;
     LAppConfig::_CharacterY = !config["ModelSettings"]["CharacterY"].isNull() ? config["ModelSettings"]["CharacterY"].asFloat() : 0.0f;
 
-    LAppConfig::_WindowWidth = !config["WindowSettings"]["Width"].isNull() ? config["WindowSettings"]["Width"].asInt() : 500;
-    LAppConfig::_WindowHeight = !config["WindowSettings"]["Height"].isNull() ? config["WindowSettings"]["Height"].asInt() : 700;
+    LAppConfig::_WindowWidth = !config["WindowSettings"]["Width"].isNull() ? config["WindowSettings"]["Width"].asInt() : 400;
+    LAppConfig::_WindowHeight = !config["WindowSettings"]["Height"].isNull() ? config["WindowSettings"]["Height"].asInt() : 500;
     LAppConfig::_LastPosX = !config["WindowSettings"]["LastPos"]["X"].isNull() ? config["WindowSettings"]["LastPos"]["X"].asInt() : 1; 
     LAppConfig::_LastPosY = !config["WindowSettings"]["LastPos"]["Y"].isNull() ? config["WindowSettings"]["LastPos"]["Y"].asInt() : 1;
 

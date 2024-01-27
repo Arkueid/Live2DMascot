@@ -43,7 +43,7 @@ void Dialog::Pop(const char* text)
 
 void Dialog::LoadConfig()
 {
-	_font.setPointSizeF(LAppConfig::_DialogFontSize);
+	_font.setPixelSize(LAppConfig::_DialogFontSize);
 	if (_fontMetrics != NULL)
 	{
 		delete _fontMetrics;
@@ -51,6 +51,7 @@ void Dialog::LoadConfig()
 	}
 	_fontMetrics = new QFontMetrics(_font);
 }
+
 
 void Dialog::WaitChatResponse()
 {
@@ -91,14 +92,14 @@ void Dialog::paintEvent(QPaintEvent* e)
 	resize(boxWidth+20, boxHeight+20);
 	AttachToCharacter();
 	QPainter painter(this);
-	QPainterPath path;
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-	path.addRoundRect(10, 10, boxWidth, boxHeight, 1);
-	painter.fillPath(path, Qt::black);
 	painter.setFont(_font);
 	painter.setPen(Qt::white);
+	painter.drawPixmap(this->rect(), QPixmap("assets/bubble.png"));
 	painter.drawText(10+_xBorder, 10+_yBorder, boxWidth - 2 * _xBorder, boxHeight - 2 * _yBorder, Qt::TextWordWrap, _text);
 }
+
+
 
 bool Dialog::IsVisible() {
 	return this->isVisible();
